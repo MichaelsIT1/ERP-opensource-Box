@@ -1,3 +1,6 @@
+# Status: Alpha
+# Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
+# getestet auf Debian 11 im LXC Container
 #!/bin/sh
 clear
 echo "xentral opensource installieren"
