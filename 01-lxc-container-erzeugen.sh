@@ -3,8 +3,9 @@
 # Nur fuer Testzwecke
 # Version 0.1
 
+# Variable
 # Container-ID
-CID = 999
+CID=999
 
 clear
 
@@ -19,9 +20,9 @@ pct create $CID local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz \
         -password 12345 \
         -features nesting=1
 
-pct start 999
+pct start $CID
 sleep 10
 
-pct exec 999 -- bash -c "apt install git -y && git clone https://github.com/MichaelsIT1/ERP-opensource-Box.git"
+pct exec $CID -- bash -c "apt install git -y && git clone https://github.com/MichaelsIT1/ERP-opensource-Box.git"
 
-lxc-attach -n999 bash /root/ERP-opensource-Box/install-xentral-opensource.sh
+lxc-attach -n$CID bash /root/ERP-opensource-Box/install-xentral-opensource.sh
