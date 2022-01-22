@@ -12,19 +12,19 @@ timedatectl set-timezone Europe/Berlin
 echo
 echo "Betriebssystem debian wird aktualisiert"
 echo "***************************************"
-apt update > /dev/null 2>&1 && apt dist-upgrade -y > /dev/null 2>&1
+apt update && apt dist-upgrade -y
 echo
 echo "Webserver Apache, MariaDB und PHP wird installiert"
 echo "**************************************************"
-apt install apache2 mariadb-server php php-mbstring php-soap php-imap php-xml php-zip php-gd php-cli php-mysql php-curl unzip zip -y > /dev/null 2>&1
+apt install apache2 mariadb-server php php-mbstring php-soap php-imap php-xml php-zip php-gd php-cli php-mysql php-curl unzip zip -y
 echo
 echo "xentral opensource herunterladen"
 echo "********************************"
-wget https://github.com/xentral-erp-software-gmbh/downloads/raw/master/installer.zip > /dev/null 2>&1
+wget https://github.com/xentral-erp-software-gmbh/downloads/raw/master/installer.zip
 echo
 echo "Installer.zip wird entpackt und nach var/www/html verschoben"
 echo "***********************************************************"
-unzip installer.zip > /dev/null 2>&1
+unzip installer.zip
 mv installer.php /var/www/html/
 echo
 echo "Zugriffsrechte werden gesetzt"
@@ -51,7 +51,7 @@ fi
 echo "Cronjob wird erzeugt"
 echo "********************"
 crontab -u www-data -l > cron_bkp
-echo "* * * * * /usr/bin/php /var/www/html/cronjobs/starter2.php > /dev/null 2>&1" >> cron_bkp
+echo "* * * * * /usr/bin/php /var/www/html/cronjobs/starter2.php" >> cron_bkp
 crontab -u www-data cron_bkp
 rm cron_bkp
 echo
