@@ -57,3 +57,4 @@ rm cron_bkp
 echo
 echo "xentral openSource erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "*******************************************************************************************"
+ip a
