@@ -1,6 +1,3 @@
-# Version 0.1
-# getestet debian 11 im LXC-Container
-
 #!/bin/sh
 clear
 echo "xentral opensource installieren"
@@ -47,3 +44,14 @@ else
         echo "Datenbank xentral vorhanden"
         echo "****************************"
 fi
+
+echo "Cronjob wird erzeugt"
+echo "********************"
+crontab -u www-data -l > cron_bkp
+echo "* * * * * /usr/bin/php /var/www/html/cronjobs/starter2.php > /dev/null 2>&1" >> cron
+_bkp
+crontab -u www-data cron_bkp
+rm cron_bkp
+echo
+echo "xentral openSource erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
+echo "*******************************************************************************************"
