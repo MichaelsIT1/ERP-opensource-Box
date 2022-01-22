@@ -2,7 +2,7 @@
 # Nur fuer Testzwecke
 # Version 0.1
 
-!/bin/sh
+#!/bin/sh
 clear
 
 # Container wird erzeugt
