@@ -1,8 +1,8 @@
+#!/bin/sh
 # Dieses Script erstellt einen LXC-Container im Proxmox und installiert xentral opensource
 # Nur fuer Testzwecke
 # Version 0.1
 
-#!/bin/sh
 clear
 
 # Container wird erzeugt
