@@ -51,8 +51,7 @@ fi
 echo "Cronjob wird erzeugt"
 echo "********************"
 crontab -u www-data -l > cron_bkp
-echo "* * * * * /usr/bin/php /var/www/html/cronjobs/starter2.php > /dev/null 2>&1" >> cron
-_bkp
+echo "* * * * * /usr/bin/php /var/www/html/cronjobs/starter2.php > /dev/null 2>&1" >> cron_bkp
 crontab -u www-data cron_bkp
 rm cron_bkp
 echo
