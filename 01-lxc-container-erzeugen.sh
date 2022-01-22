@@ -19,6 +19,6 @@ pct create 999 local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz \
 pct start 999
 sleep 10
 
-pct exec 999 -- bash -c "apt install git -y && git clone https://github.com/MichaelsIT1/ERP-opensource-Box.git && /root/ERP-opensource-Box/install-xentral-opensource.sh"
+pct exec 999 -- bash -c "apt install git -y && git clone https://github.com/MichaelsIT1/ERP-opensource-Box.git"
 
 lxc-attach -n999 bash /root/ERP-opensource-Box/install-xentral-opensource.sh
