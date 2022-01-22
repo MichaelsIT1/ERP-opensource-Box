@@ -3,10 +3,13 @@
 # Nur fuer Testzwecke
 # Version 0.1
 
+# Container-ID
+CID = 999
+
 clear
 
 # Container wird erzeugt
-pct create 999 local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz \
+pct create $CID local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz \
         -hostname xentral-test \
         -rootfs local-zfs:8 \
         -cores 2 \
