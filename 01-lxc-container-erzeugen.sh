@@ -11,7 +11,7 @@ CPW=12345            #Container root-Passwort
 # Funktionen
 menu() {
     clear
-    echo -ne "
+    echo "
 MAIN MENU
 1) xentral opensource installieren
 0) Exit
@@ -54,4 +54,5 @@ pct push $CID install-xentral-opensource.sh /root/install-xentral-opensource.sh
 pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
 }
 
+# main program
 menu
