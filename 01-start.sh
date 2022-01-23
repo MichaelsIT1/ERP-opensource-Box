@@ -15,6 +15,7 @@ menu() {
     echo "
 MAIN MENU
 1) xentral opensource installieren
+2) ISP-Config installieren
 -----------------------------------------
 10) lokale Images
 0) Exit
@@ -23,6 +24,10 @@ Choose an option: "
     case $ans in
     1)  create_container
         install_xentral
+        ;;
+        
+    2)  create_container
+        install_ispconfig
         ;;
         
     10) pveam list local
@@ -61,6 +66,11 @@ sleep 10
 install_xentral() {
 pct push $CID install-xentral-opensource.sh /root/install-xentral-opensource.sh
 pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
+}
+
+install_ispconfig() {
+pct push $CID install-ispconfig.sh /root/install-ispconfig.sh
+pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
 }
 
 # main program
