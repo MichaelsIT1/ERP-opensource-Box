@@ -43,8 +43,8 @@ then
         sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
         y           # Set root password?
-        test1234    # new root password
-        test1234    # new root password         y           # Remove anonymous users?
+        xentral     # new root password
+        xentral     # new root password         y           # Remove anonymous users?
         y           # Disallow root login remotely?
         y           # Remove test database and access to it?
         y           # Reload privilege tables now?
