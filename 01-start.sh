@@ -3,12 +3,6 @@
 # Nur fuer Testzwecke
 # Version 0.1
 
-# Variablen
-CID=999                                                     #Container-ID
-CNAME=xentral-test                                          #Containername
-COS=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz     #Container Images
-CPW=12345                                                   #Container root-Passwort
-
 # Funktionen
 menu() {
     clear
@@ -38,23 +32,6 @@ Choose an option: "
         exit 1
         ;;
     esac
-}
-
-create_container() {
-clear
-# Container wird erzeugt
-pct create $CID $COS \
-        -hostname $CNAME \
-        -rootfs local-zfs:8 \
-        -cores 2 \
-        -memory 4096 \
-        -net0 name=eth0,bridge=vmbr0,ip=dhcp \
-        -unprivileged 1 \
-        -password $CPW \
-        -features nesting=1
-
-pct start $CID
-sleep 10
 }
 
 install_xentral() {
