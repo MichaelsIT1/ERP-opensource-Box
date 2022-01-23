@@ -18,7 +18,8 @@ MAIN MENU
 Choose an option:  "
     read -r ans
     case $ans in
-    1) install_xentral
+    1)  create_container
+        install_xentral
         ;;
     0)
         echo "Bye bye."
