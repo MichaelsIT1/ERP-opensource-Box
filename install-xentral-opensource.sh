@@ -35,8 +35,19 @@ echo
 if ! mysql -u root -e 'use xentral';
 then
         echo "Maria-DB wird konfiguiert und Datenbank angelegt"
-        echo "*************************"
-        mariadb-secure-installation
+        echo "*************************"       
+       
+       # automatische Installation
+        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
+                    # current root password (emtpy after installation)
+        y           # Set root password?
+        test1234    # new root password
+        test1234    # new root password         y           # Remove anonymous users?
+        y           # Disallow root login remotely?
+        y           # Remove test database and access to it?
+        y           # Reload privilege tables now?
+EOF
+       
         mysql -u root <<EOF
         CREATE DATABASE xentral;
         CREATE USER 'xentral'@'localhost' IDENTIFIED BY 'xentral';
@@ -58,3 +69,6 @@ echo
 echo "xentral openSource erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "*******************************************************************************************"
 ip a
+echo "**************************************************************************"
+echo "weiter gehts mit dem Browser. Gehen Sie auf <IP-Adresse>/Installer.php"
+echo "**************************************************************************"
