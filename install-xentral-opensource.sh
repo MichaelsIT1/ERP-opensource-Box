@@ -1,6 +1,8 @@
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
 # getestet auf Debian 11 im LXC Container
+# https://help.xentral.com/hc/de/articles/360017377620-Installation-von-xentral-ab-Version-19-1
+
 #!/bin/sh
 clear
 echo "xentral opensource installieren"
