@@ -4,14 +4,15 @@
 # Version 0.1
 
 # Variablen
-CID=999         #Container-ID
-CPW=12345       #Container root-Passwort
+CID=999              #Container-ID
+CNAME=xentral-test   #Containername
+CPW=12345            #Container root-Passwort
 
 clear
 
 # Container wird erzeugt
 pct create $CID local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz \
-        -hostname xentral-test \
+        -hostname $CNAME \
         -rootfs local-zfs:8 \
         -cores 2 \
         -memory 4096 \
