@@ -43,7 +43,6 @@ Choose an option: "
 # Container erzeugen
 create_container() {
 clear
-# Container wird erzeugt
 pct create $CID $COS \
         -hostname $CNAME \
         -rootfs local-zfs:8 \
