@@ -4,9 +4,10 @@
 # Version 0.1
 
 # Variablen
-CID=999              #Container-ID
-CNAME=xentral-test   #Containername
-CPW=12345            #Container root-Passwort
+CID=999                                                     #Container-ID
+CNAME=xentral-test                                          #Containername
+COS=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz     #Container Images
+CPW=12345                                                   #Container root-Passwort
 
 # Funktionen
 menu() {
@@ -42,7 +43,7 @@ Choose an option: "
 create_container() {
 clear
 # Container wird erzeugt
-pct create $CID local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz \
+pct create $CID $COS \
         -hostname $CNAME \
         -rootfs local-zfs:8 \
         -cores 2 \
