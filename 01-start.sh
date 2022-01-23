@@ -33,8 +33,8 @@ Choose an option: "
     esac
 }
 
-install_xentral() {
 # Installation xentral opensource
+install_xentral() {
 pct push $CID install-xentral-opensource.sh /root/install-xentral-opensource.sh
 pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
 }
