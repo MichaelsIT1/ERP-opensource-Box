@@ -14,17 +14,24 @@ menu() {
     echo "
 MAIN MENU
 1) xentral opensource installieren
+-----------------------------------------
+10) lokale Images
 0) Exit
-Choose an option:  "
+Choose an option: "
     read -r ans
     case $ans in
     1)  create_container
         install_xentral
         ;;
+        
+    10) pveam list local
+        ;;
+                
     0)
         echo "Bye bye."
         exit 0
         ;;
+        
     *)
         echo "Wrong option."
         exit 1
