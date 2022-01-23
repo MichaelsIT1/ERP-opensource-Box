@@ -70,5 +70,5 @@ echo "xentral openSource erfolgreich installiert. Bitte ueber das Web die Konfig
 echo "*******************************************************************************************"
 ip a
 echo "**************************************************************************"
-echo "weiter gehts mit dem Browser. Gehen Sie auf <IP-Adresse>/Installer.php"
+echo "weiter gehts mit dem Browser. Gehen Sie auf <IP-Adresse>/installer.php"
 echo "**************************************************************************"
