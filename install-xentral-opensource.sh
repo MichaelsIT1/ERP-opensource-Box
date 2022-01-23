@@ -65,7 +65,8 @@ crontab -u www-data -l > cron_bkp
 echo "* * * * * /usr/bin/php /var/www/html/cronjobs/starter2.php" >> cron_bkp
 crontab -u www-data cron_bkp
 rm cron_bkp
-echo
+clear
+echo "*******************************************************************************************"
 echo "xentral openSource erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "*******************************************************************************************"
 ip a
