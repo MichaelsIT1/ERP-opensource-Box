@@ -4,7 +4,7 @@
 # https://help.xentral.com/hc/de/articles/360017377620-Installation-von-xentral-ab-Version-19-1
 
 # Varibale
-IP=ip=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
+IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
 #!/bin/sh
 clear
@@ -76,5 +76,5 @@ echo "xentral openSource erfolgreich installiert. Bitte ueber das Web die Konfig
 echo "*******************************************************************************************"
 ip a
 echo "**************************************************************************"
-echo "weiter gehts mit dem Browser. Gehen Sie auf $IP/installer.php"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/installer.php"
 echo "**************************************************************************"
