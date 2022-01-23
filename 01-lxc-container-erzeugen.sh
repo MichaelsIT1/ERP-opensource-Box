@@ -10,6 +10,7 @@ CPW=12345            #Container root-Passwort
 
 # Funktionen
 menu() {
+    clear
     echo -ne "
 MAIN MENU
 1) xentral opensource installieren
