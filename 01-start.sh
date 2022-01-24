@@ -18,6 +18,7 @@ menu() {
 MAIN MENU
 1) xentral opensource installieren
 2) metafresh installieren
+3) docker Portainer installieren
 -----------------------------------------
 10) lokale Images
 0) Exit
@@ -36,6 +37,13 @@ Choose an option: "
         install_metafresh
         ;;
         
+     3) CNAME="docker-test"
+        COS=$COS_DEBIAN
+        create_container()
+        install_portainer
+        ;;
+
+
     10) pveam list local
         ;;
                 
@@ -56,12 +64,12 @@ create_container() {
 clear
 pct create $CID $COS \
         -hostname $CNAME \
+        -password $CPW \        
         -rootfs local-zfs:32 \
         -cores 2 \
         -memory 4096 \
         -net0 name=eth0,bridge=vmbr0,ip=dhcp \
         -unprivileged 1 \
-        -password $CPW \
         -features nesting=1
 
 pct start $CID
@@ -77,6 +85,11 @@ pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
 install_metafresh() {
 pct push $CID install-metafresh.sh /root/install-metafresh.sh
 pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
+}
+
+install_portainer() {
+pct push $CID install-portainer.sh /root/install-portainer.sh
+pct exec $CID -- bash -c "sh /root/install-portainer.sh"
 }
 
 # main program
