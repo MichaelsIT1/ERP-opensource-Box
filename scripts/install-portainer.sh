@@ -24,10 +24,7 @@ echo "**************************************************"
 apt install docker.io docker-compose git -y
 docker volume create portainer_data
 
-docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
-    --restart=always \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v portainer_data:/data \
-    cr.portainer.io/portainer/portainer-ce:2.9.3
+# Portainer herunterladen und starten
+docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
     
 echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP:9443/"
