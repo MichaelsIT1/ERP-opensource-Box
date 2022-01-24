@@ -78,17 +78,17 @@ sleep 10
 
 # Installation xentral opensource
 install_xentral() {
-pct push $CID scripts/install-xentral-opensource.sh /root/install-xentral-opensource.sh
+pct push $CID install-xentral-opensource.sh /root/install-xentral-opensource.sh
 pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
 }
 
 install_metafresh() {
-pct push $CID scripts/install-metafresh.sh /root/install-metafresh.sh
+pct push $CID install-metafresh.sh /root/install-metafresh.sh
 pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
 }
 
 install_portainer() {
-pct push $CID scripts/install-portainer.sh /root/install-portainer.sh
+pct push $CID install-portainer.sh /root/install-portainer.sh
 pct exec $CID -- bash -c "sh /root/install-portainer.sh"
 }
 
