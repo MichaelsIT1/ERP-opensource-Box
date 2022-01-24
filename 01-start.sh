@@ -24,14 +24,14 @@ MAIN MENU
 Choose an option: "
     read -r ans
     case $ans in
-    1)  COS=$COS_DEBIAN
-        CNAME="xentral-test" 
+    1)  CNAME="xentral-test"
+        COS=$COS_DEBIAN
         create_container
         install_xentral
         ;;
         
-    2)  COS=$COS_UBUNTU
-        CNAME="metafresh-test"
+    2)  CNAME="metafresh-test"
+        COS=$COS_UBUNTU
         create_container
         install_metafresh
         ;;
