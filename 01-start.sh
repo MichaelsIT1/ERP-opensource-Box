@@ -15,7 +15,7 @@ menu() {
     echo "
 MAIN MENU
 1) xentral opensource installieren
-2) ISP-Config installieren
+2) metafresh installieren
 -----------------------------------------
 10) lokale Images
 0) Exit
@@ -27,7 +27,7 @@ Choose an option: "
         ;;
         
     2)  create_container
-        install_ispconfig
+        install_metafresh
         ;;
         
     10) pveam list local
@@ -69,8 +69,8 @@ pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
 }
 
 install_ispconfig() {
-pct push $CID install-ispconfig.sh /root/install-ispconfig.sh
-pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
+pct push $CID install-metafresh.sh /root/install-metafresh.sh
+pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
 }
 
 # main program
