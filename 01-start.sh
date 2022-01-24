@@ -68,7 +68,7 @@ pct push $CID install-xentral-opensource.sh /root/install-xentral-opensource.sh
 pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
 }
 
-install_ispconfig() {
+install_metafresh() {
 pct push $CID install-metafresh.sh /root/install-metafresh.sh
 pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
 }
