@@ -1,6 +1,6 @@
 #!/bin/sh
 # Dieses Script erstellt einen LXC-Container im Proxmox und installiert diverse Software.
-# Nur fuer Testzwecke. Keine Gewährleistung oder Haftung bei Datenverlust.
+# Nur fuer Testzwecke. Keine Gewaehrleistung oder Haftung bei Datenverlust.
 # Version 0.1
 
 # Variablen
