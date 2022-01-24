@@ -5,7 +5,6 @@
 
 # Variablen
 CID=999                                                     #Container-ID
-COS=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz     #Container Images
 CPW=12345                                                   #Container root-Passwort
 
 # Container Images
@@ -26,13 +25,13 @@ Choose an option: "
     read -r ans
     case $ans in
     1)  COS=$COS_DEBIAN
-        CNAME=xentral-test 
+        CNAME="xentral-test" 
         create_container
         install_xentral
         ;;
         
     2)  COS=$COS_UBUNTU
-        CNAME=metafresh-test
+        CNAME="metafresh-test"
         create_container
         install_metafresh
         ;;
@@ -57,7 +56,7 @@ create_container() {
 clear
 pct create $CID $COS \
         -hostname $CNAME \
-        -rootfs local-zfs:8 \
+        -rootfs local-zfs:32 \
         -cores 2 \
         -memory 4096 \
         -net0 name=eth0,bridge=vmbr0,ip=dhcp \
