@@ -21,7 +21,7 @@ apt update && apt dist-upgrade -y
 echo
 echo "Docker wird installiert"
 echo "**************************************************"
-apt install docker.io docker-compose git -y
+apt install docker.io docker-compose git curl -y
 docker volume create portainer_data
 
 # Portainer herunterladen und starten
