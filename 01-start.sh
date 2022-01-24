@@ -9,6 +9,10 @@ CNAME=xentral-test                                          #Containername
 COS=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz     #Container Images
 CPW=12345                                                   #Container root-Passwort
 
+# Container Images
+COS_DEBIAN=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz     
+COS_UBUNTU=local:vztmpl/ubuntu-21.10-standard_21.10-1_amd64.tar.zst 
+
 # Funktionen
 menu() {
     clear
@@ -22,11 +26,13 @@ MAIN MENU
 Choose an option: "
     read -r ans
     case $ans in
-    1)  create_container
+    1)  COS=$COS_DEBIAN
+        create_container
         install_xentral
         ;;
         
-    2)  create_container
+    2)  COS=$COS_UBUNTU
+        create_container
         install_metafresh
         ;;
         
