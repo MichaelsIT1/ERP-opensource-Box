@@ -1,0 +1,33 @@
+#!/bin/sh
+# Status: Alpha
+# Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
+# getestet auf Ubuntu im LXC Container
+# https://docs.portainer.io/v/ce-2.9/start/install/server/docker/linux
+
+# System-Varibale
+IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
+
+clear
+echo "portainer installieren"
+echo "*******************************"
+echo
+echo "Zeitzone auf Europe/Berlin gesetzt"
+echo "**********************************"
+timedatectl set-timezone Europe/Berlin 
+echo
+echo "Betriebssystem wird aktualisiert"
+echo "***************************************"
+apt update && apt dist-upgrade -y
+echo
+echo "Docker wird installiert"
+echo "**************************************************"
+apt install docker.io docker-compose git -y
+docker volume create portainer_data
+
+docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data \
+    cr.portainer.io/portainer/portainer-ce:2.9.3
+    
+echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP:9443/"
