@@ -39,7 +39,7 @@ Choose an option: "
         
      3) CNAME="docker-test"
         COS=$COS_DEBIAN
-        create_container()
+        create_container
         install_portainer
         ;;
 
