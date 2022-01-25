@@ -1,7 +1,7 @@
 #!/bin/sh
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Ubuntu im LXC Container
+# getestet auf Ubuntu in einer VM. Läuft bei mir nicht im LXC-Container
 # https://docs.metasfresh.org/installation_collection/DE/Wie_installiere_ich_den_metasfresh_Stack_mit_Docker.html
 
 # System-Varibale
