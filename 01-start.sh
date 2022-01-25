@@ -17,7 +17,7 @@ menu() {
     echo "
 MAIN MENU
 1) xentral opensource installieren
-2) metafresh installieren
+2) 
 3) docker Portainer installieren
 -----------------------------------------
 10) lokale Images
