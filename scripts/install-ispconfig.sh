@@ -2,7 +2,7 @@
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
 # getestet auf Debian 11 im LXC Container
-# https://help.xentral.com/hc/de/articles/360017377620-Installation-von-xentral-ab-Version-19-1
+# https://www.howtoforge.com/ispconfig-autoinstall-debian-ubuntu/
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
