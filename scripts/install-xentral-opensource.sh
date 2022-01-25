@@ -73,7 +73,5 @@ rm cron_bkp
 clear
 echo "*******************************************************************************************"
 echo "xentral openSource erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "*******************************************************************************************"
-echo "**************************************************************************"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/installer.php"
 echo "**************************************************************************"
