@@ -17,7 +17,7 @@ menu() {
     echo "
 MAIN MENU
 1) xentral opensource installieren
-2) 
+2) ISPConfig installieren
 3) docker Portainer installieren
 -----------------------------------------
 10) lokale Images
@@ -31,10 +31,10 @@ Choose an option: "
         install_xentral
         ;;
         
-    2)  CNAME="metafresh-test"
+    2)  CNAME="ispconfig-test"
         COS=$COS_UBUNTU
         create_container
-        install_metafresh
+        install-ispconfig
         ;;
         
      3) CNAME="docker-test"
@@ -80,6 +80,11 @@ sleep 10
 install_xentral() {
 pct push $CID scripts/install-xentral-opensource.sh /root/install-xentral-opensource.sh
 pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
+}
+
+install-ispconfig() {
+pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
+pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
 }
 
 install_metafresh() {
