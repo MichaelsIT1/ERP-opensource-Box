@@ -82,7 +82,7 @@ pct push $CID scripts/install-xentral-opensource.sh /root/install-xentral-openso
 pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
 }
 
-install-ispconfig() {
+install_ispconfig() {
 pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
 pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
 }
