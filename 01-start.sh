@@ -34,7 +34,7 @@ Choose an option: "
     2)  CNAME="ispconfig-test"
         COS=$COS_UBUNTU
         create_container
-        install-ispconfig
+        install_ispconfig
         ;;
         
      3) CNAME="docker-test"
