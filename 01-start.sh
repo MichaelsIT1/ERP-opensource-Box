@@ -17,8 +17,9 @@ menu() {
     echo "
 MAIN MENU
 1) xentral opensource installieren
-2) ISPConfig installieren
-3) docker Portainer installieren
+2) open3a installieren
+3) ISPConfig installieren
+5) docker Portainer installieren
 -----------------------------------------
 10) lokale Images
 0) Exit
@@ -31,13 +32,19 @@ Choose an option: "
         install_xentral
         ;;
         
-    2)  CNAME="ispconfig-test"
+    2)  CNAME="open3a-test"
+        COS=$COS_DEBIAN
+        create_container
+        install_open3a
+        ;;
+        
+    3)  CNAME="ispconfig-test"
         COS=$COS_UBUNTU
         create_container
         install_ispconfig
         ;;
         
-     3) CNAME="docker-test"
+     5) CNAME="docker-test"
         COS=$COS_UBUNTU
         create_container
         install_portainer
@@ -80,6 +87,11 @@ sleep 10
 install_xentral() {
 pct push $CID scripts/install-xentral-opensource.sh /root/install-xentral-opensource.sh
 pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
+}
+
+install_open3a() {
+pct push $CID scripts/install-open3a.sh /root/install--open3a.sh
+pct exec $CID -- bash -c "sh /root/install-open3a.sh"
 }
 
 install_ispconfig() {
