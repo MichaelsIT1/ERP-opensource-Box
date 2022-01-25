@@ -18,11 +18,13 @@ echo
 echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update && apt dist-upgrade -y
+sleep 5
 echo
 echo "Docker wird installiert"
 echo "**************************************************"
 apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release -y
 docker volume create portainer_data
+sleep 5
 
 # Portainer herunterladen und starten
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
