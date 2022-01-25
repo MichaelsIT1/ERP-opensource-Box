@@ -21,11 +21,11 @@ apt update && apt dist-upgrade -y
 echo
 echo "Docker wird installiert"
 echo "**************************************************"
-apt install docker.io docker-compose git curl -y
+apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release -y
 docker volume create portainer_data
 
 # Portainer herunterladen und starten
 docker run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce
     
-echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP:9000/"
-echp "*************************************************************"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:9000/"
+echo "*************************************************************"
