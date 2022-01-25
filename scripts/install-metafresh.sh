@@ -25,6 +25,7 @@ echo
 sleep 5
 echo "metafresh image herunterladen"
 echo "********************************"
+cd /root/
 git clone https://github.com/metasfresh/metasfresh-docker.git
 cd metasfresh-docker/
 echo
