@@ -20,7 +20,7 @@ apt update && apt dist-upgrade -y
 echo
 echo "Docker wird installiert"
 echo "**************************************************"
-apt install docker.io docker-compose git -y
+apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release -y
 echo
 sleep 5
 echo "metafresh image herunterladen"
