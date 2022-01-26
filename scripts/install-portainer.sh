@@ -22,7 +22,7 @@ sleep 5
 echo
 echo "Docker wird installiert"
 echo "**************************************************"
-apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release -y
+apt install docker docker-compose git ca-certificates curl gnupg lsb-release -y
 docker volume create portainer_data
 sleep 5
 
