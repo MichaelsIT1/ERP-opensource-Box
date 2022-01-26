@@ -17,11 +17,12 @@ menu() {
     echo "
 MAIN MENU
 1) xentral opensource installieren
-2) open3a installieren
-3) ISPConfig installieren
-5) docker Portainer installieren
+2) open3a installieren - NICHT FERTIG
+3) metafresh installieren - FEHLER
+3) ISPConfig installieren - FEHLER
 -----------------------------------------
-10) lokale Images
+10) docker Portainer installieren
+20) lokale Images
 0) Exit
 Choose an option: "
     read -r ans
@@ -38,20 +39,25 @@ Choose an option: "
         install_open3a
         ;;
         
-    3)  CNAME="ispconfig-test"
+    3)  CNAME="metafresh-test"
+        COS=$COS_DEBIAN
+        create_container
+        install_metafresh
+        ;;        
+        
+    4)  CNAME="ispconfig-test"
         COS=$COS_UBUNTU
         create_container
         install_ispconfig
         ;;
         
-     5) CNAME="docker-test"
+    10) CNAME="portainer-test"
         COS=$COS_UBUNTU
         create_container
         install_portainer
         ;;
 
-
-    10) pveam list local
+    20) pveam list local
         ;;
                 
     0)
