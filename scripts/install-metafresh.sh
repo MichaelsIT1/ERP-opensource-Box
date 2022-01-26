@@ -22,7 +22,7 @@ echo "Docker wird installiert"
 echo "**************************************************"
 apt install docker docker.io docker-compose git ca-certificates curl gnupg lsb-release -y
 echo
-sleep 5
+sleep 20
 echo "metafresh image herunterladen"
 echo "********************************"
 cd /root/
