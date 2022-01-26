@@ -40,7 +40,7 @@ Choose an option: "
         ;;
         
     3)  CNAME="metafresh-test"
-        COS=$COS_DEBIAN
+        COS=$COS_UBUNTU
         create_container
         install_metafresh
         ;;        
