@@ -59,6 +59,7 @@ Choose an option: "
         ;;
 
     19) pct stop 999 && pct destroy 999
+        ;;
     
     20) pveam list local
         ;;
