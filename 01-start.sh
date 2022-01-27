@@ -22,6 +22,7 @@ MAIN MENU
 4) ISPConfig installieren - FEHLER
 -----------------------------------------
 10) docker Portainer installieren
+19) Container 999 löschen
 20) lokale Images
 0) Exit
 Choose an option: "
@@ -57,6 +58,8 @@ Choose an option: "
         install_portainer
         ;;
 
+    19) pct stop 999 && pct destroy 999
+    
     20) pveam list local
         ;;
                 
