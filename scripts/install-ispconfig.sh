@@ -36,6 +36,21 @@ echo "Install Postfix, Dovecot, MariaDB, rkhunter, and Binutils"
 echo ***********************************************************
 apt-get -y install ntp postfix postfix-mysql postfix-doc mariadb-client mariadb-server openssl getmail4 rkhunter binutils dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve dovecot-lmtpd sudo curl patch
 
+echo "Install Amavisd-new, SpamAssassin, and ClamAV"
+echo "**********************************************"
+apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
+
+echo "Install Apache Web Server"
+echo "**********************************"
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php  libapache2-mod-fcgid apache2-suexec-pristine php-pear mcrypt imagemagick libruby libapache2-mod-python memcached php-memcache php-imagick php-gettext memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
+
+echo "Install PHP"
+echo "***********"
+apt-get -y install php $PHP $PHP-common $PHP-gd $PHP-mysql $PHP-imap $PHP-cli $PHP-cgi $PHP-curl $PHP-intl $PHP-pspell $PHP-sqlite3 $PHP-tidy $PHP-xmlrpc $PHP-xsl $PHP-zip $PHP-mbstring $PHP-soap $PHP-fpm $PHP-opcache
+
+
+
+
 sleep 3
 
 
@@ -101,10 +116,6 @@ sleep 3
 systemctl daemon-reload
 systemctl restart mariadb
 
-echo "Install Amavisd-new, SpamAssassin, and ClamAV"
-echo "**********************************************"
-
-apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
 
 systemctl stop spamassassin
 systemctl disable spamassassin
