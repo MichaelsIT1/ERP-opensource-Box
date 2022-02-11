@@ -17,6 +17,7 @@ timedatectl set-timezone Europe/Berlin
 echo
 
 # Non-free aktivieren
+echo "*****************"
 tee /etc/apt/sources.list.d/ispconfig.list >/dev/null <<EOF
 deb http://deb.debian.org/debian/ buster main contrib non-free
 deb-src http://deb.debian.org/debian/ buster main contrib non-free
@@ -98,13 +99,13 @@ sleep 3
 systemctl daemon-reload
 systemctl restart mariadb
 
-#echo "Install Amavisd-new, SpamAssassin, and ClamAV"
-#echo "**********************************************"
+echo "Install Amavisd-new, SpamAssassin, and ClamAV"
+echo "**********************************************"
 
-#apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
+apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
 
-#systemctl stop spamassassin
-#systemctl disable spamassassin
+systemctl stop spamassassin
+systemctl disable spamassassin
 
 echo "Install Apache Web Server and PHP"
 echo "**********************************"
@@ -133,12 +134,9 @@ curl https://get.acme.sh | sh -s
 #echo "Install PureFTPd and Quota"
 #echo "**********************"
 #apt-get -y install pure-ftpd-common pure-ftpd-mysql quota quotatool
-
 #openssl dhparam -out /etc/ssl/private/pure-ftpd-dhparams.pem 2048
 #sleep 3
-
 #sed -i "s|VIRTUALCHROOT=false|VIRTUALCHROOT=true|g" /etc/default/pure-ftpd-common
-
 #echo 1 > /etc/pure-ftpd/conf/TLS
 #mkdir -p /etc/ssl/private/
 
@@ -159,7 +157,7 @@ curl https://get.acme.sh | sh -s
 #mount -o remount /
 
 echo "Install BIND DNS Server"
-echo "'''''''''''''''''''''''"
+echo "************************"
 apt-get -y install bind9 dnsutils haveged
 
 
@@ -167,9 +165,7 @@ apt-get -y install bind9 dnsutils haveged
 #echo "****************************************"
 
 #apt-get -y install webalizer awstats geoip-database libclass-dbi-mysql-perl libtimedate-perl
-
 #sed -i "s|MAILTO=root|#MAILTO=root|g" /etc/cron.d/awstats
-
 #echo "deb https://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
 #wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/goaccess.gpg add -
 #apt-get update
@@ -178,14 +174,12 @@ apt-get -y install bind9 dnsutils haveged
 #echo "Install Jailkit"
 #echo "***************"
 #apt-get install build-essential autoconf automake libtool flex bison debhelper binutils
-
 #cd /tmp
 #wget http://olivier.sessink.nl/jailkit/jailkit-2.20.tar.gz
 #tar xvfz jailkit-2.20.tar.gz
 #cd jailkit-2.20
 #echo 5 > debian/compat
 #./debian/rules binary
-
 #cd ..
 #dpkg -i jailkit_2.20-1_*.deb
 #rm -rf jailkit-2.20*
