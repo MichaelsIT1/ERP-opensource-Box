@@ -29,12 +29,13 @@ echo "***************************************"
 apt update -y && apt dist-upgrade -y
 echo
 
+echo "Install Postfix, Dovecot, MariaDB, rkhunter, and Binutils"
+echo ***********************************************************
 apt-get -y install ntp postfix postfix-mysql postfix-doc mariadb-client mariadb-server openssl getmail4 rkhunter binutils dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve dovecot-lmtpd sudo curl
 
 sleep 3
 
-echo "ISP-Config wird installiert"
-echo "**************************************************"
+
 
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
@@ -97,6 +98,19 @@ sleep 3
 systemctl daemon-reload
 systemctl restart mariadb
 
+echo "Install Amavisd-new, SpamAssassin, and ClamAV"
+echo "**********************************************"
+
+apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
+
+systemctl stop spamassassin
+systemctl disable spamassassin
+
+echo "Install Apache Web Server and PHP"
+echo "**********************************"
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear mcrypt  imagemagick libruby libapache2-mod-python php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring memcached libapache2-mod-passenger php7.3-soap php7.3-fpm php7.3-opcache php-apcu libapache2-reload-perl
+
+a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
 
 echo "**************************************************************************"
