@@ -31,30 +31,43 @@ echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
 echo
+sleep 3
 
-echo "Install Postfix, Dovecot, MariaDB, rkhunter, and Binutils"
-echo ***********************************************************
-apt-get -y install ntp postfix postfix-mysql postfix-doc mariadb-client mariadb-server openssl getmail4 rkhunter binutils dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve dovecot-lmtpd sudo curl patch
+echo "Install Basics"
+echo "**********************************"
+apt-get -y install sudo curl patch
+sleep 3
 
-echo "Install Amavisd-new, SpamAssassin, and ClamAV"
-echo "**********************************************"
-apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
 
 echo "Install Apache Web Server"
 echo "**********************************"
-apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php  libapache2-mod-fcgid apache2-suexec-pristine php-pear mcrypt imagemagick libruby libapache2-mod-python memcached php-memcache php-imagick php-gettext memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
+sleep 3
 
 echo "Install PHP"
 echo "***********"
-apt-get -y install php $PHP $PHP-common $PHP-gd $PHP-mysql $PHP-imap $PHP-cli $PHP-cgi $PHP-curl $PHP-intl $PHP-pspell $PHP-sqlite3 $PHP-tidy $PHP-xmlrpc $PHP-xsl $PHP-zip $PHP-mbstring $PHP-soap $PHP-fpm $PHP-opcache
+apt-get -y install php $PHP $PHP-common $PHP-gd $PHP-mysql $PHP-imap $PHP-cli $PHP-cgi $PHP-curl $PHP-intl $PHP-pspell $PHP-sqlite3 $PHP-tidy $PHP-xmlrpc $PHP-xsl $PHP-zip $PHP-mbstring $PHP-soap $PHP-fpm $PHP-opcache php-memcache php-imagick php-gettext php-pear 
 
-
-
-
+echo "Install MariaDB"
+echo  "****************"
+apt-get -y installmariadb-client mariadb-server
 sleep 3
 
 
 
+
+echo "Install Postfix, Dovecot, MariaDB, rkhunter, and Binutils"
+echo  "*********************************************************"
+apt-get -y install ntp postfix postfix-mysql postfix-doc openssl rkhunter binutils dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve dovecot-lmtpd sudo curl patch
+sleep 3
+
+echo "Install Amavisd-new, SpamAssassin, and ClamAV"
+echo "**********************************************"
+apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
+sleep 3
+
+
+############### Maria DB Installation #####################################
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
         n           # Set root password?
@@ -66,8 +79,25 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
         y           # Reload privilege tables now?
 EOF
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 sleep 3
 
+################## Mailserver konfiguration ##############################################
 sed -i "s|#submission inet n       -       y       -       -       smtpd|submission inet n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
 sed -i "s|#  -o syslog_name=postfix/submission|  -o syslog_name=postfix/submission|g" /etc/postfix/master.cf
 sed -i "s|#  -o smtpd_tls_security_level=encrypt|  -o smtpd_tls_security_level=encrypt|g" /etc/postfix/master.cf
@@ -84,6 +114,9 @@ sleep 3
 
 systemctl restart postfix
 
+
+
+###################### PHPAdmin ########################################################
 # Datei /etc/mysql/mariadb.conf.d/50-server.cnf anpassen
 sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
 
@@ -120,9 +153,6 @@ systemctl restart mariadb
 systemctl stop spamassassin
 systemctl disable spamassassin
 
-echo "Install Apache Web Server and PHP"
-echo "**********************************"
-apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php php $PHP $PHP-common $PHP-gd $PHP-mysql $PHP-imap $PHP-cli $PHP-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear mcrypt  imagemagick libruby libapache2-mod-python $PHP-curl $PHP-intl $PHP-pspell $PHP-recode $PHP-sqlite3 $PHP-tidy $PHP-xmlrpc $PHP-xsl memcached php-memcache php-imagick php-gettext $PHP-zip $PHP-mbstring memcached libapache2-mod-passenger $PHP-soap $PHP-fpm $PHP-opcache php-apcu libapache2-reload-perl
 
 a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
