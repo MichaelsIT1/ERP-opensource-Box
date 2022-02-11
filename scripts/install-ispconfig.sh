@@ -6,8 +6,6 @@
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
-PHP=php7.4
-
 
 clear
 echo "ISP-Config installieren"
@@ -36,35 +34,32 @@ sleep 3
 echo "Install Basics"
 echo "**********************************"
 apt-get -y install sudo curl patch
-sleep 3
-
+sleep 30
 
 echo "Install Apache Web Server"
 echo "**********************************"
 apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
-sleep 3
+sleep 30
 
 echo "Install PHP"
 echo "***********"
-apt-get -y install php $PHP $PHP-common $PHP-gd $PHP-mysql $PHP-imap $PHP-cli $PHP-cgi $PHP-curl $PHP-intl $PHP-pspell $PHP-sqlite3 $PHP-tidy $PHP-xmlrpc $PHP-xsl $PHP-zip $PHP-mbstring $PHP-soap $PHP-fpm $PHP-opcache php-memcache php-imagick php-gettext php-pear 
+apt-get -y install php php-curl php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-gettext php-pear 
+sleep 30
 
 echo "Install MariaDB"
 echo  "****************"
-apt-get -y installmariadb-client mariadb-server
-sleep 3
+apt-get -y install mariadb-client mariadb-server
+sleep 30
 
-
-
-
-echo "Install Postfix, Dovecot, MariaDB, rkhunter, and Binutils"
+echo "Install Postfix, Dovecot, rkhunter and Binutils"
 echo  "*********************************************************"
 apt-get -y install ntp postfix postfix-mysql postfix-doc openssl rkhunter binutils dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve dovecot-lmtpd sudo curl patch
-sleep 3
+sleep 30
 
 echo "Install Amavisd-new, SpamAssassin, and ClamAV"
 echo "**********************************************"
 apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
-sleep 3
+sleep 30
 
 
 ############### Maria DB Installation #####################################
@@ -78,22 +73,6 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
         y           # Remove test database and access to it?
         y           # Reload privilege tables now?
 EOF
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 sleep 3
 
@@ -305,6 +284,8 @@ mysql -u root phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
 
 sed -i "s|// $cfg['Servers'][$i]['controlhost'] = '';|$cfg['Servers'][$i]['controlhost'] = 'localhost';|g"  /usr/share/phpmyadmin/config.inc.php
 sed -i "s|// $cfg['Servers'][$i]['controlpass'] = 'pmapass';|$cfg['Servers'][$i]['controlpass'] = 'mypassword';|g"  /usr/share/phpmyadmin/config.inc.php
+
+systemctl restart apache2
 
 echo "Download ISPConfig 3"
 echo "********************"
