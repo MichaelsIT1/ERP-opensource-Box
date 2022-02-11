@@ -126,9 +126,93 @@ echo "Install Let's Encrypt"
 echo "**********************"
 curl https://get.acme.sh | sh -s
 
-echo "Install Mailman"
+#echo "Install Mailman FEHLER"
+#echo "**********************"
+#apt -y install mailman
+
+echo "Install PureFTPd and Quota"
 echo "**********************"
-apt -y install mailman
+apt-get -y install pure-ftpd-common pure-ftpd-mysql quota quotatool
+
+openssl dhparam -out /etc/ssl/private/pure-ftpd-dhparams.pem 2048
+sleep 3
+
+sed -i "s|VIRTUALCHROOT=false|VIRTUALCHROOT=true|g" /etc/default/pure-ftpd-common
+
+echo 1 > /etc/pure-ftpd/conf/TLS
+mkdir -p /etc/ssl/private/
+
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | openssl req -x509 -nodes -days 7300 -newkey rsa:2048 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem
+DE
+Berlin
+10000
+Test-Company
+IT-Test
+test.test.local
+test@test.local
+EOF
+
+sleep 2
+
+chmod 600 /etc/ssl/private/pure-ftpd.pem
+systemctl restart pure-ftpd-mysql
+mount -o remount /
+
+echo "Install BIND DNS Server"
+echo "'''''''''''''''''''''''"
+apt-get -y install bind9 dnsutils haveged
+
+
+echo "Install Webalizer, AWStats and GoAccess"
+echo "****************************************"
+
+apt-get -y install webalizer awstats geoip-database libclass-dbi-mysql-perl libtimedate-perl
+
+#sed -i "s|MAILTO=root|#MAILTO=root|g" /etc/cron.d/awstats
+
+echo "deb https://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
+wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/goaccess.gpg add -
+apt-get update
+apt-get install goaccess
+
+echo "Install Jailkit"
+echo "***************"
+apt-get install build-essential autoconf automake libtool flex bison debhelper binutils
+
+cd /tmp
+wget http://olivier.sessink.nl/jailkit/jailkit-2.20.tar.gz
+tar xvfz jailkit-2.20.tar.gz
+cd jailkit-2.20
+echo 5 > debian/compat
+./debian/rules binary
+
+cd ..
+dpkg -i jailkit_2.20-1_*.deb
+rm -rf jailkit-2.20*
+
+echo "Install PHPMyAdmin Database Administration Tool"
+echo "************************************************"
+mkdir /usr/share/phpmyadmin
+mkdir /etc/phpmyadmin
+mkdir -p /var/lib/phpmyadmin/tmp
+chown -R www-data:www-data /var/lib/phpmyadmin
+touch /etc/phpmyadmin/htpasswd.setup
+
+cd /tmp
+wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
+
+tar xfz phpMyAdmin-4.9.0.1-all-languages.tar.gz
+mv phpMyAdmin-4.9.0.1-all-languages/* /usr/share/phpmyadmin/
+rm phpMyAdmin-4.9.0.1-all-languages.tar.gz
+rm -rf phpMyAdmin-4.9.0.1-all-languages
+
+cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc.php
+
+sed -i "s|$cfg['blowfish_secret'] =|$cfg['blowfish_secret'] = 'bD3e6wva9fnd93jVsb7SDgeiBCd452Dh'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */|g" /usr/share/phpmyadmin/config.inc.php
+
+echo "$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';" >> /usr/share/phpmyadmin/config.inc.php
+
+
 
 
 
