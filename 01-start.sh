@@ -20,7 +20,7 @@ MAIN MENU
 1) xentral opensource installieren
 2) open3a installieren - NICHT FERTIG
 3) metafresh installieren - FEHLER
-4) ISPConfig installieren - FEHLER
+4) ISPConfig installieren
 -----------------------------------------
 10) docker Portainer installieren
 19) Container 999 löschen
