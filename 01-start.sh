@@ -42,13 +42,13 @@ Choose an option: "
         ;;
         
     3)  CNAME="metafresh-test"
-        COS=$UBUNTU
+        COS=$UBUNTU # only Ubuntu
         create_container
         install_metafresh
         ;;        
         
     4)  CNAME="ispconfig-test"
-        COS=$UBUNTU
+        COS=$DEBIAN
         create_container
         install_ispconfig
         ;;
