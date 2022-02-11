@@ -37,7 +37,7 @@ sleep 3
 
 
 
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
         y           # Set root password?
         ispconfig   # new root password
@@ -142,7 +142,7 @@ sed -i "s|VIRTUALCHROOT=false|VIRTUALCHROOT=true|g" /etc/default/pure-ftpd-commo
 echo 1 > /etc/pure-ftpd/conf/TLS
 mkdir -p /etc/ssl/private/
 
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | openssl req -x509 -nodes -days 7300 -newkey rsa:2048 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | openssl req -x509 -nodes -days 7300 -newkey rsa:2048 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem
 DE
 Berlin
 10000
@@ -211,6 +211,51 @@ cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc
 sed -i "s|$cfg['blowfish_secret'] =|$cfg['blowfish_secret'] = 'bD3e6wva9fnd93jVsb7SDgeiBCd452Dh'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */|g" /usr/share/phpmyadmin/config.inc.php
 
 echo "$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';" >> /usr/share/phpmyadmin/config.inc.php
+
+tee /etc/apache2/conf-available/phpmyadmin.conf >/dev/null <<EOF
+# phpMyAdmin default Apache configuration
+
+Alias /phpmyadmin /usr/share/phpmyadmin
+
+<Directory /usr/share/phpmyadmin>
+ Options FollowSymLinks
+ DirectoryIndex index.php
+
+ <IfModule mod_php7.c>
+ AddType application/x-httpd-php .php
+
+ php_flag magic_quotes_gpc Off
+ php_flag track_vars On
+ php_flag register_globals Off
+ php_value include_path .
+ </IfModule>
+
+</Directory>
+
+# Authorize for setup
+<Directory /usr/share/phpmyadmin/setup>
+ <IfModule mod_authn_file.c>
+ AuthType Basic
+ AuthName "phpMyAdmin Setup"
+ AuthUserFile /etc/phpmyadmin/htpasswd.setup
+ </IfModule>
+ Require valid-user
+</Directory>
+
+# Disallow web access to directories that don't need it
+<Directory /usr/share/phpmyadmin/libraries>
+ Order Deny,Allow
+ Deny from All
+</Directory>
+<Directory /usr/share/phpmyadmin/setup/lib>
+ Order Deny,Allow
+ Deny from All
+</Directory>
+EOF
+
+
+a2enconf phpmyadmin
+systemctl restart apache2
 
 
 
