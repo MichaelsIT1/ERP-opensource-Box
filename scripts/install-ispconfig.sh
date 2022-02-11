@@ -43,10 +43,9 @@ sleep 30
 
 echo "Install PHP"
 echo "***********"
-apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-gettext php-pear 
+apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear 
 sleep 30
-apt -y install php-curl php-mysqli php-mbstring
-
+apt -y install php-curl php-mysqli php-mbstring php-php-gettext
 sleep 30
 
 echo "Install MariaDB"
@@ -56,7 +55,7 @@ sleep 30
 
 echo "Install Postfix, Dovecot, rkhunter and Binutils"
 echo  "*********************************************************"
-apt-get -y install ntp postfix postfix-mysql postfix-doc openssl rkhunter binutils dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve dovecot-lmtpd sudo curl patch
+apt-get -y install ntp postfix postfix-mysql postfix-doc openssl rkhunter binutils dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve dovecot-lmtpd
 sleep 30
 
 echo "Install Amavisd-new, SpamAssassin, and ClamAV"
