@@ -257,7 +257,7 @@ EOF
 a2enconf phpmyadmin
 systemctl restart apache2
 
-mysql -u root ispconfig <<EOF
+mysql -u root <<EOF
         CREATE DATABASE phpmyadmin;
         CREATE USER 'pma'@'localhost' IDENTIFIED BY 'mypassword';
         GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
@@ -265,6 +265,24 @@ mysql -u root ispconfig <<EOF
 EOF
 
 mysql -u root phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
+
+sed -i "s|// $cfg['Servers'][$i]['controlhost'] = '';|$cfg['Servers'][$i]['controlhost'] = 'localhost';|g"  /usr/share/phpmyadmin/config.inc.php
+sed -i "s|// $cfg['Servers'][$i]['controlpass'] = 'pmapass';|$cfg['Servers'][$i]['controlpass'] = 'mypassword';|g"  /usr/share/phpmyadmin/config.inc.php
+
+echo "Download ISPConfig 3"
+echo "********************"
+cd /tmp
+wget http://www.ispconfig.org/downloads/ISPConfig-3-stable.tar.gz
+tar xfz ISPConfig-3-stable.tar.gz
+cd ispconfig3_install/install/
+
+echo "Install ISPConfig"
+echo "*****************"
+php -q install.php
+
+
+
+
 
 echo "**************************************************************************"
 echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP:8080"
