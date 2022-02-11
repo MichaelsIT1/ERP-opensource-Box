@@ -111,7 +111,7 @@ systemctl disable spamassassin
 
 echo "Install Apache Web Server and PHP"
 echo "**********************************"
-apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php $PHP $PHP-common $PHP-gd $PHP-mysql $PHP-imap $PHP-cli $PHP-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear mcrypt  imagemagick libruby libapache2-mod-python $PHP-curl $PHP-intl $PHP-pspell $PHP-recode $PHP-sqlite3 $PHP-tidy $PHP-xmlrpc $PHP-xsl memcached php-memcache php-imagick php-gettext $PHP-zip $PHP-mbstring memcached libapache2-mod-passenger $PHP-soap $PHP-fpm $PHP-opcache php-apcu libapache2-reload-perl
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php php $PHP $PHP-common $PHP-gd $PHP-mysql $PHP-imap $PHP-cli $PHP-cgi libapache2-mod-fcgid apache2-suexec-pristine php-pear mcrypt  imagemagick libruby libapache2-mod-python $PHP-curl $PHP-intl $PHP-pspell $PHP-recode $PHP-sqlite3 $PHP-tidy $PHP-xmlrpc $PHP-xsl memcached php-memcache php-imagick php-gettext $PHP-zip $PHP-mbstring memcached libapache2-mod-passenger $PHP-soap $PHP-fpm $PHP-opcache php-apcu libapache2-reload-perl
 
 a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
