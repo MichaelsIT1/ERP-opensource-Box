@@ -83,6 +83,20 @@ mysql hard nofile 65535
 EOF
 
 
+# Datei /etc/systemd/system/mysql.service.d/limits.conf erzeugen und befuellen
+mkdir -p /etc/systemd/system/mysql.service.d/
+touch /etc/systemd/system/mysql.service.d/limits.conf
+
+tee /etc/systemd/system/mysql.service.d/limits.conf >/dev/null <<EOF
+[Service]
+LimitNOFILE=infinity
+EOF
+
+sleep 3
+
+systemctl daemon-reload
+systemctl restart mariadb
+
 
 
 echo "**************************************************************************"
