@@ -65,7 +65,14 @@ sleep 3
 
 systemctl restart postfix
 
+# Datei /etc/mysql/mariadb.conf.d/50-server.cnf anpassen
+sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
 
+# Passwort setzen für phpadmin
+echo "update mysql.user set plugin = 'mysql_native_password' where user='root';" | mysql -u root
+
+# MySQL-Passwort auf ispconfig setzen
+sed -i "s|password =|password = ispconfig|g" /etc/mysql/debian.cnf
 
 
 
