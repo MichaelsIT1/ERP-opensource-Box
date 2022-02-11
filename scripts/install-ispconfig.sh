@@ -39,9 +39,9 @@ sleep 3
 
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
-        y           # Set root password?
-        ispconfig   # new root password
-        ispconfig   # new root password         y          
+        n           # Set root password?
+        #ispconfig   # new root password
+        #ispconfig   # new root password
         Y            # Remove anonymous users?
         y           # Disallow root login remotely?
         y           # Remove test database and access to it?
@@ -257,9 +257,14 @@ EOF
 a2enconf phpmyadmin
 systemctl restart apache2
 
+mysql -u root ispconfig <<EOF
+        CREATE DATABASE phpmyadmin;
+        CREATE USER 'pma'@'localhost' IDENTIFIED BY 'mypassword';
+        GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+        FLUSH PRIVILEGES;
+EOF
 
-
-
+mysql -u root phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
 
 echo "**************************************************************************"
 echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP:8080"
