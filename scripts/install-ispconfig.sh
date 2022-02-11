@@ -74,6 +74,13 @@ echo "update mysql.user set plugin = 'mysql_native_password' where user='root';"
 # MySQL-Passwort auf ispconfig setzen
 sed -i "s|password =|password = ispconfig|g" /etc/mysql/debian.cnf
 
+# Datei /etc/security/limits.conf ergaenzen
+cp /etc/security/limits.conf /etc/security/limits.conf.orig
+
+tee /etc/security/limits.conf >/dev/null <<EOF
+mysql soft nofile 65535
+mysql hard nofile 65535
+EOF
 
 
 
