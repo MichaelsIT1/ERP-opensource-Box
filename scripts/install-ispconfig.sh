@@ -19,10 +19,10 @@ echo
 # Non-free aktivieren
 echo "*****************"
 tee /etc/apt/sources.list.d/ispconfig.list >/dev/null <<EOF
-deb http://deb.debian.org/debian/ buster main contrib non-free
-deb-src http://deb.debian.org/debian/ buster main contrib non-free
-deb http://security.debian.org/debian-security buster/updates main contrib non-free
-deb-src http://security.debian.org/debian-security buster/updates main contrib non-free
+deb http://deb.debian.org/debian/ stable main contrib non-free
+deb-src http://deb.debian.org/debian/ stable main contrib non-free
+deb http://security.debian.org/debian-security stable/updates main contrib non-free
+deb-src http://security.debian.org/debian-security stable/updates main contrib non-free
 EOF
 
 echo "Betriebssystem wird aktualisiert"
