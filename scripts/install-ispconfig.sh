@@ -43,7 +43,10 @@ sleep 30
 
 echo "Install PHP"
 echo "***********"
-apt-get -y install php php-curl php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-gettext php-pear 
+apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-gettext php-pear 
+sleep 30
+apt -y install php-curl php-mysqli php-mbstring
+
 sleep 30
 
 echo "Install MariaDB"
