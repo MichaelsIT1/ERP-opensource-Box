@@ -43,7 +43,7 @@ then
         echo "*************************"       
        
        # automatische Installation
-        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
+        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
         y           # Set root password?
         xentral     # new root password
