@@ -33,7 +33,7 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch
+apt-get -y install sudo curl patch ntp  openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg
 sleep 30
 
 echo "Install Apache Web Server"
@@ -53,14 +53,14 @@ echo  "****************"
 apt-get -y install mariadb-client mariadb-server
 sleep 30
 
-echo "Install Postfix, Dovecot, rkhunter and Binutils"
-echo  "*********************************************************"
-apt-get -y install ntp postfix postfix-mysql postfix-doc openssl rkhunter binutils dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve dovecot-lmtpd
-sleep 30
+#echo "Install Postfix, Dovecot, rkhunter and Binutils"
+#echo  "*********************************************************"
+#apt-get -y install postfix postfix-mysql postfix-doc rkhunter binutils dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve dovecot-lmtpd
+#sleep 30
 
 echo "Install Amavisd-new, SpamAssassin, and ClamAV"
 echo "**********************************************"
-apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
+apt-get -y install amavisd-new spamassassin clamav clamav-daemon arj nomarch lzop cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
 sleep 30
 
 
@@ -79,21 +79,20 @@ EOF
 sleep 3
 
 ################## Mailserver konfiguration ##############################################
-sed -i "s|#submission inet n       -       y       -       -       smtpd|submission inet n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
-sed -i "s|#  -o syslog_name=postfix/submission|  -o syslog_name=postfix/submission|g" /etc/postfix/master.cf
-sed -i "s|#  -o smtpd_tls_security_level=encrypt|  -o smtpd_tls_security_level=encrypt|g" /etc/postfix/master.cf
-sed -i "s|#  -o smtpd_sasl_auth_enable=yes|  -o smtpd_sasl_auth_enable=yes|g" /etc/postfix/master.cf
-sed -i "s|#  -o smtpd_client_restrictions=$mua_client_restrictions|  -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
+#sed -i "s|#submission inet n       -       y       -       -       smtpd|submission inet n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
+#sed -i "s|#  -o syslog_name=postfix/submission|  -o syslog_name=postfix/submission|g" /etc/postfix/master.cf
+#sed -i "s|#  -o smtpd_tls_security_level=encrypt|  -o smtpd_tls_security_level=encrypt|g" /etc/postfix/master.cf
+#sed -i "s|#  -o smtpd_sasl_auth_enable=yes|  -o smtpd_sasl_auth_enable=yes|g" /etc/postfix/master.cf
+#sed -i "s|#  -o smtpd_client_restrictions=$mua_client_restrictions|  -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
 
-sleep 3
-sed -i "s|#smtps     inet  n       -       y       -       -       smtpd|smtps     inet  n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
-sed -i "s|#  -o syslog_name=postfix/smtps|  -o syslog_name=postfix/smtps|g" /etc/postfix/master.cf
-sed -i "s|#  -o smtpd_tls_wrappermode=yes|  -o smtpd_tls_wrappermode=yes|g" /etc/postfix/master.cf
-sed -i "s|#  -o smtpd_sasl_auth_enable=yes|  -o smtpd_sasl_auth_enable=yes|g" /etc/postfix/master.cf
-sed -i "s|#  -o smtpd_client_restrictions=$mua_client_restrictions|#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
-sleep 3
-
-systemctl restart postfix
+#sleep 3
+#sed -i "s|#smtps     inet  n       -       y       -       -       smtpd|smtps     inet  n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
+#sed -i "s|#  -o syslog_name=postfix/smtps|  -o syslog_name=postfix/smtps|g" /etc/postfix/master.cf
+#sed -i "s|#  -o smtpd_tls_wrappermode=yes|  -o smtpd_tls_wrappermode=yes|g" /etc/postfix/master.cf
+#sed -i "s|#  -o smtpd_sasl_auth_enable=yes|  -o smtpd_sasl_auth_enable=yes|g" /etc/postfix/master.cf
+#sed -i "s|#  -o smtpd_client_restrictions=$mua_client_restrictions|#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
+#sleep 3
+#systemctl restart postfix
 
 
 
