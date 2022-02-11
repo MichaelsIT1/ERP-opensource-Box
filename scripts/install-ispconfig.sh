@@ -112,6 +112,25 @@ apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php php7.3 p
 
 a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
+# Datei /etc/apache2/conf-available/httpoxy.conf erzeugen und bearbeiten
+tee /etc/apache2/conf-available/httpoxy.conf >/dev/null <<EOF
+<IfModule mod_headers.c>
+    RequestHeader unset Proxy early
+</IfModule>
+EOF
+
+a2enconf httpoxy
+systemctl restart apache2
+
+echo "Install Let's Encrypt"
+echo "**********************"
+curl https://get.acme.sh | sh -s
+
+echo "Install Mailman"
+echo "**********************"
+apt -y install mailman
+
+
 
 echo "**************************************************************************"
 echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP:8080"
