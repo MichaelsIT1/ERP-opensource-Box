@@ -1,8 +1,8 @@
 #!/bin/sh
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Debian 10 (buster) im LXC Container
-# https://www.howtoforge.com/ispconfig-autoinstall-debian-ubuntu/
+# getestet auf Debian 11 im LXC Container
+# https://www.howtoforge.com/perfect-server-debian-10-buster-apache-bind-dovecot-ispconfig-3-1/
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
