@@ -33,7 +33,7 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch ntp  openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg
+apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg
 sleep 30
 
 echo "Install Apache Web Server"
