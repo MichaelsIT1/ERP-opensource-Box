@@ -36,6 +36,10 @@ echo "**********************************"
 apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg
 sleep 30
 
+echo "Install BIND DNS Server"
+echo "************************"
+apt-get -y install bind9 dnsutils haveged
+
 echo "Install Apache Web Server"
 echo "**********************************"
 apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
@@ -62,6 +66,25 @@ echo "Install Amavisd-new, SpamAssassin, and ClamAV"
 echo "**********************************************"
 apt-get -y install amavisd-new spamassassin clamav clamav-daemon arj nomarch lzop cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
 sleep 30
+
+#echo "Install Let's Encrypt"
+#echo "**********************"
+#curl https://get.acme.sh | sh -s
+sleep 30
+
+#echo "Install PureFTPd and Quota"
+#echo "**********************"
+#apt-get -y install pure-ftpd-common pure-ftpd-mysql quota quotatool
+sleep 30
+
+#echo "Install Webalizer, AWStats and GoAccess"
+#echo "****************************************"
+#sed -i "s|MAILTO=root|#MAILTO=root|g" /etc/cron.d/awstats
+#echo "deb https://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
+#wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/goaccess.gpg add -
+
+#apt-get -y install webalizer awstats geoip-database libclass-dbi-mysql-perl libtimedate-perl
+#apt-get -y install goaccess
 
 
 ############### Maria DB Installation #####################################
@@ -137,6 +160,7 @@ systemctl disable spamassassin
 a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
 # Datei /etc/apache2/conf-available/httpoxy.conf erzeugen und bearbeiten
+############################################################################
 tee /etc/apache2/conf-available/httpoxy.conf >/dev/null <<EOF
 <IfModule mod_headers.c>
     RequestHeader unset Proxy early
@@ -146,23 +170,14 @@ EOF
 a2enconf httpoxy
 systemctl restart apache2
 
-echo "Install Let's Encrypt"
-echo "**********************"
-curl https://get.acme.sh | sh -s
-
-#echo "Install Mailman FEHLER"
-#echo "**********************"
-#apt -y install mailman
-
-#echo "Install PureFTPd and Quota"
-#echo "**********************"
-#apt-get -y install pure-ftpd-common pure-ftpd-mysql quota quotatool
+#CA erzeugen
 #openssl dhparam -out /etc/ssl/private/pure-ftpd-dhparams.pem 2048
 #sleep 3
 #sed -i "s|VIRTUALCHROOT=false|VIRTUALCHROOT=true|g" /etc/default/pure-ftpd-common
 #echo 1 > /etc/pure-ftpd/conf/TLS
 #mkdir -p /etc/ssl/private/
 
+######################################################
 #sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | openssl req -x509 -nodes -days 7300 -newkey rsa:2048 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem
 #DE
 #Berlin
@@ -172,27 +187,17 @@ curl https://get.acme.sh | sh -s
 #test.test.local
 #test@test.local
 #EOF
-
+##########################################################
 #sleep 2
 
 #chmod 600 /etc/ssl/private/pure-ftpd.pem
 #systemctl restart pure-ftpd-mysql
 #mount -o remount /
 
-echo "Install BIND DNS Server"
-echo "************************"
-apt-get -y install bind9 dnsutils haveged
 
 
-#echo "Install Webalizer, AWStats and GoAccess"
-#echo "****************************************"
 
-#apt-get -y install webalizer awstats geoip-database libclass-dbi-mysql-perl libtimedate-perl
-#sed -i "s|MAILTO=root|#MAILTO=root|g" /etc/cron.d/awstats
-#echo "deb https://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
-#wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/goaccess.gpg add -
-#apt-get update
-#apt-get install goaccess
+
 
 #echo "Install Jailkit"
 #echo "***************"
