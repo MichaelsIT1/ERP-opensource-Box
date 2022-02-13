@@ -82,11 +82,6 @@ sleep 3
 # Datei /etc/mysql/mariadb.conf.d/50-server.cnf anpassen
 sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
 
-
-# MARIA-DB ROOT PASSWORT SETZEN
-# MySQL-Passwort auf ispconfig setzen
-#sed -i "s|password =|password = ispconfig|g" /etc/mysql/debian.cnf
-
 # Datei /etc/security/limits.conf ergaenzen
 cp /etc/security/limits.conf /etc/security/limits.conf.orig
 
