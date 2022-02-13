@@ -142,7 +142,7 @@ echo "Install PHP"
 echo "***********"
 apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear 
 sleep 30
-apt -y install php-curl php-mysqli php-mbstring php-php-gettext
+apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-gmp
 sleep 30
 
 
@@ -232,11 +232,11 @@ apt-get -y install haveged
 apt install -y phpmyadmin
 
 # Erzeuge Benutzer fuer phpmyadmin
-mysql -u root <<EOF
-        CREATE USER 'pma'@'localhost' IDENTIFIED BY 'mypassword';
-        GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
-        FLUSH PRIVILEGES;
-EOF
+#mysql -u root <<EOF
+#        CREATE USER 'pma'@'localhost' IDENTIFIED BY 'mypassword';
+#        GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+#        FLUSH PRIVILEGES;
+#EOF
 
 systemctl restart apache2
 
