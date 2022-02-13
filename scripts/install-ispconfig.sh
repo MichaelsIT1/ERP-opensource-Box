@@ -234,92 +234,9 @@ apt-get -y install haveged
 
 
 ########## 18 Install PHPMyAdmin Database Administration Tool ##################################
-
-echo "Install PHPMyAdmin Database Administration Tool"
-echo "************************************************"
-mkdir /usr/share/phpmyadmin
-mkdir /etc/phpmyadmin
-mkdir -p /var/lib/phpmyadmin/tmp
-chown -R www-data:www-data /var/lib/phpmyadmin
-touch /etc/phpmyadmin/htpasswd.setup
-
-cd /tmp
-wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
-
-tar xfz phpMyAdmin-4.9.0.1-all-languages.tar.gz
-mv phpMyAdmin-4.9.0.1-all-languages/* /usr/share/phpmyadmin/
-rm phpMyAdmin-4.9.0.1-all-languages.tar.gz
-rm -rf phpMyAdmin-4.9.0.1-all-languages
-
-cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc.php
-
-sed -i "s|$cfg['blowfish_secret'] =|$cfg['blowfish_secret'] = 'bD3e6wva9fnd93jVsb7SDgeiBCd452Dh'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */|g" /usr/share/phpmyadmin/config.inc.php
-
-echo "\$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';" >> /usr/share/phpmyadmin/config.inc.php
-
-tee /etc/apache2/conf-available/phpmyadmin.conf >/dev/null <<EOF
-# phpMyAdmin default Apache configuration
-
-Alias /phpmyadmin /usr/share/phpmyadmin
-
-<Directory /usr/share/phpmyadmin>
- Options FollowSymLinks
- DirectoryIndex index.php
-
- <IfModule mod_php7.c>
- AddType application/x-httpd-php .php
-
- php_flag magic_quotes_gpc Off
- php_flag track_vars On
- php_flag register_globals Off
- php_value include_path .
- </IfModule>
-
-</Directory>
-
-# Authorize for setup
-<Directory /usr/share/phpmyadmin/setup>
- <IfModule mod_authn_file.c>
- AuthType Basic
- AuthName "phpMyAdmin Setup"
- AuthUserFile /etc/phpmyadmin/htpasswd.setup
- </IfModule>
- Require valid-user
-</Directory>
-
-# Disallow web access to directories that don't need it
-<Directory /usr/share/phpmyadmin/libraries>
- Order Deny,Allow
- Deny from All
-</Directory>
-<Directory /usr/share/phpmyadmin/setup/lib>
- Order Deny,Allow
- Deny from All
-</Directory>
-EOF
+apt install -y phpmyadmin
 
 
-a2enconf phpmyadmin
-systemctl restart apache2
-
-mysql -u root <<EOF
-        CREATE DATABASE phpmyadmin;
-        CREATE USER 'pma'@'localhost' IDENTIFIED BY 'mypassword';
-        GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
-        FLUSH PRIVILEGES;
-EOF
-
-mysql -u root phpmyadmin < /usr/share/phpmyadmin/sql/create_tables.sql
-
-sed -i "s|// $cfg['Servers'][$i]['controlhost'] = '';|$cfg['Servers'][$i]['controlhost'] = 'localhost';|g"  /usr/share/phpmyadmin/config.inc.php
-sed -i "s|// $cfg['Servers'][$i]['controlpass'] = 'pmapass';|$cfg['Servers'][$i]['controlpass'] = 'mypassword';|g"  /usr/share/phpmyadmin/config.inc.php
-
-
-
-########## PHPMYADMIN ################################
-# Passwort setzen für phpadmin
-echo "update mysql.user set plugin = 'mysql_native_password' where user='root';" | mysql -u root
-systemctl restart apache2
 
 
 
