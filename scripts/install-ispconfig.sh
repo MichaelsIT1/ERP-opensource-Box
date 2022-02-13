@@ -85,7 +85,7 @@ sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0
 
 # MARIA-DB ROOT PASSWORT SETZEN
 # MySQL-Passwort auf ispconfig setzen
-sed -i "s|password =|password = ispconfig|g" /etc/mysql/debian.cnf
+#sed -i "s|password =|password = ispconfig|g" /etc/mysql/debian.cnf
 
 # Datei /etc/security/limits.conf ergaenzen
 cp /etc/security/limits.conf /etc/security/limits.conf.orig
@@ -152,7 +152,7 @@ sleep 30
 
 
 ##################### 11 Install Let's Encrypt ##################################
-curl https://get.acme.sh | sh -s
+apt-get -y install certbot
 sleep 30
 
 ################### 12 Install Mailman #########################################
@@ -233,12 +233,17 @@ apt-get -y install haveged
 
 
 
-########## 18 Install PHPMyAdmin Database Administration Tool ##################################
+################ 18 Install PHPMyAdmin Database Administration Tool ##################################
 apt install -y phpmyadmin
 
+# Erzeuge Benutzer fuer phpmyadmin
+mysql -u root <<EOF
+        CREATE USER 'pma'@'localhost' IDENTIFIED BY 'mypassword';
+        GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+        FLUSH PRIVILEGES;
+EOF
 
-
-
+systemctl restart apache2
 
 
 #################### 19 Install RoundCube Webmail (optional) #########################
