@@ -152,8 +152,8 @@ sleep 30
 
 
 ##################### 11 Install Let's Encrypt ##################################
-#curl https://get.acme.sh | sh -s
-#sleep 30
+curl https://get.acme.sh | sh -s
+sleep 30
 
 ################### 12 Install Mailman #########################################
 apt-get install mailman
