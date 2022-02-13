@@ -255,7 +255,7 @@ cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc
 
 sed -i "s|$cfg['blowfish_secret'] =|$cfg['blowfish_secret'] = 'bD3e6wva9fnd93jVsb7SDgeiBCd452Dh'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */|g" /usr/share/phpmyadmin/config.inc.php
 
-echo "$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';" >> /usr/share/phpmyadmin/config.inc.php
+echo "\$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';" >> /usr/share/phpmyadmin/config.inc.php
 
 tee /etc/apache2/conf-available/phpmyadmin.conf >/dev/null <<EOF
 # phpMyAdmin default Apache configuration
