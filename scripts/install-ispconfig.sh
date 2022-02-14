@@ -109,13 +109,17 @@ systemctl restart mariadb
 ######### 9 Install Amavisd-new, SpamAssassin, and ClamAV ###############################
 echo "Install Amavisd-new, SpamAssassin, and ClamAV"
 echo "**********************************************"
-apt-get -y install amavisd-new spamassassin clamav clamav-daemon arj nomarch lzop cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
+
+apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl postgrey
+
+
 sleep 30
 
 systemctl stop spamassassin
 systemctl disable spamassassin
 
-
+freshclam
+service clamav-daemon start
 
 
 
@@ -152,10 +156,10 @@ apt-get -y install certbot
 sleep 30
 
 ################### 12 Install Mailman #########################################
-apt-get install mailman
+#apt-get install mailman3
 #######  Languages to support: <-- en (English)
 ######## Missing site list <-- Ok
-newlist mailman
+#newlist mailman
 
 ## NOCH ZU IMPLEMENTIEREN
 
@@ -199,9 +203,8 @@ apt-get -y install bind9 dnsutils
 apt-get -y install haveged
 
 
-############### 15 Install Webalizer, AWStats and GoAccess #######################################
-#apt-get -y install webalizer awstats geoip-database libclass-dbi-mysql-perl libtimedate-perl
-#sed -i "s|MAILTO=root|#MAILTO=root|g" /etc/cron.d/awstats
+############### 15 Install AWStats #######################################
+apt-get -y install vlogger awstats geoip-database libclass-dbi-mysql-perl
 
 # GoAcces
 #echo "deb https://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
@@ -224,8 +227,9 @@ apt-get -y install haveged
 
 
 ############### 17 Install fail2ban and UFW Firewall ######################################
+apt-get -y install fail2ban
+apt-get -y install ufw
 
-### OFFEN ########
 
 
 
