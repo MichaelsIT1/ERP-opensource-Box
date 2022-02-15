@@ -6,6 +6,14 @@
 # https://www.howtoforge.com/tutorial/perfect-server-ubuntu-20.04-with-apache-php-myqsl-pureftpd-bind-postfix-doveot-and-ispconfig/
 
 # System-Varibale
+MAIL=false
+VIRENSCANNER=false
+
+
+
+
+
+
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
 clear
@@ -38,6 +46,8 @@ apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unra
 sleep 30
 
 
+if ($MAIL)
+then
 ###################  8 Install Postfix, Dovecot, rkhunter #############################
 apt-get -y install postfix postfix-mysql postfix-doc getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 30
@@ -60,7 +70,7 @@ sed -i "s|#  -o smtpd_sasl_auth_enable=yes|  -o smtpd_sasl_auth_enable=yes|g" /e
 sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
 sleep 3
 systemctl restart postfix
-
+fi
 
 ################## MARIADB installieren ##############################################
 apt-get -y install mariadb-client mariadb-server
@@ -105,7 +115,8 @@ sleep 3
 systemctl daemon-reload
 systemctl restart mariadb
 
-
+if ($VIRENSCANNER)
+then
 ######### 9 Install Amavisd-new, SpamAssassin, and ClamAV ###############################
 echo "Install Amavisd-new, SpamAssassin, and ClamAV"
 echo "**********************************************"
@@ -120,7 +131,7 @@ systemctl disable spamassassin
 
 freshclam
 service clamav-daemon start
-
+fi
 
 
 
@@ -152,8 +163,8 @@ sleep 30
 
 
 ##################### 11 Install Let's Encrypt ##################################
-apt-get -y install certbot
-sleep 30
+#apt-get -y install certbot
+#sleep 30
 
 ################### 12 Install Mailman #########################################
 #apt-get install mailman3
@@ -199,8 +210,8 @@ sleep 30
 
 
 ############ 14 Install BIND DNS Server #####################
-apt-get -y install bind9 dnsutils 
-apt-get -y install haveged
+#apt-get -y install bind9 dnsutils 
+#apt-get -y install haveged
 
 
 ############### 15 Install AWStats #######################################
