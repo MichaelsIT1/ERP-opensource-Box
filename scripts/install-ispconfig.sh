@@ -9,6 +9,7 @@
 MAIL=true
 VIRENSCANNER=false
 SSL_LETSENCRYPT=false
+PureFTPd=false
 
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
@@ -24,9 +25,9 @@ echo "Zeitzone auf Europe/Berlin gesetzt"
 echo "**********************************"
 timedatectl set-timezone Europe/Berlin 
 echo
-################################  5 Update your Debian Installation  ###################################################
+################################  Update your Debian Installation ###################################################
+
 # Non-free aktivieren
-echo "*****************"
 tee /etc/apt/sources.list.d/ispconfig.list >/dev/null <<EOF
 deb http://deb.debian.org/debian/ stable main contrib non-free
 deb-src http://deb.debian.org/debian/ stable main contrib non-free
@@ -40,7 +41,7 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils
+apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common
 sleep 30
 
 
@@ -55,21 +56,22 @@ sleep 10
 ####### System mail name: <-- server1.example.com
 
 ################## POSTFIX Mailserver konfiguration ##############################################
-#sed -i "s|#submission inet n       -       y       -       -       smtpd|submission inet n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
-#sed -i "s|#  -o syslog_name=postfix/submission|  -o syslog_name=postfix/submission|g" /etc/postfix/master.cf
-#sed -i "s|#  -o smtpd_tls_security_level=encrypt|  -o smtpd_tls_security_level=encrypt|g" /etc/postfix/master.cf
-#sed -i "s|#  -o smtpd_sasl_auth_enable=yes|  -o smtpd_sasl_auth_enable=yes|g" /etc/postfix/master.cf
-#sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|  -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
+sed -i "s|#submission inet n       -       y       -       -       smtpd|submission inet n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
+sed -i "s|#  -o syslog_name=postfix/submission|  -o syslog_name=postfix/submission|g" /etc/postfix/master.cf
+sed -i "s|#  -o smtpd_tls_security_level=encrypt|  -o smtpd_tls_security_level=encrypt|g" /etc/postfix/master.cf
+sed -i "s|#  -o smtpd_sasl_auth_enable=yes|  -o smtpd_sasl_auth_enable=yes|g" /etc/postfix/master.cf
+sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|  -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
 
-#sleep 3
-#sed -i "s|#smtps     inet  n       -       y       -       -       smtpd|smtps     inet  n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
-#sed -i "s|#  -o syslog_name=postfix/smtps|  -o syslog_name=postfix/smtps|g" /etc/postfix/master.cf
-#sed -i "s|#  -o smtpd_tls_wrappermode=yes|  -o smtpd_tls_wrappermode=yes|g" /etc/postfix/master.cf
-#sed -i "s|#  -o smtpd_sasl_auth_enable=yes|  -o smtpd_sasl_auth_enable=yes|g" /etc/postfix/master.cf
-#sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
-#sleep 3
+sleep 3
+sed -i "s|#smtps     inet  n       -       y       -       -       smtpd|smtps     inet  n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
+sed -i "s|#  -o syslog_name=postfix/smtps|  -o syslog_name=postfix/smtps|g" /etc/postfix/master.cf
+sed -i "s|#  -o smtpd_tls_wrappermode=yes|  -o smtpd_tls_wrappermode=yes|g" /etc/postfix/master.cf
+sed -i "s|#  -o smtpd_sasl_auth_enable=yes|  -o smtpd_sasl_auth_enable=yes|g" /etc/postfix/master.cf
+sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
+sleep 3
 systemctl restart postfix
 fi
+
 
 ################## MARIADB installieren ##############################################
 apt-get -y install mariadb-client mariadb-server
@@ -179,37 +181,35 @@ fi
 
 
 
-############### 13 Install PureFTPd and Quota ################################################
-#apt-get -y install pure-ftpd-common pure-ftpd-mysql quota quotatool
-#sleep 30
+############### 13 Install PureFTPd ################################################
+if ($PureFTPd)
+then
+apt-get -y install pure-ftpd-common pure-ftpd-mysql
+sleep 30
 
 #CA erzeugen
-#openssl dhparam -out /etc/ssl/private/pure-ftpd-dhparams.pem 2048
-#sleep 3
-#sed -i "s|VIRTUALCHROOT=false|VIRTUALCHROOT=true|g" /etc/default/pure-ftpd-common
-#echo 1 > /etc/pure-ftpd/conf/TLS
-#mkdir -p /etc/ssl/private/
+openssl dhparam -out /etc/ssl/private/pure-ftpd-dhparams.pem 2048
+sleep 3
+sed -i "s|VIRTUALCHROOT=false|VIRTUALCHROOT=true|g" /etc/default/pure-ftpd-common
+echo 1 > /etc/pure-ftpd/conf/TLS
+mkdir -p /etc/ssl/private/
 
 ######################################################
-#sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | openssl req -x509 -nodes -days 7300 -newkey rsa:2048 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem
-#DE
-#Berlin
-#10000
-#Test-Company
-#IT-Test
-#test.test.local
-#test@test.local
-#EOF
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | openssl req -x509 -nodes -days 7300 -newkey rsa:2048 -keyout /etc/ssl/private/pure-ftpd.pem -out /etc/ssl/private/pure-ftpd.pem
+DE
+Berlin
+10000
+Test-Company
+IT-Test
+test.test.local
+test@test.local
+EOF
 ##########################################################
-#sleep 2
+sleep 2
 
-#chmod 600 /etc/ssl/private/pure-ftpd.pem
-#systemctl restart pure-ftpd-mysql
-#mount -o remount /
-
-
-#### OFFEN ##########
-
+chmod 600 /etc/ssl/private/pure-ftpd.pem
+systemctl restart pure-ftpd-mysql
+if
 
 
 ############ 14 Install BIND DNS Server #####################
