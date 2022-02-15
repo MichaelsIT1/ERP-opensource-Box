@@ -8,7 +8,7 @@
 # System-Varibale
 MAIL=false
 VIRENSCANNER=false
-SSL-LETSENCRYPT=false
+SSL_LETSENCRYPT=false
 
 
 
@@ -164,7 +164,7 @@ sleep 30
 
 
 ##################### 11 Install Let's Encrypt ##################################
-if ($SSL-LETSENCRYPT)
+if ($SSL_LETSENCRYPT)
 then
 apt-get -y install certbot
 sleep 30
