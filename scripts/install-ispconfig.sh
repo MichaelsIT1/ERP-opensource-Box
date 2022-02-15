@@ -12,6 +12,10 @@ SSL_LETSENCRYPT=false
 
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
+# Postfix entfernen
+apt-get -y purge postfix
+sleep 10
+
 clear
 echo "ISP-Config installieren"
 echo "*******************************"
@@ -43,11 +47,7 @@ sleep 30
 if ($MAIL)
 then
 ###################  8 Install Postfix, Dovecot, rkhunter #############################
-apt-get -y purge postfix
-sleep 10
-apt-get -y install postfix 
-sleep 10
-apt -y install postfix-mysql postfix-doc getmail6 rkhunter
+apt-get -y install postfix postfix-mysql postfix-doc getmail6 rkhunter
 apt-get -y install dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 10
 
