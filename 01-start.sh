@@ -22,6 +22,7 @@ MAIN MENU
 4) ISPConfig installieren
 -----------------------------------------
 10) docker Portainer installieren
+11) Debian 11 Container
 19) Container 999 löschen
 20) lokale Images
 0) Exit
@@ -56,6 +57,12 @@ Choose an option: "
         COS=$UBUNTU
         create_container
         install_portainer
+        ;;
+        
+    11) CNAME="Debian11-test"
+        COS=$DEBIAN
+        create_container
+        install_debian
         ;;
 
     19) pct stop 999 && pct destroy 999
@@ -107,6 +114,11 @@ pct exec $CID -- bash -c "sh /root/install-open3a.sh"
 install_ispconfig() {
 pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
 pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
+}
+
+install_debian() {
+pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
+pct exec $CID -- bash -c "sh /root/install-debian.sh"
 }
 
 install_metafresh() {
