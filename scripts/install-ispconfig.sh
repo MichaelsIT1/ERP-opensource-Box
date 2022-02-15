@@ -10,6 +10,8 @@ MAIL=true
 VIRENSCANNER=false
 SSL_LETSENCRYPT=false
 PureFTPd=false
+AWSTATS=true
+PHPMYADMIN=true
 
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
@@ -209,7 +211,7 @@ sleep 2
 
 chmod 600 /etc/ssl/private/pure-ftpd.pem
 systemctl restart pure-ftpd-mysql
-if
+fi
 
 
 ############ 14 Install BIND DNS Server #####################
@@ -218,13 +220,15 @@ if
 
 
 ############### 15 Install AWStats #######################################
+if ($AWSTATS)
+then
 apt-get -y install vlogger awstats geoip-database libclass-dbi-mysql-perl
 
 # GoAcces
 #echo "deb https://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
 #wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/goaccess.gpg add -
 #apt-get -y install goaccess
-
+fi
 
 
 ##################### 16 Install Jailkit #########################################
@@ -248,6 +252,8 @@ apt-get -y install ufw
 
 
 ################ 18 Install PHPMyAdmin Database Administration Tool ##################################
+if ($PHPMYADMIN)
+then
 apt install -y phpmyadmin
 
 # Erzeuge Benutzer fuer phpmyadmin
@@ -256,6 +262,7 @@ apt install -y phpmyadmin
 #        GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
 #        FLUSH PRIVILEGES;
 #EOF
+fi
 
 systemctl restart apache2
 
