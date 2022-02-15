@@ -252,7 +252,7 @@ apt-get -y install roundcube roundcube-core roundcube-mysql roundcube-plugins ro
 sed -i "s|#    Alias /roundcube /var/lib/roundcube/public_html|    Alias /roundcube /var/lib/roundcube/public_html\nAlias /webmail /var/lib/roundcube|g"  /etc/apache2/conf-enabled/roundcube.conf
 
 sed -i "s|\$config\['default_host'\] = '';|\$config\['default_host'\] = 'localhost';|g"  /etc/roundcube/config.inc.php
-sed -i "s|\$config\['smtp_server'\] = '';|\$config\['smtp_server'\] = 'localhost';|g"  /etc/roundcube/config.inc.php
+sed -i "s|\$config\['smtp_server'\] = '';|\$config\['smtp_server'\] = '%h';|g"  /etc/roundcube/config.inc.php
 
 sed -i "s|\$config\['smtp_port'\] = 587;|\$config\['smtp_port'\] = 25;|g"  /etc/roundcube/config.inc.php
 
