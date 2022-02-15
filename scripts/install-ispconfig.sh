@@ -6,13 +6,9 @@
 # https://www.howtoforge.com/tutorial/perfect-server-ubuntu-20.04-with-apache-php-myqsl-pureftpd-bind-postfix-doveot-and-ispconfig/
 
 # System-Varibale
-MAIL=false
+MAIL=true
 VIRENSCANNER=false
 SSL_LETSENCRYPT=false
-
-
-
-
 
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
@@ -49,8 +45,11 @@ sleep 30
 if ($MAIL)
 then
 ###################  8 Install Postfix, Dovecot, rkhunter #############################
-apt-get -y install postfix postfix-mysql postfix-doc getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
+apt-get -y install postfix postfix-mysql postfix-doc getmail6 rkhunter 
 sleep 30
+apt-get -y install dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
+sleep 30
+
 
 ###### General type of mail configuration: <-- Internet Site
 ####### System mail name: <-- server1.example.com
