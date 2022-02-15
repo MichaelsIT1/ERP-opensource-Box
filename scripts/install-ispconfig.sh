@@ -8,7 +8,7 @@
 # System-Varibale
 MAIL=false
 VIRENSCANNER=false
-
+SSL-LETSENCRYPT=false
 
 
 
@@ -162,9 +162,13 @@ apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-g
 sleep 30
 
 
+
 ##################### 11 Install Let's Encrypt ##################################
-#apt-get -y install certbot
-#sleep 30
+if ($SSL-LETSENCRYPT)
+then
+apt-get -y install certbot
+sleep 30
+fi
 
 ################### 12 Install Mailman #########################################
 #apt-get install mailman3
