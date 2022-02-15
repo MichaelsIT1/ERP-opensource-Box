@@ -117,7 +117,7 @@ pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
 }
 
 install_debian() {
-pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
+pct push $CID scripts/install-ispconfig.sh /root/install-debian.sh
 pct exec $CID -- bash -c "sh /root/install-debian.sh"
 }
 
