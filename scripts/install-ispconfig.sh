@@ -50,7 +50,7 @@ sleep 30
 if ($MAIL)
 then
 ###################  8 Install Postfix, Dovecot, rkhunter #############################
-apt-get -y install postfix postfix-mysql postfix-doc getmail6 rkhunter
+apt-get -y install postfix postfix-mysql postfix-doc dovecot-managesieved dovecot-lmtpd getmail6 rkhunter
 apt-get -y install dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 10
 
