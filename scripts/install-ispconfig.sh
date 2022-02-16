@@ -26,8 +26,18 @@ echo
 echo "Zeitzone auf Europe/Berlin gesetzt"
 echo "**********************************"
 timedatectl set-timezone Europe/Berlin 
-echo
-################################  Update your Debian Installation ###################################################
+
+
+######## HOSTS setzen #########################
+#tee -a /etc/hosts >/dev/null <<EOF
+## ### BEGIN ###
+#127.0.1.1 isp-config-test.spoor.local isp-config-test
+## ### END ###
+#EOF
+
+
+
+echo ################################  Update your Debian Installation ###################################################
 
 # Non-free aktivieren
 tee /etc/apt/sources.list.d/ispconfig.list >/dev/null <<EOF
@@ -222,8 +232,8 @@ fi
 
 
 ############ 14 Install BIND DNS Server #####################
-#apt-get -y install bind9 dnsutils 
-#apt-get -y install haveged
+apt-get -y install bind9 dnsutils 
+apt-get -y install haveged
 
 
 ############### 15 Install AWStats #######################################
