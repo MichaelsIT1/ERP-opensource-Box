@@ -93,7 +93,7 @@ EOF
 sleep 3
 
 # MySQL-Passwort auf ispconfig setzen
-sed -i "s|password =|password = ispconfig|g" /etc/mysql/debian.cnf
+sed -i "s|user     = root|user     = root\npassword = ispconfig|g" /etc/mysql/debian.cnf
 
 # Datei /etc/mysql/mariadb.conf.d/50-server.cnf anpassen
 #sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
