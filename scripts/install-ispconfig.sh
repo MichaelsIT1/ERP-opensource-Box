@@ -166,6 +166,11 @@ sleep 30
 apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-gmp
 sleep 30
 
+# Zeitzone setzen
+sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/cgi/php.ini
+sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/cli/php.ini
+sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/fpm/php.ini
+sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/apache2/php.ini
 
 
 ##################### 11 Install Let's Encrypt ##################################
