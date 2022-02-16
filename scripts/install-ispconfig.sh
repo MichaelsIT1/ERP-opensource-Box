@@ -106,7 +106,7 @@ sleep 3
 sed -i "s|user     = root|user     = root\npassword = ispconfig|g" /etc/mysql/debian.cnf
 
 # Datei /etc/mysql/mariadb.conf.d/50-server.cnf anpassen
-#sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
+sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Datei /etc/security/limits.conf ergaenzen
 cp /etc/security/limits.conf /etc/security/limits.conf.orig
