@@ -49,7 +49,7 @@ Choose an option: "
         ;;        
         
     4)  CNAME="ispconfig-test"
-        COS=$DEBIAN10
+        COS=$DEBIAN11
         create_container
         install_ispconfig
         ;;
