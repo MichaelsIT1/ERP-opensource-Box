@@ -22,16 +22,16 @@ sleep 3
 echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash 2>&1
 sleep 3
 
-# etc/hosts erstellen
-tee /etc/hosts > /dev/null <<EOF
-127.0.0.1       localhost.localdomain localhost
-$IP $HOSTNAME_DNSNAME $HOSTNAME_NAME
-
-# IPv6
-::1             localhost ip6-localhost ip6-loopback
-ff02::1         ip6-allnodes
-ff02::2         ip6-allrouters
-EOF
+## etc/hosts erstellen
+#tee /etc/hosts > /dev/null <<EOF
+#127.0.0.1       localhost.localdomain localhost
+#$IP $HOSTNAME_DNSNAME $HOSTNAME_NAME
+#
+## IPv6
+#::1             localhost ip6-localhost ip6-loopback
+#ff02::1         ip6-allnodes
+#ff02::2         ip6-allrouters
+#EOF
 
 # locale setzen auf de_DE.UTF-8 UTF-8
 sed -i "s|# de_DE.UTF-8 UTF-8|de_DE.UTF-8 UTF-8|g" /etc/locale.gen
