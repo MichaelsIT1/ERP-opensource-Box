@@ -14,35 +14,29 @@ AWSTATS=true
 PHPMYADMIN=true
 
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
-
-# Postfix entfernen
-apt-get -y purge postfix
-sleep 10
+HOSTNAME_NAME=$HOSTNAME
+HOSTNAME_DNSNAME=($HOSTNAME -f)
 
 
-# Shell auf bash stellen
-echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash 2>&1
+# etc/hosts erstellen
+tee /etc/hosts > /dev/null <<EOF
+127.0.0.1       localhost.localdomain localhost
+$IP $HOSTNAME_DNSNAME $HOSTNAME_NAME
+
+# IPv6
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
+EOF
+
+# locale setzen auf de_DE.UTF-8 UTF-8
+sed -i "s|# de_DE.UTF-8 UTF-8|de_DE.UTF-8 UTF-8|g" /etc/locale.gen
+locale-gen
 
 
-
-
-
-clear
-echo "ISP-Config installieren"
-echo "*******************************"
-echo
 echo "Zeitzone auf Europe/Berlin gesetzt"
 echo "**********************************"
 timedatectl set-timezone Europe/Berlin 
-
-
-######## HOSTS setzen #########################
-#tee -a /etc/hosts >/dev/null <<EOF
-## ### BEGIN ###
-#127.0.1.1 isp-config-test.spoor.local isp-config-test
-## ### END ###
-#EOF
-
 
 
 echo ################################  Update your Debian Installation ###################################################
@@ -59,21 +53,30 @@ apt update -y && apt dist-upgrade -y
 echo
 sleep 3
 
+# Shell auf bash stellen
+echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash 2>&1
+
 echo "Install Basics"
 echo "**********************************"
 apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common
 sleep 30
 
+echo "ISP-Config installieren"
+echo "*******************************"
+echo
 
 if ($MAIL)
 then
 ###################  8 Install Postfix, Dovecot, rkhunter #############################
-apt-get -y install postfix postfix-mysql postfix-doc dovecot-managesieved dovecot-lmtpd getmail6 rkhunter
-apt-get -y install dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
+apt-get -y install postfix-mysql postfix-doc dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 10
 
 ###### General type of mail configuration: <-- Internet Site
 ####### System mail name: <-- server1.example.com
+
+echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections 2>&1
+echo "postfix postfix/mailname string $HOSTNAME_DNSNAME" | debconf-set-selections 2>&1
+
 
 ################## POSTFIX Mailserver konfiguration ##############################################
 sed -i "s|#submission inet n       -       y       -       -       smtpd|submission inet n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
@@ -96,6 +99,7 @@ fi
 ################## MARIADB installieren ##############################################
 apt-get -y install mariadb-client mariadb-server
 sleep 30
+
 
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
@@ -198,15 +202,8 @@ apt-get -y install certbot
 sleep 30
 fi
 
-################### 12 Install Mailman #########################################
-#apt-get install mailman3
-#######  Languages to support: <-- en (English)
-######## Missing site list <-- Ok
-#newlist mailman
-
-## NOCH ZU IMPLEMENTIEREN
-
-
+################### 12 Install Mailman 3 #########################################
+# NOT SUPPORTED
 
 ############### 13 Install PureFTPd ################################################
 if ($PureFTPd)
