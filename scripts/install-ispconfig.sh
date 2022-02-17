@@ -11,7 +11,7 @@ VIRENSCANNER=false
 SSL_LETSENCRYPT=false
 PureFTPd=false
 AWSTATS=true
-PHPMYADMIN=true
+PHPMYADMIN=false
 
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 HOSTNAME_NAME=$HOSTNAME
@@ -59,8 +59,11 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common
+apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common resolvconf
 sleep 30
+
+# statischen DNS-Server setzen wegen nslookup
+echo "nameserver 127.0.0.1" | tee -a /etc/resolvconf/resolv.conf.d/head
 
 echo "ISP-Config installieren"
 echo "*******************************"
