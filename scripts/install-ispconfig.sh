@@ -186,7 +186,7 @@ echo "Install PHP"
 echo "***********"
 apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear 
 sleep 30
-apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-gmp
+apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-gmp php-bz2 php-phpdbg php-xsl
 sleep 30
 
 # Zeitzone setzen
