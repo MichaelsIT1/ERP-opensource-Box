@@ -53,17 +53,14 @@ EOF
 
 echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
-apt update -y && apt dist-upgrade -y
+apt update -y && apt upgrade -y
 echo
 sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common #resolvconf
+apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common
 sleep 30
-
-# statischen DNS-Server setzen wegen nslookup
-#echo "nameserver 127.0.0.1" | tee -a /etc/resolvconf/resolv.conf.d/head
 
 echo "ISP-Config installieren"
 echo "*******************************"
