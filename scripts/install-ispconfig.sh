@@ -59,7 +59,7 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common resolvconf
+apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common #resolvconf
 sleep 30
 
 # statischen DNS-Server setzen wegen nslookup
