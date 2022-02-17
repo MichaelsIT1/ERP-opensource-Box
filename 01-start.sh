@@ -8,7 +8,8 @@ CID=999                                                     #Container-ID
 CPW=12345                                                   #Container root-Passwort
 
 # Container Images
-DEBIAN=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz     
+DEBIAN10=local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz
+DEBIAN11=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz     
 UBUNTU=local:vztmpl/ubuntu-21.10-standard_21.10-1_amd64.tar.zst 
 
 # Funktionen
@@ -30,13 +31,13 @@ Choose an option: "
     read -r ans
     case $ans in
     1)  CNAME="xentral-test"
-        COS=$DEBIAN
+        COS=$DEBIAN11
         create_container
         install_xentral
         ;;
         
     2)  CNAME="open3a-test"
-        COS=$DEBIAN
+        COS=$DEBIAN11
         create_container
         install_open3a
         ;;
@@ -48,7 +49,7 @@ Choose an option: "
         ;;        
         
     4)  CNAME="ispconfig-test"
-        COS=$DEBIAN
+        COS=$DEBIAN10
         create_container
         install_ispconfig
         ;;
@@ -60,7 +61,7 @@ Choose an option: "
         ;;
         
     11) CNAME="Debian11-test"
-        COS=$DEBIAN
+        COS=$DEBIAN11
         create_container
         install_debian
         ;;
