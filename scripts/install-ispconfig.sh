@@ -17,6 +17,8 @@ IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | gre
 HOSTNAME_NAME=$HOSTNAME
 HOSTNAME_DNSNAME=($HOSTNAME -f)
 
+# Shell auf bash stellen
+echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash 2>&1
 
 # etc/hosts erstellen
 tee /etc/hosts > /dev/null <<EOF
@@ -52,9 +54,6 @@ echo "***************************************"
 apt update -y && apt dist-upgrade -y
 echo
 sleep 3
-
-# Shell auf bash stellen
-echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash 2>&1
 
 echo "Install Basics"
 echo "**********************************"
