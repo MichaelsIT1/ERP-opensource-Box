@@ -63,7 +63,7 @@ apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unra
 sleep 30
 
 # statischen DNS-Server setzen wegen nslookup
-echo "nameserver 127.0.0.1" | tee -a /etc/resolvconf/resolv.conf.d/head
+#echo "nameserver 127.0.0.1" | tee -a /etc/resolvconf/resolv.conf.d/head
 
 echo "ISP-Config installieren"
 echo "*******************************"
