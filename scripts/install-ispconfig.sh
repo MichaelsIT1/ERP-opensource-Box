@@ -5,13 +5,20 @@
 # https://www.howtoforge.com/perfect-server-debian-10-buster-apache-bind-dovecot-ispconfig-3-1/
 # https://www.howtoforge.com/tutorial/perfect-server-ubuntu-20.04-with-apache-php-myqsl-pureftpd-bind-postfix-doveot-and-ispconfig/
 
+echo "ISP-Config installieren"
+echo "*******************************"
+
 # System-Varibale
 MAIL=true
 VIRENSCANNER=false
 SSL_LETSENCRYPT=false
 PureFTPd=false
-AWSTATS=true
+AWSTATS=false
 PHPMYADMIN=false
+DNS-SERVER=false
+FAIL2BAN=false
+FIREWALL=false
+
 
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 HOSTNAME_NAME=$HOSTNAME
@@ -62,13 +69,11 @@ echo "**********************************"
 apt-get -y install sudo curl patch ntp openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common
 sleep 30
 
-echo "ISP-Config installieren"
-echo "*******************************"
-echo
 
+
+###################  8 Install Postfix, Dovecot, rkhunter #############################
 if ($MAIL)
 then
-###################  8 Install Postfix, Dovecot, rkhunter #############################
 apt-get -y install postfix-mysql postfix-doc dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 10
 
@@ -238,9 +243,11 @@ fi
 
 
 ############ 14 Install BIND DNS Server #####################
+if ($DNS-SERVER)
+then
 apt-get -y install bind9 dnsutils 
 apt-get -y install haveged
-
+fi
 
 ############### 15 Install AWStats #######################################
 if ($AWSTATS)
@@ -268,9 +275,17 @@ fi
 
 
 ############### 17 Install fail2ban and UFW Firewall ######################################
+# FAIL2BAN
+if ($FAIL2BAN)
+then
 apt-get -y install fail2ban
-apt-get -y install ufw
+fi
 
+# FIREWALL
+if ($FIREWALL)
+then
+apt-get -y install ufw
+fi
 
 
 
@@ -291,6 +306,8 @@ systemctl restart apache2
 
 
 #################### 19 Install RoundCube Webmail (optional) #########################
+if ($MAIL)
+then
 apt-get -y install roundcube roundcube-core roundcube-mysql roundcube-plugins roundcube-plugins-extra javascript-common libjs-jquery-mousewheel php-net-sieve
 
 sed -i "s|#    Alias /roundcube /var/lib/roundcube/public_html|    Alias /roundcube /var/lib/roundcube/public_html\n  Alias /webmail /var/lib/roundcube/public_html|g"  /etc/apache2/conf-enabled/roundcube.conf
@@ -299,7 +316,7 @@ sed -i "s|\$config\['default_host'\] = '';|\$config\['default_host'\] = 'localho
 sed -i "s|\$config\['smtp_server'\] = '';|\$config\['smtp_server'\] = '%h';|g"  /etc/roundcube/config.inc.php
 
 sed -i "s|\$config\['smtp_port'\] = 587;|\$config\['smtp_port'\] = 25;|g"  /etc/roundcube/config.inc.php
-
+fi
 
 
 
