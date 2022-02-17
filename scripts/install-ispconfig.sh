@@ -63,7 +63,7 @@ sleep 30
 ###################  8 Install Postfix, Dovecot, rkhunter #############################
 if ($MAIL)
 then
-apt-get -y install postfix-mysql postfix-doc dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
+apt-get -y install postfix-mysql postfix-doc postgrey dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 10
 
 ###### General type of mail configuration: <-- Internet Site
