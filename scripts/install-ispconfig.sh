@@ -11,7 +11,7 @@ echo "*******************************"
 # System-Varibale
 MAIL=true
 VIRENSCANNER=false
-SSL_LETSENCRYPT=false
+SSL_LETSENCRYPT=true
 PureFTPd=false
 AWSTATS=false
 PHPMYADMIN=false
