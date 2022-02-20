@@ -23,6 +23,11 @@ FIREWALL=false
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 HOSTNAME_NAME=$HOSTNAME
 HOSTNAME_DNSNAME=$(hostname -f)
+
+MARIADB_PW=ispconfig
+
+
+
 sleep 3
 
 # Shell auf bash stellen
@@ -96,21 +101,25 @@ apt-get -y install mariadb-client mariadb-server
 sleep 30
 
 
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
-                    # current root password (emtpy after installation)
-        y           # Set root password?
-        ispconfig   # new root password
-        ispconfig   # new root password
-        Y            # Remove anonymous users?
-        y           # Disallow root login remotely?
-        y           # Remove test database and access to it?
-        y           # Reload privilege tables now?
-EOF
+#sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
+#                    # current root password (emtpy after installation)
+#        y           # Set root password?
+#        ispconfig   # new root password
+#        ispconfig   # new root password
+#        Y            # Remove anonymous users?
+#        y           # Disallow root login remotely?
+#        y           # Remove test database and access to it?
+#        y           # Reload privilege tables now?
+#EOF
+
+mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
 
 sleep 3
 
-# MySQL-Passwort auf ispconfig setzen
-sed -i "s|user     = root|user     = root\npassword = ispconfig|g" /etc/mysql/debian.cnf
+# MariaDB-Passwort setzen
+sed -i "s|user     = root|user     = root\npassword = $MARIADB_PW|g" /etc/mysql/debian.cnf
+systemctl restart mariadb 
+sleep 5
 
 # Datei /etc/mysql/mariadb.conf.d/50-server.cnf anpassen
 sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
