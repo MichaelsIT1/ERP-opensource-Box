@@ -333,4 +333,5 @@ php -q install.php
 
 echo "**************************************************************************"
 echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP:8080"
+echo "MariaDB-Passwort: $MARIADB_PW"
 echo "**************************************************************************"
