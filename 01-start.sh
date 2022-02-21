@@ -141,7 +141,7 @@ pct exec $CID -- bash -c "sh /root/install-portainer.sh"
 }
 
 install_itop() {
-pct push $CID scripts/install-portainer.sh /root/install-itop.sh
+pct push $CID scripts/install-itop.sh /root/install-itop.sh
 pct exec $CID -- bash -c "sh /root/install-itop.sh"
 }
 
