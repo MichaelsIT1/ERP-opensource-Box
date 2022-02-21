@@ -152,7 +152,7 @@ pct push $CID scripts/install-itop.sh /root/install-itop.sh
 pct exec $CID -- bash -c "sh /root/install-itop.sh"
 }
 
-install_itop() {
+install_idoit() {
 pct push $CID scripts/install-idoit /root/install-idoit.sh
 pct exec $CID -- bash -c "sh /root/install-idoit.sh"
 }
