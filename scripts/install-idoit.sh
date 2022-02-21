@@ -116,7 +116,7 @@ wget https://sourceforge.net/projects/i-doit/files/latest/download
 
 #mkdir /var/www/html/idoit/
 mv download /var/www/html/
-cd /var/www/html/idoit/
+cd /var/www/html/
 unzip download
 
 
