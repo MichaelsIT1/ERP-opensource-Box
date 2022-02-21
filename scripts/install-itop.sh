@@ -65,6 +65,8 @@ echo
  # chmod 777 specifics/
  # chmod 777 system/Backup/
 
+systemctl restart apache2
+
 echo "*******************************************************************************************"
 echo "iTop erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/itop/web/setup/wizard.php"
