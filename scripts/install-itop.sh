@@ -53,7 +53,7 @@ wget https://sourceforge.net/projects/itop/files/latest/download
 mkdir /var/www/html/itop/
 mv download /var/www/html/itop/
 cd /var/www/html/itop/
-unzip multiCMSDownload.php?filedl=133
+unzip download
 
 
 echo "Zugriffsrechte werden gesetzt"
