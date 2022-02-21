@@ -22,6 +22,7 @@ MAIN MENU
 3) metafresh installieren - Docker
 4) ISPConfig installieren
 5) iTop installieren
+6) i-doit installieren
 -----------------------------------------
 10) docker Portainer installieren
 11) Debian 11 Container
@@ -59,6 +60,12 @@ Choose an option: "
         COS=$DEBIAN11
         create_container
         install_itop
+        ;;
+        
+    6)  CNAME="i-doit-test"
+        COS=$DEBIAN11
+        create_container
+        install_idoit
         ;;
         
         
@@ -143,6 +150,11 @@ pct exec $CID -- bash -c "sh /root/install-portainer.sh"
 install_itop() {
 pct push $CID scripts/install-itop.sh /root/install-itop.sh
 pct exec $CID -- bash -c "sh /root/install-itop.sh"
+}
+
+install_itop() {
+pct push $CID scripts/install-idoit /root/install-idoit.sh
+pct exec $CID -- bash -c "sh /root/install-idoit.sh"
 }
 
 # main program
