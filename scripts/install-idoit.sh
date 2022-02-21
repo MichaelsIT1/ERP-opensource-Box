@@ -23,6 +23,8 @@ echo "**************************************************"
 apt install apache2 mariadb-server php php-mbstring php-soap php-imap php-xml php-zip php-gd php-cli php-mysql php-curl php-ldap unzip zip graphviz -y
 echo
 
+a2enmod rewrite
+systemctl restart apache2
 
 ############# Datenbank erzeugen #########################
  mysql -u root <<EOF
