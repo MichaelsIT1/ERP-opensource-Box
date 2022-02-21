@@ -7,7 +7,7 @@
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
 clear
-echo "open3a installieren"
+echo "itop installieren"
 echo "*******************************"
 echo
 echo "Zeitzone auf Europe/Berlin gesetzt"
@@ -67,6 +67,6 @@ echo
 
 echo "*******************************************************************************************"
 echo "iTop erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/open3a/"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/itop/web/setup/wizard.php"
 echo "Zugangsdaten: Host: localhost, Bentzer: itop, Passwort: itop, Datenbank: itop, Passwort: itop"
 echo "**************************************************************************"
