@@ -167,31 +167,15 @@ mkdir /var/www/html/i-doit/
 mv download /var/www/html/i-doit
 cd /var/www/html/i-doit/
 unzip download
-sudo chown www-data:www-data -R .
-sudo find . -type d -name \* -exec chmod 775 {} \;
-sudo find . -type f -exec chmod 664 {} \;
-sudo chmod 774 controller *.sh setup/*.sh
-
-
-
-
-
-############# Datenbank erzeugen #########################
-# mysql -u root <<EOF
-#        CREATE DATABASE idoit;
-#        CREATE USER 'idoit'@'localhost' IDENTIFIED BY 'idoit';
-#        GRANT ALL PRIVILEGES ON idoit . * TO 'idoit'@'localhost';
-#        FLUSH PRIVILEGES;
-#EOF
-
- 
-
-
+chown www-data:www-data -R .
+find . -type d -name \* -exec chmod 775 {} \;
+find . -type f -exec chmod 664 {} \;
+chmod 774 controller *.sh setup/*.sh
 
 systemctl restart apache2
 
 echo "*******************************************************************************************"
 echo "iTop erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/idoit"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/i-doit"
 echo "Zugangsdaten: Host: localhost, Benutzer: idoit, Passwort: idoit, Datenbank: idoit, Passwort: idoit"
 echo "**************************************************************************"
