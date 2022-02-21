@@ -83,25 +83,12 @@ a2enmod rewrite
 systemctl restart apache2.service
 
 
-
-
-
-
-
-############# Datenbank erzeugen #########################
- mysql -u root <<EOF
-        CREATE DATABASE idoit;
-        CREATE USER 'idoit'@'localhost' IDENTIFIED BY 'idoit';
-        GRANT ALL PRIVILEGES ON idoit . * TO 'idoit'@'localhost';
-        FLUSH PRIVILEGES;
-EOF
-
- # automatische Installation
+ #automatische Installation
         sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
         y           # Set root password?
-        open3a     # new root password
-        open3a     # new root password         
+        idoit     # new root password
+        idoit     # new root password         
         y           # Remove anonymous users?
         y           # Disallow root login remotely?
         y           # Remove test database and access to it?
@@ -109,33 +96,97 @@ EOF
 EOF
 
 
+mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$idoit');"
+mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('idoit'); FLUSH PRIVILEGES;"
+mysql -u root -e "SET GLOBAL innodb_fast_shutdown = 0"
+
+systemctl stop mysql.service
+mv /var/lib/mysql/ib_logfile[01] /tmp
+
+
+
+tee /etc/mysql/mariadb.conf.d/99-i-doit.cnf >/dev/null <<EOF
+[mysqld]
+  
+# This is the number 1 setting to look at for any performance optimization
+# It is where the data and indexes are cached: having it as large as possible will
+# ensure MySQL uses memory and not disks for most read operations.
+#
+# Typical values are 1G (1-2GB RAM), 5-6G (8GB RAM), 20-25G (32GB RAM), 100-120G (128GB RAM).
+innodb_buffer_pool_size = 1G
+ 
+# Use multiple instances if you have innodb_buffer_pool_size > 10G, 1 every 4GB
+innodb_buffer_pool_instances = 1
+ 
+# Redo log file size, the higher the better.
+# MySQL/MariaDB writes two of these log files in a default installation.
+innodb_log_file_size = 512M
+ 
+innodb_sort_buffer_size = 64M
+sort_buffer_size = 262144 # default
+join_buffer_size = 262144 # default
+ 
+max_allowed_packet = 128M
+max_heap_table_size = 32M
+query_cache_min_res_unit = 4096
+query_cache_type = 1
+query_cache_limit = 5M
+query_cache_size = 80M
+ 
+tmp_table_size = 32M
+max_connections = 200
+innodb_file_per_table = 1
+ 
+# Disable this (= 0) if you have only one to two CPU cores, change it to 4 for a quad core.
+innodb_thread_concurrency = 0
+ 
+# Disable this (= 0) if you have slow harddisks
+innodb_flush_log_at_trx_commit = 1
+innodb_flush_method = O_DIRECT
+ 
+innodb_lru_scan_depth = 2048
+table_definition_cache = 1024
+table_open_cache = 2048
+# Only if your have MySQL 5.6 or higher, do not use with MariaDB!
+#table_open_cache_instances = 4
+ 
+innodb_stats_on_metadata = 0
+ 
+sql-mode = ""
+EOF
+
+systemctl start mysql.service
+
+
 echo "i-doit herunterladen"
 echo "********************************"
 cd /root/
 wget https://sourceforge.net/projects/i-doit/files/latest/download
 
-#mkdir /var/www/html/idoit/
-mv download /var/www/html/
-cd /var/www/html/
+mkdir /var/www/html/i-doit/
+mv download /var/www/html/i-doit
+cd /var/www/html/i-doit/
 unzip download
+sudo chown www-data:www-data -R .
+sudo find . -type d -name \* -exec chmod 775 {} \;
+sudo find . -type f -exec chmod 664 {} \;
+sudo chmod 774 controller *.sh setup/*.sh
 
 
 
 
 
+############# Datenbank erzeugen #########################
+# mysql -u root <<EOF
+#        CREATE DATABASE idoit;
+#        CREATE USER 'idoit'@'localhost' IDENTIFIED BY 'idoit';
+#        GRANT ALL PRIVILEGES ON idoit . * TO 'idoit'@'localhost';
+#        FLUSH PRIVILEGES;
+#EOF
+
+ 
 
 
-
-
-
-echo "Zugriffsrechte werden gesetzt"
-echo "*****************************"
-chown -R www-data:www-data /var/www/html/
-echo
-       
-# Rechte setzen
- # chmod 777 specifics/
- # chmod 777 system/Backup/
 
 systemctl restart apache2
 
