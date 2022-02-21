@@ -32,6 +32,19 @@ echo
         FLUSH PRIVILEGES;
 EOF
 
+ # automatische Installation
+        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
+                    # current root password (emtpy after installation)
+        y           # Set root password?
+        open3a     # new root password
+        open3a     # new root password         
+        y           # Remove anonymous users?
+        y           # Disallow root login remotely?
+        y           # Remove test database and access to it?
+        y           # Reload privilege tables now?
+EOF
+
+
 cd /root/
 echo "open3a herunterladen"
 echo "********************************"
@@ -48,24 +61,12 @@ echo "*****************************"
 chown -R www-data:www-data /var/www/html/open3a
 echo
        
-       # automatische Installation
-        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
-                    # current root password (emtpy after installation)
-        y           # Set root password?
-        open3a     # new root password
-        open3a     # new root password         
-        y           # Remove anonymous users?
-        y           # Disallow root login remotely?
-        y           # Remove test database and access to it?
-        y           # Reload privilege tables now?
-EOF
-       
+# Rechte setzen
   chmod 777 specifics/
   chmod 777 system/Backup/
 
-
-e
 echo "*******************************************************************************************"
 echo "open3A erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/open3a/"
+echo "Zugangsdaten: Datenbank: open3a, Passwort: open3a"
 echo "**************************************************************************"
