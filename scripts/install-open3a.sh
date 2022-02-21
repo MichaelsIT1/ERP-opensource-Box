@@ -2,7 +2,6 @@
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
 # getestet auf Debian 11 im LXC Container
-# https://help.xentral.com/hc/de/articles/360017377620-Installation-von-xentral-ab-Version-19-1
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
@@ -23,67 +22,50 @@ echo "Webserver Apache, MariaDB und PHP wird installiert"
 echo "**************************************************"
 apt install apache2 mariadb-server php php-mbstring php-soap php-imap php-xml php-zip php-gd php-cli php-mysql php-curl unzip zip -y
 echo
+
+
+############# Datenbank erzeugen #########################
+ mysql -u root <<EOF
+        CREATE DATABASE open3a;
+        CREATE USER 'open3a'@'localhost' IDENTIFIED BY 'open3a';
+        GRANT ALL PRIVILEGES ON open3a . * TO 'open3a'@'localhost';
+        FLUSH PRIVILEGES;
+EOF
+
+cd /root/
 echo "open3a herunterladen"
 echo "********************************"
 wget https://www.open3a.de/multiCMSDownload.php?filedl=133
 
+mkdir /var/www/html/open3a/
+mv multiCMSDownload.php\?filedl\=133 /var/www/html/open3a/
+cd /var/www/html/open3a/
+unzip multiCMSDownload.php?filedl=133
 
 
-
-
-
-
-
-
-
-
-mv
-echo
-echo "Installer.zip wird entpackt und nach var/www/html verschoben"
-echo "***********************************************************"
-unzip "open3A 3.5.zip"
-mv installer.php /var/www/html/
-echo
 echo "Zugriffsrechte werden gesetzt"
 echo "*****************************"
-chown -R www-data:www-data /var/www/html/
+chown -R www-data:www-data /var/www/html/open3a
 echo
-
-if ! mysql -u root -e 'use xentral';
-then
-        echo "Maria-DB wird konfiguiert und Datenbank angelegt"
-        echo "*************************"       
        
        # automatische Installation
         sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
         y           # Set root password?
-        xentral     # new root password
-        xentral     # new root password         y           # Remove anonymous users?
+        open3a     # new root password
+        open3a     # new root password         
+        y           # Remove anonymous users?
         y           # Disallow root login remotely?
         y           # Remove test database and access to it?
         y           # Reload privilege tables now?
 EOF
        
-        mysql -u root <<EOF
-        CREATE DATABASE xentral;
-        CREATE USER 'xentral'@'localhost' IDENTIFIED BY 'xentral';
-        GRANT ALL PRIVILEGES ON xentral . * TO 'xentral'@'localhost';
-        FLUSH PRIVILEGES;
-EOF
-else
-        echo "Datenbank xentral vorhanden"
-        echo "****************************"
-fi
+  chmod 777 specifics/
+  chmod 777 system/Backup/
 
-echo "Cronjob wird erzeugt"
-echo "********************"
-crontab -u www-data -l > cron_bkp
-echo "* * * * * /usr/bin/php /var/www/html/cronjobs/starter2.php" >> cron_bkp
-crontab -u www-data cron_bkp
-rm cron_bkp
-clear
+
+e
 echo "*******************************************************************************************"
-echo "xentral openSource erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/installer.php"
+echo "open3A erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/open3a/"
 echo "**************************************************************************"
