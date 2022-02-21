@@ -45,9 +45,9 @@ EOF
 EOF
 
 
-cd /root/
 echo "open3a herunterladen"
 echo "********************************"
+cd /root/
 wget https://www.open3a.de/multiCMSDownload.php?filedl=133
 
 mkdir /var/www/html/open3a/
@@ -68,5 +68,5 @@ echo
 echo "*******************************************************************************************"
 echo "open3A erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/open3a/"
-echo "Zugangsdaten: Datenbank: open3a, Passwort: open3a"
+echo "Zugangsdaten: Host: localhost, Bentzer: open3a, Passwort: open3a, Datenbank: open3a, Passwort: open3a"
 echo "**************************************************************************"
