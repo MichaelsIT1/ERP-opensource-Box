@@ -23,6 +23,7 @@ MAIN MENU
 4) ISPConfig installieren
 5) iTop installieren
 6) i-doit installieren
+7) checkMK-Raw installieren
 -----------------------------------------
 10) docker Portainer installieren
 11) Debian 11 Container
@@ -66,6 +67,12 @@ Choose an option: "
         COS=$DEBIAN11
         create_container
         install_idoit
+        ;;
+        
+    7)  CNAME="checmk-raw-test"
+        COS=$DEBIAN11
+        create_container
+        install_checkmk
         ;;
         
         
@@ -157,5 +164,9 @@ pct push $CID scripts/install-idoit.sh /root/install-idoit.sh
 pct exec $CID -- bash -c "sh /root/install-idoit.sh"
 }
 
+install_checkmk() {
+pct push $CID scripts/install-checkmk-raw.sh /root/install-checkmk-raw.sh
+pct exec $CID -- bash -c "sh /root/install-checkmk-raw.sh"
+}
 # main program
 menu
