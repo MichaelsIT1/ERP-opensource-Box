@@ -21,6 +21,7 @@ MAIN MENU
 2) open3a installieren
 3) metafresh installieren - Docker
 4) ISPConfig installieren
+5) iTop installieren
 -----------------------------------------
 10) docker Portainer installieren
 11) Debian 11 Container
@@ -53,6 +54,13 @@ Choose an option: "
         create_container
         install_ispconfig
         ;;
+        
+    5)  CNAME="itop-test"
+        COS=$DEBIAN11
+        create_container
+        install_itop
+        ;;
+        
         
     10) CNAME="portainer-test"
         COS=$UBUNTU
@@ -130,6 +138,11 @@ pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
 install_portainer() {
 pct push $CID scripts/install-portainer.sh /root/install-portainer.sh
 pct exec $CID -- bash -c "sh /root/install-portainer.sh"
+}
+
+install_itop() {
+pct push $CID scripts/install-portainer.sh /root/install-itop.sh
+pct exec $CID -- bash -c "sh /root/install-itop.sh"
 }
 
 # main program
