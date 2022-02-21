@@ -70,5 +70,5 @@ systemctl restart apache2
 echo "*******************************************************************************************"
 echo "iTop erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/itop/web/setup/wizard.php"
-echo "Zugangsdaten: Host: localhost, Bentzer: itop, Passwort: itop, Datenbank: itop, Passwort: itop"
+echo "Zugangsdaten: Host: localhost, Benutzer: itop, Passwort: itop, Datenbank: itop, Passwort: itop"
 echo "**************************************************************************"
