@@ -27,7 +27,7 @@ echo
 cd /root/
 wget https://download.checkmk.com/checkmk/2.0.0p20/check-mk-raw-2.0.0p20_0.bullseye_amd64.deb
 
-apt install ./check*
+apt install ./check* -y
 
 omd create TEST
 omd start TEST
