@@ -338,6 +338,25 @@ sed -i "s|\$config\['smtp_server'\] = '';|\$config\['smtp_server'\] = '%h';|g"  
 sed -i "s|\$config\['smtp_port'\] = 587;|\$config\['smtp_port'\] = 25;|g"  /etc/roundcube/config.inc.php
 fi
 
+
+
+############# 20 Download ISPConfig 3 #########################
+cd /tmp
+wget http://www.ispconfig.org/downloads/ISPConfig-3-stable.tar.gz
+tar xfz ISPConfig-3-stable.tar.gz
+cd ispconfig3_install/install/
+
+
+
+############## 21 Install ISPConfig #####################
+php -q install.php
+
+
+sleep 5
+
+
+
+
 tee /etc/postfix/main.cf >/dev/null <<EOF
 # See /usr/share/postfix/main.cf.dist for a commented, more complete version
 
@@ -439,16 +458,6 @@ sleep 5
 
 
 
-############# 20 Download ISPConfig 3 #########################
-cd /tmp
-wget http://www.ispconfig.org/downloads/ISPConfig-3-stable.tar.gz
-tar xfz ISPConfig-3-stable.tar.gz
-cd ispconfig3_install/install/
-
-
-
-############## 21 Install ISPConfig #####################
-php -q install.php
 
 
 
