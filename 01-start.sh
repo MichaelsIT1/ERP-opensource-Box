@@ -89,7 +89,7 @@ Choose an option: "
         install_portainer
         ;;
         
-    11) CNAME="Debian11-test"
+    11) CNAME="debian11-test"
         COS=$DEBIAN11
         create_container
         install_debian
