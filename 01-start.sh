@@ -17,13 +17,14 @@ menu() {
     clear
     echo "
 MAIN MENU
-1) xentral opensource installieren
-2) open3a installieren
-3) metafresh installieren - Docker
-4) ISPConfig installieren
-5) iTop installieren
-6) i-doit installieren
-7) checkMK-Raw installieren
+1) xentral opensource
+2) open3a
+3) metafresh- Docker
+4) ISPConfig
+5) iTop
+6) i-doit
+7) checkMK-Raw
+8) Nextcloud
 -----------------------------------------
 10) docker Portainer installieren
 11) Debian 11 Container
