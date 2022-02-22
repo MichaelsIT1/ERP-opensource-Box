@@ -69,10 +69,16 @@ Choose an option: "
         install_idoit
         ;;
         
-    7)  CNAME="checmk-raw-test"
+    7)  CNAME="checmk-raw"
         COS=$DEBIAN11
         create_container
         install_checkmk
+        ;;
+        
+    8)  CNAME="nextcloud-test"
+        COS=$DEBIAN11
+        create_container
+        install_nextcloud
         ;;
         
         
@@ -168,5 +174,11 @@ install_checkmk() {
 pct push $CID scripts/install-checkmk-raw.sh /root/install-checkmk-raw.sh
 pct exec $CID -- bash -c "sh /root/install-checkmk-raw.sh"
 }
+
+install_nextcloud() {
+pct push $CID scripts/install-nextcloud.sh /root/install-nextcloud.sh
+pct exec $CID -- bash -c "sh /root/install-nextcloud.sh"
+}
+
 # main program
 menu
