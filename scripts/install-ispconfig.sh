@@ -340,11 +340,16 @@ fi
 
 
 
+############# 20 Download ISPConfig 3 #########################
+cd /tmp
+wget http://www.ispconfig.org/downloads/ISPConfig-3-stable.tar.gz
+tar xfz ISPConfig-3-stable.tar.gz
+cd ispconfig3_install/install/
 
 
 
-
-
+############## 21 Install ISPConfig #####################
+php -q install.php
 
 
 tee /etc/postfix/main.cf >/dev/null <<EOF
@@ -442,20 +447,6 @@ milter_protocol = 6
 milter_mail_macros = i {mail_addr} {client_addr} {client_name} {auth_authen}
 milter_default_action = accept
 EOF
-
-
-############# 20 Download ISPConfig 3 #########################
-cd /tmp
-wget http://www.ispconfig.org/downloads/ISPConfig-3-stable.tar.gz
-tar xfz ISPConfig-3-stable.tar.gz
-cd ispconfig3_install/install/
-
-
-
-############## 21 Install ISPConfig #####################
-php -q install.php
-
-
 
 
 
