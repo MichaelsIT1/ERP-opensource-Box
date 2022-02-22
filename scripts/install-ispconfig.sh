@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -x
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
 # getestet auf Debian 11 im LXC Container
