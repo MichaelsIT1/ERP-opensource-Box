@@ -47,12 +47,12 @@ EOF
 
 echo "itop herunterladen"
 echo "********************************"
-cd /root/
-wget https://sourceforge.net/projects/itop/files/latest/download
+
 
 mkdir /var/www/html/itop/
-mv download /var/www/html/itop/
 cd /var/www/html/itop/
+wget https://sourceforge.net/projects/itop/files/latest/download
+
 unzip download
 
 
