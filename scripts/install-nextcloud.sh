@@ -60,6 +60,8 @@ echo
 
 systemctl restart apache2
 
+clear
+
 echo "*******************************************************************************************"
 echo "nextcloud: Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/setup-nextcloud.php"
