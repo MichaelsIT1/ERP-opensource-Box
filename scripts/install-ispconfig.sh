@@ -66,7 +66,7 @@ sleep 30
 
 ##### resolvconf einrichten
 echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
-
+resolvconf -u
 
 
 ###################  8 Install Postfix, Dovecot, rkhunter #############################
