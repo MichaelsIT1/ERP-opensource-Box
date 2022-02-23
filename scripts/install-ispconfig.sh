@@ -382,15 +382,16 @@ php -q install.php
 sleep 5
 
 
-#tee -a /etc/postfix/main.cf >/dev/null <<EOF
-#smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
+tee -a /etc/postfix/main.cf >/dev/null <<EOF
+# TODO: Hack, weil die Namensauflösung fehlerhaft ist
+smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
 #myhostname = $HOSTNAME_NAME
 #smtpd_milters = inet:localhost:11332
 #non_smtpd_milters = inet:localhost:11332
 #milter_protocol = 6
 #milter_mail_macros = i {mail_addr} {client_addr} {client_name} {auth_authen}
 #milter_default_action = accept
-#EOF
+EOF
 
 postfix reload
 sleep 5
