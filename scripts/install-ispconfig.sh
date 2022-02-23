@@ -320,6 +320,17 @@ if ($PHPMYADMIN)
 then
 apt install -y phpmyadmin
 
+echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections 2>&1
+echo "phpmyadmin phpmyadmin/app-password-confirm password 'ispconfig'" | debconf-set-selections 2>&1'
+echo "phpmyadmin phpmyadmin/mysql/admin-user string root" | debconf-set-selections 2>&1' 
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password 'ispconfig'" | debconf-set-selections 2>&1' 
+echo "phpmyadmin phpmyadmin/mysql/app-pass password 'ispconfig'" | debconf-set-selections 2>&1' 
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections 2>&1' 
+
+
+
+
+
 # Erzeuge Benutzer fuer phpmyadmin
 #mysql -u root <<EOF
 #        CREATE USER 'pma'@'localhost' IDENTIFIED BY 'mypassword';
