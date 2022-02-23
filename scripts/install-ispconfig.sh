@@ -340,8 +340,7 @@ fi
 
 
 
-mv /etc/postfix/main.cf /etc/postfix/main.cf_original
-sleep 3
+
 
 #tee -a /etc/postfix/main.cf >/dev/null <<EOF
 #smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
