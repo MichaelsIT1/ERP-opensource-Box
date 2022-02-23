@@ -72,7 +72,7 @@ resolvconf -u
 ############################################ Install Apache Web Server ##############################
 echo "Install Apache Web Server"
 echo "**********************************"
-apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl openssl 2>&1 >/dev/null
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl ca-certificates openssl 2>&1 >/dev/null
 sleep 30
 a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
