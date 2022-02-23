@@ -5,8 +5,7 @@
 # https://www.howtoforge.com/perfect-server-debian-10-buster-apache-bind-dovecot-ispconfig-3-1/
 # https://www.howtoforge.com/tutorial/perfect-server-ubuntu-20.04-with-apache-php-myqsl-pureftpd-bind-postfix-doveot-and-ispconfig/
 
-echo "ISP-Config installieren"
-echo "*******************************"
+
 
 # System-Varibale
 MAIL=true
@@ -26,17 +25,20 @@ HOSTNAME_DNSNAME=$(hostname -f)
 
 MARIADB_PW=ispconfig
 
-
+clear
+echo '###########################################################'
+echo '############## ISP-Config wird installiert ################'
+echo '###########################################################'
 
 sleep 3
 
 # Shell auf bash stellen
-echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash 2>&1
+echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash 2>&1 >/dev/null
 sleep 3
 
 # locale setzen auf de_DE.UTF-8 UTF-8
 sed -i "s|# de_DE.UTF-8 UTF-8|de_DE.UTF-8 UTF-8|g" /etc/locale.gen
-locale-gen
+locale-gen 2>&1 >/dev/null
 
 
 echo "Zeitzone auf Europe/Berlin gesetzt"
@@ -44,7 +46,7 @@ echo "**********************************"
 timedatectl set-timezone Europe/Berlin 
 
 
-echo ################################  Update your Debian Installation ###################################################
+echo #echo '###############################  Update your Debian Installation ###################################################'
 
 # Non-free aktivieren
 tee /etc/apt/sources.list.d/ispconfig.list >/dev/null <<EOF
@@ -52,15 +54,14 @@ deb http://deb.debian.org/debian/ stable main contrib non-free
 deb-src http://deb.debian.org/debian/ stable main contrib non-free
 EOF
 
-echo "Betriebssystem wird aktualisiert"
-echo "***************************************"
-apt update -y && apt upgrade -y
+echo '############## Betriebssystem wird aktualisiert ################'
+apt update -y  2>&1 >/dev/null && apt upgrade -y 2>&1 >/dev/null
 echo
 sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common vim resolvconf rkhunter sudo
+apt-get -y install sudo curl patch openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common vim resolvconf rkhunter sudo 2>&1 >/dev/null
 sleep 30
 
 
@@ -384,15 +385,15 @@ php -q install.php
 sleep 5
 
 
-tee -a /etc/postfix/main.cf >/dev/null <<EOF
-smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
+#tee -a /etc/postfix/main.cf >/dev/null <<EOF
+#smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
 #myhostname = $HOSTNAME_NAME
 #smtpd_milters = inet:localhost:11332
 #non_smtpd_milters = inet:localhost:11332
 #milter_protocol = 6
 #milter_mail_macros = i {mail_addr} {client_addr} {client_name} {auth_authen}
 #milter_default_action = accept
-EOF
+#EOF
 
 postfix reload
 sleep 5
