@@ -13,7 +13,7 @@ MAIL=true
 VIRENSCANNER=false
 SSL_LETSENCRYPT=true
 PureFTPd=false
-AWSTATS=false
+AWSTATS=true
 PHPMYADMIN=false
 DNSSERVER=false
 FAIL2BAN=false
@@ -70,7 +70,7 @@ sleep 30
 
 
 
-########### 10 Install Apache Web Server and PHP ##############################
+############################################ Install Apache Web Server ##############################
 echo "Install Apache Web Server"
 echo "**********************************"
 apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
@@ -138,7 +138,7 @@ sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/apache2
 
 
 
-###################  8 Install Postfix, Dovecot, rkhunter #############################
+############################### Install Postfix, Dovecot, rkhunter #############################
 if ($MAIL)
 then
 apt-get -y install postfix-mysql postfix-doc postgrey dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
@@ -167,11 +167,6 @@ sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|#   -o smtpd
 sleep 3
 systemctl restart postfix
 fi
-
-
-
-
-
 
 
 sleep 3
@@ -207,9 +202,11 @@ sleep 3
 systemctl daemon-reload
 systemctl restart mariadb
 
+
+########################################## Install Amavisd-new, SpamAssassin, and ClamAV ###############################
 if ($VIRENSCANNER)
 then
-######### 9 Install Amavisd-new, SpamAssassin, and ClamAV ###############################
+
 echo "Install Amavisd-new, SpamAssassin, and ClamAV"
 echo "**********************************************"
 
@@ -228,17 +225,17 @@ fi
 
 
 
-##################### 11 Install Let's Encrypt ##################################
+############################################ Install Let's Encrypt ##################################
 if ($SSL_LETSENCRYPT)
 then
 apt-get -y install certbot
 sleep 30
 fi
 
-################### 12 Install Mailman 3 #########################################
+############################################## Install Mailman 3 #########################################
 # NOT SUPPORTED
 
-############### 13 Install PureFTPd ################################################
+############################################## Install PureFTPd ################################################
 if ($PureFTPd)
 then
 apt-get -y install pure-ftpd-common pure-ftpd-mysql
@@ -269,26 +266,24 @@ systemctl restart pure-ftpd-mysql
 fi
 
 
-############ 14 Install BIND DNS Server #####################
+########################################## Install BIND DNS Server #####################
 if ($DNSSERVER)
 then
 apt-get -y install bind9 dnsutils 
 apt-get -y install haveged
 fi
 
-############### 15 Install AWStats #######################################
+####################################### Install AWStats #######################################
 if ($AWSTATS)
 then
 apt-get -y install vlogger awstats geoip-database libclass-dbi-mysql-perl
 
 # GoAcces
-#echo "deb https://deb.goaccess.io/ $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/goaccess.list
-#wget -O - https://deb.goaccess.io/gnugpg.key | sudo apt-key --keyring /etc/apt/trusted.gpg.d/goaccess.gpg add -
-#apt-get -y install goaccess
+apt-get -y install goaccess
 fi
 
 
-##################### 16 Install Jailkit #########################################
+####################################### Install Jailkit #########################################
 #apt-get install build-essential autoconf automake libtool flex bison debhelper binutils
 #cd /tmp
 #wget http://olivier.sessink.nl/jailkit/jailkit-2.20.tar.gz
@@ -301,7 +296,7 @@ fi
 #rm -rf jailkit-2.20*
 
 
-############### 17 Install fail2ban and UFW Firewall ######################################
+###################################### Install fail2ban and UFW Firewall ######################################
 # FAIL2BAN
 if ($FAIL2BAN)
 then
@@ -316,7 +311,7 @@ fi
 
 
 
-################ 18 Install PHPMyAdmin Database Administration Tool ##################################
+######################################## Install PHPMyAdmin Database Administration Tool ##################################
 if ($PHPMYADMIN)
 then
 apt install -y phpmyadmin
@@ -332,7 +327,7 @@ fi
 systemctl restart apache2
 
 
-#################### 19 Install RoundCube Webmail (optional) #########################
+######################################### Install RoundCube Webmail (optional) #########################
 if ($MAIL)
 then
 
@@ -368,7 +363,7 @@ fi
 
 
 
-############# 20 Download ISPConfig 3 #########################
+############################################## Download ISPConfig 3 #########################
 cd /tmp
 wget http://www.ispconfig.org/downloads/ISPConfig-3-stable.tar.gz
 tar xfz ISPConfig-3-stable.tar.gz
@@ -376,7 +371,7 @@ cd ispconfig3_install/install/
 
 
 
-############## 21 Install ISPConfig #####################
+############################################## Install ISPConfig #####################
 php -q install.php
 
 
