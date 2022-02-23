@@ -7,11 +7,11 @@
 MAILSERVER=true         #Postfix und Dovecot
 ROUNDCUBEMAIL=true
 VIRENSCANNER=false
-SSL_LETSENCRYPT=true
+SSL_LETSENCRYPT=false
 PureFTPd=false
-AWSTATS=false
+AWSTATS=true
 PHPMYADMIN=false
-DNSSERVER=true
+DNSSERVER=false
 FAIL2BAN=false
 FIREWALL=false
 
@@ -280,17 +280,8 @@ fi
 
 
 ####################################### Install Jailkit #########################################
-#apt-get install build-essential autoconf automake libtool flex bison debhelper binutils
-#cd /tmp
-#wget http://olivier.sessink.nl/jailkit/jailkit-2.20.tar.gz
-#tar xvfz jailkit-2.20.tar.gz
-#cd jailkit-2.20
-#echo 5 > debian/compat
-#./debian/rules binary
-#cd ..
-#dpkg -i jailkit_2.20-1_*.deb
-#rm -rf jailkit-2.20*
-
+# CHROOT-Umgebung
+#apt-get install build-essential autoconf automake libtool flex bison debhelper binutils jailkit
 
 ###################################### Install fail2ban and UFW Firewall ######################################
 # FAIL2BAN
