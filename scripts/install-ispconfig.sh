@@ -108,11 +108,41 @@ EOF
 
 mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
 
+# MariaDB-Passwort setzen
+sed -i "s|user     = root|user     = root\npassword = $MARIADB_PW|g" /etc/mysql/debian.cnf
+
+sleep 5
+
+# MariaDB für alle IP-Adressen öffnen
+sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
+
+# Datei /etc/security/limits.conf ergaenzen
+cp /etc/security/limits.conf /etc/security/limits.conf.orig
+
+tee /etc/security/limits.conf >/dev/null <<EOF
+mysql soft nofile 65535
+mysql hard nofile 65535
+EOF
+
+# Datei /etc/systemd/system/mysql.service.d/limits.conf erzeugen und befuellen
+mkdir -p /etc/systemd/system/mysql.service.d/
+touch /etc/systemd/system/mysql.service.d/limits.conf
+
+tee /etc/systemd/system/mysql.service.d/limits.conf >/dev/null <<EOF
+[Service]
+LimitNOFILE=infinity
+EOF
+
+sleep 3
+
+systemctl daemon-reload
+systemctl restart mariadb
 
 
 
 
 
+clear
 echo "################## PHP installieren ##############################################"
 apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear
 sleep 30
@@ -172,37 +202,6 @@ fi
 
 
 sleep 3
-
-# MariaDB-Passwort setzen
-sed -i "s|user     = root|user     = root\npassword = $MARIADB_PW|g" /etc/mysql/debian.cnf
-
-systemctl restart mariadb 
-sleep 5
-
-# Datei /etc/mysql/mariadb.conf.d/50-server.cnf anpassen
-sed -i "s|bind-address            = 127.0.0.1|#bind-address            = 127.0.0.1|g" /etc/mysql/mariadb.conf.d/50-server.cnf
-
-# Datei /etc/security/limits.conf ergaenzen
-cp /etc/security/limits.conf /etc/security/limits.conf.orig
-
-tee /etc/security/limits.conf >/dev/null <<EOF
-mysql soft nofile 65535
-mysql hard nofile 65535
-EOF
-
-# Datei /etc/systemd/system/mysql.service.d/limits.conf erzeugen und befuellen
-mkdir -p /etc/systemd/system/mysql.service.d/
-touch /etc/systemd/system/mysql.service.d/limits.conf
-
-tee /etc/systemd/system/mysql.service.d/limits.conf >/dev/null <<EOF
-[Service]
-LimitNOFILE=infinity
-EOF
-
-sleep 3
-
-systemctl daemon-reload
-systemctl restart mariadb
 
 
 ########################################## Install Amavisd-new, SpamAssassin, and ClamAV ###############################
@@ -318,13 +317,11 @@ then
 apt install -y phpmyadmin
 
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections 2>&1
-echo "phpmyadmin phpmyadmin/app-password-confirm password 'ispconfig'" | debconf-set-selections 2>&1'
-echo "phpmyadmin phpmyadmin/mysql/admin-user string root" | debconf-set-selections 2>&1' 
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password ispconfig" | debconf-set-selections 2>&1' 
-echo "phpmyadmin phpmyadmin/mysql/app-pass password ispconfig" | debconf-set-selections 2>&1' 
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections 2>&1' 
-
-
+echo "phpmyadmin phpmyadmin/app-password-confirm password 'ispconfig'" | debconf-set-selections 2>&1
+echo "phpmyadmin phpmyadmin/mysql/admin-user string root" | debconf-set-selections 2>&1
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password ispconfig" | debconf-set-selections 2>&1 
+echo "phpmyadmin phpmyadmin/mysql/app-pass password ispconfig" | debconf-set-selections 2>&1
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections 2>&1
 
 
 
@@ -381,7 +378,10 @@ sleep 5
 
 tee -a /etc/postfix/main.cf >/dev/null <<EOF
 # TODO: Hack, weil die Namensauflösung fehlerhaft ist
-smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
+#smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
+
+
+
 #myhostname = $HOSTNAME_NAME
 #smtpd_milters = inet:localhost:11332
 #non_smtpd_milters = inet:localhost:11332
