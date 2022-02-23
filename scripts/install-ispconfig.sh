@@ -214,7 +214,6 @@ echo "**********************************************"
 
 apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl postgrey
 
-
 sleep 30
 
 systemctl stop spamassassin
@@ -321,8 +320,8 @@ apt install -y phpmyadmin
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections 2>&1
 echo "phpmyadmin phpmyadmin/app-password-confirm password 'ispconfig'" | debconf-set-selections 2>&1'
 echo "phpmyadmin phpmyadmin/mysql/admin-user string root" | debconf-set-selections 2>&1' 
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password 'ispconfig'" | debconf-set-selections 2>&1' 
-echo "phpmyadmin phpmyadmin/mysql/app-pass password 'ispconfig'" | debconf-set-selections 2>&1' 
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password ispconfig" | debconf-set-selections 2>&1' 
+echo "phpmyadmin phpmyadmin/mysql/app-pass password ispconfig" | debconf-set-selections 2>&1' 
 echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections 2>&1' 
 
 
