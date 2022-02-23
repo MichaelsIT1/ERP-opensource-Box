@@ -8,7 +8,8 @@
 
 
 # System-Varibale
-MAIL=true
+MAILSERVER=true         #Postfix und Dovecot
+ROUNDCUBEMAIL=true
 VIRENSCANNER=false
 SSL_LETSENCRYPT=true
 PureFTPd=false
@@ -137,7 +138,7 @@ sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/apache2
 
 
 ############################### Install Postfix, Dovecot, rkhunter #############################
-if ($MAIL)
+if ($MAILSERVER)
 then
 apt-get -y install software-properties-common dnsutils nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl 2>&1 >/dev/null
 
@@ -343,7 +344,7 @@ systemctl restart apache2
 
 
 ######################################### Install RoundCube Webmail (optional) #########################
-if ($MAIL)
+if ($ROUNDCUBEMAIL)
 then
 
 echo "roundcube-core roundcube/dbconfig-install boolean true" | debconf-set-selections 2>&1
