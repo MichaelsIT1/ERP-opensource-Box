@@ -60,7 +60,7 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common resolvconf
+apt-get -y install sudo curl patch openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common
 sleep 30
 
 
@@ -385,12 +385,12 @@ sleep 5
 
 tee -a /etc/postfix/main.cf >/dev/null <<EOF
 smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
-myhostname = $HOSTNAME_NAME
-smtpd_milters = inet:localhost:11332
-non_smtpd_milters = inet:localhost:11332
-milter_protocol = 6
-milter_mail_macros = i {mail_addr} {client_addr} {client_name} {auth_authen}
-milter_default_action = accept
+#myhostname = $HOSTNAME_NAME
+#smtpd_milters = inet:localhost:11332
+#non_smtpd_milters = inet:localhost:11332
+#milter_protocol = 6
+#milter_mail_macros = i {mail_addr} {client_addr} {client_name} {auth_authen}
+#milter_default_action = accept
 EOF
 
 postfix reload
