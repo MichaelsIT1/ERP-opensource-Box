@@ -65,11 +65,28 @@ sleep 30
 
 
 ##### resolvconf einrichten
-echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
-resolvconf -u
+#echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
+#resolvconf -u
 
 
 
+########### 10 Install Apache Web Server and PHP ##############################
+echo "Install Apache Web Server"
+echo "**********************************"
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
+sleep 30
+a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
+
+# Datei /etc/apache2/conf-available/httpoxy.conf erzeugen und bearbeiten
+############################################################################
+tee /etc/apache2/conf-available/httpoxy.conf >/dev/null <<EOF
+<IfModule mod_headers.c>
+    RequestHeader unset Proxy early
+</IfModule>
+EOF
+
+a2enconf httpoxy
+systemctl restart apache2
 
 
 
@@ -94,23 +111,6 @@ EOF
 mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
 
 
-########### 10 Install Apache Web Server and PHP ##############################
-echo "Install Apache Web Server"
-echo "**********************************"
-apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
-sleep 30
-a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
-
-# Datei /etc/apache2/conf-available/httpoxy.conf erzeugen und bearbeiten
-############################################################################
-tee /etc/apache2/conf-available/httpoxy.conf >/dev/null <<EOF
-<IfModule mod_headers.c>
-    RequestHeader unset Proxy early
-</IfModule>
-EOF
-
-a2enconf httpoxy
-systemctl restart apache2
 
 
 
