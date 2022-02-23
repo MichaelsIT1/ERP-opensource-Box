@@ -54,7 +54,7 @@ EOF
 
 clear
 echo '############## Betriebssystem wird aktualisiert ################'
-apt update -y >/dev/null && apt upgrade -y
+apt update -y && apt upgrade -y
 echo
 sleep 3
 
