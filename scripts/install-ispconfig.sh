@@ -368,17 +368,6 @@ fi
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 ############################################## Download ISPConfig 3 #########################
 cd /tmp
 wget http://www.ispconfig.org/downloads/ISPConfig-3-stable.tar.gz
@@ -411,15 +400,8 @@ sleep 5
 
 
 
-
-
-
-
-
-
-
-
 echo "**************************************************************************"
-echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP:8080"
+echo "ISP-Config: https://$IP:8080"
+echo "Roundcubemail: http://$IP/webmail"
 echo "MariaDB-Passwort: $MARIADB_PW"
 echo "**************************************************************************"
