@@ -69,6 +69,75 @@ echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
 resolvconf -u
 
 
+
+
+
+
+
+
+################## MARIADB installieren ##############################################
+apt-get -y install mariadb-client mariadb-server
+sleep 30
+
+
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
+                    # current root password (emtpy after installation)
+        y           # Set root password?
+        ispconfig   # new root password
+        ispconfig   # new root password
+        Y            # Remove anonymous users?
+        y           # Disallow root login remotely?
+        y           # Remove test database and access to it?
+        y           # Reload privilege tables now?
+EOF
+
+mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
+
+
+########### 10 Install Apache Web Server and PHP ##############################
+echo "Install Apache Web Server"
+echo "**********************************"
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
+sleep 30
+a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
+
+# Datei /etc/apache2/conf-available/httpoxy.conf erzeugen und bearbeiten
+############################################################################
+tee /etc/apache2/conf-available/httpoxy.conf >/dev/null <<EOF
+<IfModule mod_headers.c>
+    RequestHeader unset Proxy early
+</IfModule>
+EOF
+
+a2enconf httpoxy
+systemctl restart apache2
+
+
+
+
+################## PHP installieren ##############################################
+echo "Install PHP"
+echo "***********"
+apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear 
+sleep 30
+apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-gmp php-bz2 php-phpdbg php-xsl
+sleep 30
+
+# Zeitzone setzen
+sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/cgi/php.ini
+sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/cli/php.ini
+sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/fpm/php.ini
+sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/apache2/php.ini
+
+
+
+
+
+
+
+
+
+
 ###################  8 Install Postfix, Dovecot, rkhunter #############################
 if ($MAIL)
 then
@@ -98,36 +167,6 @@ sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|#   -o smtpd
 sleep 3
 systemctl restart postfix
 fi
-
-
-################## MARIADB installieren ##############################################
-apt-get -y install mariadb-client mariadb-server
-sleep 30
-
-
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
-                    # current root password (emtpy after installation)
-        y           # Set root password?
-        ispconfig   # new root password
-        ispconfig   # new root password
-        Y            # Remove anonymous users?
-        y           # Disallow root login remotely?
-        y           # Remove test database and access to it?
-        y           # Reload privilege tables now?
-EOF
-
-mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -187,38 +226,6 @@ service clamav-daemon start
 fi
 
 
-
-########### 10 Install Apache Web Server and PHP ##############################
-echo "Install Apache Web Server"
-echo "**********************************"
-apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
-sleep 30
-a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
-
-# Datei /etc/apache2/conf-available/httpoxy.conf erzeugen und bearbeiten
-############################################################################
-tee /etc/apache2/conf-available/httpoxy.conf >/dev/null <<EOF
-<IfModule mod_headers.c>
-    RequestHeader unset Proxy early
-</IfModule>
-EOF
-
-a2enconf httpoxy
-systemctl restart apache2
-
-
-echo "Install PHP"
-echo "***********"
-apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear 
-sleep 30
-apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-gmp php-bz2 php-phpdbg php-xsl
-sleep 30
-
-# Zeitzone setzen
-sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/cgi/php.ini
-sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/cli/php.ini
-sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/fpm/php.ini
-sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/apache2/php.ini
 
 
 ##################### 11 Install Let's Encrypt ##################################
@@ -328,6 +335,14 @@ systemctl restart apache2
 #################### 19 Install RoundCube Webmail (optional) #########################
 if ($MAIL)
 then
+
+echo "roundcube-core roundcube/dbconfig-install boolean true" | debconf-set-selections 2>&1
+echo "roundcube-core roundcube/database-type select mysql" | debconf-set-selections 2>&1
+echo "roundcube-core roundcube/mysql/admin-user string root" | debconf-set-selections 2>&1
+echo "roundcube-core roundcube/mysql/admin-pass password ispconfig" | debconf-set-selections 2>&1
+echo "roundcube-core roundcube/mysql/app-pass password ispconfig" | debconf-set-selections 2>&1
+echo "roundcube-core roundcube/reconfigure-webserver multiselect apache2" | debconf-set-selections 2>&1
+
 apt-get -y install roundcube roundcube-core roundcube-mysql roundcube-plugins roundcube-plugins-extra javascript-common libjs-jquery-mousewheel php-net-sieve
 
 sed -i "s|#    Alias /roundcube /var/lib/roundcube/public_html|    Alias /roundcube /var/lib/roundcube/public_html\n  Alias /webmail /var/lib/roundcube/public_html|g"  /etc/apache2/conf-enabled/roundcube.conf
