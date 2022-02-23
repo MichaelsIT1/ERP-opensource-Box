@@ -34,7 +34,7 @@ echo '###########################################################'
 sleep 3
 
 # Shell auf bash stellen
-echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash 2>&1 >/dev/null
+echo "dash dash/sh boolean false" | debconf-set-selections && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure dash
 sleep 3
 
 # locale setzen auf de_DE.UTF-8 UTF-8
@@ -52,6 +52,7 @@ deb http://deb.debian.org/debian/ stable main contrib non-free
 deb-src http://deb.debian.org/debian/ stable main contrib non-free
 EOF
 
+clear
 echo '############## Betriebssystem wird aktualisiert ################'
 apt update -y  2>&1 >/dev/null && apt upgrade -y 2>&1 >/dev/null
 echo
@@ -59,7 +60,7 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common vim resolvconf rkhunter sudo 2>&1 >/dev/null
+apt-get -y install sudo curl patch openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common vim resolvconf rkhunter sudo
 sleep 30
 
 
@@ -68,11 +69,9 @@ echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
 resolvconf -u
 
 
-
-############################################ Install Apache Web Server ##############################
-echo "Install Apache Web Server"
-echo "**********************************"
-apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl ca-certificates openssl 2>&1 >/dev/null
+clear
+echo "############################################ Install Apache Web Server ##############################"
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl ca-certificates openssl 
 sleep 30
 a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
@@ -91,7 +90,7 @@ systemctl restart apache2
 
 
 
-################## MARIADB installieren ##############################################
+echo "################## MARIADB installieren ##############################################"
 apt-get -y install mariadb-client mariadb-server dbconfig-common
 sleep 30
 
@@ -114,12 +113,10 @@ mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
 
 
 
-################## PHP installieren ##############################################
-echo "Install PHP"
-echo "***********"
-apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear 2>&1 >/dev/null
+echo "################## PHP installieren ##############################################"
+apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear
 sleep 30
-apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-gmp php-bz2 php-phpdbg php-xsl 2>&1 >/dev/null
+apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-gmp php-bz2 php-phpdbg php-xsl
 sleep 30
 
 # Zeitzone setzen
@@ -136,14 +133,14 @@ sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/apache2
 
 
 
-
-############################### Install Postfix, Dovecot, rkhunter #############################
+clear
+echo "############################### Install Postfix, Dovecot, rkhunter #############################"
 if ($MAILSERVER)
 then
-apt-get -y install software-properties-common dnsutils nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl 2>&1 >/dev/null
+apt-get -y install software-properties-common dnsutils nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl
 
 
-apt-get -y install postfix-mysql postfix-doc postgrey dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve 2>&1 >/dev/null
+apt-get -y install postfix-mysql postfix-doc postgrey dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 10
 
 
