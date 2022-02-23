@@ -141,11 +141,13 @@ sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/apache2
 ############################### Install Postfix, Dovecot, rkhunter #############################
 if ($MAIL)
 then
+apt-get -y install software-properties-common dnsutils resolvconf nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl
+
+
 apt-get -y install postfix-mysql postfix-doc postgrey dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 10
 
 
-apt-get -y install software-properties-common dnsutils resolvconf nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl
 
 
 ###### General type of mail configuration: <-- Internet Site
