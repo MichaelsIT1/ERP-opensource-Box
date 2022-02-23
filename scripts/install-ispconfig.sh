@@ -92,7 +92,7 @@ systemctl restart apache2
 
 echo "################## MARIADB installieren ##############################################"
 apt-get -y install mariadb-client mariadb-server dbconfig-common
-sleep 30
+sleep 3
 
 
 sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
@@ -171,7 +171,7 @@ apt-get -y install software-properties-common dnsutils nomarch cabextract apt-li
 
 
 apt-get -y install postfix-mysql postfix-doc postgrey dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
-sleep 10
+sleep 3
 
 
 
@@ -213,7 +213,7 @@ echo "**********************************************"
 
 apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl postgrey
 
-sleep 30
+sleep 3
 
 systemctl stop spamassassin
 systemctl disable spamassassin
@@ -229,7 +229,7 @@ fi
 if ($SSL_LETSENCRYPT)
 then
 apt-get -y install certbot
-sleep 30
+sleep 3
 fi
 
 ############################################## Install Mailman 3 #########################################
@@ -239,7 +239,7 @@ fi
 if ($PureFTPd)
 then
 apt-get -y install pure-ftpd-common pure-ftpd-mysql
-sleep 30
+sleep 3
 
 #CA erzeugen
 openssl dhparam -out /etc/ssl/private/pure-ftpd-dhparams.pem 2048
