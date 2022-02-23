@@ -60,20 +60,20 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common vim
+apt-get -y install sudo curl patch openssl unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common vim resolvconf rkhunter sudo
 sleep 30
 
 
 ##### resolvconf einrichten
-#echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
-#resolvconf -u
+echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
+resolvconf -u
 
 
 
 ############################################ Install Apache Web Server ##############################
 echo "Install Apache Web Server"
 echo "**********************************"
-apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl openssl
 sleep 30
 a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
@@ -93,7 +93,7 @@ systemctl restart apache2
 
 
 ################## MARIADB installieren ##############################################
-apt-get -y install mariadb-client mariadb-server
+apt-get -y install mariadb-client mariadb-server dbconfig-common
 sleep 30
 
 
@@ -141,7 +141,7 @@ sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/apache2
 ############################### Install Postfix, Dovecot, rkhunter #############################
 if ($MAIL)
 then
-apt-get -y install software-properties-common dnsutils resolvconf nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl
+apt-get -y install software-properties-common dnsutils nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl
 
 
 apt-get -y install postfix-mysql postfix-doc postgrey dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
