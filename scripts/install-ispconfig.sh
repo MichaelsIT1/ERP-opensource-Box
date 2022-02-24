@@ -11,7 +11,7 @@ SSL_LETSENCRYPT=false
 PureFTPd=false
 AWSTATS=true
 PHPMYADMIN=false
-DNSSERVER=false
+DNSSERVER=true
 FAIL2BAN=false
 FIREWALL=false
 
@@ -60,10 +60,6 @@ apt-get -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip binu
 apt get -y install ssh openssh-server nano vim-nox lsb-release apt-transport-https ca-certificates wget git gnupg software-properties-common
 sleep 30
 
-
-##### resolvconf einrichten
-#echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
-#resolvconf -u
 
 
 clear
@@ -268,8 +264,13 @@ clear
 ########################################## Install BIND DNS Server #####################
 if ($DNSSERVER)
 then
-apt-get -y install bind9 dnsutils 
+apt-get -y install bind9 dnsutils resolvconf
 apt-get -y install haveged
+
+##### resolvconf einrichten
+echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
+resolvconf -u
+
 fi
 
 clear
