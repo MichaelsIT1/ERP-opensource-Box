@@ -86,7 +86,7 @@ systemctl restart apache2
 
 
 
-
+clear
 echo "################## MARIADB installieren ##############################################"
 apt-get -y install mariadb-client mariadb-server dbconfig-common
 sleep 3
@@ -201,6 +201,7 @@ fi
 sleep 3
 
 
+clear
 ########################################## Install Amavisd-new, SpamAssassin, and ClamAV ###############################
 if ($VIRENSCANNER)
 then
@@ -220,7 +221,7 @@ fi
 
 
 
-
+clear
 ############################################ Install Let's Encrypt ##################################
 if ($SSL_LETSENCRYPT)
 then
@@ -231,6 +232,8 @@ fi
 ############################################## Install Mailman 3 #########################################
 # NOT SUPPORTED
 
+
+clear
 ############################################## Install PureFTPd ################################################
 if ($PureFTPd)
 then
@@ -261,7 +264,7 @@ chmod 600 /etc/ssl/private/pure-ftpd.pem
 systemctl restart pure-ftpd-mysql
 fi
 
-
+clear
 ########################################## Install BIND DNS Server #####################
 if ($DNSSERVER)
 then
@@ -269,6 +272,7 @@ apt-get -y install bind9 dnsutils
 apt-get -y install haveged
 fi
 
+clear
 ####################################### Install AWStats #######################################
 if ($AWSTATS)
 then
@@ -278,11 +282,12 @@ apt-get -y install vlogger awstats geoip-database libclass-dbi-mysql-perl
 apt-get -y install goaccess
 fi
 
-
+clear
 ####################################### Install Jailkit #########################################
 # CHROOT-Umgebung
 #apt-get install build-essential autoconf automake libtool flex bison debhelper binutils jailkit
 
+clear
 ###################################### Install fail2ban and UFW Firewall ######################################
 # FAIL2BAN
 if ($FAIL2BAN)
@@ -297,7 +302,7 @@ apt-get -y install ufw
 fi
 
 
-
+clear
 ######################################## Install PHPMyAdmin Database Administration Tool ##################################
 if ($PHPMYADMIN)
 then
@@ -322,7 +327,7 @@ fi
 
 systemctl restart apache2
 
-
+clear
 ######################################### Install RoundCube Webmail (optional) #########################
 if ($ROUNDCUBEMAIL)
 then
@@ -347,7 +352,7 @@ fi
 
 
 
-
+clear
 ############################################## Download ISPConfig 3 #########################
 cd /tmp
 wget http://www.ispconfig.org/downloads/ISPConfig-3-stable.tar.gz
@@ -382,7 +387,7 @@ sleep 5
 
 
 
-
+clear
 echo "**************************************************************************"
 echo "ISP-Config: https://$IP:8080"
 echo "Roundcubemail: http://$IP/webmail"
