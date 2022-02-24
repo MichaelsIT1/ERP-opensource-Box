@@ -370,7 +370,7 @@ sleep 5
 
 
 tee -a /etc/postfix/main.cf >/dev/null <<EOF
-# TODO: Hack, weil die Namensauflösung fehlerhaft ist
+# TODO: Hack, weil die Namensauflösung fehlerhaft ist, funktioniert nicht wenn DNS Server installiert wurde
 smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
 
 
@@ -391,6 +391,16 @@ sleep 5
 clear
 echo "**************************************************************************"
 echo "ISP-Config: https://$IP:8080"
+
+if ($ROUNDCUBEMAIL)
+then
 echo "Roundcubemail: http://$IP/webmail"
+fi
+
+if ($PHPMYADMIN)
+then
+echo "phpMyAdmin: http://$IP/phpmyadmin"
+fi
+
 echo "MariaDB-Passwort: $MARIADB_PW"
 echo "**************************************************************************"
