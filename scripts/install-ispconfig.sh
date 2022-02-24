@@ -56,7 +56,8 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common vim rkhunter sudo
+apt-get -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip binutils vim sudo
+apt get -y install ssh openssh-server nano vim-nox lsb-release apt-transport-https ca-certificates wget git gnupg software-properties-common
 sleep 30
 
 
@@ -67,7 +68,7 @@ sleep 30
 
 clear
 echo "############################################ Install Apache Web Server ##############################"
-apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger php-apcu libapache2-reload-perl ca-certificates openssl 
+apt-get -y install apache2 apache2-doc apache2-utils libapache2-mod-php libapache2-mod-fcgid apache2-suexec-pristine mcrypt imagemagick libruby libapache2-mod-python memcached memcached libapache2-mod-passenger libapache2-reload-perl ca-certificates openssl 
 sleep 30
 a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
@@ -140,7 +141,7 @@ systemctl restart mariadb
 
 clear
 echo "################## PHP installieren ##############################################"
-apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear
+apt-get -y install php php php-common php-gd php-mysql php-imap php-cli php-cgi php-curl php-intl php-pspell php-sqlite3 php-tidy php-xmlrpc php-xsl php-zip php-mbstring php-soap php-fpm php-opcache php-memcache php-imagick php-pear php-apcu 
 sleep 30
 apt -y install php-curl php-mysqli php-mbstring php-php-gettext php-bcmath php-gmp php-bz2 php-phpdbg php-xsl
 sleep 30
@@ -163,12 +164,12 @@ clear
 echo "############################### Install Postfix, Dovecot, rkhunter #############################"
 if ($MAILSERVER)
 then
-apt-get -y install software-properties-common dnsutils nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl
-
-
-apt-get -y install postfix-mysql postfix-doc postgrey dovecot-managesieved dovecot-lmtpd getmail6 rkhunter dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
+apt-get -y install postfix postfix-mysql postfix-doc dovecot-managesieved dovecot-lmtpd dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 3
 
+apt-get -y install software-properties-common dnsutils nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl  rkhunter
+
+#apt -y install postgrey getmail6
 
 
 
