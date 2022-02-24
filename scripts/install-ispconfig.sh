@@ -307,8 +307,6 @@ clear
 ######################################## Install PHPMyAdmin Database Administration Tool ##################################
 if ($PHPMYADMIN)
 then
-apt install -y phpmyadmin
-
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections 2>&1
 echo "phpmyadmin phpmyadmin/app-password-confirm password 'ispconfig'" | debconf-set-selections 2>&1
 echo "phpmyadmin phpmyadmin/mysql/admin-user string root" | debconf-set-selections 2>&1
@@ -316,7 +314,7 @@ echo "phpmyadmin phpmyadmin/mysql/admin-pass password ispconfig" | debconf-set-s
 echo "phpmyadmin phpmyadmin/mysql/app-pass password ispconfig" | debconf-set-selections 2>&1
 echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections 2>&1
 
-
+apt install -y phpmyadmin
 
 # Erzeuge Benutzer fuer phpmyadmin
 #mysql -u root <<EOF
