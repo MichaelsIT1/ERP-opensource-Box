@@ -56,13 +56,13 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common vim resolvconf rkhunter sudo
+apt-get -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip gpg binutils software-properties-common vim rkhunter sudo
 sleep 30
 
 
 ##### resolvconf einrichten
-echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
-resolvconf -u
+#echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
+#resolvconf -u
 
 
 clear
