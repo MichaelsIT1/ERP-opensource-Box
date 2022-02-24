@@ -6,7 +6,7 @@
 # System-Varibale
 MAILSERVER=true         #Postfix und Dovecot
 ROUNDCUBEMAIL=true
-VIRENSCANNER=false
+VIRENSCANNER=true
 SSL_LETSENCRYPT=false
 PureFTPd=false
 AWSTATS=true
