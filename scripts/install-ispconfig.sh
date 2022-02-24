@@ -11,7 +11,7 @@ SSL_LETSENCRYPT=false
 PureFTPd=false
 AWSTATS=true
 PHPMYADMIN=false
-DNSSERVER=true
+DNSSERVER=false
 FAIL2BAN=false
 FIREWALL=false
 
