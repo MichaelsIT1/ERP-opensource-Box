@@ -169,6 +169,11 @@ apt-get -y install software-properties-common dnsutils nomarch cabextract apt-li
 
 
 
+a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
+
+
+
+
 ###### General type of mail configuration: <-- Internet Site
 ####### System mail name: <-- server1.example.com
 
@@ -192,6 +197,9 @@ sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|#   -o smtpd
 sleep 3
 
 fi
+
+
+
 systemctl daemon-reload
 systemctl restart postfix
 sleep 3
