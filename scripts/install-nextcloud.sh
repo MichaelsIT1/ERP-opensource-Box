@@ -60,9 +60,9 @@ unzip nextcloud*
 
 curl /var/www/html/nextcloud/index.php
 
+sleep 3
 
-mv nextcloud/config/config.php nextcloud/config/config.php.org
-
+sed -i "s|);||g" /var/www/html/nextcloud/config/config.php
 
 #config/config.php erzeugen
 tee /var/www/html/nextcloud/config/config.php >/dev/null <<EOF
