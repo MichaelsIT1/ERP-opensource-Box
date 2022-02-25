@@ -57,10 +57,10 @@ cd /var/www/html/
 wget https://download.nextcloud.com/server/releases/nextcloud-23.0.2.zip
 unzip nextcloud*
 
-
-rm config/CAN_INSTALL
+sleep 3
 
 curl http://$IP/nextcloud/index.php
+rm config/CAN_INSTALL
 
 sleep 3
 
@@ -93,8 +93,7 @@ tee /var/www/html/nextcloud/config/config.php >/dev/null <<EOF
 );
 EOF
 
-
-
+PAUSE
 
 
 
