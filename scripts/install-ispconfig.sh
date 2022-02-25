@@ -128,7 +128,7 @@ EOF
 
 sleep 3
 
-systemctl daemon-reload
+
 systemctl restart mariadb
 
 
@@ -190,10 +190,10 @@ sed -i "s|#  -o smtpd_tls_wrappermode=yes|   -o smtpd_tls_wrappermode=yes|g" /et
 sed -i "s|#  -o smtpd_sasl_auth_enable=yes|   -o smtpd_sasl_auth_enable=yes|g" /etc/postfix/master.cf
 sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|#   -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
 sleep 3
-systemctl restart postfix
+
 fi
-
-
+systemctl daemon-reload
+systemctl restart postfix
 sleep 3
 
 
@@ -348,8 +348,11 @@ sed -i "s|\$config\['smtp_server'\] = '';|\$config\['smtp_server'\] = '%h';|g"  
 sed -i "s|\$config\['smtp_port'\] = 587;|\$config\['smtp_port'\] = 25;|g"  /etc/roundcube/config.inc.php
 fi
 
-
-
+systemctl daemon-reload
+systemctl restart apache2
+systemctl restart mariadb
+systemctl restart postfix
+systemctl restart dovecot
 
 clear
 ############################################## Download ISPConfig 3 #########################
