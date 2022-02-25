@@ -47,10 +47,17 @@ EOF
 echo "nextcloud herunterladen"
 echo "********************************"
 
-#mkdir /var/www/html/nextcloud/
-cd /var/www/html/
+mkdir /var/www/html/nextcloud/
+cd /var/www/html/nextcloud
 
-wget https://download.nextcloud.com/server/installer/setup-nextcloud.php
+# Webinstalller
+# wget https://download.nextcloud.com/server/installer/setup-nextcloud.php
+
+# Offline-installer
+wget https://download.nextcloud.com/server/releases/nextcloud-23.0.2.zip
+unzip nextcloud*
+
+
 
 
 echo "Zugriffsrechte werden gesetzt"
