@@ -101,8 +101,8 @@ EOF
 
 mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
 
-# MariaDB-Passwort setzen
-sed -i "s|user     = root|user     = root\npassword = $MARIADB_PW|g" /etc/mysql/debian.cnf
+# MariaDB-Passwort setzen / veraltet
+#sed -i "s|user     = root|user     = root\npassword = $MARIADB_PW|g" /etc/mysql/debian.cnf
 
 sleep 5
 
