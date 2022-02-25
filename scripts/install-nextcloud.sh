@@ -53,46 +53,9 @@ cd /var/www/html/
 # Webinstalller
 # wget https://download.nextcloud.com/server/installer/setup-nextcloud.php
 
-# Offline-installer
-wget https://download.nextcloud.com/server/releases/nextcloud-23.0.2.zip
-unzip nextcloud*
-
-
-mv nextcloud/config/config.php nextcloud/config/config.php.org
-
-
-#config/config.php erzeugen
-tee /var/www/html/nextcloud/config/config.php >/dev/null <<EOF
-<?php
-$CONFIG = array (
-  'instanceid' => 'ocmp60d6dazq',
-  'passwordsalt' => 'n6hcplI/UzRHP9kRLM1gL4ISHQcEY0',
-  'secret' => 'f1q9NmHPPDxriS8D0zBE1mdi1NkvsEZT5xUHrjnblaImuoDi',
-  'trusted_domains' =>
-  array (
-    0 => '$IP',
-  ),
-  'datadirectory' => '/var/www/html/nextcloud/nextcloud/data',
-  'dbtype' => 'mysql',
-  'version' => '23.0.2.1',
-  'overwrite.cli.url' => 'http://192.168.188.89/nextcloud/nextcloud',
-  'dbname' => 'nextcloud',
-  'dbhost' => 'localhost',
-  'dbport' => '',
-  'dbtableprefix' => 'oc_',
-  'mysql.utf8mb4' => true,
-  'dbuser' => 'nextcloud',
-  'dbpassword' => 'nextcloud',
-  'default_language' => 'de',
-  'default_locale' => 'de_DE',
-  'default_phone_region' => 'DE',
-  'installed' => true,
-);
-EOF
-
-
-
-
+## Offline-installer
+#wget https://download.nextcloud.com/server/releases/nextcloud-23.0.2.zip
+#unzip nextcloud*
 
 echo "Zugriffsrechte werden gesetzt"
 echo "*****************************"
@@ -104,6 +67,6 @@ systemctl restart apache2
 clear
 
 echo "*******************************************************************************************"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/nextcloud"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/setup-nextcloud.php"
 echo "Zugangsdaten: Benutzer: nextcloud, Passwort: nextcloud"
 echo "**************************************************************************"
