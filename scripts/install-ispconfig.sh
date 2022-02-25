@@ -2,6 +2,7 @@
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
 # getestet auf Debian 11 im LXC Container
+# Lizenz / Entwickler: https://www.ispconfig.org / https://www.ispconfig.de
 
 # System-Varibale
 MAILSERVER=true         #Postfix und Dovecot
