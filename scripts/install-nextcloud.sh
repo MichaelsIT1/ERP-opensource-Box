@@ -68,7 +68,7 @@ sleep 3
 sed -i "s|);||g" /var/www/html/nextcloud/config/config.php
 
 #config/config.php erzeugen
-tee /var/www/html/nextcloud/config/config.php >/dev/null <<EOF
+tee -a /var/www/html/nextcloud/config/config.php >/dev/null <<EOF
   'passwordsalt' => 'n6hcplI/UzRHP9kRLM1gL4ISHQcEY0',
   'secret' => 'f1q9NmHPPDxriS8D0zBE1mdi1NkvsEZT5xUHrjnblaImuoDi',
   'trusted_domains' =>
