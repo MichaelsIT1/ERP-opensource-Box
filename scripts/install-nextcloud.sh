@@ -4,6 +4,10 @@
 # getestet auf Debian 11 im LXC Container
 
 # System-Varibale
+OFFLINEINSTALL=false
+ONLINEINSTALL=true
+
+
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
 clear
@@ -50,10 +54,17 @@ echo "********************************"
 #mkdir /var/www/html/nextcloud/
 cd /var/www/html/
 
+if ($ONLINEINSTALL)
+then
 # Webinstalller
-# wget https://download.nextcloud.com/server/installer/setup-nextcloud.php
+ wget https://download.nextcloud.com/server/installer/setup-nextcloud.php
+fi
 
-# Offline-installer
+
+
+# Offline-installer FEHLERHAFT
+if ($OFFLINEINSTALL)
+then
 wget https://download.nextcloud.com/server/releases/nextcloud-23.0.2.zip
 unzip nextcloud*
 
@@ -93,7 +104,7 @@ tee -a /var/www/html/nextcloud/config/config.php >/dev/null <<EOF
 );
 EOF
 
-PAUSE
+fi
 
 
 
