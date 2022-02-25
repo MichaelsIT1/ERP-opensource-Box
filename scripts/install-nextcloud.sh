@@ -36,8 +36,8 @@ EOF
         sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
         y           # Set root password?
-        open3a     # new root password
-        open3a     # new root password         
+        nextcloud     # new root password
+        nextcloud     # new root password         
         y           # Remove anonymous users?
         y           # Disallow root login remotely?
         y           # Remove test database and access to it?
@@ -47,8 +47,8 @@ EOF
 echo "nextcloud herunterladen"
 echo "********************************"
 
-mkdir /var/www/html/nextcloud/
-cd /var/www/html/nextcloud
+#mkdir /var/www/html/nextcloud/
+cd /var/www/html/
 
 # Webinstalller
 # wget https://download.nextcloud.com/server/installer/setup-nextcloud.php
@@ -70,7 +70,6 @@ systemctl restart apache2
 clear
 
 echo "*******************************************************************************************"
-echo "nextcloud: Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/setup-nextcloud.php"
-echo "Zugangsdaten: Host: localhost, Benutzer: nextcloud, Passwort: nextcloud, Datenbank: nextcloud, Passwort: nextcloud"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/nextcloud"
+echo "Zugangsdaten: Benutzer: nextcloud, Passwort: nextcloud"
 echo "**************************************************************************"
