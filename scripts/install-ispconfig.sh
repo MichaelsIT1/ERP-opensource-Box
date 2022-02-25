@@ -2,7 +2,7 @@
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
 # getestet auf Debian 11 im LXC Container
-# Lizenz / Entwickler: https://www.ispconfig.org / https://www.ispconfig.de
+# Entwickler: https://www.ispconfig.org / https://www.ispconfig.de
 
 # System-Varibale
 MAILSERVER=true         #Postfix und Dovecot
@@ -58,7 +58,7 @@ sleep 3
 echo "Install Basics"
 echo "**********************************"
 apt-get -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip binutils vim sudo
-apt get -y install ssh openssh-server nano vim-nox lsb-release apt-transport-https ca-certificates wget git gnupg software-properties-common
+apt get -y install ssh openssh-server nano vim-nox lsb-release apt-transport-https ca-certificates wget git gnupg software-properties-common recode
 sleep 30
 
 
@@ -380,6 +380,7 @@ sleep 5
 
 
 tee -a /etc/postfix/main.cf >/dev/null <<EOF
+
 # TODO: Hack, weil die Namensauflösung fehlerhaft ist, check_sender_access regexp:/etc/postfix/tag_as_originating.re fail for me
 smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
 
