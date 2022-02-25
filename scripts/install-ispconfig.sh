@@ -371,7 +371,7 @@ sleep 5
 
 
 tee -a /etc/postfix/main.cf >/dev/null <<EOF
-# TODO: Hack, weil die Namensauflösung fehlerhaft ist, funktioniert nicht wenn DNS Server installiert wurde
+# TODO: Hack, weil die Namensauflösung fehlerhaft ist, check_sender_access regexp:/etc/postfix/tag_as_originating.re fail for me
 smtpd_sender_restrictions = check_sender_access proxy:mysql:/etc/postfix/mysql-virtual_sender.cf, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_sender, reject_unlisted_sender
 
 
