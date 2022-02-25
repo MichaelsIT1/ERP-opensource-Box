@@ -20,7 +20,7 @@ apt update && apt dist-upgrade -y
 echo
 echo "Webserver Apache, MariaDB und PHP wird installiert"
 echo "**************************************************"
-apt install apache2 mariadb-server php php-mbstring php-soap php-imap php-xml php-zip php-gd php-cli php-mysql php-curl php-ldap php-intl php-bcmath php-gmp php-imagick unzip zip vim -y
+apt install curl apache2 mariadb-server php php-mbstring php-soap php-imap php-xml php-zip php-gd php-cli php-mysql php-curl php-ldap php-intl php-bcmath php-gmp php-imagick unzip zip vim -y
 echo
 
 
@@ -58,9 +58,12 @@ wget https://download.nextcloud.com/server/releases/nextcloud-23.0.2.zip
 unzip nextcloud*
 
 
-curl /var/www/html/nextcloud/index.php
+rm config/CAN_INSTALL
+
+curl http://$IP/nextcloud/index.php
 
 sleep 3
+
 
 sed -i "s|);||g" /var/www/html/nextcloud/config/config.php
 
