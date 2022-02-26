@@ -211,10 +211,23 @@ clear
 if ($VIRENSCANNER)
 then
 
-echo "Install Amavisd-new, SpamAssassin, and ClamAV"
+echo "Install rspamd, SpamAssassin, and ClamAV"
 echo "**********************************************"
 
-apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
+# Amavisd-new is old, rspamd is new
+apt-get -y install redis-server lsb-release
+apt-get -y install rspamd
+
+sleep 3
+echo 'servers = "127.0.0.1";' > /etc/rspamd/local.d/redis.conf
+echo "nrows = 2500;" > /etc/rspamd/local.d/history_redis.conf 
+echo "compress = true;" >> /etc/rspamd/local.d/history_redis.conf
+echo "subject_privacy = false;" >> /etc/rspamd/local.d/history_redis.conf
+systemctl restart rspamd
+
+
+#apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
+
 sleep 3
 
 systemctl stop spamassassin
@@ -362,6 +375,7 @@ systemctl restart apache2
 systemctl restart mariadb
 systemctl restart postfix
 systemctl restart dovecot
+systemctl restart rspamd
 
 clear
 ############################################## Download ISPConfig 3 #########################
