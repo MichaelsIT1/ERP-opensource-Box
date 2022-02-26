@@ -409,5 +409,10 @@ then
 echo "phpMyAdmin: http://$IP/phpmyadmin"
 fi
 
+if ($MAILSERVER)
+then
+echo "Rspamd: $HOSTNAME_DNSNAME:8081/rspamd/"
+fi
+
 echo "MariaDB-Passwort: $MARIADB_PW"
 echo "**************************************************************************"
