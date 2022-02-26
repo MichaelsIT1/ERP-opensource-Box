@@ -401,8 +401,26 @@ sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | php -q install.php
         $HOSTNAME_DNSNAME   # 
         3306            #
         root           # 
-        test           # 
+                  # 
         dbispconfig           # 
+        utf8
+        DE
+        Some-State
+        Berlin
+        Internet Widgits Pty Ltd
+        IT
+        $HOSTNAME_DNSNAME
+        test@test.local
+        8080
+        test
+        Y
+         DE
+        Some-State
+        Berlin
+        Internet Widgits Pty Ltd
+        IT
+        $HOSTNAME_DNSNAME
+        test@test.local
 EOF
 
 
