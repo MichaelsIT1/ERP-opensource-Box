@@ -57,7 +57,7 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip binutils vim sudo
+apt -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip binutils vim expect
 apt -y install ssh openssh-server lsb-release apt-transport-https ca-certificates wget git gnupg software-properties-common recode
 sleep 30
 
