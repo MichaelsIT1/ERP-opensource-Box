@@ -58,7 +58,7 @@ sleep 3
 echo "Install Basics"
 echo "**********************************"
 apt -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip binutils vim sudo
-apt -y install ssh openssh-server vim-nox lsb-release apt-transport-https ca-certificates wget git gnupg software-properties-common recode
+apt -y install ssh openssh-server lsb-release apt-transport-https ca-certificates wget git gnupg software-properties-common recode
 sleep 30
 
 
@@ -394,34 +394,7 @@ cd ispconfig3_install/install/
 # php -q install.php
 
 
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | php -q install.php
-         de           # 
-        standard           # 
-        $   # 
-        $HOSTNAME_DNSNAME   # 
-        3306            #
-        root           # 
-                  # 
-        dbispconfig           # 
-        utf8
-        DE
-        Some-State
-        Berlin
-        Internet Widgits Pty Ltd
-        IT
-        $HOSTNAME_DNSNAME
-        test@test.local
-        8080
-        test
-        Y
-         DE
-        Some-State
-        Berlin
-        Internet Widgits Pty Ltd
-        IT
-        $HOSTNAME_DNSNAME
-        test@test.local
-EOF
+
 
 
 
