@@ -391,7 +391,7 @@ cd ispconfig3_install/install/
 
 ############################################## Install ISPConfig #####################
 
-# php -q install.php
+php -q install.php
 
 
 
