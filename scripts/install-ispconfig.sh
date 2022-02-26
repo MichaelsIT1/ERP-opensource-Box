@@ -6,7 +6,7 @@
 # Entwicklerseite ISP-Config: https://www.ispconfig.org / https://www.ispconfig.de
 
 # System-Varibale
-MAILSERVER=true         #Postfix und Dovecot
+MAILSERVER=true         #Postfix, Dovecot, Rspamd
 ROUNDCUBEMAIL=true
 SSL_LETSENCRYPT=false
 PureFTPd=false
@@ -161,14 +161,12 @@ clear
 echo "############################### Install Postfix, Dovecot, rkhunter #############################"
 if ($MAILSERVER)
 then
-apt-get -y install postfix postfix-mysql postfix-doc dovecot-managesieved dovecot-lmtpd dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
+apt -y install postfix postfix-mysql postfix-doc dovecot-managesieved dovecot-lmtpd dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 3
 
-apt-get -y install software-properties-common dnsutils nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl  rkhunter
+apt -y install software-properties-common dnsutils nomarch cabextract apt-listchanges libnet-ldap-perl libauthen-sasl-perl daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl libnet-dns-perl libdbd-mysql-perl
 
 #apt -y install postgrey getmail6
-
-
 
 a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers actions proxy_fcgi alias
 
@@ -180,43 +178,6 @@ a2enmod suexec rewrite ssl actions include dav_fs dav auth_digest cgi headers ac
 
 echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selections 2>&1
 echo "postfix postfix/mailname string $HOSTNAME_DNSNAME" | debconf-set-selections 2>&1
-
-
-clear
-echo "########################################## Install rspamd, SpamAssassin, and ClamAV ###############################"
-# ohne rspamd funktioniert es nicht
-echo "Install rspamd, SpamAssassin, and ClamAV"
-echo "**********************************************"
-
-# Amavisd-new is old, rspamd is new
-apt-get -y install redis-server lsb-release
-apt-get -y install rspamd
-
-sleep 3
-echo 'servers = "127.0.0.1";' > /etc/rspamd/local.d/redis.conf
-echo "nrows = 2500;" > /etc/rspamd/local.d/history_redis.conf 
-echo "compress = true;" >> /etc/rspamd/local.d/history_redis.conf
-echo "subject_privacy = false;" >> /etc/rspamd/local.d/history_redis.conf
-systemctl restart rspamd
-
-
-#apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
-
-sleep 3
-
-systemctl stop spamassassin
-systemctl disable spamassassin
-
-freshclam
-service clamav-daemon start
-
-
-
-
-
-
-
-
 
 
 
@@ -237,6 +198,37 @@ sed -i "s|#  -o smtpd_sasl_auth_enable=yes|   -o smtpd_sasl_auth_enable=yes|g" /
 sed -i "s|#  -o smtpd_client_restrictions=\$mua_client_restrictions|#   -o smtpd_client_restrictions=permit_sasl_authenticated,reject|g" /etc/postfix/master.cf
 sleep 3
 
+
+clear
+echo "########################################## Install rspamd and ClamAV ###############################"
+# Amavisd wird nicht mehr verwendet, SpamAssassin wird auch nicht mehr benötigt.
+# ohne rspamd funktioniert der Mailserver nicht
+
+# Amavisd-new is old, rspamd is new
+apt-get -y install redis-server lsb-release
+apt-get -y install rspamd
+
+sleep 3
+# Config rspamd
+echo 'servers = "127.0.0.1";' > /etc/rspamd/local.d/redis.conf
+echo "nrows = 2500;" > /etc/rspamd/local.d/history_redis.conf 
+echo "compress = true;" >> /etc/rspamd/local.d/history_redis.conf
+echo "subject_privacy = false;" >> /etc/rspamd/local.d/history_redis.conf
+systemctl restart rspamd
+
+# install Clam-AV
+apt-get -y install clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl
+
+# postgrey whitelist blacklist filter
+apt -y install postgrey
+
+# rootkithunter rhunter installed
+apt -y install rkhunter
+
+sleep 3
+
+freshclam
+service clamav-daemon start
 fi
 
 
@@ -297,12 +289,12 @@ clear
 ########################################## Install BIND DNS Server #####################
 if ($DNSSERVER)
 then
-apt-get -y install bind9 dnsutils resolvconf
+apt-get -y install bind9 dnsutils
 apt-get -y install haveged
 
 ##### resolvconf einrichten
 echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
-resolvconf -u
+#resolvconf -u
 
 fi
 
