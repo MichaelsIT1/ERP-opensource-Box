@@ -390,7 +390,30 @@ cd ispconfig3_install/install/
 
 
 ############################################## Install ISPConfig #####################
-php -q install.php
+
+# php -q install.php
+
+
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | php -q install.php
+         de           # 
+        standard           # 
+        $   # 
+        $HOSTNAME_DNSNAME   # 
+        3306            #
+        root           # 
+        test           # 
+        dbispconfig           # 
+EOF
+
+
+
+
+
+
+
+
+
+
 
 
 sleep 5
