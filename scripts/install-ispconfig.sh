@@ -158,9 +158,9 @@ sed -i "s|;date.timezone =|date.timezone = Europe/Berlin|g" /etc/php/7.4/apache2
 
 
 clear
-echo "############################### Install Postfix, Dovecot, rkhunter #############################"
 if ($MAILSERVER)
 then
+echo "############################### Install Postfix, Dovecot, rkhunter #############################"
 apt -y install postfix postfix-mysql postfix-doc dovecot-managesieved dovecot-lmtpd dovecot-imapd dovecot-pop3d dovecot-mysql dovecot-sieve
 sleep 3
 
@@ -243,9 +243,10 @@ clear
 
 
 clear
-############################################ Install Let's Encrypt ##################################
 if ($SSL_LETSENCRYPT)
 then
+echo "############################################ Install Let's Encrypt ##################################"
+
 apt-get -y install certbot
 sleep 3
 fi
@@ -255,9 +256,9 @@ fi
 
 
 clear
-############################################## Install PureFTPd ################################################
 if ($PureFTPd)
 then
+echo "############################################## Install PureFTPd ################################################"
 apt-get -y install pure-ftpd-common pure-ftpd-mysql
 sleep 3
 
@@ -286,9 +287,9 @@ systemctl restart pure-ftpd-mysql
 fi
 
 clear
-########################################## Install BIND DNS Server #####################
 if ($DNSSERVER)
 then
+echo "########################################## Install BIND DNS Server #####################"
 apt-get -y install bind9 dnsutils
 apt-get -y install haveged
 
@@ -299,9 +300,9 @@ echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
 fi
 
 clear
-####################################### Install AWStats #######################################
 if ($AWSTATS)
 then
+echo "####################################### Install AWStats und GoAccess #######################################"
 apt-get -y install vlogger awstats geoip-database libclass-dbi-mysql-perl
 
 # GoAcces
@@ -314,24 +315,25 @@ clear
 #apt-get install build-essential autoconf automake libtool flex bison debhelper binutils jailkit
 
 clear
-###################################### Install fail2ban and UFW Firewall ######################################
-# FAIL2BAN
 if ($FAIL2BAN)
 then
+echo "###################################### Install fail2ban ######################################"
+# FAIL2BAN
 apt-get -y install fail2ban
 fi
 
-# FIREWALL
 if ($FIREWALL)
 then
+echo "###################################### Install UFW Firewall ######################################"
 apt-get -y install ufw
 fi
 
 
 clear
-######################################## Install PHPMyAdmin Database Administration Tool ##################################
 if ($PHPMYADMIN)
 then
+echo "######################################## Install PHPMyAdmin Database Administration Tool ##################################"
+
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections 2>&1
 echo "phpmyadmin phpmyadmin/app-password-confirm password 'ispconfig'" | debconf-set-selections 2>&1
 echo "phpmyadmin phpmyadmin/mysql/admin-user string root" | debconf-set-selections 2>&1
@@ -352,9 +354,10 @@ fi
 systemctl restart apache2
 
 clear
-######################################### Install RoundCube Webmail (optional) #########################
 if ($ROUNDCUBEMAIL)
 then
+echo "######################################### Install RoundCube Webmail (optional) #########################"
+
 
 echo "roundcube-core roundcube/dbconfig-install boolean true" | debconf-set-selections 2>&1
 echo "roundcube-core roundcube/database-type select mysql" | debconf-set-selections 2>&1
@@ -373,6 +376,7 @@ sed -i "s|\$config\['smtp_server'\] = '';|\$config\['smtp_server'\] = '%h';|g"  
 sed -i "s|\$config\['smtp_port'\] = 587;|\$config\['smtp_port'\] = 25;|g"  /etc/roundcube/config.inc.php
 fi
 
+# Services restart
 systemctl daemon-reload
 systemctl restart apache2
 systemctl restart mariadb
