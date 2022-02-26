@@ -415,8 +415,8 @@ IT
 $HOSTNAME_DNSNAME
 test@test.local		# END Certificate
 8080			# PORT ISPCONFIG
-test			# Admin PW ISPCONFIG
-test			# Admin PW ISPCONFIG
+test# Admin PW ISPCONFIG
+test# Admin PW ISPCONFIG
 y			# SSL to ISPConfig Webinterface
 n			# ignore DNS Check
 DE			# Start-ISPConfig-Certificate
