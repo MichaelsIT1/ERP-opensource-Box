@@ -88,38 +88,18 @@ echo "################## MARIADB installieren ##################################
 apt-get -y install mariadb-client mariadb-server dbconfig-common
 sleep 3
 
-SECURE_MYSQL=$(expect -c "
-set timeout 10
-spawn mysql_secure_installation
-expect \"Enter current password for root (enter for none):\"
-send \"\r\"
-expect \"Change the root password?\"
-send \"n\r\"
-expect \"Remove anonymous users?\"
-send \"y\r\"
-expect \"Disallow root login remotely?\"
-send \"y\r\"
-expect \"Remove test database and access to it?\"
-send \"y\r\"
-expect \"Reload privilege tables now?\"
-send \"y\r\"
-expect eof
-")
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
+                    # current root password (emtpy after installation)
+        y           # Set root password?
+        ispconfig   # new root password
+        ispconfig   # new root password
+        Y            # Remove anonymous users?
+        y           # Disallow root login remotely?
+        y           # Remove test database and access to it?
+        y           # Reload privilege tables now?
+EOF
 
-echo "$SECURE_MYSQL"
-
-#sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
-#                    # current root password (emtpy after installation)
-#        y           # Set root password?
-#        ispconfig   # new root password
-#        ispconfig   # new root password
-#        Y            # Remove anonymous users?
-#        y           # Disallow root login remotely?
-#        y           # Remove test database and access to it?
-#        y           # Reload privilege tables now?
-#EOF
-
-#mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
+mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
 
 # MariaDB-Passwort setzen / veraltet
 #sed -i "s|user     = root|user     = root\npassword = $MARIADB_PW|g" /etc/mysql/debian.cnf
@@ -414,141 +394,7 @@ cd ispconfig3_install/install/
 
 ############################################## Install ISPConfig #####################
 
- #php -q install.php
-
-
-
-ISPCONFIG_INSTALL=$(expect -c "
-set force_conservative 0  ;# set to 1 to force conservative mode even if
-                          ;# script wasn't run conservatively originally
-if {$force_conservative} {
-        set send_slow {1 .1}
-        proc send {ignore arg} {
-                sleep .1
-                exp_send -s -- $arg
-        }
-}
-
-
-set timeout -1
-spawn php -q install.php
-match_max 100000
-expect -exact "\r
-
-Select language (en,de) \[en\]: "
-send -- "de\r"
-expect -exact "de\r
-\r
-Installation mode (standard,expert) \[standard\]: "
-send -- "\r"
-expect -exact "\r
-\r
-Full qualified hostname (FQDN) of the server, eg server1.domain.tld  \[$HOSTNAME_DNSNAME\]: "
-send -- "\r"
-expect -exact "\r
-\r
-MySQL server hostname \[localhost\]: "
-send -- "\r"
-expect -exact "\r
-\r
-MySQL server port \[3306\]: "
-send -- "\r"
-expect -exact "\r
-\r
-MySQL root username \[root\]: "
-send -- "\r"
-expect -exact "\r
-\r
-MySQL root password \[\]: "
-send -- "\r"
-expect -exact "\r
-\r
-MySQL database to create \[dbispconfig\]: "
-send -- "\r"
-expect -exact "\r
-\r
-MySQL charset \[utf8\]: "
-send -- "\r"
-expect -exact "\r
-Country Name (2 letter code) \[AU\]:"
-send -- "DE\r"
-expect -exact "DE\r
-State or Province Name (full name) \[Some-State\]:"
-send -- "\r"
-expect -exact "\r
-Locality Name (eg, city) \[\]:"
-send -- "Berlin\r"
-expect -exact "Berlin\r
-Organization Name (eg, company) \[Internet Widgits Pty Ltd\]:"
-send -- "\r"
-expect -exact "\r
-Organizational Unit Name (eg, section) \[\]:"
-send -- "IT\r"
-expect -exact "IT\r
-Common Name (e.g. server FQDN or YOUR name) \[\]:"
-send -- "$HOSTNAME_DNSNAME\r"
-expect -exact "$HOSTNAME_DNSNAME\r
-Email Address \[\]:"
-send -- "test@test.de"
-expect -exact "
-send -- ""
-expect -exact "
-send -- "öoc"
-expect -exact "
-send -- ""
-expect -exact "
-send -- ""
-expect -exact "
-send -- "local\r"
-ISPConfig Port \[8080\]: "
-send -- "\r"
-expect -exact "\r
-\r
-Admin password: "
-send -- "test\r"
-expect -exact "test\r
-\r
-Re-enter admin password \[\]: "
-send -- "test\r"
-expect -exact "test\r
-\r
-Do you want a secure (SSL) connection to the ISPConfig web interface (y,n) \[y\]: "
-send -- "\r"
-expect -exact "\r
-\r
-Checking / creating certificate for $HOSTNAME_DNSNAME\r
-Using certificate path /etc/letsencrypt/live/$HOSTNAME_DNSNAME\r
-Server's public ip(s) (95.91.205.32) not found in A/AAAA records for $HOSTNAME_DNSNAME: \r
-Ignore DNS check and continue to request certificate? (y,n) \[n\]: "
-send -- "\r"
-expect -exact "\r
-Country Name (2 letter code) \[AU\]:"
-send -- "DE\r"
-expect -exact "DE\r
-State or Province Name (full name) \[Some-State\]:"
-send -- "\r"
-expect -exact "\r
-Locality Name (eg, city) \[\]:"
-send -- "Berlin\r"
-expect -exact "Berlin\r
-Organization Name (eg, company) \[Internet Widgits Pty Ltd\]:"
-send -- "\r"
-expect -exact "\r
-Organizational Unit Name (eg, section) \[\]:"
-send -- "IT\r"
-expect -exact "IT\r
-Common Name (e.g. server FQDN or YOUR name) \[\]:"
-send -- "$HOSTNAME_DNSNAME\r"
-expect -exact "$HOSTNAME_DNSNAME\r
-Email Address \[\]:"
-send -- "test@test.de\r"
-expect -exact "test@test.de\r
-Symlink ISPConfig SSL certs to Postfix? (y,n) \[y\]: "
-send -- "\r"
-expect eof
-")
-
-echo "$ISPCONFIG_INSTALL"
+ php -q install.php
 
 
 sleep 5
