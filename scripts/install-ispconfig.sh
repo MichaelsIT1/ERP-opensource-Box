@@ -412,6 +412,7 @@ fi
 if ($MAILSERVER)
 then
 echo "Rspamd: $HOSTNAME_DNSNAME:8081/rspamd/"
+echo "Passwort siehe ISPConfig -> System > Server Config > Mail"
 fi
 
 echo "MariaDB-Passwort: $MARIADB_PW"
