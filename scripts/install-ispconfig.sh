@@ -341,10 +341,10 @@ echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf
 
 apt install -y phpmyadmin
 
-# Erzeuge Benutzer fuer phpmyadmin
+# Erzeuge Benutzer fuer phpmyadmin User: pma Passwort: mypasswort
 #mysql -u root <<EOF
 #        CREATE USER 'pma'@'localhost' IDENTIFIED BY 'mypassword';
-#        GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
+#        GRANT ALL PRIVILEGES ON *.* TO 'pma'@'localhost' IDENTIFIED BY 'mypassword' WITH GRANT OPTION;
 #        FLUSH PRIVILEGES;
 #EOF
 fi
