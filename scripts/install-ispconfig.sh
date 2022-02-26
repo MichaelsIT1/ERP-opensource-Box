@@ -417,7 +417,7 @@ expect \"MySQL root username [root]:\" send \"\r\"
 expect eof
 ")
 
-
+echo "$SECURE_MYSQL"
 
 
 
