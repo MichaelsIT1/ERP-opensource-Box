@@ -411,7 +411,7 @@ fi
 
 if ($MAILSERVER)
 then
-echo "Rspamd: $HOSTNAME_DNSNAME:8081/rspamd/"
+echo "Rspamd: $IP:8081/rspamd/"
 echo "Passwort siehe ISPConfig -> System > Server Config > Mail"
 fi
 
