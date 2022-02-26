@@ -399,7 +399,7 @@ cd ispconfig3_install/install/
 
 sleep 5
 
-#clear
+clear
 echo "**************************************************************************"
 echo "ISP-Config: https://$IP:8080"
 
