@@ -395,29 +395,29 @@ cd ispconfig3_install/install/
 
 ############################################## Install ISPConfig #####################
 
-# php -q install.php
+ php -q install.php
 
 
 
-SECURE_MYSQL=$(expect -c "
-set timeout 10
-spawn php -q install.php
-expect \"Select language (en,de) [en]:\" send \"de\r\"
-expect \"Installation mode (standard,expert) [standard]: \" send \"\r\"
-expect \"Full qualified hostname (FQDN) of the server, eg server1.domain.tld  [$$HOSTNAME_DNSNAME]:\" send \"$HOSTNAME_DNSNAME\r\"
-expect \"MySQL server hostname [localhost]:\" \" send \"\r\"
-expect \"MySQL server port [3306]:\" send \"\r\"
-expect \"MySQL root username [root]:\" send \"\r\"
-expect \"MySQL root password []:\" send \"\r\"
-expect \"MySQL database to create [dbispconfig]:\" send \"\r\"
-expect \"MySQL charset [utf8]:\" send \"\r\"
-expect \"Country Name (2 letter code) [AU]:\" send \"DE\r\"
-expect \"MySQL root username [root]:\" send \"\r\"
-expect \"MySQL root username [root]:\" send \"\r\"
-expect eof
-")
+#SECURE_MYSQL=$(expect -c "
+#set timeout 10
+#spawn php -q install.php
+#expect "Select language (en,de) [en]:" send "de\r"
+#expect \"Installation mode (standard,expert) [standard]: \" send \"\r\"
+#expect \"Full qualified hostname (FQDN) of the server, eg server1.domain.tld  [$$HOSTNAME_DNSNAME]:\" send \"$HOSTNAME_DNSNAME\r\"
+#expect \"MySQL server hostname [localhost]:\" \" send \"\r\"
+#expect \"MySQL server port [3306]:\" send \"\r\"
+#expect \"MySQL root username [root]:\" send \"\r\"
+#expect \"MySQL root password []:\" send \"\r\"
+#expect \"MySQL database to create [dbispconfig]:\" send \"\r\"
+#expect \"MySQL charset [utf8]:\" send \"\r\"
+#expect \"Country Name (2 letter code) [AU]:\" send \"DE\r\"
+#expect \"MySQL root username [root]:\" send \"\r\"
+#expect \"MySQL root username [root]:\" send \"\r\"
+#expect eof
+#")
 
-echo "$SECURE_MYSQL"
+#echo "$SECURE_MYSQL"
 
 
 
