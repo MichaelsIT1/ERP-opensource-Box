@@ -397,37 +397,32 @@ cd ispconfig3_install/install/
 
 # php -q install.php
 
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | php -q install.php
-de
-standard# Installmode
-$HOSTNAME_DNSNAME#hostname FQDN
-localhost#MariaDB-Server
-3306#MariaDB-Port
-root#MariaDB-User
-password#MariaDB-PW
-dbispconfig#Databasename
-utf8#UTF8
-DE# Start-SMTP-Certificate
-Some-State
-Berlin
-Internet Widgits Pty Ltd
-IT
-$HOSTNAME_DNSNAME
-test@test.local# END Certificate
-8080# PORT ISPCONFIG
-test# Admin PW ISPCONFIG
-test# Admin PW ISPCONFIG
-y# SSL to ISPConfig Webinterface
-n# ignore DNS Check
-DE# Start-ISPConfig-Certificate
-Some-State
-Berlin
-Internet Widgits Pty Ltd
-IT
-$HOSTNAME_DNSNAME
-test@test.local# END Certificate
-y# Symlink ISPConfig SSL certs to Postfix?
-EOF
+
+
+SECURE_MYSQL=$(expect -c "
+set timeout 10
+spawn php -q install.php
+expect \"Select language (en,de) [en]:\" send \"de\r\"
+expect \"Installation mode (standard,expert) [standard]: \" send \"\r\"
+expect \"Full qualified hostname (FQDN) of the server, eg server1.domain.tld  [$$HOSTNAME_DNSNAME]:\" send \"$HOSTNAME_DNSNAME\r\"
+expect \"MySQL server hostname [localhost]:\" \" send \"\r\"
+expect \"MySQL server port [3306]:\" send \"\r\"
+expect \"MySQL root username [root]:\" send \"\r\"
+expect \"MySQL root password []:\" send \"\r\"
+expect \"MySQL database to create [dbispconfig]:\" send \"\r\"
+expect \"MySQL charset [utf8]:\" send \"\r\"
+expect \"Country Name (2 letter code) [AU]:\" send \"DE\r\"
+expect \"MySQL root username [root]:\" send \"\r\"
+expect \"MySQL root username [root]:\" send \"\r\"
+expect eof
+")
+
+
+
+
+
+
+
 
 
 
