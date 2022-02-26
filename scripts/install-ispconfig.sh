@@ -8,7 +8,6 @@
 # System-Varibale
 MAILSERVER=true         #Postfix und Dovecot
 ROUNDCUBEMAIL=true
-VIRENSCANNER=true
 SSL_LETSENCRYPT=false
 PureFTPd=false
 AWSTATS=true
@@ -183,6 +182,46 @@ echo "postfix postfix/main_mailer_type select Internet Site" | debconf-set-selec
 echo "postfix postfix/mailname string $HOSTNAME_DNSNAME" | debconf-set-selections 2>&1
 
 
+clear
+echo "########################################## Install rspamd, SpamAssassin, and ClamAV ###############################"
+# ohne rspamd funktioniert es nicht
+echo "Install rspamd, SpamAssassin, and ClamAV"
+echo "**********************************************"
+
+# Amavisd-new is old, rspamd is new
+apt-get -y install redis-server lsb-release
+apt-get -y install rspamd
+
+sleep 3
+echo 'servers = "127.0.0.1";' > /etc/rspamd/local.d/redis.conf
+echo "nrows = 2500;" > /etc/rspamd/local.d/history_redis.conf 
+echo "compress = true;" >> /etc/rspamd/local.d/history_redis.conf
+echo "subject_privacy = false;" >> /etc/rspamd/local.d/history_redis.conf
+systemctl restart rspamd
+
+
+#apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
+
+sleep 3
+
+systemctl stop spamassassin
+systemctl disable spamassassin
+
+freshclam
+service clamav-daemon start
+
+
+
+
+
+
+
+
+
+
+
+
+
 ################## POSTFIX Mailserver konfiguration ##############################################
 sed -i "s|#submission inet n       -       y       -       -       smtpd|submission inet n       -       y       -       -       smtpd|g" /etc/postfix/master.cf
 sed -i "s|#  -o syslog_name=postfix/submission|   -o syslog_name=postfix/submission|g" /etc/postfix/master.cf
@@ -208,35 +247,6 @@ sleep 3
 
 
 clear
-echo "########################################## Install rspamd, SpamAssassin, and ClamAV ###############################"
-if ($VIRENSCANNER)
-then
-
-echo "Install rspamd, SpamAssassin, and ClamAV"
-echo "**********************************************"
-
-# Amavisd-new is old, rspamd is new
-apt-get -y install redis-server lsb-release
-apt-get -y install rspamd
-
-sleep 3
-echo 'servers = "127.0.0.1";' > /etc/rspamd/local.d/redis.conf
-echo "nrows = 2500;" > /etc/rspamd/local.d/history_redis.conf 
-echo "compress = true;" >> /etc/rspamd/local.d/history_redis.conf
-echo "subject_privacy = false;" >> /etc/rspamd/local.d/history_redis.conf
-systemctl restart rspamd
-
-
-#apt-get -y install amavisd-new spamassassin clamav clamav-daemon unzip bzip2 arj nomarch lzop cabextract p7zip p7zip-full unrar lrzip apt-listchanges libnet-ldap-perl libauthen-sasl-perl clamav-docs daemon libio-string-perl libio-socket-ssl-perl libnet-ident-perl zip libnet-dns-perl libdbd-mysql-perl postgrey
-
-sleep 3
-
-systemctl stop spamassassin
-systemctl disable spamassassin
-
-freshclam
-service clamav-daemon start
-fi
 
 
 
