@@ -2,6 +2,7 @@
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
 # getestet auf Debian 11 im LXC Container
+# https://www.howtoforge.com/replacing-amavisd-with-rspamd-in-ispconfig/
 # Entwicklerseite ISP-Config: https://www.ispconfig.org / https://www.ispconfig.de
 
 # System-Varibale
