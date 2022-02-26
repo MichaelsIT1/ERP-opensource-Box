@@ -207,7 +207,7 @@ sleep 3
 
 
 clear
-########################################## Install Amavisd-new, SpamAssassin, and ClamAV ###############################
+echo "########################################## Install rspamd, SpamAssassin, and ClamAV ###############################"
 if ($VIRENSCANNER)
 then
 
