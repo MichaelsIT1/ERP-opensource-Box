@@ -57,8 +57,8 @@ sleep 3
 
 echo "Install Basics"
 echo "**********************************"
-apt-get -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip binutils vim sudo
-apt get -y install ssh openssh-server nano vim-nox lsb-release apt-transport-https ca-certificates wget git gnupg software-properties-common recode
+apt -y install sudo curl patch unzip bzip2 p7zip p7zip-full unrar lrzip binutils vim sudo
+apt -y install ssh openssh-server vim-nox lsb-release apt-transport-https ca-certificates wget git gnupg software-properties-common recode
 sleep 30
 
 
