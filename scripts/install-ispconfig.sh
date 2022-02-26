@@ -88,19 +88,38 @@ echo "################## MARIADB installieren ##################################
 apt-get -y install mariadb-client mariadb-server dbconfig-common
 sleep 3
 
+SECURE_MYSQL=$(expect -c "
+set timeout 10
+spawn mysql_secure_installation
+expect \"Enter current password for root (enter for none):\"
+send \"\r\"
+expect \"Change the root password?\"
+send \"n\r\"
+expect \"Remove anonymous users?\"
+send \"y\r\"
+expect \"Disallow root login remotely?\"
+send \"y\r\"
+expect \"Remove test database and access to it?\"
+send \"y\r\"
+expect \"Reload privilege tables now?\"
+send \"y\r\"
+expect eof
+")
 
-sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
-                    # current root password (emtpy after installation)
-        y           # Set root password?
-        ispconfig   # new root password
-        ispconfig   # new root password
-        Y            # Remove anonymous users?
-        y           # Disallow root login remotely?
-        y           # Remove test database and access to it?
-        y           # Reload privilege tables now?
-EOF
+echo "$SECURE_MYSQL"
 
-mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
+#sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | mysql_secure_installation
+#                    # current root password (emtpy after installation)
+#        y           # Set root password?
+#        ispconfig   # new root password
+#        ispconfig   # new root password
+#        Y            # Remove anonymous users?
+#        y           # Disallow root login remotely?
+#        y           # Remove test database and access to it?
+#        y           # Reload privilege tables now?
+#EOF
+
+#mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$MARIADB_PW');"
 
 # MariaDB-Passwort setzen / veraltet
 #sed -i "s|user     = root|user     = root\npassword = $MARIADB_PW|g" /etc/mysql/debian.cnf
