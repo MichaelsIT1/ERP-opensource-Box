@@ -68,41 +68,7 @@ then
 wget https://download.nextcloud.com/server/releases/nextcloud-23.0.2.zip
 unzip nextcloud*
 
-sleep 3
 
-curl http://$IP/nextcloud/index.php
-rm config/CAN_INSTALL
-
-sleep 3
-
-
-sed -i "s|);||g" /var/www/html/nextcloud/config/config.php
-
-#config/config.php erzeugen
-tee -a /var/www/html/nextcloud/config/config.php >/dev/null <<EOF
-  'passwordsalt' => 'n6hcplI/UzRHP9kRLM1gL4ISHQcEY0',
-  'secret' => 'f1q9NmHPPDxriS8D0zBE1mdi1NkvsEZT5xUHrjnblaImuoDi',
-  'trusted_domains' =>
-  array (
-    0 => '$IP',
-  ),
-  'datadirectory' => '/var/www/html/nextcloud/nextcloud/data',
-  'dbtype' => 'mysql',
-  'version' => '23.0.2.1',
-  'overwrite.cli.url' => 'http://192.168.188.89/nextcloud/nextcloud',
-  'dbname' => 'nextcloud',
-  'dbhost' => 'localhost',
-  'dbport' => '',
-  'dbtableprefix' => 'oc_',
-  'mysql.utf8mb4' => true,
-  'dbuser' => 'nextcloud',
-  'dbpassword' => 'nextcloud',
-  'default_language' => 'de',
-  'default_locale' => 'de_DE',
-  'default_phone_region' => 'DE',
-  'installed' => true,
-);
-EOF
 
 fi
 
