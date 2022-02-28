@@ -4,8 +4,9 @@
 # getestet auf Debian 11 im LXC Container
 
 # System-Varibale
-OFFLINEINSTALL=false
 ONLINEINSTALL=true
+OFFLINEINSTALL=false
+
 
 
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
@@ -67,16 +68,7 @@ if ($OFFLINEINSTALL)
 then
 wget https://download.nextcloud.com/server/releases/nextcloud-23.0.2.zip
 unzip nextcloud*
-
-
-
 fi
-
-
-
-
-
-
 
 
 echo "Zugriffsrechte werden gesetzt"
@@ -90,5 +82,5 @@ clear
 
 echo "*******************************************************************************************"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/setup-nextcloud.php"
-echo "Zugangsdaten: Benutzer: nextcloud, Passwort: nextcloud"
+echo "Zugangsdaten: Benutzer: nextcloud, Passwort: nextcloud, Datenbank: nextcloud, DB-PW: nextcloud, DB-Server: localhost"
 echo "**************************************************************************"
