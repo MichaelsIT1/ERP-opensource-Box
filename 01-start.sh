@@ -25,6 +25,7 @@ MAIN MENU
 6) i-doit
 7) checkMK-Raw
 8) Nextcloud
+9) motioneye
 -----------------------------------------
 10) docker Portainer installieren
 11) Debian 11 Container
@@ -77,6 +78,12 @@ Choose an option: "
         ;;
         
     8)  CNAME="nextcloud-test"
+        COS=$DEBIAN11
+        create_container
+        install_nextcloud
+        ;;
+        
+    9) CNAME="motioneye-test"
         COS=$DEBIAN11
         create_container
         install_nextcloud
@@ -179,6 +186,11 @@ pct exec $CID -- bash -c "sh /root/install-checkmk-raw.sh"
 install_nextcloud() {
 pct push $CID scripts/install-nextcloud.sh /root/install-nextcloud.sh
 pct exec $CID -- bash -c "sh /root/install-nextcloud.sh"
+}
+
+install_motioneye() {
+pct push $CID scripts/install-motioneye.sh /root/install-motioneye.sh
+pct exec $CID -- bash -c "sh /root/install-motioneye.sh"
 }
 
 # main program
