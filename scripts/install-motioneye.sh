@@ -26,13 +26,15 @@ systemctl stop motion
 systemctl disable motion
 
 apt-get install python2 -y
+sleep 5
 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
+sleep 5
 python2 get-pip.py
- 
+sleep 5
 apt-get install python-dev-is-python2 python-setuptools curl libssl-dev libcurl4-openssl-dev libjpeg-dev zlib1g-dev libffi-dev libzbar-dev libzbar0 -y
- 
+sleep 5
 pip install motioneye
- 
+sleep 5
 mkdir -p /etc/motioneye
 cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
  
