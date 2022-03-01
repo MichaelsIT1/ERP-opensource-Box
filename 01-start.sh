@@ -86,7 +86,7 @@ Choose an option: "
     9) CNAME="motioneye-test"
         COS=$DEBIAN11
         create_container
-        install_nextcloud
+        install_motioneye
         ;;
         
         
