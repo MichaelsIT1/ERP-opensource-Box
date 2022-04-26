@@ -21,19 +21,20 @@ echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
 
-apt-get install motion ffmpeg v4l-utils curl -y
-systemctl stop motion
-systemctl disable motion
-
-apt-get install python2 -y
+apt install curl motion ffmpeg v4l-utils -y
+apt install python2 -y
 sleep 5
 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 sleep 5
 python2 get-pip.py
 sleep 5
-apt-get install python-dev-is-python2 python-setuptools curl libssl-dev libcurl4-openssl-dev libjpeg-dev zlib1g-dev libffi-dev libzbar-dev libzbar0 -y
+apt install libffi-dev libzbar-dev libzbar0 -y
 sleep 5
-usr/local/bin/pip install motioneye
+apt install python2-dev libssl-dev libcurl4-openssl-dev libjpeg-dev -y
+sleep 5
+apt install python-pil -y
+sleep 5
+usr/local/bin/pip2 install motioneye
 sleep 5
 mkdir -p /etc/motioneye
 cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
@@ -45,7 +46,7 @@ systemctl daemon-reload
 systemctl enable motioneye
 systemctl start motioneye
  
-usr/local/bin/pip install motioneye --upgrade
+usr/local/bin/pip2 install motioneye --upgrade
 
 echo "*******************************************************************************************"
 echo "motioneye erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
