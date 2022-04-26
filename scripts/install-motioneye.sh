@@ -48,7 +48,9 @@ systemctl start motioneye
  
 usr/local/bin/pip2 install motioneye --upgrade
 
+clear
 echo "*******************************************************************************************"
 echo "motioneye erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/TEST/"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:8765"
+echo "Login: username: admin passwort: "
 echo "**************************************************************************"
