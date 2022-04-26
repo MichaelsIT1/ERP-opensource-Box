@@ -21,7 +21,7 @@ echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
 
-apt-get install motion ffmpeg v4l-utils -y
+apt-get install motion ffmpeg v4l-utils curl -y
 systemctl stop motion
 systemctl disable motion
 
@@ -45,4 +45,4 @@ systemctl daemon-reload
 systemctl enable motioneye
 systemctl start motioneye
  
-pip install motioneye --upgrade
+usr/local/bin/pip install motioneye --upgrade
