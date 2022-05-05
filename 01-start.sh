@@ -4,7 +4,6 @@
 # Version 0.1
 
 # Variablen
-CID=999                                                     #Container-ID
 CPW=12345                                                   #Container root-Passwort
 
 # Container Images
@@ -29,7 +28,6 @@ MAIN MENU
 -----------------------------------------
 10) docker Portainer installieren
 11) Debian 11 Container
-19) Container 999 löschen
 20) lokale Images
 0) Exit
 Choose an option: "
@@ -37,54 +35,63 @@ Choose an option: "
     case $ans in
     1)  CNAME="xentral-test"
         COS=$DEBIAN11
+        CID=900
         create_container
         install_xentral
         ;;
         
     2)  CNAME="open3a-test"
         COS=$DEBIAN11
+        CID=901
         create_container
         install_open3a
         ;;
         
     3)  CNAME="metafresh-test"
         COS=$UBUNTU # only Ubuntu
+        CID=902
         create_container
         install_metafresh
         ;;        
         
     4)  CNAME="ispconfig-test"
         COS=$DEBIAN11
+        CID=903
         create_container
         install_ispconfig
         ;;
         
     5)  CNAME="itop-test"
         COS=$DEBIAN11
+        CID=904
         create_container
         install_itop
         ;;
         
     6)  CNAME="i-doit-test"
         COS=$DEBIAN11
+        CID=905
         create_container
         install_idoit
         ;;
         
     7)  CNAME="checmk-raw"
         COS=$DEBIAN11
+        CID=906
         create_container
         install_checkmk
         ;;
         
     8)  CNAME="nextcloud-test"
         COS=$DEBIAN11
+        CID=907
         create_container
         install_nextcloud
         ;;
         
     9) CNAME="motioneye-test"
         COS=$DEBIAN11
+        CID=908
         create_container
         install_motioneye
         ;;
@@ -92,12 +99,14 @@ Choose an option: "
         
     10) CNAME="portainer-test"
         COS=$UBUNTU
+        CID=909
         create_container
         install_portainer
         ;;
         
     11) CNAME="debian11-test"
         COS=$DEBIAN11
+        CID=910
         create_container
         install_debian
         ;;
