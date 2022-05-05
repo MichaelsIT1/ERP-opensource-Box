@@ -23,5 +23,3 @@ Als Beispiel Nextcloud. Nextcloud kann mit dem Script installiert werden. Es wer
 
 Die eizelne Rechte liegen bei den jeweiligen Firmen/Entwickler.
 Ich bin nicht der Entwickler der einzelnen Software.
-
-Xentral opensource installieren
