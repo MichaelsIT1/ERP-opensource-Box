@@ -137,7 +137,7 @@ pct create $CID $COS \
         -password $CPW \
         -rootfs local-zfs:32 \
         -cores 2 \
-        -memory 4096 \
+        -memory 2048 \
         -net0 name=eth0,bridge=vmbr0,ip=dhcp \
         -unprivileged 1 \
         -features nesting=1,keyctl=1
