@@ -18,7 +18,6 @@ menu() {
 MAIN MENU
 1) xentral opensource
 2) open3a
-3) metafresh- Docker
 4) ISPConfig
 5) iTop
 6) i-doit
