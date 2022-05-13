@@ -73,6 +73,7 @@ crontab -u www-data cron_bkp
 rm cron_bkp
 clear
 echo "*******************************************************************************************"
-echo "xentral openSource erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
+echo "Server wurde für die Installation von xentral openSource vorbereitet."
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/installer.php"
+echo "Datenbank-Name: xentral, Datenbankbenutzer: xentral, Datenbankpasswort: xentral"
 echo "**************************************************************************"
