@@ -38,6 +38,7 @@ Der Anbieter setzt auf das Cloudmodell.
 
 Webseite: https://xentral.com/de/
 
+----------------------------------------------------------------------------------------------------------------------------
 **open3a Rechnungsprogramm**
 
 Das Installationsskript basiert weitgehend auf diese Anleitung:
@@ -45,6 +46,7 @@ https://www.open3a.de/page-Installation/WebserverSetup
 
 Webseite: https://www.open3a.de
 
+----------------------------------------------------------------------------------------------------------------------------
 **ISPConfig TESTVERSION**
 
 Das Installationsskript bereitet den Server für das eigentliche Installationskript vor.
