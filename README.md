@@ -1,10 +1,12 @@
+# Dies ist ein privates Projekt.
 # ERP-opensource-Box
 
 Mit dieser Toolbox kann von Proxmox als Host spezielle LXC-Container installiert werden.
+Diese Toolbox soll Existensgründer diverser Programme eine einfache Installation bieten.
 
-Folgende Software kann installiert werden. Hinweis: Die LXC-Container werden ab ID 900 installiert.
+Folgende Software können installiert werden. Hinweis: Die LXC-Container werden ab ID 900 installiert.
 
-1) xentral opensource
+1) xentral ERP opensource
 2) open3a
 4) ISPConfig
 5) iTop
@@ -23,3 +25,13 @@ Als Beispiel Nextcloud. Nextcloud kann mit dem Script installiert werden. Es wer
 
 Die eizelne Rechte liegen bei den jeweiligen Firmen/Entwickler.
 Ich bin nicht der Entwickler der einzelnen Software.
+
+# DETAILS
+# xentral ERP opensource
+Das Installationsscript beruht auf diese Installationsanleitung: 
+https://help.xentral.com/hc/de/articles/360017377620-Installation-von-xentral-ab-Version-19-1
+So wie es Aussieht wird die opensource Version nicht mehr weiter entwickelt.
+# Daher empfehle ich diese Version nur zum Testen zu verwenden.
+Der Anbieter setzt auf das Cloudmodell.
+Webseite: https://xentral.com/de/
+
