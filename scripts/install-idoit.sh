@@ -176,7 +176,7 @@ systemctl restart apache2
 
 clear
 echo "*******************************************************************************************"
-echo "iTop erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
+echo "Server wurde vorbereitet. Bitte ueber das Web das Setup starten"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/i-doit"
 echo "Zugangsdaten: Host: localhost, Benutzer: idoit, Passwort: idoit, Datenbank: idoit, Passwort: idoit"
 echo "**************************************************************************"
