@@ -55,9 +55,7 @@ Ich empfehle dieses nur zum Testen.
 **Für eine produktive Umgebung würde ich dieses Skript nehmen: https://www.howtoforge.com/ispconfig-autoinstall-debian-ubuntu/**
 
 Webseiten: https://www.ispconfig.org, https://www.ispconfig.de
-
 --------------------------------------------------------------------------------------------------------------------------------
---
 **iTop CMDB + Ticketsystem**
 
 iTop ist ein CMDB und Ticketsystem.
