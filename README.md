@@ -27,11 +27,11 @@ Die eizelne Rechte liegen bei den jeweiligen Firmen/Entwickler.
 Ich bin nicht der Entwickler der einzelnen Software.
 
 # DETAILS
-# xentral ERP opensource
+# xentral ERP opensource DEMO
 Das Installationsscript beruht auf diese Installationsanleitung: 
 https://help.xentral.com/hc/de/articles/360017377620-Installation-von-xentral-ab-Version-19-1
 So wie es Aussieht wird die opensource Version nicht mehr weiter entwickelt.
-# Daher empfehle ich diese Version nur zum Testen zu verwenden.
+Daher empfehle ich diese Version nur zum Testen zu verwenden.
 Der Anbieter setzt auf das Cloudmodell.
 Webseite: https://xentral.com/de/
 
