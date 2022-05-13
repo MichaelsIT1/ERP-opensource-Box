@@ -179,4 +179,5 @@ echo "**************************************************************************
 echo "Server wurde vorbereitet. Bitte ueber das Web das Setup starten"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/i-doit"
 echo "Zugangsdaten: Host: localhost, Benutzer: idoit, Passwort: idoit, Datenbank: idoit, Passwort: idoit"
+echo "login: User: admin, Passwort: admin"
 echo "**************************************************************************"
