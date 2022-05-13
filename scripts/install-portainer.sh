@@ -1,5 +1,6 @@
 #!/bin/sh
 # Status: Alpha
+# DOCKER
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
 # getestet auf Ubuntu im LXC Container
 # https://docs.portainer.io/v/ce-2.9/start/install/server/docker/linux
