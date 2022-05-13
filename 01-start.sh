@@ -42,7 +42,7 @@ Choose an option: "
         install_xentral
         ;;
         
-    2)  CNAME="open3a-test"
+    2)  CNAME="open3a"
         COS=$DEBIAN11
         CID=901
         create_container
@@ -56,14 +56,14 @@ Choose an option: "
         install_ispconfig
         ;;
         
-    5)  CNAME="itop-test"
+    5)  CNAME="itop"
         COS=$DEBIAN11
         CID=904
         create_container
         install_itop
         ;;
         
-    6)  CNAME="i-doit-test"
+    6)  CNAME="i-doit"
         COS=$DEBIAN11
         CID=905
         create_container
@@ -84,7 +84,7 @@ Choose an option: "
         install_nextcloud
         ;;
         
-    9) CNAME="motioneye-test"
+    9) CNAME="motioneye"
         COS=$DEBIAN11
         CID=908
         create_container
@@ -93,7 +93,7 @@ Choose an option: "
         
         
    
-     20) CNAME="docker-portainer-test"
+     20) CNAME="docker-portainer"
         COS=$UBUNTU
         CID=909
         create_container
@@ -107,7 +107,7 @@ Choose an option: "
         install_metafresh
         ;;        
     
-    50) CNAME="debian11-test"
+    50) CNAME="debian11"
         COS=$DEBIAN11
         CID=910
         create_container
