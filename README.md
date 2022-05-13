@@ -6,14 +6,14 @@ Diese Toolbox soll Existensgründer diverser Programme eine einfache Installatio
 
 Folgende Software können installiert werden. Hinweis: Die LXC-Container werden ab ID 900 installiert.
 
-1) xentral ERP opensource
-2) open3a
-4) ISPConfig
-5) iTop
-6) i-doit
-7) checkMK-Raw
-8) Nextcloud
-9) motioneye
+1) xentral opensource (ERP)
+2) open3a (Rechnungs­programm)
+4) ISPConfig (Hosting und Mailserver)
+5) iTop (CMDB + Ticketsystem)
+6) i-doit (CMDB)
+7) checkMK-Raw (Netzwerkmonitoring)
+8) Nextcloud (Zusammenarbeit)
+9) motioneye (Kamerazentrale)
 -----------------------------------------
 10) docker Portainer installieren
 11) Debian 11 Container
