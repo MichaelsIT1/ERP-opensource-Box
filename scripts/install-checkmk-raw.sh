@@ -34,8 +34,8 @@ omd start TEST
 
 systemctl restart apache2
 
-clear
 echo "*******************************************************************************************"
 echo "checkmk raw erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/TEST/"
+echo "Bitte notieren Sie sich das Passwort für den Benutzer cmkadmin"
 echo "**************************************************************************"
