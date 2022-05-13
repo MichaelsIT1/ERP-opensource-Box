@@ -100,7 +100,7 @@ Choose an option: "
         install_portainer
         ;;
         
-    21)  CNAME="metafresh-test"
+    21)  CNAME="metafresh-docker-test"
         COS=$UBUNTU # only Ubuntu
         CID=902
         create_container
