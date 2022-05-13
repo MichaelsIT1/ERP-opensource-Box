@@ -174,6 +174,7 @@ chmod 774 controller *.sh setup/*.sh
 
 systemctl restart apache2
 
+clear
 echo "*******************************************************************************************"
 echo "iTop erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/i-doit"
