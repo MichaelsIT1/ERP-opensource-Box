@@ -28,15 +28,28 @@ Ich bin nicht der Entwickler der einzelnen Software.
 
 # DETAILS
 **xentral ERP opensource DEMO**
-Das Installationsscript beruht auf diese Installationsanleitung: 
+
+Das Installationsscript beruht auf diese Installationsanleitung:
 https://help.xentral.com/hc/de/articles/360017377620-Installation-von-xentral-ab-Version-19-1
+
 So wie es Aussieht wird die opensource Version nicht mehr weiter entwickelt.
 Daher empfehle ich diese Version nur zum Testen zu verwenden.
 Der Anbieter setzt auf das Cloudmodell.
+
 Webseite: https://xentral.com/de/
 
 **open3a Rechnungsprogramm**
+
 Das Installationsskript basiert weitgehend auf diese Anleitung:
 https://www.open3a.de/page-Installation/WebserverSetup
+
 Webseite: https://www.open3a.de
+
+**ISPConfig TESTVERSION**
+
+Das Installationsskript bereitet den Server für das eigentliche Installationskript vor.
+Ich empfehle dieses nur zum Testen.
+Für eine produktive Umgebung würde ich dieses Skript nehmen: https://www.howtoforge.com/ispconfig-autoinstall-debian-ubuntu/
+
+Webseiten: https://www.ispconfig.org, https://www.ispconfig.de
 
