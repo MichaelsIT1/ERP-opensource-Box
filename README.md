@@ -27,7 +27,7 @@ Die eizelne Rechte liegen bei den jeweiligen Firmen/Entwickler.
 Ich bin nicht der Entwickler der einzelnen Software.
 
 # DETAILS
-**xentral ERP opensource DEMO**
+**xentral ERP opensource TESTVERSION**
 
 Das Installationsscript beruht auf diese Installationsanleitung:
 https://help.xentral.com/hc/de/articles/360017377620-Installation-von-xentral-ab-Version-19-1
@@ -48,8 +48,11 @@ Webseite: https://www.open3a.de
 **ISPConfig TESTVERSION**
 
 Das Installationsskript bereitet den Server für das eigentliche Installationskript vor.
+https://www.howtoforge.com/perfect-server-debian-10-buster-apache-bind-dovecot-ispconfig-3-1/
+
 Ich empfehle dieses nur zum Testen.
-Für eine produktive Umgebung würde ich dieses Skript nehmen: https://www.howtoforge.com/ispconfig-autoinstall-debian-ubuntu/
+
+**Für eine produktive Umgebung würde ich dieses Skript nehmen: https://www.howtoforge.com/ispconfig-autoinstall-debian-ubuntu/**
 
 Webseiten: https://www.ispconfig.org, https://www.ispconfig.de
 
