@@ -70,7 +70,7 @@ Webseite: https://www.combodo.com
 
 i-doit ist ein CMDB.
 
-Das Installationsskript basiert weitgehend auf diese Anleitung:
+Das Installationsskript basiert auf diese Anleitung:
 https://kb.i-doit.com/pages/viewpage.action?pageId=10223831
 
 Webseite: https://www.i-doit.org
