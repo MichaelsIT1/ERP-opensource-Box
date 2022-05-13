@@ -64,3 +64,13 @@ Webseiten: https://www.ispconfig.org, https://www.ispconfig.de
 iTop ist ein CMDB und Ticketsystem.
 
 Webseite: https://www.combodo.com
+
+--------------------------------------------------------------------------------------------------------------------------------
+**i-doit CMDB**
+
+i-doit ist ein CMDB.
+
+Das Installationsskript basiert weitgehend auf diese Anleitung:
+https://kb.i-doit.com/pages/viewpage.action?pageId=10223831
+
+Webseite: https://www.i-doit.org
