@@ -18,6 +18,7 @@ menu() {
 MAIN MENU
 1) xentral opensource
 2) open3a
+3) metafresh-docker
 4) ISPConfig
 5) iTop
 6) i-doit
@@ -26,6 +27,7 @@ MAIN MENU
 9) motioneye
 -----------------------------------------
 10) docker Portainer installieren
+20) metafresh - docker
 11) Debian 11 Container
 20) lokale Images
 0) Exit
