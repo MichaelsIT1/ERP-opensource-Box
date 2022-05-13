@@ -18,7 +18,7 @@ menu() {
 MAIN MENU
 1) xentral opensource
 2) open3a
-3) metafresh-docker
+3)
 4) ISPConfig
 5) iTop
 6) i-doit
@@ -26,10 +26,11 @@ MAIN MENU
 8) Nextcloud
 9) motioneye
 -----------------------------------------
-10) docker Portainer installieren
+10) docker Portainer
 20) metafresh - docker
-11) Debian 11 Container
-20) lokale Images
+-----------------------------------------
+50) Debian 11 Container
+90) lokale Images
 0) Exit
 Choose an option: "
     read -r ans
@@ -47,13 +48,6 @@ Choose an option: "
         create_container
         install_open3a
         ;;
-        
-    3)  CNAME="metafresh-test"
-        COS=$UBUNTU # only Ubuntu
-        CID=902
-        create_container
-        install_metafresh
-        ;;        
         
     4)  CNAME="ispconfig-test"
         COS=$DEBIAN11
@@ -105,17 +99,27 @@ Choose an option: "
         install_portainer
         ;;
         
-    11) CNAME="debian11-test"
+    19) pct stop 999 && pct destroy 999
+        ;;
+    
+    
+        
+    20)  CNAME="metafresh-test"
+        COS=$UBUNTU # only Ubuntu
+        CID=902
+        create_container
+        install_metafresh
+        ;;        
+    
+    50) CNAME="debian11-test"
         COS=$DEBIAN11
         CID=910
         create_container
         install_debian
         ;;
 
-    19) pct stop 999 && pct destroy 999
-        ;;
     
-    20) pveam list local
+    99) pveam list local
         ;;
                 
     0)
