@@ -26,8 +26,8 @@ MAIN MENU
 8) Nextcloud
 9) motioneye
 -----------------------------------------
-10) docker Portainer
-20) metafresh - docker
+20) docker Portainer
+21) metafresh - docker
 -----------------------------------------
 50) Debian 11 Container
 90) lokale Images
@@ -92,19 +92,15 @@ Choose an option: "
         ;;
         
         
-    10) CNAME="portainer-test"
+   
+     20) CNAME="docker-portainer-test"
         COS=$UBUNTU
         CID=909
         create_container
         install_portainer
         ;;
         
-    19) pct stop 999 && pct destroy 999
-        ;;
-    
-    
-        
-    20)  CNAME="metafresh-test"
+    21)  CNAME="metafresh-test"
         COS=$UBUNTU # only Ubuntu
         CID=902
         create_container
