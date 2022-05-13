@@ -16,18 +16,18 @@ menu() {
     clear
     echo "
 MAIN MENU
-1) xentral opensource
-2) open3a
+1) xentral opensource (ERP)
+2) open3a (Rechnungsprogramm)
 3)
-4) ISPConfig
-5) iTop
-6) i-doit
-7) checkMK-Raw
-8) Nextcloud
-9) motioneye
+4) ISPConfig (Webseitenhosting/Mailserver) 
+5) iTop (CMDB)
+6) i-doit (CMDB)
+7) checkMK-Raw (LAN-Monitoring)
+8) Nextcloud (Zusammenarbeit)
+9) motioneye (Videokamerazentrale)
 -----------------------------------------
 20) docker Portainer
-21) metafresh - docker
+21) metafresh - docker (ERP)
 -----------------------------------------
 50) Debian 11 Container
 99) lokale Images
