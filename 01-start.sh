@@ -16,7 +16,7 @@ menu() {
     clear
     echo "
 MAIN MENU
-1) xentral opensource (ERP)
+1) Invoice Ninja (ERP) offen
 2) open3a (Rechnungsprogramm)
 3)
 4) ISPConfig (Webseitenhosting/Mailserver) 
@@ -25,21 +25,27 @@ MAIN MENU
 7) checkMK-Raw (LAN-Monitoring)
 8) Nextcloud (Zusammenarbeit)
 9) motioneye (Videokamerazentrale)
+
+----------------------------------------
+DOCKER Software (bitte setzen: nesting=1,keyctl=1)
+20) Portainer
+21) metafresh (ERP)
+
 -----------------------------------------
-20) docker Portainer
-21) metafresh - docker (ERP)
------------------------------------------
+outdated Software
+30) xentral opensource (ERP)
+
 50) Debian 11 Container
 99) lokale Images
 0) Exit
 Choose an option: "
     read -r ans
     case $ans in
-    1)  CNAME="xentral-test"
+    1)  CNAME="invoice-ninja"
         COS=$DEBIAN11
         CID=900
         create_container
-        install_xentral
+        install_ninja
         ;;
         
     2)  CNAME="open3a"
@@ -106,6 +112,14 @@ Choose an option: "
         create_container
         install_metafresh
         ;;        
+    
+    30)  CNAME="xentral-test"
+        COS=$DEBIAN11
+        CID=900
+        create_container
+        install_xentral
+        ;;
+    
     
     50) CNAME="debian11"
         COS=$DEBIAN11
@@ -201,6 +215,11 @@ pct exec $CID -- bash -c "sh /root/install-nextcloud.sh"
 install_motioneye() {
 pct push $CID scripts/install-motioneye.sh /root/install-motioneye.sh
 pct exec $CID -- bash -c "sh /root/install-motioneye.sh"
+}
+
+install_ninja() {
+pct push $CID scripts/install-motioneye.sh /root/install-ninja.sh
+pct exec $CID -- bash -c "sh /root/install-ninja.sh"
 }
 
 # main program
