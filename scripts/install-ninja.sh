@@ -7,14 +7,14 @@
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
 clear
-echo "i-doit installieren"
+echo "Invoice Ninja installieren"
 echo "*******************************"
 echo
 echo "Zeitzone auf Europe/Berlin gesetzt"
 echo "**********************************"
 timedatectl set-timezone Europe/Berlin 
 echo
-echo "Betriebssystem debian wird aktualisiert"
+echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
