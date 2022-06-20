@@ -32,9 +32,6 @@ DOCKER Software (bitte setzen: nesting=1,keyctl=1)
 21) metafresh (ERP)
 
 -----------------------------------------
-outdated Software
-30) xentral opensource (ERP)
-
 50) Debian 11 Container
 99) lokale Images
 0) Exit
