@@ -6,7 +6,7 @@ Diese Toolbox soll Existensgründer diverser Programme eine einfache Installatio
 
 Folgende Software können installiert werden. Hinweis: Die LXC-Container werden ab ID 900 installiert.
 
-1) xentral opensource (ERP)
+1) 
 2) open3a (Rechnungs­programm)
 4) ISPConfig (Hosting und Mailserver)
 5) iTop (CMDB + Ticketsystem)
@@ -27,18 +27,7 @@ Die eizelne Rechte liegen bei den jeweiligen Firmen/Entwickler.
 Ich bin nicht der Entwickler der einzelnen Software.
 
 # DETAILS
-**xentral ERP opensource TESTVERSION**
 
-Das Installationsscript beruht auf diese Installationsanleitung:
-https://help.xentral.com/hc/de/articles/360017377620-Installation-von-xentral-ab-Version-19-1
-
-So wie es Aussieht wird die opensource Version nicht mehr weiter entwickelt.
-Daher empfehle ich diese Version nur zum Testen zu verwenden.
-Der Anbieter setzt auf das Cloudmodell.
-
-Webseite: https://xentral.com/de/
-
-----------------------------------------------------------------------------------------------------------------------------
 **open3a Rechnungsprogramm**
 
 Das Installationsskript basiert weitgehend auf diese Anleitung:
