@@ -18,7 +18,7 @@ echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
-echo "Webserver Apache, MariaDB und PHP wird installiert"
+echo "PHP wird installiert"
 echo "**************************************************"
-apt install apache2 libapache2-mod-php mariadb-client mariadb-server php php-bcmath php-cli php-common php-curl php-gd php-imagick php-json php-ldap php-mbstring php-memcached php-mysql php-pgsql php-soap php-xml php-zip memcached unzip moreutils -y
+apt install php7.4 php7.4-{fpm,bcmath,ctype,fileinfo,json,mbstring,pdo,tokenizer,xml,curl,zip,gmp,gd,mysqli} mariadb-server mariadb-client curl git nginx vim composer -y
 echo
