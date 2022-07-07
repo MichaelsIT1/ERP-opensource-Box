@@ -215,7 +215,7 @@ pct exec $CID -- bash -c "sh /root/install-motioneye.sh"
 }
 
 install_ninja() {
-pct push $CID scripts/install-motioneye.sh /root/install-ninja.sh
+pct push $CID scripts/install-ninja.sh /root/install-ninja.sh
 pct exec $CID -- bash -c "sh /root/install-ninja.sh"
 }
 
