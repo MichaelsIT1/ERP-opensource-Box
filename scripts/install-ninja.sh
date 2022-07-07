@@ -34,6 +34,16 @@ systemctl enable --now mariadb
         y           # Remove test database and access to it?
         y           # Reload privilege tables now?
 EOF
+
+ mysql -u root <<EOF
+        CREATE DATABASE ninjadbl;
+        CREATE USER 'ninja'@'localhost' IDENTIFIED BY 'ninjapass';
+        #GRANT ALL PRIVILEGES ON ninja . * TO 'xentral'@'localhost';
+        FLUSH PRIVILEGES;
+EOF
+
+
+
 mkdir -p /etc/nginx/cert
 openssl req -new -x509 -days 365 -nodes -out /etc/nginx/cert/ninja.crt -keyout /etc/nginx/cert/ninja.key
 rm /etc/nginx/sites-enabled/default
@@ -126,3 +136,33 @@ tee /etc/nginx/conf.d/invoiceninja.conf >/dev/null <<EOF
       add_header Strict-Transport-Security max-age=2592000;
       rewrite ^ https://$server_name$request_uri? permanent;
   }
+EOF
+
+systemctl stop apache2
+systemctl disable apache2
+systemctl start nginx
+systemctl enable nginx
+
+cd /usr/share/nginx
+mkdir invoiceninja && cd invoiceninja
+wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.4.8/invoiceninja.zip
+unzip invoiceninja.zip
+
+
+cp .env.example .env
+
+chown -R www-data:www-data /usr/share/nginx/invoiceninja
+php7.4 artisan optimize
+
+echo "Cronjob wird erzeugt"
+echo "********************"
+crontab -u www-data -l > cron_bkp
+echo "* * * * * php7.4 /usr/share/nginx/"""invoiceninja"""/artisan schedule:run >> /dev/null 2>&1" >> cron_bkp
+crontab -u www-data cron_bkp
+rm cron_bkp
+clear
+
+clear
+echo "*******************************************************************************************"
+echo "Server wurde vorbereitet. Bitte ueber das Web das Setup starten"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/i-doit"
