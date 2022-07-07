@@ -20,9 +20,9 @@ apt update && apt dist-upgrade -y
 echo
 echo "PHP wird installiert"
 echo "**************************************************"
-apt install php php-fpm php-bcmath php-ctype php-fileinfo php-json php-mbstring php-pdo php-tokenizer php-xml php-curl php-zip php-gmp php-gd php-mysqli mariadb-server mariadb-client curl git nginx vim composer -y
+apt install php php-fpm php-bcmath php-ctype php-fileinfo php-json php-mbstring php-pdo php-tokenizer php-xml php-curl php-zip php-gmp php-gd php-mysqli mariadb-server mariadb-client curl git vim composer -y
 echo
-systemctl enable --now mariadb
+
  #automatische Installation
         sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
                     # current root password (emtpy after installation)
@@ -38,60 +38,41 @@ EOF
  mysql -u root <<EOF
         CREATE DATABASE ninjal;
         CREATE USER 'ninja'@'localhost' IDENTIFIED BY 'ninja';
-        #GRANT ALL PRIVILEGES ON ninja . * TO 'xentral'@'localhost';
+        GRANT ALL PRIVILEGES ON ninja . * TO 'ninja'@'localhost';
         FLUSH PRIVILEGES;
 EOF
 
 
 
-mkdir -p /etc/nginx/cert
-openssl req -new -x509 -days 365 -nodes -out /etc/nginx/cert/ninja.crt -keyout /etc/nginx/cert/ninja.key
-rm /etc/nginx/sites-enabled/default
+#mkdir -p /etc/nginx/cert
+#openssl req -new -x509 -days 365 -nodes -out /etc/nginx/cert/ninja.crt -keyout /etc/nginx/cert/ninja.key
+#rm /etc/nginx/sites-enabled/default
 
-tee /etc/nginx/conf.d/invoiceninja.conf >/dev/null <<EOF
-  server {
+tee /etc/apache2/sites-available/invoice-ninja.conf >/dev/null <<EOF
+ <VirtualHost *:80>
+    ServerName invoice.yourdomain.com
+    DocumentRoot /var/www/invoiceninja/public
 
-listen 80;
-server_name invoiceninja.test;
-root /var/www/invoiceninja/public;
-index index.php index.html index.htm;
-client_max_body_size 20M;
+    <Directory /var/www/invoiceninja/public>
+       DirectoryIndex index.php
+       Options +FollowSymLinks
+       AllowOverride All
+       Require all granted
+    </Directory>
 
-gzip on;
-gzip_types      application/javascript application/x-javascript text/javascript text/plain application/xml application/json;
-gzip_proxied    no-cache no-store private expired auth;
-gzip_min_length 1000;
+    ErrorLog ${APACHE_LOG_DIR}/invoiceninja.error.log
+    CustomLog ${APACHE_LOG_DIR}/invoiceninja.access.log combined
 
-location / {
-    try_files $uri $uri/ =404;
-}
-
-location ~* \.pdf$ {
-    add_header Cache-Control no-store;
-}
-
-if (!-e $request_filename) {
-    rewrite ^(.+)$ /index.php?q= last;
-}
-
-location ~ \.php$ {
-include snippets/fastcgi-php.conf;
-fastcgi_pass unix:/run/php/php7.4-fpm.sock;
-}
-
-location ~ /\.ht {
-    deny all;
-}
-
-}
+    Include /etc/apache2/conf-available/php7.4-fpm.conf
+</VirtualHost>
 EOF
 
-systemctl stop apache2
-systemctl disable apache2
-systemctl start nginx
-systemctl enable nginx
+a2ensite invoice-ninja.conf
+a2enmod rewrite
+systemctl restart apache2
 
-cd /usr/share/nginx
+
+cd /usr/www/html
 mkdir invoiceninja && cd invoiceninja
 wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.4.8/invoiceninja.zip
 unzip invoiceninja.zip
@@ -99,16 +80,16 @@ unzip invoiceninja.zip
 
 cp .env.example .env
 
-chown -R www-data:www-data /usr/share/nginx/invoiceninja
+chown -R www-data:www-data /usr/www/html/invoiceninja
 php7.4 artisan optimize
 
-echo "Cronjob wird erzeugt"
-echo "********************"
-crontab -u www-data -l > cron_bkp
-echo "* * * * * php7.4 /usr/share/nginx/invoiceninja/artisan schedule:run >> /dev/null 2>&1" >> cron_bkp
-crontab -u www-data cron_bkp
-rm cron_bkp
-clear
+#echo "Cronjob wird erzeugt"
+#echo "********************"
+#crontab -u www-data -l > cron_bkp
+#echo "* * * * * php7.4 /usr/share/nginx/invoiceninja/artisan schedule:run >> /dev/null 2>&1" >> cron_bkp
+#crontab -u www-data cron_bkp
+#rm cron_bkp
+#clear
 
 clear
 echo "*******************************************************************************************"
