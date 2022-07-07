@@ -36,8 +36,8 @@ systemctl enable --now mariadb
 EOF
 
  mysql -u root <<EOF
-        CREATE DATABASE ninjadbl;
-        CREATE USER 'ninja'@'localhost' IDENTIFIED BY 'ninjapass';
+        CREATE DATABASE ninjal;
+        CREATE USER 'ninja'@'localhost' IDENTIFIED BY 'ninja';
         #GRANT ALL PRIVILEGES ON ninja . * TO 'xentral'@'localhost';
         FLUSH PRIVILEGES;
 EOF
