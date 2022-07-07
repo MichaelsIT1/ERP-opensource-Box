@@ -72,7 +72,7 @@ a2enmod rewrite
 systemctl restart apache2
 
 
-cd /usr/www/html
+cd /var/www/html
 mkdir invoiceninja && cd invoiceninja
 wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.4.8/invoiceninja.zip
 unzip invoiceninja.zip
