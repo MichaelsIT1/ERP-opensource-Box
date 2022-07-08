@@ -122,7 +122,7 @@ server {
       add_header Strict-Transport-Security max-age=2592000;
       rewrite ^ https://$server_name$request_uri? permanent;
   }
-  EOF
+EOF
 
 systemctl stop apache2
 systemctl disable apache2
