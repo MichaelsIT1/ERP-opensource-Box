@@ -19,7 +19,7 @@ echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
 sleep 10
-apt install php7.4 php7.4-fpm,php7.4-bcmath php7.4-ctype php7.4-fileinfo php7.4-json php7.4-mbstring php7.4-pdo php7.4-tokenizer php7.4-xml php7.4-curl php7.4-zip php7.4-gmp php7.4-gd php7.4-mysqli mariadb-server mariadb-client curl git nginx vim composer -y
+apt install php7.4 php7.4-fpm php7.4-bcmath php7.4-ctype php7.4-fileinfo php7.4-json php7.4-mbstring php7.4-pdo php7.4-tokenizer php7.4-xml php7.4-curl php7.4-zip php7.4-gmp php7.4-gd php7.4-mysqli mariadb-server mariadb-client curl git nginx vim composer -y
 
 systemctl enable --now mariadb
 
