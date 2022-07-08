@@ -9,7 +9,8 @@ CPW=12345                                                   #Container root-Pass
 # Container Images
 DEBIAN10=local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz
 DEBIAN11=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz     
-UBUNTU=local:vztmpl/ubuntu-21.10-standard_21.10-1_amd64.tar.zst 
+UBUNTU20=local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz
+UBUNTU21=local:vztmpl/ubuntu-21.10-standard_21.10-1_amd64.tar.zst 
 
 # Funktionen
 menu() {
@@ -39,7 +40,7 @@ Choose an option: "
     read -r ans
     case $ans in
     1)  CNAME="invoice-ninja"
-        COS=$UBUNTU
+        COS=$UBUNTU20
         CID=900
         create_container
         install_ninja
@@ -97,14 +98,14 @@ Choose an option: "
         
    
      20) CNAME="docker-portainer"
-        COS=$UBUNTU
+        COS=$UBUNTU21
         CID=909
         create_container
         install_portainer
         ;;
         
     21)  CNAME="metafresh-docker-test"
-        COS=$UBUNTU # only Ubuntu
+        COS=$UBUNTU21 # only Ubuntu
         CID=902
         create_container
         install_metafresh
