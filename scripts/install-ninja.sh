@@ -22,7 +22,7 @@ echo
 apt-get install software-properties-common apt-transport-https ca-certificates gnupg2 -y
 apt-get install apache2 mariadb-server -y
 
- apt-get install php7.2 libapache2-mod-php7.2 php-imagick php7.2-fpm php7.2-mysql php7.2-common php7.2-gd php7.2-json php7.2-curl php7.2-zip php7.2-xml php7.2-mbstring php7.2-bz2 php7.2-intl php7.2-gmp unzip -y
+ apt-get install unzip php7.2 libapache2-mod-php7.2 php-imagick php7.2-fpm php7.2-mysql php7.2-common php7.2-gd php7.2-json php7.2-curl php7.2-zip php7.2-xml php7.2-mbstring php7.2-bz2 php7.2-intl php7.2-gmp unzip -y
 
 mysql -u root <<EOF
         CREATE DATABASE  invoiceninjadb;
