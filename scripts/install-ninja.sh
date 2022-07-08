@@ -19,64 +19,17 @@ echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
 
+apt-get install software-properties-common apt-transport-https ca-certificates gnupg2 -y
+apt-get install apache2 mariadb-server -y
 
-echo "Apache Webserver wird installiert"
-echo "**************************************************"
-apt install -y apache2 apache2-utils
+ apt-get install php7.2 libapache2-mod-php7.2 php-imagick php7.2-fpm php7.2-mysql php7.2-common php7.2-gd php7.2-json php7.2-curl php7.2-zip php7.2-xml php7.2-mbstring php7.2-bz2 php7.2-intl php7.2-gmp unzip -y
 
-systemctl start apache2
-systemctl enable apache2
-
-chown www-data:www-data /var/www/html/ -R
-
-
-echo "MariaDB Datenbankserver wird installiert"
-echo "**************************************************"
-apt install -y mariadb-server mariadb-client
-
-systemctl start mariadb
-systemctl enable mariadb
-
-#automatische Installation
-        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
-                    # current root password (emtpy after installation)
-        y           # Set root password?
-        ninja     # new root password
-        ninja     # new root password         
-        y           # Remove anonymous users?
-        y           # Disallow root login remotely?
-        y           # Remove test database and access to it?
-        y           # Reload privilege tables now?
-EOF
-
- mysql -u root <<EOF
-        CREATE DATABASE ninja;
-        CREATE USER 'ninja'@'localhost' IDENTIFIED BY 'ninja';
-        GRANT ALL PRIVILEGES ON ninja . * TO 'ninja'@'localhost';
+mysql -u root <<EOF
+        CREATE DATABASE  invoiceninjadb;
+        create user invoiceninja@localhost identified by 'password123!';
+        grant all privileges on invoicedb.* to invoice@localhost;
         FLUSH PRIVILEGES;
 EOF
-
-
-echo "PHP wird installiert"
-echo "**************************************************"
-apt install php php-fpm php-bcmath php-ctype php-fileinfo php-json php-mbstring php-pdo php-tokenizer php-xml php-curl php-zip php-gmp php-gd php-mysqli curl git vim composer -y
-echo
-
-apt install -y php7.4 libapache2-mod-php7.4 php7.4-mysql php-common php7.4-cli php7.4-common php7.4-json php7.4-opcache php7.4-readline
-
-a2enmod php7.4
-systemctl restart apache2
-
-
-echo "Run PHP-FPM with Apache"
-echo "**************************************************"
-
-a2dismod php7.4
-apt install -y php7.4-fpm
-a2enmod proxy_fcgi setenvif
-
-a2enconf php7.4-fpm
-systemctl restart apache2
 
 echo "Invoice Ninja installieren"
 echo "**************************************************"
@@ -87,8 +40,6 @@ unzip invoiceninja.zip
 
 chown www-data:www-data /var/www/invoice-ninja/ -R
 chmod 755 /var/www/invoice-ninja/storage/ -R
-
-a2dismod mpm_prefork
 
 tee /etc/apache2/sites-available/invoice-ninja.conf >/dev/null <<EOF
  <VirtualHost *:80>
@@ -109,30 +60,11 @@ tee /etc/apache2/sites-available/invoice-ninja.conf >/dev/null <<EOF
 </VirtualHost>
 EOF
 
-
 a2ensite invoice-ninja.conf
 a2enmod rewrite
 systemctl restart apache2
-
-
-
-
-
-
-
-
-#cp .env.example .env
-
-
-#php7.4 artisan optimize
-
-#echo "Cronjob wird erzeugt"
-#echo "********************"
-#crontab -u www-data -l > cron_bkp
-#echo "* * * * * php7.4 /usr/share/nginx/invoiceninja/artisan schedule:run >> /dev/null 2>&1" >> cron_bkp
-#crontab -u www-data cron_bkp
-#rm cron_bkp
-#clear
+a2dissite 000-default.conf
+systemctl reload apache2
 
 clear
 echo "*******************************************************************************************"
