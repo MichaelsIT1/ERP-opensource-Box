@@ -1,3 +1,4 @@
+# Lizenz: GPL V3.
 # Dies ist ein privates Projekt.
 # ERP-opensource-Box
 
