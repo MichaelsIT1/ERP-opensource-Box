@@ -137,8 +137,8 @@ mkdir invoiceninja && cd invoiceninja
 wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.4.8/invoiceninja.zip
 unzip invoiceninja.zip
 
-#chown www-data:www-data /var/www/invoice-ninja/ -R
-#chmod 755 /var/www/invoice-ninja/storage/ -R
+#chown www-data:www-data /usr/share/nginx/invoiceninja/ -R
+
 
 
 clear
