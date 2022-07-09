@@ -1,7 +1,7 @@
 #!/bin/sh
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Ubuntu 20.04 im LXC Container
+# getestet auf Debian11 im LXC Container
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
@@ -35,11 +35,10 @@ echo "Invoice Ninja installieren"
 echo "**************************************************"
 apt install -y unzip
 cd /var/www/html
-mkdir invoiceninja && cd invoiceninja
-wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.4.9/invoiceninja.zip
-unzip invoiceninja.zip
+wget -O invoice-ninja.zip https://download.invoiceninja.com/
+unzip invoice-ninja.zip
 
-chown www-data:www-data /var/www/html/invoiceninja/ -R
+chown www-data:www-data /var/www/html/ninja/ -R
 
 # conf erzeugen
 ###############################################################################
@@ -48,7 +47,7 @@ server {
     listen 80;
     server_name ninja.$(hostname -f);
 
-    root /var/www/html/invoiceninja/public/;
+    root /var/www/html/ninja/public/;
     index index.php index.html index.htm;
     charset utf-8;
 
@@ -64,7 +63,7 @@ server {
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+        fastcgi_pass unix:/run/php/php7.3-fpm.sock;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
