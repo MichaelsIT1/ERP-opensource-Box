@@ -19,7 +19,7 @@ echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
 
-apt-get install nginx mariadb-server php php-fpm php-cli php-common php-curl php-gd php-mysql php-xml php-mbstring php-gmp php-zip unzip vim -y
+apt-get install nginx mariadb-server php php-fpm php-cli php-common php-curl php-gd php-mysql php-xml php-bcmath php-json php-tokenizer php-mbstring php-gmp php-zip unzip vim -y
 
 systemctl start nginx
 systemctl start mariadb
