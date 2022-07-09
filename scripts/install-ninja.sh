@@ -19,7 +19,7 @@ echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
 
-apt-get install nginx mariadb-server php php-fpm php-cli php-common php-curl php-gd php-mysql php-xml php-mbstring php-gmp php-zip unzip -y
+apt-get install nginx mariadb-server php php-fpm php-cli php-common php-curl php-gd php-mysql php-xml php-mbstring php-gmp php-zip unzip vim -y
 
 systemctl start nginx
 systemctl start mariadb
@@ -52,7 +52,7 @@ server {
     charset utf-8;
 
     location / {
-        try_files $uri $uri/ /index.php?$query_string;
+        try_files \$uri \$uri/ /index.php?\$query_string;
     }
 
     location = /favicon.ico { access_log off; log_not_found off; }
