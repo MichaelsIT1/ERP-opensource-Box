@@ -30,7 +30,7 @@ mysql -u root <<EOF
         FLUSH PRIVILEGES;
 EOF
 
-rm /etc/nginx/sites-enabled/default
+#rm /etc/nginx/sites-enabled/default
 
 # conf erzeugen
 ###############################################################################
@@ -40,7 +40,7 @@ server {
 # If you run multiple subdomains from the same host already, remove the 'default_server' option.
    listen       443 ssl http2 default_server;
    listen       [::]:443 ssl http2 default_server;
-   server_name  invoices.$(hostname -f);
+   server_name  $(hostname -f);
    client_max_body_size 20M;
 
  # This if statement will forcefully redirect any connection attempts to explicitly use the domain name.  
@@ -118,7 +118,7 @@ server {
 
   server {
       listen      80;
-      server_name invoices.$(hostname -f);
+      server_name $(hostname -f);
       add_header Strict-Transport-Security max-age=2592000;
       rewrite ^ https://$server_name$request_uri? permanent;
   }
@@ -137,7 +137,7 @@ mkdir invoiceninja && cd invoiceninja
 wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.4.9/invoiceninja.zip
 unzip invoiceninja.zip
 
-#chown www-data:www-data /usr/share/nginx/invoiceninja/ -R
+chown www-data:www-data /usr/share/nginx/invoiceninja/ -R
 
 
 
