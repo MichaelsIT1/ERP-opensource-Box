@@ -134,7 +134,7 @@ echo "**************************************************"
 apt install -y unzip
 cd /usr/share/nginx
 mkdir invoiceninja && cd invoiceninja
-wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.4.8/invoiceninja.zip
+wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.4.9/invoiceninja.zip
 unzip invoiceninja.zip
 
 #chown www-data:www-data /usr/share/nginx/invoiceninja/ -R
