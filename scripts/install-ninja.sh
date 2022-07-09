@@ -19,7 +19,7 @@ echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
 
-apt-get install nginx mariadb-server php php-fpm php-cli php-common php-curl php-gd php-mysql php-xml php-mbstring unzip -y
+apt-get install nginx mariadb-server php php-fpm php-cli php-common php-curl php-gd php-mysql php-xml php-mbstring php-gmp php-zip unzip -y
 
 systemctl start nginx
 systemctl start mariadb
@@ -63,7 +63,7 @@ server {
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME \$document_root$fastcgi_script_name;
