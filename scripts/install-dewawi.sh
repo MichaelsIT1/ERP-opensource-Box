@@ -16,5 +16,5 @@ timedatectl set-timezone Europe/Berlin
 echo
 echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
-apt update && apt dist-upgrade -y
+apt update -y && apt dist-upgrade -y
 echo
