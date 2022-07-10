@@ -53,7 +53,7 @@ Choose an option: "
         install_open3a
         ;;
         
-    3)  CNAME="DEWAWI"
+    3)  CNAME="dewawi"
         COS=$DEBIAN11
         CID=902
         create_container
