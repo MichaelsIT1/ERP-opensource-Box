@@ -13,10 +13,10 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 2) open3a (Rechnungsprogramm) -> https://www.open3a.de
 4) ISPConfig (Hosting und Mailserver) -> https://www.ispconfig.de/ oder https://www.ispconfig.org/
 5) iTop (CMDB + Ticketsystem) -> https://www.combodo.com/itop-193
-6) i-doit (CMDB)
-7) checkMK-Raw (Netzwerkmonitoring)
-8) Nextcloud (Zusammenarbeit)
-9) motioneye (Kamerazentrale)
+6) i-doit (CMDB) -> https://www.i-doit.org oder https://www.i-doit.com/
+7) checkMK-Raw (Netzwerkmonitoring) -> https://checkmk.com/de
+8) Nextcloud (Zusammenarbeit) -> https://nextcloud.com/
+9) motioneye (Kamerazentrale) -> https://github.com/motioneye-project/motioneye
 -----------------------------------------
 10) docker Portainer installieren
 11) Debian 11 Container
