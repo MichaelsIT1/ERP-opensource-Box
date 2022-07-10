@@ -16,7 +16,7 @@ timedatectl set-timezone Europe/Berlin
 echo
 echo "Betriebssystem debian wird aktualisiert"
 echo "***************************************"
-apt update && apt dist-upgrade -y
+apt update -y && apt dist-upgrade -y
 echo
 echo "Webserver Apache, MariaDB und PHP wird installiert"
 echo "**************************************************"
