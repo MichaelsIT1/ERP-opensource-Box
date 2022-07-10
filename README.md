@@ -12,7 +12,7 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 1) Invoice Ninja (Buchhaltung für kleine Firmen) -> https://www.invoiceninja.org
 2) open3a (Rechnungsprogramm) -> https://www.open3a.de
 4) ISPConfig (Hosting und Mailserver) -> https://www.ispconfig.de/ oder https://www.ispconfig.org/
-5) iTop (CMDB + Ticketsystem)
+5) iTop (CMDB + Ticketsystem) -> https://www.combodo.com/itop-193
 6) i-doit (CMDB)
 7) checkMK-Raw (Netzwerkmonitoring)
 8) Nextcloud (Zusammenarbeit)
