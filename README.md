@@ -9,7 +9,7 @@ Diese Toolbox soll Existensgründer diverser Programme eine einfache Installatio
 
 Folgende Software können installiert werden. Hinweis: Die LXC-Container werden ab ID 900 installiert.
 
-1) Invoice Ninja (Buchhaltung für kleine Firmen) -> https://www.invoiceninja.org
+1) Invoice Ninja (Buchhaltung für kleine Firmen) -> https://www.invoiceninja.org oder https://www.invoiceninja.com
 2) open3a (Rechnungsprogramm) -> https://www.open3a.de
 4) ISPConfig (Hosting und Mailserver) -> https://www.ispconfig.de/ oder https://www.ispconfig.org/
 5) iTop (CMDB + Ticketsystem) -> https://www.combodo.com/itop-193
