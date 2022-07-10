@@ -19,7 +19,7 @@ menu() {
 MAIN MENU
 1) Invoice Ninja (ERP)
 2) open3a (Rechnungsprogramm)
-3)
+3) DEWAWI (Warenwirtschaft) offen
 4) ISPConfig (Webseitenhosting/Mailserver) 
 5) iTop (CMDB)
 6) i-doit (CMDB)
@@ -52,6 +52,13 @@ Choose an option: "
         create_container
         install_open3a
         ;;
+        
+    3)  CNAME="DEWAWI"
+        COS=$DEBIAN11
+        CID=902
+        create_container
+        install_dewawi
+        ;;   
         
     4)  CNAME="ispconfig-test"
         COS=$DEBIAN11
@@ -168,6 +175,11 @@ pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
 install_open3a() {
 pct push $CID scripts/install-open3a.sh /root/install-open3a.sh
 pct exec $CID -- bash -c "sh /root/install-open3a.sh"
+}
+
+install_dewawi() {
+pct push $CID scripts/install-dewawi.sh /root/install-dewawi.sh
+pct exec $CID -- bash -c "sh /root/install-dewawi.sh"
 }
 
 install_ispconfig() {
