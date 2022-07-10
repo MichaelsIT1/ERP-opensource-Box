@@ -2,6 +2,7 @@
 # Dies ist ein privates Projekt.
 # Nur für Testzwecke. Es erfolgt z.B. kein Backup oder Optimierungen
 # auf eigenes Risiko, ohne Gewähr
+# für Rückfragen info@edv-spoor.de
 # ERP-opensource-Box
 
 Mit dieser Toolbox kann von Proxmox als Host spezielle LXC-Container installiert werden.
