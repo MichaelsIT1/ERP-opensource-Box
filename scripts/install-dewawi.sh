@@ -26,7 +26,7 @@ echo
 
 ############# Datenbank erzeugen #########################
  mysql -u root <<EOF
-        CREATE DATABASE open3a;
+        CREATE DATABASE dewawi;
         CREATE USER 'dewawi'@'localhost' IDENTIFIED BY 'dewawi';
         GRANT ALL PRIVILEGES ON dewawi . * TO 'dewawi'@'localhost';
         FLUSH PRIVILEGES;
