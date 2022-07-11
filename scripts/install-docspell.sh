@@ -125,7 +125,7 @@ server {
     }
     ssl_certificate /etc/nginx/ssl/docs.home.crt;
     ssl_certificate_key /etc/nginx/ssl/docs.home.key;
-    ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;
+    #ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;
     access_log /var/log/nginx/docs.home.access.log;
     error_log /var/log/nginx/docs.home.error.log;
     ssl_protocols TLSv1.2;
@@ -172,10 +172,10 @@ location /solr {
 }
 EOF
 
+mkdir /etc/nginx/ssl 
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/docs.home.key -out /etc/nginx/ssl/docs.home.crt
 
-
-
-
+sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|g" /etc/nginx/sites-enabled/default
 
 
 
