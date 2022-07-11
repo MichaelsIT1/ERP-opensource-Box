@@ -179,6 +179,25 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 
 
+REM OFFEN
+REM /usr/share/docspell-joex/conf/docspell-joex.conf
+REM # The database user.
+REM    user = "docspell"
+
+REM    # The database password.
+REM    password = "123"
+ REM }
+REM SOLR enablen
+
+
+
+
+
+
+
+
+
+
 echo "*******************************************************************************************"
 echo "docspell installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP/"
