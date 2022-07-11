@@ -37,16 +37,16 @@ echo "********************************"
 cd /var/www/html
 wget https://github.com/dewawi/dewawi/archive/1.0.1.zip
 unzip 1.0.1.zip
-mv dewawi-1.0.1 dewawi
+mv dewawi-1.0.1/* /var/www/html
 
 echo "Zugriffsrechte werden gesetzt"
 echo "*****************************"
-chown -R www-data:www-data /var/www/html/dewawi
+chown -R www-data:www-data /var/www/html
 echo
 clear
 echo "*******************************************************************************************"
 echo "dewawi installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/dewawi/"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/"
 echo "Database name: dewawi, Username: dewawi, Password: dewawi"
 echo "Loginseite: http://$IP/dewawi/index.php/"
 echo "**************************************************************************"
