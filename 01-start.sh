@@ -19,14 +19,14 @@ menu() {
 MAIN MENU
 1) Invoice Ninja (ERP)
 2) open3a (Rechnungsprogramm)
-3) DEWAWI (Warenwirtschaft) offen
+3) DEWAWI (Warenwirtschaft) FEHLER
 4) ISPConfig (Webseitenhosting/Mailserver) 
 5) iTop (CMDB)
 6) i-doit (CMDB)
 7) checkMK-Raw (LAN-Monitoring)
 8) Nextcloud (Zusammenarbeit)
 9) motioneye (Videokamerazentrale)
-
+10) docspell (Dokumente durchsuchen OCR)
 ----------------------------------------
 DOCKER Software (bitte setzen: nesting=1,keyctl=1)
 20) Portainer
@@ -102,7 +102,12 @@ Choose an option: "
         install_motioneye
         ;;
         
-        
+     10)  CNAME="docspell"
+        COS=$DEBIAN11
+        CID=909
+        create_container
+        install_docspell
+        ;;   
    
      20) CNAME="docker-portainer"
         COS=$UBUNTU21
@@ -230,6 +235,11 @@ pct exec $CID -- bash -c "sh /root/install-motioneye.sh"
 install_ninja() {
 pct push $CID scripts/install-ninja.sh /root/install-ninja.sh
 pct exec $CID -- bash -c "sh /root/install-ninja.sh"
+}
+
+install_docspell() {
+pct push $CID scripts/install-docspell.sh /root/install-docspell.sh
+pct exec $CID -- bash -c "sh /root/install-docspell.sh"
 }
 
 # main program
