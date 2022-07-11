@@ -48,4 +48,5 @@ echo "**************************************************************************
 echo "dewawi installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/dewawi/"
 echo "Database name: dewawi, Username: dewawi, Password: dewawi"
+echo "Loginseite: http://$IP/dewawi/index.php/"
 echo "**************************************************************************"
