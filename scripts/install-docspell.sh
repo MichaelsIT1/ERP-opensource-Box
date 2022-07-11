@@ -94,10 +94,11 @@ openssl dhparam -out /etc/nginx/dhparam.pem 2048
 rm /etc/nginx/sites-available/default
 sleep 5
 
-
+echo "new default config"
+echo "**********************"
 tee /etc/nginx/sites-available/default >/dev/null <<EOF
 client_max_body_size 200M;
-    map $http_upgrade $connection_upgrade {
+    map \$http_upgrade \$connection_upgrade {
         default upgrade;
         ''      close;
     }
@@ -111,7 +112,7 @@ server {
         auth_basic off;
     }
     location / {
-        return 301 https://$host$request_uri;
+        return 301 https://\$host$request_uri;
     }
 }
 server {
@@ -147,24 +148,24 @@ server {
  location / {
      proxy_pass http://127.0.0.1:7880;
      proxy_http_version 1.1;
-     proxy_set_header Upgrade $http_upgrade;
-     proxy_set_header Connection $connection_upgrade;
-     proxy_set_header X-Real-IP $remote_addr;
-     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-     proxy_set_header X-Forwarded-Proto $scheme;
-     proxy_set_header X-Forwarded-Host $host;
+     proxy_set_header Upgrade \$http_upgrade;
+     proxy_set_header Connection \$connection_upgrade;
+     proxy_set_header X-Real-IP \$remote_addr;
+     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+     proxy_set_header X-Forwarded-Proto \$scheme;
+     proxy_set_header X-Forwarded-Host \$host;
   }
 
 
 location /solr {
      proxy_pass http://127.0.0.1:8983;
      proxy_http_version 1.1;
-#     proxy_set_header Upgrade $http_upgrade;
-#     proxy_set_header Connection $connection_upgrade;
-     proxy_set_header X-Real-IP $remote_addr;
-     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-     proxy_set_header X-Forwarded-Proto $scheme;
-     proxy_set_header X-Forwarded-Host $host;
+#     proxy_set_header Upgrade \$http_upgrade;
+#     proxy_set_header Connection \$connection_upgrade;
+     proxy_set_header X-Real-IP \$remote_addr;
+     proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+     proxy_set_header X-Forwarded-Proto \$scheme;
+     proxy_set_header X-Forwarded-Host \$host;
   }
 
 
