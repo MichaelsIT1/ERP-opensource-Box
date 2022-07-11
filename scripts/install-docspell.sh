@@ -41,7 +41,12 @@ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg mai
 apt update && apt full-upgrade -y
 apt install postgresql-14 -y
 
-
+psql -U postgres <<EOF
+        CREATE USER docspell
+        WITH SUPERUSER CREATEDB CREATEROLE
+        PASSWORD '123';
+        CREATE DATABASE docspelldb WITH OWNER docspell;
+EOF
 
 
 
