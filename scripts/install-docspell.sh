@@ -64,10 +64,12 @@ cd /tmp
 rem https://github.com/eikek/docspell/releases/tag/v0.38.0
 wget https://github.com/eikek/docspell/releases/download/v0.38.0/docspell-joex_0.38.0_all.deb
 wget https://github.com/eikek/docspell/releases/download/v0.38.0/docspell-restserver_0.38.0_all.deb
-dpki -i docspell*
+dpkg -i docspell*
 
 sleep 10
 
+echo "commandline tool dsc"
+echo "**********************************"
 wget https://github.com/docspell/dsc/releases/download/v0.9.0/dsc_amd64-musl-0.9.0
 mv dsc_amd* dsc
 chmod +x dsc
@@ -75,9 +77,26 @@ mv dsc /usr/bin
 
 echo "Docspell configuration"
 echo "**********************************"
+rem offen
+rem /etc/docspell-joex/docspell-joex.conf
+rem /etc/docspell-restserver/docspell-server.conf
+
+
+systemctl start docspell-restserver
+systemctl enable docspell-restserver
+systemctl start docspell-joex
+systemctl enable docspell-joex
+
+
+
+
+
+
+
+
 
 
 
 echo "*******************************************************************************************"
 echo "dewawi installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:7880/"
