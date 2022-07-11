@@ -19,6 +19,31 @@ echo "***************************************"
 apt update -y && apt dist-upgrade -y
 echo
 
+apt install curl htop zip gnupg2 ca-certificates sudo -y
+apt install default-jdk apt-transport-https wget -y
+apt install ghostscript tesseract-ocr tesseract-ocr-deu tesseract-ocr-eng unpaper unoconv wkhtmltopdf ocrmypdf -y
+
+echo "SOLR Installation"
+echo "**********************************"
+cd /root/
+wget https://downloads.apache.org/lucene/solr/8.11.2/solr-8.11.2.tgz
+tar xzf solr-8.11.2.tgz
+bash solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz
+
+systemctl start solr
+
+su solr -c '/opt/solr-8.11.1/bin/solr create -c docspell'
+
+echo "PostgreSQL Installation"
+echo "**********************************"
+curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/apt.postgresql.org.gpg >/dev/null
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" > /etc/apt/sources.list.d/postgresql.list'
+apt update && apt full-upgrade -y
+apt install postgresql-14 -y
+
+
+
+
 
 
 
