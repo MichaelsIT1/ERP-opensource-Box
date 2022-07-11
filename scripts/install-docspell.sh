@@ -179,17 +179,6 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 echo "*******************************************************************************************"
-echo "dewawi installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:7880/"
+echo "docspell installiert. Bitte ueber das Web die Konfiguration vornehmen"
+echo "weiter gehts mit dem Browser. Gehen Sie auf https://$IP/"
