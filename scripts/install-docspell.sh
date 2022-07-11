@@ -187,6 +187,8 @@ REM    user = "docspell"
 REM    # The database password.
 REM    password = "123"
  REM }
+
+rem /etc/docspell-restserver/docspell-server.conf
 REM SOLR enablen
 
 
