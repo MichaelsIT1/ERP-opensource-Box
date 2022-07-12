@@ -173,8 +173,8 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 #echo "**********************************"
 
 
-
-
+# OFFEN
+# Bitte folgende Schritte ausfuehren
 
 #sudo su -
 #root@debian-11:~# su - postgres
@@ -196,7 +196,7 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 #systemctl enable postgresql
 
-# OFFEN
+
 # /usr/share/docspell-joex/conf/docspell-joex.conf
 # /etc/docspell-restserver/docspell-server.conf
  # The database user.
