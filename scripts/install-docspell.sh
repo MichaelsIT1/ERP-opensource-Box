@@ -28,22 +28,18 @@ apt install ghostscript tesseract-ocr tesseract-ocr-deu tesseract-ocr-eng unpape
 
 echo "SOLR Installation"
 echo "**********************************"
-#cd /root/
-#wget https://downloads.apache.org/lucene/solr/8.11.2/solr-8.11.2.tgz
-#tar xzf solr-8.11.2.tgz
-#bash solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz
-#systemctl start solr
-#su solr -c '/opt/solr-8.11.2/bin/solr create -c docspell'
-
 cd /root/
-wget https://downloads.apache.org/lucene/solr/8.11.1/solr-8.11.1.tgz
-tar xzf solr-8.11.1.tgz
+wget https://downloads.apache.org/lucene/solr/8.11.2/solr-8.11.2.tgz
 sleep 5
-bash solr-8.11.1/bin/install_solr_service.sh solr-8.11.1.tgz
+tar xzf solr-8.11.2.tgz
+sleep 5
+bash solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz
 sleep 5
 systemctl start solr
 sleep 5
-su solr -c '/opt/solr-8.11.1/bin/solr create -c docspell'
+su solr -c '/opt/solr-8.11.2/bin/solr create -c docspell'
+
+
 
 
 echo "PostgreSQL Installation"
@@ -66,9 +62,10 @@ echo "fehlt weil ZFS ingesetzt wird"
 echo "Docspell installation"
 echo "**********************************"
 cd /tmp
-rem https://github.com/eikek/docspell/releases/tag/v0.38.0
 wget https://github.com/eikek/docspell/releases/download/v0.38.0/docspell-joex_0.38.0_all.deb
+sleep 5
 wget https://github.com/eikek/docspell/releases/download/v0.38.0/docspell-restserver_0.38.0_all.deb
+sleep 5
 dpkg -i docspell*
 
 sleep 10
@@ -80,13 +77,8 @@ mv dsc_amd* dsc
 chmod +x dsc
 mv dsc /usr/bin
 
-echo "Docspell configuration"
-echo "**********************************"
-rem offen
-rem /etc/docspell-joex/docspell-joex.conf
-rem /etc/docspell-restserver/docspell-server.conf
-
-
+echo "Dienste neu starten"
+echo "*************************"
 systemctl start docspell-restserver
 systemctl enable docspell-restserver
 systemctl start docspell-joex
@@ -94,8 +86,9 @@ systemctl enable docspell-joex
 
 
 apt install nginx -y
+sleep 5
 openssl dhparam -out /etc/nginx/dhparam.pem 2048
-
+sleep 5
 rm /etc/nginx/sites-available/default
 sleep 5
 
@@ -178,17 +171,11 @@ location /solr {
 EOF
 
 mkdir /etc/nginx/ssl 
+sleep 5
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/docs.home.key -out /etc/nginx/ssl/docs.home.crt
-
+sleep 5
 sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|g" /etc/nginx/sites-enabled/default
 
-sleep 5
-
-#echo "temp DB löschen"
-#echo "******************"
-#rm /tmp/docspell-demo.db.lock.db
-#rm /tmp/docspell-demo.db.mv.db
-#rm /tmp/docspell-demo.db.trace.db 
 
 
 
@@ -227,8 +214,6 @@ sleep 5
 #sudo su -
 #root@debian-11:~# su - postgres
 #postgres@debian-11:~$ psql
-#psql (14.1 (Debian 14.1-1.pgdg110+1)) 
-#Type "help" for help.
 
 #postgres=# CREATE USER docspell
 #postgres-# WITH SUPERUSER CREATEDB CREATEROLE
