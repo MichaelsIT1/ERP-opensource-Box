@@ -42,6 +42,10 @@ apt update && apt full-upgrade -y
 apt install postgresql-14 -y
 
 sleep 5
+
+echo "PostgreSQL User anlegen"
+echo "**********************************"
+
 sudo su -
 su - postgres
 
@@ -52,11 +56,16 @@ psql -U postgres <<EOF
         CREATE DATABASE docspelldb WITH OWNER docspell;
 EOF
 
-exit
 systemctl enable postgresql
+
+
+
+
+
 
 echo "scheduled database backup"
 echo "**********************************"
+echo "fehlt weil ZFS ingesetzt wird"
 
 echo "Docspell installation"
 echo "**********************************"
