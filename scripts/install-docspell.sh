@@ -172,9 +172,13 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/
 
 sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|g" /etc/nginx/sites-enabled/default
 
+sleep 5
 
-
-
+echo "temp DB löschen"
+echo "******************"
+rm /tmp/docspell-demo.db.lock.db
+rm /tmp/docspell-demo.db.mv.db
+rm /tmp/docspell-demo.db.trace.db 
 
 
 
