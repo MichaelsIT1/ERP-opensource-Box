@@ -32,7 +32,7 @@ bash solr-8.11.2/bin/install_solr_service.sh solr-8.11.2.tgz
 
 systemctl start solr
 
-su solr -c '/opt/solr-8.11.1/bin/solr create -c docspell'
+su solr -c '/opt/solr-8.11.2/bin/solr create -c docspell'
 
 echo "PostgreSQL Installation"
 echo "**********************************"
