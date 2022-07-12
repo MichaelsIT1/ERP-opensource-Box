@@ -242,7 +242,7 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 #full-text-search 
 #enable = true
 
-
+#bin/solr config -c docspell -p 8983 -action set-user-property -property update.autoCreateFields -value false
 
 
 
