@@ -183,6 +183,30 @@ rm /tmp/docspell-demo.db.trace.db
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #echo "PostgreSQL User anlegen"
 #echo "**********************************"
 
