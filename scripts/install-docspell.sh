@@ -184,19 +184,19 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 #systemctl enable postgresql
 
-REM OFFEN
-REM /usr/share/docspell-joex/conf/docspell-joex.conf
-rem /etc/docspell-restserver/docspell-server.conf
-REM # The database user.
-REM    user = "docspell"
+# OFFEN
+# /usr/share/docspell-joex/conf/docspell-joex.conf
+# /etc/docspell-restserver/docspell-server.conf
+ # The database user.
+#    user = "docspell"
 
-REM    # The database password.
-REM    password = "123"
- REM }
+   # The database password.
+#    password = "123"
+# }
 
 
-REM SOLR enablen
-
+# SOLR enablen
+# Full-text
 
 
 
