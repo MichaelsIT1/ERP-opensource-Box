@@ -190,7 +190,7 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 #postgres=# \connect docspelldb;
 #You are now connected to database "docspelldb" as user "docspell".
 #docspelldb=# \q
-
+#exit
 
 
 
