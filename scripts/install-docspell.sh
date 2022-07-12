@@ -172,15 +172,29 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 #echo "PostgreSQL User anlegen"
 #echo "**********************************"
 
-#sudo su -
-#su - postgres
 
-#psql -U postgres <<EOF
-#        CREATE USER docspell
-#        WITH SUPERUSER CREATEDB CREATEROLE
-#        PASSWORD '123';
-#        CREATE DATABASE docspelldb WITH OWNER docspell;
-#EOF
+
+
+
+#sudo su -
+#root@debian-11:~# su - postgres
+#postgres@debian-11:~$ psql
+#psql (14.1 (Debian 14.1-1.pgdg110+1)) 
+#Type "help" for help.
+#Create the user docspell
+
+#postgres=# CREATE USER docspell
+#postgres-# WITH SUPERUSER CREATEDB CREATEROLE
+#postgres-# PASSWORD 'YOURPASSWORD';
+#Create the database and (as a test) connect to it
+
+#postgres=# CREATE DATABASE docspelldb WITH OWNER docspell;
+#postgres=# \connect docspelldb;
+#You are now connected to database "docspelldb" as user "docspell".
+#docspelldb=# \q
+
+
+
 
 #systemctl enable postgresql
 
