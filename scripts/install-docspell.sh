@@ -3,6 +3,9 @@
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
 # getestet auf Debian 11 im LXC Container
 
+# Doku
+# https://github.com/andreklug/docspell-debian
+
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
@@ -46,6 +49,9 @@ sleep 5
 echo "scheduled database backup"
 echo "**********************************"
 echo "fehlt weil ZFS ingesetzt wird"
+# crontab -u postgres -e
+# 11 1 * * * sh /opt/postgres-backup.sh
+
 
 echo "Docspell installation"
 echo "**********************************"
@@ -169,6 +175,10 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 
 
+
+
+
+
 #echo "PostgreSQL User anlegen"
 #echo "**********************************"
 
@@ -194,11 +204,19 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 
 
+
+
+
+# /etc/docspell-joex/docspell-joex.conf
+# /etc/docspell-restserver/docspell-server.conf
 #systemctl enable postgresql
 
 
-# /usr/share/docspell-joex/conf/docspell-joex.conf
-# /etc/docspell-restserver/docspell-server.conf
+#echo "SOLR full-text-suche enablen"
+#full-text-search 
+#enable = true
+
+
  # The database user.
 #    user = "docspell"
 
@@ -207,8 +225,7 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 # }
 
 
-# SOLR enablen
-# Full-text
+
 
 
 
