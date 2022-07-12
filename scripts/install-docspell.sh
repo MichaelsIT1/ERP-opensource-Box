@@ -229,7 +229,7 @@ rm /tmp/docspell-demo.db.trace.db
 #You are now connected to database "docspelldb" as user "docspell".
 #docspelldb=# \q
 #exit
-
+#systemctl enable postgresql
 
 
 
@@ -237,20 +237,16 @@ rm /tmp/docspell-demo.db.trace.db
 
 # /etc/docspell-joex/docspell-joex.conf
 # /etc/docspell-restserver/docspell-server.conf
-#systemctl enable postgresql
 
 
+#   url = "jdbc:postgresql://localhost:5432/docspelldb"
+#  user = "docspell"
+#  password = "docspell"
+  
 #echo "SOLR full-text-suche enablen"
 #full-text-search 
 #enable = true
 
-
- # The database user.
-#    user = "docspell"
-
-   # The database password.
-#    password = "123"
-# }
 
 
 
