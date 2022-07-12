@@ -43,26 +43,6 @@ apt install postgresql-14 -y
 
 sleep 5
 
-echo "PostgreSQL User anlegen"
-echo "**********************************"
-
-sudo su -
-su - postgres
-
-psql -U postgres <<EOF
-        CREATE USER docspell
-        WITH SUPERUSER CREATEDB CREATEROLE
-        PASSWORD '123';
-        CREATE DATABASE docspelldb WITH OWNER docspell;
-EOF
-
-systemctl enable postgresql
-
-
-
-
-
-
 echo "scheduled database backup"
 echo "**********************************"
 echo "fehlt weil ZFS ingesetzt wird"
@@ -188,8 +168,25 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 
 
+
+#echo "PostgreSQL User anlegen"
+#echo "**********************************"
+
+#sudo su -
+#su - postgres
+
+#psql -U postgres <<EOF
+#        CREATE USER docspell
+#        WITH SUPERUSER CREATEDB CREATEROLE
+#        PASSWORD '123';
+#        CREATE DATABASE docspelldb WITH OWNER docspell;
+#EOF
+
+#systemctl enable postgresql
+
 REM OFFEN
 REM /usr/share/docspell-joex/conf/docspell-joex.conf
+rem /etc/docspell-restserver/docspell-server.conf
 REM # The database user.
 REM    user = "docspell"
 
@@ -197,7 +194,7 @@ REM    # The database password.
 REM    password = "123"
  REM }
 
-rem /etc/docspell-restserver/docspell-server.conf
+
 REM SOLR enablen
 
 
