@@ -174,11 +174,11 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 sleep 5
 
-echo "temp DB löschen"
-echo "******************"
-rm /tmp/docspell-demo.db.lock.db
-rm /tmp/docspell-demo.db.mv.db
-rm /tmp/docspell-demo.db.trace.db 
+#echo "temp DB löschen"
+#echo "******************"
+#rm /tmp/docspell-demo.db.lock.db
+#rm /tmp/docspell-demo.db.mv.db
+#rm /tmp/docspell-demo.db.trace.db 
 
 
 
