@@ -244,7 +244,7 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 #bin/solr config -c docspell -p 8983 -action set-user-property -property update.autoCreateFields -value false
 
-
+#curl -XPOST -H "Docspell-Admin-Secret: my secret" http://localhost:7880/api/v1/admin/fts/reIndexAll
 
 
 
