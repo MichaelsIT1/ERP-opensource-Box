@@ -26,7 +26,7 @@ MAIN MENU
 7) checkMK-Raw (LAN-Monitoring)
 8) Nextcloud (Zusammenarbeit)
 9) motioneye (Videokamerazentrale)
-10) docspell (Dokumente durchsuchen OCR)
+10)
 ----------------------------------------
 DOCKER Software (bitte setzen: nesting=1,keyctl=1)
 20) Portainer
@@ -102,12 +102,12 @@ Choose an option: "
         install_motioneye
         ;;
         
-     10)  CNAME="docspell"
-        COS=$DEBIAN11
-        CID=909
-        create_container
-        install_docspell
-        ;;   
+#     10)  CNAME="docspell"
+#        COS=$DEBIAN11
+#        CID=909
+#        create_container
+#        install_docspell
+#        ;;   
    
      20) CNAME="docker-portainer"
         COS=$UBUNTU21
