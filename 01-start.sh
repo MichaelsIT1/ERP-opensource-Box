@@ -26,7 +26,7 @@ MAIN MENU
 7) checkMK-Raw (LAN-Monitoring)
 8) Nextcloud (Zusammenarbeit)
 9) motioneye (Videokamerazentrale)
-10)
+10) Zammad (Ticketsystem) offen
 ----------------------------------------
 DOCKER Software (bitte setzen: nesting=1,keyctl=1)
 20) Portainer
@@ -102,12 +102,13 @@ Choose an option: "
         install_motioneye
         ;;
         
-#     10)  CNAME="docspell"
-#        COS=$DEBIAN11
-#        CID=909
-#        create_container
-#        install_docspell
-#        ;;   
+ 10) CNAME="zammad"
+        COS=$DEBIAN11
+        CID=908
+        create_container
+        install_zammad
+        ;;
+
    
      20) CNAME="docker-portainer"
         COS=$UBUNTU21
@@ -137,6 +138,13 @@ Choose an option: "
         create_container
         install_debian
         ;;
+        
+     90)  CNAME="docspell"
+        COS=$DEBIAN11
+        CID=909
+        create_container
+        install_docspell
+        ;;   
 
     
     99) pveam list local
@@ -241,6 +249,13 @@ install_docspell() {
 pct push $CID scripts/install-docspell.sh /root/install-docspell.sh
 pct exec $CID -- bash -c "sh /root/install-docspell.sh"
 }
+
+install_zammad() {
+pct push $CID scripts/install_zammad.sh /root/install_zammad.sh
+pct exec $CID -- bash -c "sh /root/install_zammad.sh"
+}
+
+
 
 # main program
 menu
