@@ -65,7 +65,6 @@ zammad run rake zammad:searchindex:rebuild
 
 
 
-
 # Zammad service to start all services at once
 #systemctl (status|start|stop|restart) zammad
 
