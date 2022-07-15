@@ -29,7 +29,7 @@ echo "*************************************"
 curl -fsSL https://dl.packager.io/srv/zammad/zammad/key | \
   gpg --dearmor | tee /etc/apt/trusted.gpg.d/pkgr-zammad.gpg> /dev/null
   
-echo "deb [signed-by=/etc/apt/trusted.gpg.d/pkgr-zammad.gpg] https://dl.packager.io/srv/deb/zammad/zammad/stable/debian 11 main"| \
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/pkgr-zammad.gpg] https://dl.packager.io/srv/deb/zammad/zammad/stable/ubuntu 20.04 main"| \
   tee /etc/apt/sources.list.d/zammad.list > /dev/null
   
 apt update -y
