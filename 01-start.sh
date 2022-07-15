@@ -96,7 +96,7 @@ Choose an option: "
         ;;
         
     9) CNAME="motioneye"
-        COS=$DEBIAN11
+        COS=$UBUNTU20
         CID=908
         create_container
         install_motioneye
