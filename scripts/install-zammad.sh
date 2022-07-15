@@ -11,7 +11,7 @@ apt install curl apt-transport-https gnupg -y
 
 echo "installing Elasticsearch"
 echo "***************************"
-apt install apt-transport-https sudo wget curl gnupg
+apt install apt-transport-https sudo wget curl gnupg -y
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/elasticsearch.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main"| \
   tee -a /etc/apt/sources.list.d/elastic-7.x.list > /dev/null
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | \
