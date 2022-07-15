@@ -19,7 +19,7 @@ gpg --dearmor | tee /etc/apt/trusted.gpg.d/elasticsearch.gpg> /dev/null
 apt update -y
 apt install elasticsearch -y
 sleep 5
-/usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
+/usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment -y
 
 systemctl start elasticsearch
 systemctl enable elasticsearch
