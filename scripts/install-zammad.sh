@@ -27,8 +27,8 @@ apt install elasticsearch -y
 sleep 5
 /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
 
-systemctl start elasticsearch
-systemctl enable elasticsearch
+#systemctl start elasticsearch
+#systemctl enable elasticsearch
 
 echo "Add Repository and install Zammad"
 echo "*************************************"
@@ -60,12 +60,15 @@ $ # Zammads websocket server for session related information
 systemctl restart zammad-websocket
 
 Set the Elasticsearch server address
-$ zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
+zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
 
 # Build the search index
-$ zammad run rake zammad:searchindex:rebuild
+zammad run rake zammad:searchindex:rebuild
+
+systemctl start elasticsearch
+systemctl enable elasticsearch
 
 echo "*******************************************************************************************"
-echo "checkmk raw erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
+echo "zammad erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP//"
 echo "**************************************************************************"
