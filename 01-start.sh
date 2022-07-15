@@ -96,14 +96,14 @@ Choose an option: "
         ;;
         
     9) CNAME="motioneye"
-        COS=$UBUNTU20
+        COS=$DEBIAN11
         CID=908
         create_container
         install_motioneye
         ;;
         
  10) CNAME="zammad"
-        COS=$DEBIAN11
+        COS=$UBUNTU20
         CID=909
         create_container
         install_zammad
