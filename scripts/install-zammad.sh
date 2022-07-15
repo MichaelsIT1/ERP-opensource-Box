@@ -50,16 +50,16 @@ zammad run rake zammad:searchindex:rebuild
 # Zammad service to start all services at once
 systemctl restart zammad
 
-$ # Zammads internal puma server (relevant for displaying the web app)
+# Zammads internal puma server (relevant for displaying the web app)
 systemctl restart) zammad-web
 
-$ # Zammads background worker - relevant for all delayed- and background jobs
+# Zammads background worker - relevant for all delayed- and background jobs
 systemctl restart zammad-worker
 
-$ # Zammads websocket server for session related information
+# Zammads websocket server for session related information
 systemctl restart zammad-websocket
 
-Set the Elasticsearch server address
+# Set the Elasticsearch server address
 zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
 
 # Build the search index
