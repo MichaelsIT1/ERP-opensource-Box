@@ -41,7 +41,7 @@ mv dewawi-1.0.1/ dewawi
 
 echo "Zugriffsrechte werden gesetzt"
 echo "*****************************"
-chown -R www-data:www-data /var/www/html
+chown -R www-data:www-data /var/www/html/dewawi
 echo
 clear
 echo "*******************************************************************************************"
