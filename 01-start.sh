@@ -26,7 +26,7 @@ MAIN MENU
 7) checkMK-Raw (LAN-Monitoring)
 8) Nextcloud (Zusammenarbeit)
 9) motioneye (Videokamerazentrale)
-10) Zammad (Ticketsystem) offen
+10) Zammad (Ticketsystem)
 ----------------------------------------
 DOCKER Software (bitte setzen: nesting=1,keyctl=1)
 20) Portainer
