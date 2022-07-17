@@ -11,15 +11,15 @@ Diese Toolbox soll Existensgründer diverser Programme eine einfache Installatio
 Folgende Software können installiert werden. Hinweis: Die LXC-Container werden ab ID 900 installiert.
 
 
--Invoice Ninja (Buchhaltung für kleine Firmen) -> https://www.invoiceninja.org oder https://www.invoiceninja.com
--open3a (Rechnungsprogramm) -> https://www.open3a.de
--ISPConfig (Hosting und Mailserver) -> https://www.ispconfig.de/ oder https://www.ispconfig.org/
--iTop (CMDB + Ticketsystem) -> https://www.combodo.com/itop-193
--i-doit (CMDB) -> https://www.i-doit.org oder https://www.i-doit.com/
--checkMK-Raw (Netzwerkmonitoring) -> https://checkmk.com/de
--Nextcloud (Zusammenarbeit) -> https://nextcloud.com/
--motioneye (Kamerazentrale) -> https://github.com/motioneye-project/motioneye
--zammad (Ticketsystem) -> https://zammad.org oder https://zammad.com
+- Invoice Ninja (Buchhaltung für kleine Firmen) -> https://www.invoiceninja.org oder https://www.invoiceninja.com
+- open3a (Rechnungsprogramm) -> https://www.open3a.de
+- ISPConfig (Hosting und Mailserver) -> https://www.ispconfig.de/ oder https://www.ispconfig.org/
+- iTop (CMDB + Ticketsystem) -> https://www.combodo.com/itop-193
+- i-doit (CMDB) -> https://www.i-doit.org oder https://www.i-doit.com/
+- checkMK-Raw (Netzwerkmonitoring) -> https://checkmk.com/de
+- Nextcloud (Zusammenarbeit) -> https://nextcloud.com/
+- motioneye (Kamerazentrale) -> https://github.com/motioneye-project/motioneye
+- zammad (Ticketsystem) -> https://zammad.org oder https://zammad.com
 -----------------------------------------
 docker Portainer installieren
 Debian 11 Container
