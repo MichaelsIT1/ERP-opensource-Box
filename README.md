@@ -31,6 +31,9 @@ Die eizelne Rechte liegen bei den jeweiligen Firmen/Entwickler.
 Ich bin nicht der Entwickler der einzelnen Software.
 
 # DETAILS
+**Zammad**
+Continue with installation? [y/N] -> y wählen
+
 
 **open3a Rechnungsprogramm**
 
