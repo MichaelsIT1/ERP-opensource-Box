@@ -10,6 +10,7 @@ Diese Toolbox soll Existensgründer diverser Programme eine einfache Installatio
 
 Folgende Software können installiert werden. Hinweis: Die LXC-Container werden ab ID 900 installiert.
 
+...
 Invoice Ninja (Buchhaltung für kleine Firmen) -> https://www.invoiceninja.org oder https://www.invoiceninja.com
 open3a (Rechnungsprogramm) -> https://www.open3a.de
 ISPConfig (Hosting und Mailserver) -> https://www.ispconfig.de/ oder https://www.ispconfig.org/
@@ -22,6 +23,8 @@ zammad (Ticketsystem) -> https://zammad.org oder https://zammad.com
 -----------------------------------------
 docker Portainer installieren
 Debian 11 Container
+
+...
 
 Die Software ist in der Regel unter einer freien Lizenz.
 Die Software bitte nur zur Evalierungzwecken installieren.
