@@ -37,7 +37,7 @@ echo "********************************"
 cd /var/www/html
 wget https://github.com/dewawi/dewawi/archive/1.0.1.zip
 unzip 1.0.1.zip
-mv dewawi-1.0.1/* /var/www/html
+mv dewawi-1.0.1/ dewawi 
 
 echo "Zugriffsrechte werden gesetzt"
 echo "*****************************"
