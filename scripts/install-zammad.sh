@@ -40,6 +40,8 @@ echo "install zammad"
 apt update -y
 apt install zammad -y
 
+sleep 10
+
 echo "connect zammad"
 # Set the Elasticsearch server address
 zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
