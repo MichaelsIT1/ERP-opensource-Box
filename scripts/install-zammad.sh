@@ -40,16 +40,22 @@ echo "install zammad"
 apt update -y
 apt install zammad -y
 
-sleep 10
+sleep 5
+
+sed -i "s|    server_name localhost;|    server_name zammad;|g" /etc/nginx/sites-available/zammad.conf  
+systemctl restart nginx
+
+sleep 5
 
 echo "connect zammad"
 # Set the Elasticsearch server address
-zammad run rails r "Setting.set('es_url', 'http://localhost:9200')"
+zammad run rails r "Setting.set('es_url', 'http://zammad:9200')"
 
 # Build the search index
 zammad run rake zammad:searchindex:rebuild
 
 echo "*******************************************************************************************"
 echo "zammad erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP//"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://zammad/"
+echo "Hinweis. Linux: /etc/hosts eintragen: $IP zammad"
 echo "**************************************************************************"
