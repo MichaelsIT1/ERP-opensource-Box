@@ -27,6 +27,7 @@ MAIN MENU
 8) Nextcloud (Zusammenarbeit)
 9) motioneye (Videokamerazentrale)
 10) Zammad (Ticketsystem)
+11) docspell (Dokumentenverwaltung mit OCR)
 ----------------------------------------
 DOCKER Software (bitte setzen: nesting=1,keyctl=1)
 20) Portainer
@@ -109,17 +110,24 @@ Choose an option: "
         install_zammad
         ;;
 
+11)  CNAME="docspell"
+        COS=$DEBIAN11
+        CID=910
+        create_container
+        install_docspell
+        ;;   
+
    
      20) CNAME="docker-portainer"
         COS=$UBUNTU21
-        CID=909
+        CID=919
         create_container
         install_portainer
         ;;
         
     21)  CNAME="metafresh-docker-test"
         COS=$UBUNTU21 # only Ubuntu
-        CID=902
+        CID=920
         create_container
         install_metafresh
         ;;
@@ -127,17 +135,12 @@ Choose an option: "
     
     50) CNAME="debian11"
         COS=$DEBIAN11
-        CID=910
+        CID=949
         create_container
         install_debian
         ;;
         
-     1000)  CNAME="docspell"
-        COS=$DEBIAN11
-        CID=1000
-        create_container
-        install_docspell
-        ;;   
+     
 
     1001)  CNAME="xentral-test"
         COS=$DEBIAN11
