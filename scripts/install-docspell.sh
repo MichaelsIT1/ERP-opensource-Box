@@ -200,7 +200,7 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 
 
-
+#nächste manuelle Schritte
 
 
 
@@ -229,10 +229,10 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 
 
 
-
+#in den Dateien
 # /etc/docspell-joex/docspell-joex.conf
 # /etc/docspell-restserver/docspell-server.conf
-
+#eintragen bzw ändern
 
 #   url = "jdbc:postgresql://localhost:5432/docspelldb"
 #  user = "docspell"
@@ -241,16 +241,6 @@ sed -i "s|ssl_trusted_certificate /etc/nginx/ssl/homelab.local_CA.crt;|#ssl_trus
 #echo "SOLR full-text-suche enablen"
 #full-text-search 
 #enable = true
-
-#bin/solr config -c docspell -p 8983 -action set-user-property -property update.autoCreateFields -value false
-
-#curl -XPOST -H "Docspell-Admin-Secret: my secret" http://localhost:7880/api/v1/admin/fts/reIndexAll
-
-
-
-
-
-
 
 
 
