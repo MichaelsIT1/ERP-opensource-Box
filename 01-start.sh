@@ -122,13 +122,6 @@ Choose an option: "
         CID=902
         create_container
         install_metafresh
-        ;;        
-    
-    30)  CNAME="xentral-test"
-        COS=$DEBIAN11
-        CID=900
-        create_container
-        install_xentral
         ;;
     
     
@@ -145,6 +138,13 @@ Choose an option: "
         create_container
         install_docspell
         ;;   
+
+    91)  CNAME="xentral-test"
+        COS=$DEBIAN11
+        CID=900
+        create_container
+        install_xentral
+        ;;
 
     
     99) pveam list local
