@@ -132,16 +132,16 @@ Choose an option: "
         install_debian
         ;;
         
-     90)  CNAME="docspell"
+     1000)  CNAME="docspell"
         COS=$DEBIAN11
-        CID=909
+        CID=1000
         create_container
         install_docspell
         ;;   
 
-    91)  CNAME="xentral-test"
+    1001)  CNAME="xentral-test"
         COS=$DEBIAN11
-        CID=900
+        CID=1001
         create_container
         install_xentral
         ;;
