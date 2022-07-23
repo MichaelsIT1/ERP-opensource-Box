@@ -17,7 +17,7 @@ menu() {
     clear
     echo "
 MAIN MENU
-1) Invoice Ninja (ERP)
+1) Invoice Ninja (Rechnungsprogramm)
 2) open3a (Rechnungsprogramm)
 3) DEWAWI (Warenwirtschaft) FEHLER
 4) ISPConfig (Webseitenhosting/Mailserver) 
