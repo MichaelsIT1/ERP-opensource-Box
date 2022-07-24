@@ -25,7 +25,7 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 
 Benutzung
 --
-Alle Einstellungen werden in der 01_start.sh vorgenommen.
+Alle Einstellungen werden in der 01-start.sh vorgenommen.
 
 **Ganz oben müssen die Pfade zur den LXC Images angepasst werden.**
 ---
