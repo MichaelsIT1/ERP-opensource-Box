@@ -28,6 +28,7 @@ Benutzung
 Alle Einstellungen werden in der 01_start.sh vorgenommen.
 
 **Ganz oben müssen die Pfade zur den LXC Images angepasst werden.**
+---
 
 Rechtliches
 --
