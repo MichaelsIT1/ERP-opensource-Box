@@ -21,7 +21,7 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 - zammad (Ticketsystem) -> https://zammad.org oder https://zammad.com
 - docker Portainer (Container Management)-> https://www.portainer.io
 
----
+--
 
 Benutzung
 --
