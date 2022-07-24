@@ -10,7 +10,6 @@ Diese Toolbox soll Existensgründer diverser Programme eine einfache Installatio
 
 Folgende Software können installiert werden. Hinweis: Die LXC-Container werden ab ID 900 installiert.
 
-
 - Invoice Ninja (Rechnungsprogramm) -> https://www.invoiceninja.org oder https://www.invoiceninja.com
 - open3a (Rechnungsprogramm) -> https://www.open3a.de
 - ISPConfig (Hosting und Mailserver) -> https://www.ispconfig.de/ oder https://www.ispconfig.org/
@@ -22,6 +21,13 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 - zammad (Ticketsystem) -> https://zammad.org oder https://zammad.com
 - docker Portainer (Container Management)-> https://www.portainer.io
 
+---
+
+**Benutzung**
+
+Alle Einstellungen werden in der 01_start.sh vorgenommen.
+
+Ganz oben müssen die Pfade zur den LXC Images angepasst werden.
 ---
 
 Die Software ist in der Regel unter einer freien Lizenz.
