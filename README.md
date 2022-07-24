@@ -39,7 +39,6 @@ Continue with installation? [y/N] -> y wählen
 **ISPConfig TESTVERSION**
 
 Das Installationsskript bereitet den Server für das eigentliche Installationskript vor.
-https://www.howtoforge.com/perfect-server-debian-10-buster-apache-bind-dovecot-ispconfig-3-1/
 
 Ich empfehle dieses nur zum Testen.
 
