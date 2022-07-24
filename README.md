@@ -20,10 +20,9 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 - Nextcloud (Zusammenarbeit) -> https://nextcloud.com/
 - motioneye (Kamerazentrale) -> https://github.com/motioneye-project/motioneye
 - zammad (Ticketsystem) -> https://zammad.org oder https://zammad.com
------------------------------------------
-docker Portainer installieren
-Debian 11 Container
+- docker Portainer (Container Management)-> https://www.portainer.io
 
+---
 
 Die Software ist in der Regel unter einer freien Lizenz.
 Die Software bitte nur zur Evalierungzwecken installieren.
@@ -36,15 +35,6 @@ Ich bin nicht der Entwickler der einzelnen Software.
 # DETAILS
 **Zammad**
 Continue with installation? [y/N] -> y wählen
-
-
-**open3a Rechnungsprogramm**
-
-Das Installationsskript basiert weitgehend auf diese Anleitung:
-https://www.open3a.de/page-Installation/WebserverSetup
-
-Webseite: https://www.open3a.de
-
 ----------------------------------------------------------------------------------------------------------------------------
 **ISPConfig TESTVERSION**
 
@@ -58,18 +48,3 @@ Ich empfehle dieses nur zum Testen.
 Webseiten: https://www.ispconfig.org, https://www.ispconfig.de
 
 --------------------------------------------------------------------------------------------------------------------------------
-**iTop CMDB + Ticketsystem**
-
-iTop ist ein CMDB und Ticketsystem.
-
-Webseite: https://www.combodo.com
-
---------------------------------------------------------------------------------------------------------------------------------
-**i-doit CMDB**
-
-i-doit ist ein CMDB.
-
-Das Installationsskript basiert auf diese Anleitung:
-https://kb.i-doit.com/pages/viewpage.action?pageId=10223831
-
-Webseite: https://www.i-doit.org
