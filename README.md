@@ -19,6 +19,7 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 - Nextcloud (Zusammenarbeit) -> https://nextcloud.com/
 - motioneye (Kamerazentrale) -> https://github.com/motioneye-project/motioneye
 - zammad (Ticketsystem) -> https://zammad.org oder https://zammad.com
+- docspell (Dokumentenverwaltung mit OCR) -> https://docspell.org
 - docker Portainer (Container Management)-> https://www.portainer.io
 
 ---
