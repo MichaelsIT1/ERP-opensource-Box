@@ -23,13 +23,14 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 
 ---
 
-**Benutzung**
-
+Benutzung
+--
 Alle Einstellungen werden in der 01_start.sh vorgenommen.
 
-Ganz oben müssen die Pfade zur den LXC Images angepasst werden.
----
+**Ganz oben müssen die Pfade zur den LXC Images angepasst werden.**
 
+Rechtliches
+--
 Die Software ist in der Regel unter einer freien Lizenz.
 Die Software bitte nur zur Evalierungzwecken installieren.
 Die einzelne Software ist nicht angepasst. Es werden auch keine Datensicherungen vorgenommen.
