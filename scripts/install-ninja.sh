@@ -93,6 +93,7 @@ EOF
 
 systemctl restart nginx
 
+# Text vor der Anmeldung
 tee /etc/issue >/dev/null <<EOF
 ninja.$(hostname -f);
 \4
