@@ -35,6 +35,8 @@ echo "Invoice Ninja installieren"
 echo "**************************************************"
 apt install -y unzip
 cd /var/www/html
+mkdir ninja
+cd nina
 wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.5.16/invoiceninja.zip
 unzip invoiceninja.zip
 
