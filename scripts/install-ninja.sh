@@ -93,6 +93,14 @@ EOF
 
 systemctl restart nginx
 
+tee /etc/issue >/dev/null <<EOF
+ninja.$(hostname -f);
+\4
+
+EOF
+
+
+
 clear
 echo "*******************************************************************************************"
 echo "Server wurde vorbereitet. Bitte ueber das Web das Setup starten"
