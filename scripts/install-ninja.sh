@@ -36,7 +36,7 @@ echo "**************************************************"
 apt install -y unzip
 cd /var/www/html
 mkdir ninja
-cd nina
+cd ninja
 wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.5.16/invoiceninja.zip
 unzip invoiceninja.zip
 
