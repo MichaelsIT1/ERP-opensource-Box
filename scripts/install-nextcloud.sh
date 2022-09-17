@@ -84,6 +84,10 @@ sed -i "s|memory_limit = 128M|memory_limit = 1048M|g" /etc/php/*/apache2/php.ini
 # Die Zeile einfügen und output_buffering ausschalten
 echo "output_buffering = off" >> /etc/php/*/apache2/php.ini
 
+echo "Redirect 301 /.well-known/carddav /nextcloud/remote.php/dav" >> /etc/apache2/sites-enabled/000-default.conf
+echo "Redirect 301 /.well-known/caldav /nextcloud/remote.php/dav" >> /etc/apache2/sites-enabled/000-default.conf
+echo "Redirect 301 /.well-known/webfinger /nextcloud/index.php/.well-known/webfinger" >> /etc/apache2/sites-enabled/000-default.conf
+echo "Redirect 301 /.well-known/nodeinfo /nextcloud/index.php/.well-known/nodeinfo" >> /etc/apache2/sites-enabled/000-default.conf
 
 
 systemctl restart apache2
