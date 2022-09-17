@@ -76,6 +76,16 @@ echo "*****************************"
 chown -R www-data:www-data /var/www/html
 echo
 
+
+
+# PHP Memeory limit anpassen
+sed -i "s|memory_limit = 128M|memory_limit = 1048M|g" /etc/php/*/apache2/php.ini
+
+# Die Zeile einfügen und output_buffering ausschalten
+echo "output_buffering = off" >> /etc/php/*/apache2/php.ini
+
+
+
 systemctl restart apache2
 
 clear
