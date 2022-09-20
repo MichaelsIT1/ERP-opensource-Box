@@ -26,6 +26,16 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 
 Benutzung
 --
+
+git clone https://github.com/MichaelsIT1/ERP-opensource-Box.git
+cd ERP-opensource-Box
+sh 01-start.sh
+
+
+vi 01-start.sh
+
+Pfade und ggfs. ID, Passwort u.a. anpassen
+
 Alle Einstellungen werden in der 01-start.sh vorgenommen.
 
 **Ganz oben müssen die Pfade zur den LXC Images angepasst werden.**
