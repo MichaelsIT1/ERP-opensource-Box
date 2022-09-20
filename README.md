@@ -28,7 +28,9 @@ Benutzung
 --
 
 git clone https://github.com/MichaelsIT1/ERP-opensource-Box.git
+
 cd ERP-opensource-Box
+
 sh 01-start.sh
 
 
