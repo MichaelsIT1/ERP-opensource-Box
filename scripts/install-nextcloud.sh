@@ -93,6 +93,11 @@ echo "Redirect 301 /.well-known/nodeinfo /nextcloud/index.php/.well-known/nodein
 
 systemctl restart apache2
 
+# Text vor der Anmeldung
+tee /etc/issue >/dev/null <<EOF
+\4/nextcloud
+EOF
+
 clear
 
 echo "*******************************************************************************************"
