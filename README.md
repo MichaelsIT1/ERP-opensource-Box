@@ -5,6 +5,8 @@
 # für Rückfragen info@edv-spoor.de
 # ERP-opensource-Box
 
+HINWEIS: das DEWAWI-Script ist fehlerhaft. Wer möchte kann dies gern fixen. 
+
 Mit dieser Toolbox kann von Proxmox als Host spezielle LXC-Container installiert werden.
 Diese Toolbox soll Existensgründer diverser Programme eine einfache Installation bieten.
 
