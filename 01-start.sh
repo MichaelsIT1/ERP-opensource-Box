@@ -28,7 +28,7 @@ MAIN MENU
 10) Zammad (Ticketsystem)
 11) docspell (Dokumentenverwaltung mit OCR)
 ----------------------------------------
-DOCKER Software (bitte setzen: nesting=1,keyctl=1)
+DOCKER Software (bitte setzen: -unprivileged 0)
 20) Portainer
 21) metafresh (ERP)
 
