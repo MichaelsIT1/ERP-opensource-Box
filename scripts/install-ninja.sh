@@ -47,39 +47,44 @@ chown www-data:www-data /var/www/html/ninja/ -R
 ###############################################################################
 tee /etc/nginx/conf.d/ninja.conf >/dev/null <<EOF
 server {
-    listen 80;
-    server_name ninja.$(hostname -f);
 
-    root /var/www/html/ninja/public/;
-    index index.php index.html index.htm;
-    charset utf-8;
+listen 80;
+server_name ninja.$(hostname -f);
+root /var/www/html/ninja/public/;
+index index.php index.html index.htm;
+client_max_body_size 20M;
 
-    location / {
-        try_files \$uri \$uri/ /index.php?\$query_string;
-    }
+gzip on;
+gzip_types      application/javascript application/x-javascript text/javascript text/plain application/xml application/json;
+gzip_proxied    no-cache no-store private expired auth;
+gzip_min_length 1000;
 
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
+location / {
+    try_files $uri $uri/ =404;
+}
 
-    access_log  /var/log/nginx/invoiceninja.access.log;
-    error_log   /var/log/nginx/invoiceninja.error.log;
+location ~* \.pdf$ {
+    add_header Cache-Control no-store;
+}
 
-    location ~ \.php$ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-        fastcgi_intercept_errors off;
-        fastcgi_buffer_size 16k;
-        fastcgi_buffers 4 16k;
-    }
+if (!-e $request_filename) {
+    rewrite ^(.+)$ /index.php?q= last;
+}
 
-    location ~ /\.ht {
-        deny all;
-    }
+location ~ \.php$ {
+include snippets/fastcgi-php.conf;
+fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+}
+
+location ~ /\.ht {
+    deny all;
+}
+
 }
 EOF
+
+
+
 
 systemctl restart nginx
 
