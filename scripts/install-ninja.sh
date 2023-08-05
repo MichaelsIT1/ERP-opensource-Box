@@ -31,28 +31,15 @@ mysql -u root <<EOF
         FLUSH PRIVILEGES;
 EOF
 
-echo "Invoice Ninja V4 installieren"
+echo "Invoice Ninja installieren"
 echo "**************************************************"
 apt install -y unzip
 cd /var/www/html
-wget -O invoice-ninja.zip https://download.invoiceninja.com/
+wget -O invoice-ninja.zip https://github.com/invoiceninja/invoiceninja/releases/download/v5.6.25/invoiceninja.zip
 unzip invoice-ninja.zip
-wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.5.16/invoiceninja.zip
-unzip invoiceninja.zip
 
 chown www-data:www-data /var/www/html/ninja/ -R
 
-
-#echo "Invoice Ninja V5 installieren"
-#echo "**************************************************"
-#apt install -y unzip
-#cd /var/www/html
-#mkdir ninja
-#cd ninja
-#wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.5.16/invoiceninja.zip
-#unzip invoiceninja.zip
-
-#chown www-data:www-data /var/www/html/ninja/ -R
 # conf erzeugen
 ###############################################################################
 tee /etc/nginx/conf.d/ninja.conf >/dev/null <<EOF
