@@ -8,7 +8,8 @@ CPW=12345                                                   #Container root-Pass
 
 # Container Images
 DEBIAN10=local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz
-DEBIAN11=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz      
+DEBIAN11=local:vztmpl/debian-11-standard_11.0-1_amd64.tar.gz
+DEBIAN12=local:vztmpl/debian-12-standard_12.0-1_amd64.tar.zst
 UBUNTU=local:vztmpl/ubuntu-22.10-standard_22.10-1_amd64.tar.zst
 
 # Funktionen
@@ -88,8 +89,8 @@ Choose an option: "
         install_checkmk
         ;;
         
-    8)  CNAME="nextcloud-test"
-        COS=$DEBIAN11
+    8)  CNAME="nextcloud"
+        COS=$DEBIAN12
         CID=907
         create_container
         install_nextcloud
