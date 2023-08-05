@@ -31,7 +31,7 @@ apt install php-intl php-imagick php-apcu -y
 apt install libmagickcore-6.q16-6-extra -y
 
 ############# Datenbank erzeugen #########################
- mysql -u root <<EOF
+mysql -u root <<EOF
         CREATE DATABASE nextcloud;
         CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'nextcloud';
         GRANT ALL PRIVILEGES ON nextcloud . * TO 'nextcloud'@'localhost';
@@ -39,16 +39,16 @@ apt install libmagickcore-6.q16-6-extra -y
 EOF
 
  # automatische Installation
-        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
-                    # current root password (emtpy after installation)
-        y           # Set root password?
-        nextcloud     # new root password
-        nextcloud     # new root password         
-        y           # Remove anonymous users?
-        y           # Disallow root login remotely?
-        y           # Remove test database and access to it?
-        y           # Reload privilege tables now?
-EOF
+#        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
+#                    # current root password (emtpy after installation)
+#        y           # Set root password?
+#        nextcloud     # new root password
+#        nextcloud     # new root password         
+#        y           # Remove anonymous users?
+#        y           # Disallow root login remotely?
+#        y           # Remove test database and access to it?
+#        y           # Reload privilege tables now?
+#EOF
 
 echo "nextcloud herunterladen"
 echo "********************************"
