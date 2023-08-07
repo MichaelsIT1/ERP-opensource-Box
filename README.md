@@ -6,6 +6,7 @@
 # ERP-opensource-Box
 
 Updates:
+
 nextcloud: Script für debian 12 angepasst
 
 HINWEIS: das DEWAWI-Script ist fehlerhaft. Wer möchte kann dies gern fixen. 
