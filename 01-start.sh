@@ -133,8 +133,8 @@ Choose an option: "
         ;;
     
     
-    50) CNAME="debian11"
-        COS=$DEBIAN11
+    50) CNAME="debian12"
+        COS=$DEBIAN12
         CID=949
         create_container
         install_debian
