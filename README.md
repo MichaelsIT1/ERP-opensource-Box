@@ -5,9 +5,9 @@
 # für Rückfragen info@edv-spoor.de
 # ERP-opensource-Box
 
-Updates:
-nextcloud: Script für debian 12 angepasst
-Invoice Ninja: Script wird für debian 12 angepasst. In Arbeit.
+Updates:  
+nextcloud: Script für debian 12 angepasst  
+Invoice Ninja: Script wird für debian 12 angepasst. In Arbeit.  
 
 HINWEIS: das DEWAWI-Script ist fehlerhaft. Wer möchte kann dies gern fixen. 
 
