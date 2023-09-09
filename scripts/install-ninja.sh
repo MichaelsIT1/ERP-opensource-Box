@@ -38,7 +38,7 @@ apt install -y unzip
 cd /var/www/html
 mkdir ninja
 cd ninja
-wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.6.25/invoiceninja.zip
+wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.7.10/invoiceninja.zip
 unzip invoiceninja.zip
 
 chown www-data:www-data /var/www/html/ninja/ -R
