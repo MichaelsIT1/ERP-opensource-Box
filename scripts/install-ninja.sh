@@ -45,12 +45,12 @@ chown www-data:www-data /var/www/html/ninja/ -R
 
 # conf erzeugen
 ###############################################################################
-tee /etc/nginx/conf.d/ninja.conf >/dev/null <<EOF
+tee /etc/nginx/sites-available/invoiceninja <<EOF
 server {
 
 listen 80;
 server_name ninja.$(hostname -f);
-root /var/www/html/ninja/public/;
+root /var/www/html/ninja/public;
 index index.php index.html index.htm;
 client_max_body_size 20M;
 
@@ -71,6 +71,10 @@ if (!-e $request_filename) {
     rewrite ^(.+)$ /index.php?q= last;
 }
 
+location ~* /storage/.*\.php$ {
+    return 503;
+}
+
 location ~ \.php$ {
 include snippets/fastcgi-php.conf;
 fastcgi_pass unix:/run/php/php8.1-fpm.sock;
@@ -85,7 +89,8 @@ EOF
 
 
 
-
+systemctl stop apache2
+systemctl disable apache2
 systemctl restart nginx
 
 # Text vor der Anmeldung
