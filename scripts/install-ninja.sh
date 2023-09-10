@@ -35,22 +35,22 @@ EOF
 echo "Invoice Ninja V5 installieren"
 echo "**************************************************"
 apt install -y unzip
-cd /var/www/html
-mkdir ninja
-cd ninja
+cd /var/www/
+mkdir invoiceninja
+cd invoiceninja
 wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.7.10/invoiceninja.zip
 unzip invoiceninja.zip
 
-chown www-data:www-data /var/www/html/ninja/ -R
+chown www-data:www-data /var/www/invoiceninja/ -R
 
 # conf erzeugen
 ###############################################################################
-tee /etc/nginx/sites-available/invoiceninja <<EOF
+tee /etc/nginx/conf.d/invoiceninja.conf <<EOF
 server {
 
 listen 80;
-server_name ninja.$(hostname -f);
-root /var/www/html/ninja/public;
+server_name invoiceninja.$(hostname -f);
+root /var/www/invoiceninja/public;
 index index.php index.html index.htm;
 client_max_body_size 20M;
 
@@ -86,8 +86,6 @@ location ~ /\.ht {
 
 }
 EOF
-
-
 
 systemctl stop apache2
 systemctl disable apache2
