@@ -31,64 +31,66 @@ mysql -u root <<EOF
         FLUSH PRIVILEGES;
 EOF
 
-
-echo "Invoice Ninja V5 installieren"
+echo "Invoice Ninja V4 installieren"
 echo "**************************************************"
 apt install -y unzip
-cd /var/www/
-mkdir invoiceninja
-cd invoiceninja
-wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.7.10/invoiceninja.zip
+cd /var/www/html
+wget -O invoice-ninja.zip https://download.invoiceninja.com/
+unzip invoice-ninja.zip
+wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.5.16/invoiceninja.zip
 unzip invoiceninja.zip
 
-chown www-data:www-data /var/www/invoiceninja/ -R
+chown www-data:www-data /var/www/html/ninja/ -R
 
+
+#echo "Invoice Ninja V5 installieren"
+#echo "**************************************************"
+#apt install -y unzip
+#cd /var/www/html
+#mkdir ninja
+#cd ninja
+#wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.5.16/invoiceninja.zip
+#unzip invoiceninja.zip
+
+#chown www-data:www-data /var/www/html/ninja/ -R
 # conf erzeugen
 ###############################################################################
-tee /etc/nginx/conf.d/invoiceninja.conf <<EOF
+tee /etc/nginx/conf.d/ninja.conf >/dev/null <<EOF
 server {
+    listen 80;
+    server_name ninja.$(hostname -f);
 
-listen 80;
-server_name invoiceninja.$(hostname -f);
-root /var/www/invoiceninja/public;
-index index.php index.html index.htm;
-client_max_body_size 20M;
+    root /var/www/html/ninja/public/;
+    index index.php index.html index.htm;
+    charset utf-8;
 
-gzip on;
-gzip_types      application/javascript application/x-javascript text/javascript text/plain application/xml application/json;
-gzip_proxied    no-cache no-store private expired auth;
-gzip_min_length 1000;
+    location / {
+        try_files \$uri \$uri/ /index.php?\$query_string;
+    }
 
-location / {
-    try_files $uri $uri/ =404;
-}
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
 
-location ~* \.pdf$ {
-    add_header Cache-Control no-store;
-}
+    access_log  /var/log/nginx/invoiceninja.access.log;
+    error_log   /var/log/nginx/invoiceninja.error.log;
 
-if (!-e $request_filename) {
-    rewrite ^(.+)$ /index.php?q= last;
-}
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+    }
 
-location ~* /storage/.*\.php$ {
-    return 503;
-}
-
-location ~ \.php$ {
-include snippets/fastcgi-php.conf;
-fastcgi_pass unix:/run/php/php8.1-fpm.sock;
-}
-
-location ~ /\.ht {
-    deny all;
-}
-
+    location ~ /\.ht {
+        deny all;
+    }
 }
 EOF
 
-systemctl stop apache2
-systemctl disable apache2
 systemctl restart nginx
 
 # Text vor der Anmeldung
