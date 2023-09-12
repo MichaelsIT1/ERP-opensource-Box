@@ -1,7 +1,7 @@
 #!/bin/sh
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Debian 11 im LXC Container
+# getestet auf Debian 12 im LXC Container
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
@@ -25,7 +25,7 @@ echo
 
 
 cd /root/
-wget https://download.checkmk.com/checkmk/2.1.0p6/check-mk-raw-2.1.0p6_0.bullseye_amd64.deb
+wget https://download.checkmk.com/checkmk/2.2.0p9/check-mk-raw-2.2.0p9_0.bookworm_amd64.deb
 
 apt install ./check* -y
 
