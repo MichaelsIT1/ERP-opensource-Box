@@ -34,7 +34,7 @@ DOCKER Software (bitte setzen: -unprivileged 0)
 21) metafresh (ERP)
 
 -----------------------------------------
-50) Debian 11 Container
+50) Debian 12 Container
 99) lokale Images
 0) Exit
 Choose an option: "
@@ -83,7 +83,7 @@ Choose an option: "
         ;;
         
     7)  CNAME="checmk-raw"
-        COS=$DEBIAN11
+        COS=$DEBIAN12
         CID=906
         create_container
         install_checkmk
