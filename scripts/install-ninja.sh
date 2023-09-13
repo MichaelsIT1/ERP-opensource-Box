@@ -50,7 +50,7 @@ cd /var/www/html
 mkdir ninja
 cd ninja
 wget -O invoice-ninja.zip https://github.com/invoiceninja/invoiceninja/releases/download/v5.5.16/invoiceninja.zip
-unzip invoiceninja.zip
+unzip invoice-ninja.zip
 
 chown www-data:www-data /var/www/html/ninja/ -R
 
