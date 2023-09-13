@@ -58,14 +58,14 @@ chown www-data:www-data /var/www/html/ninja/ -R
 tee /etc/nginx/conf.d/ninja.conf >/dev/null <<EOF
 server {
     listen 80;
-    server_name ninja.$(hostname -f);
+    server_name ninja.invoice-ninja.spoor.local;
 
     root /var/www/html/ninja/public/;
     index index.php index.html index.htm;
     charset utf-8;
 
     location / {
-        try_files \$uri \$uri/ /index.php?\$query_string;
+        try_files $uri $uri/ /index.php?$query_string;
     }
 
     location = /favicon.ico { access_log off; log_not_found off; }
@@ -76,10 +76,10 @@ server {
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
         fastcgi_index index.php;
         include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_intercept_errors off;
         fastcgi_buffer_size 16k;
         fastcgi_buffers 4 16k;
