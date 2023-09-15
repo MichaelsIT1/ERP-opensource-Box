@@ -20,7 +20,7 @@ echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
 
-apt install apache2  php-fpm,php-soap,php-bcmath,php-common,php-imagick,php-mysql,php-gmp,php-curl,php-intl,php-mbstring,php-xmlrpc,php-gd,php-xml,php-cli,php-zip,php-bz2 -y
+apt install apache2  php-fpm php-soap php-bcmath php-common php-imagick php-mysql php-gmp php-curl php-intl php-mbstring php-xmlrpc php-gd php-xml php-cli php-zip php-bz2 -y
 apt install mariadb-server mariadb-client libapache2-mod-php unzip vim -y
 
 systemctl start mariadb
