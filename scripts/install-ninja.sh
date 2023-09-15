@@ -1,7 +1,7 @@
 #!/bin/sh
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Debian11 im LXC Container
+# getestet auf Debian12 im LXC Container
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
@@ -34,8 +34,6 @@ EOF
 
 apt update
 apt install wget curl unzip vim -y
-
-
 
 #echo "Invoice Ninja V5 installieren"
 #echo "**************************************************"
@@ -91,12 +89,6 @@ php /var/www/invoice_ninja/artisan key:generate
 
 # Datenbankmigration
 php /var/www/invoice_ninja/artisan migrate:fresh --seed
-
-
-
-
-
-
 
 tee /etc/issue >/dev/null <<EOF
 ninja.$(hostname -f);
