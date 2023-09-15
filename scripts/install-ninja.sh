@@ -80,7 +80,7 @@ a2enconf php8.2-fpm
 a2enmod rewrite 
 a2dissite 000-default.conf
 systemctl restart apache2
-
+systemctl reload apache2
 
 tee /etc/issue >/dev/null <<EOF
 ninja.$(hostname -f);
