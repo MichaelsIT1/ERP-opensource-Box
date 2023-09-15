@@ -34,7 +34,7 @@ mysql -u root <<EOF
 EOF
 
 apt update
-apt install wget curl unzip vim
+apt install wget curl unzip vim -y
 
 
 
