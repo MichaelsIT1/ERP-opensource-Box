@@ -6,8 +6,9 @@
 # ERP-opensource-Box
 
 Updates:  
-nextcloud: Script für debian 12 angepasst  
-Invoice Ninja: Script wird für debian 12 angepasst. In Arbeit.  
+Invoice Ninja: Script für debian 12 angepasst.
+nextcloud: Script für debian 12 angepasst.
+
 
 HINWEIS: das DEWAWI-Script ist fehlerhaft. Wer möchte kann dies gern fixen. 
 
