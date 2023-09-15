@@ -37,8 +37,6 @@ apt install wget curl unzip vim -y
 
 #echo "Invoice Ninja V5 installieren"
 #echo "**************************************************"
-apt install -y unzip
-
 mkdir  /var/www/invoice_ninja
 cd /var/www/invoice_ninja
 
