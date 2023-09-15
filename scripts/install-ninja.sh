@@ -83,15 +83,25 @@ a2dissite 000-default.conf
 systemctl restart apache2
 systemctl reload apache2
 
+# erzeugt einen Rechnungskey
+echo "Bitte folgende Fragen mit ja beantworten"
+php /var/www/invoice_ninja/artisan key:generate
+
+# Datenbankmigration
+php /var/www/invoice_ninja/artisan migrate:fresh --seed
+
+
+
+
+
+
+
 tee /etc/issue >/dev/null <<EOF
 ninja.$(hostname -f);
 \4
 
 EOF
 
-
-
-clear
 echo "*******************************************************************************************"
 echo "Server wurde vorbereitet. Bitte ueber das Web das Setup starten"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://invoiceninja.$(hostname -f)"
