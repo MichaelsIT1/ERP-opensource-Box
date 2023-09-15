@@ -43,6 +43,7 @@ apt install wget curl unzip vim -y
 apt install -y unzip
 
 mkdir  /var/www/invoice_ninja
+cd /var/www/invoice_ninja
 
 wget https://github.com/invoiceninja/invoiceninja/releases/download/v${VERSION}/invoiceninja.zip
 unzip invoiceninja.zip -d /var/www/invoice_ninja
@@ -79,6 +80,7 @@ a2enmod mpm_event proxy_fcgi setenvif
 a2enconf php8.2-fpm
 a2enmod rewrite 
 a2dissite 000-default.conf
+
 systemctl restart apache2
 systemctl reload apache2
 
