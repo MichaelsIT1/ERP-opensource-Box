@@ -83,6 +83,8 @@ a2dissite 000-default.conf
 systemctl restart apache2
 systemctl reload apache2
 
+clear
+
 # erzeugt einen Rechnungskey
 echo "Bitte folgende Fragen mit ja beantworten"
 php /var/www/invoice_ninja/artisan key:generate
