@@ -95,5 +95,5 @@ EOF
 clear
 echo "*******************************************************************************************"
 echo "Server wurde vorbereitet. Bitte ueber das Web das Setup starten"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://ninja.$(hostname -f)"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://invoiceninja.$(hostname -f)"
 echo "IP: $IP"
