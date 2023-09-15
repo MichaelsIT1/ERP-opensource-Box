@@ -5,6 +5,7 @@
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
+VERSION=$(curl -s https://api.github.com/repos/invoiceninja/invoiceninja/releases/latest|grep tag_name|cut -d '"' -f 4|sed 's/v//')
 
 clear
 echo "Invoice Ninja installieren"
@@ -19,10 +20,11 @@ echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
 
-apt-get install nginx mariadb-server php php-fpm php-cli php-common php-curl php-gd php-mysql php-xml php-bcmath php-json php-tokenizer php-mbstring php-gmp php-zip unzip vim -y
+apt install apache2  php-{fpm,soap,bcmath,common,imagick,mysql,gmp,curl,intl,mbstring,xmlrpc,gd,xml,cli,zip,bz2} libapache2-mod-php unzip vim -y
+apt install mariadb-server mariadb-client
 
-systemctl start nginx
 systemctl start mariadb
+systemctl enable mariadb && systemctl start mariadb
 
 mysql -u root <<EOF
         CREATE DATABASE  ninja;
@@ -31,68 +33,53 @@ mysql -u root <<EOF
         FLUSH PRIVILEGES;
 EOF
 
-#echo "Invoice Ninja V4 installieren"
-#echo "**************************************************"
-#apt install -y unzip
-#cd /var/www/html
-#wget -O invoice-ninja.zip https://download.invoiceninja.com/
-#unzip invoice-ninja.zip
-#wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.5.16/invoiceninja.zip
-#unzip invoiceninja.zip
+apt update
+apt install wget curl unzip vim
 
-#chown www-data:www-data /var/www/html/ninja/ -R
 
 
 #echo "Invoice Ninja V5 installieren"
 #echo "**************************************************"
 apt install -y unzip
-cd /var/www/html
-mkdir ninja
-cd ninja
-wget -O invoice-ninja.zip https://github.com/invoiceninja/invoiceninja/releases/download/v5.5.16/invoiceninja.zip
-unzip invoice-ninja.zip
 
-chown www-data:www-data /var/www/html/ninja/ -R
+mkdir  /var/www/invoice_ninja
+
+wget https://github.com/invoiceninja/invoiceninja/releases/download/v${VERSION}/invoiceninja.zip
+unzip invoiceninja.zip -d /var/www/invoice_ninja
+
+chown -R www-data:www-data /var/www/invoice_ninja
+chmod -R 755 /var/www/invoice_ninja
+
+cd /var/www/invoice_ninja
+cp .env.example .env
+
+chown www-data:www-data /var/www/invoice_ninja/.env
 
 # conf erzeugen
 ###############################################################################
-tee /etc/nginx/conf.d/ninja.conf >/dev/null <<EOF
-server {
-    listen 80;
-    server_name ninja.invoice-ninja.spoor.local;
+tee /etc/apache2/sites-available/invoice_ninja.conf >/dev/null <<EOF
+<VirtualHost *:80>
+    ServerName invoiceninja.$(hostname -f);
+    DocumentRoot /var/www/invoice_ninja/public
+    <Directory /var/www/invoice_ninja/public>
+       DirectoryIndex index.php
+       Options +FollowSymLinks
+       AllowOverride All
+       Require all granted
+    </Directory>
 
-    root /var/www/html/ninja/public/;
-    index index.php index.html index.htm;
-    charset utf-8;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
-
-    access_log  /var/log/nginx/invoiceninja.access.log;
-    error_log   /var/log/nginx/invoiceninja.error.log;
-
-    location ~ \.php$ {
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/run/php/php-fpm.sock;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME \$document_root$fastcgi_script_name;
-        fastcgi_intercept_errors off;
-        fastcgi_buffer_size 16k;
-        fastcgi_buffers 4 16k;
-    }
-
-    location ~ /\.ht {
-        deny all;
-    }
-}
+    ErrorLog ${APACHE_LOG_DIR}/invoice_ninja_error.log
+    CustomLog ${APACHE_LOG_DIR}/invoice_ninja_access.log combined
+</VirtualHost>
 EOF
 
-systemctl restart nginx
+a2ensite invoice_ninja.conf
+
+a2enmod mpm_event proxy_fcgi setenvif
+a2enmod rewrite 
+a2dissite 000-default.conf
+systemctl restart apache2
+
 
 tee /etc/issue >/dev/null <<EOF
 ninja.$(hostname -f);
