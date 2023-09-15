@@ -6,7 +6,7 @@
 # ERP-opensource-Box
 
 Updates:  
-Invoice Ninja: Script für debian 12 angepasst.
+Invoice Ninja: Script für debian 12 angepasst.  
 nextcloud: Script für debian 12 angepasst.
 
 
