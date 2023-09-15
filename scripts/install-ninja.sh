@@ -20,8 +20,8 @@ echo "***************************************"
 apt update && apt dist-upgrade -y
 echo
 
-apt install apache2  php-{fpm,soap,bcmath,common,imagick,mysql,gmp,curl,intl,mbstring,xmlrpc,gd,xml,cli,zip,bz2} libapache2-mod-php unzip vim -y
-apt install mariadb-server mariadb-client
+apt install apache2  php-{fpm,soap,bcmath,common,imagick,mysql,gmp,curl,intl,mbstring,xmlrpc,gd,xml,cli,zip,bz2} -y
+apt install mariadb-server mariadb-client libapache2-mod-php unzip vim -y
 
 systemctl start mariadb
 systemctl enable mariadb && systemctl start mariadb
