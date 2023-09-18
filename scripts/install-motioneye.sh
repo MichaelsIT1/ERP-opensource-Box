@@ -16,20 +16,31 @@ echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
 
-apt install curl motion ffmpeg v4l-utils -y
-apt install python2 -y
+apt --no-install-recommends install ca-certificates curl python3 python3-dev libcurl4-openssl-dev gcc libssl-dev
 sleep 5
-curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
-sleep 5
-python2 get-pip.py
-sleep 5
-apt install libffi-dev libzbar-dev libzbar0 -y
-sleep 5
-apt install python2-dev libssl-dev libcurl4-openssl-dev libjpeg-dev -y
-sleep 5
-apt install python-pil -y
-sleep 5
-usr/local/bin/pip2 install motioneye
+
+curl -sSfO 'https://bootstrap.pypa.io/get-pip.py'
+python3 get-pip.py
+rm get-pip.py
+
+python3 -m pip install 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
+motioneye_init
+
+systemctl stop motioneye
+python3 -m pip install --upgrade --force-reinstall --no-deps 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
+systemctl start motioneye
+
+
+
+
+
+
+
+
+
+
+
+
 sleep 5
 mkdir -p /etc/motioneye
 cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
