@@ -29,8 +29,8 @@ wget https://download.checkmk.com/checkmk/2.2.0p9/check-mk-raw-2.2.0p9_0.bookwor
 
 apt install ./check* -y
 
-omd create TEST
-omd start TEST
+omd create test
+omd start test
 
 systemctl restart apache2
 
@@ -42,6 +42,6 @@ EOF
 
 echo "*******************************************************************************************"
 echo "checkmk raw erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/TEST/"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/test/"
 echo "Bitte notieren Sie sich das Passwort für den Benutzer cmkadmin"
 echo "**************************************************************************"
