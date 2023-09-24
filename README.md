@@ -6,6 +6,7 @@
 # ERP-opensource-Box
 
 Updates:  
+motioneye: Script für debian 12 angepasst.  
 checkmk_raw: Script für debian 12 angepasst.  
 Invoice Ninja: Script für debian 12 angepasst.  
 nextcloud: Script für debian 12 angepasst.
