@@ -26,6 +26,8 @@ rm get-pip.py
 python3 -m pip install 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
 motioneye_init
 
+pipx ensurepath
+
 systemctl stop motioneye
 python3 -m pip install --upgrade --force-reinstall --no-deps 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
 systemctl start motioneye
