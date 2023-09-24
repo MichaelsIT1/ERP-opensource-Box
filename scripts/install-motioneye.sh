@@ -18,16 +18,17 @@ apt update -y && apt dist-upgrade -y
 
 apt --no-install-recommends install ca-certificates curl python3 python3-dev libcurl4-openssl-dev gcc libssl-dev -y
 sleep 5
-apt install python3-pip -y
+#apt install python3-pip -y
+
 rm /usr/lib/python3.11/EXTERNALLY-MANAGED
 sleep 5
 
 # PIP installieren
-#curl -sSfO 'https://bootstrap.pypa.io/get-pip.py'
-#sleep 5
-#python3 get-pip.py
-#sleep 5
-#rm get-pip.py
+curl -sSfO 'https://bootstrap.pypa.io/get-pip.py'
+sleep 5
+python3 get-pip.py
+sleep 5
+rm get-pip.py
 
 
 sleep 5
