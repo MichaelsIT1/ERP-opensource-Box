@@ -16,7 +16,7 @@ echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
 
-apt --no-install-recommends install ca-certificates curl python3 python3-dev libcurl4-openssl-dev gcc libssl-dev pipx-y
+apt --no-install-recommends install ca-certificates curl python3 python3-dev libcurl4-openssl-dev gcc libssl-dev pipx -y
 sleep 5
 
 #curl -sSfO 'https://bootstrap.pypa.io/get-pip.py'
