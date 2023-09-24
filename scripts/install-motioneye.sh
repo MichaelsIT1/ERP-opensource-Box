@@ -1,7 +1,7 @@
 #!/bin/sh
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Debian 11 im LXC Container
+# getestet auf Debian 12 im LXC Container
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
@@ -20,10 +20,13 @@ apt --no-install-recommends install ca-certificates curl python3 python3-dev lib
 sleep 5
 
 curl -sSfO 'https://bootstrap.pypa.io/get-pip.py'
+sleep 5
 python3 get-pip.py
+sleep 5
 rm get-pip.py
 
 python3 -m pip install 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
+
 motioneye_init
 
 pipx ensurepath
