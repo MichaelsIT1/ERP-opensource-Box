@@ -30,7 +30,6 @@ python3 get-pip.py
 sleep 5
 rm get-pip.py
 
-
 sleep 5
 python3 -m pip install 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
 sleep 5
