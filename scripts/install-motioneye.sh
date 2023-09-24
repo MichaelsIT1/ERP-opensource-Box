@@ -29,35 +29,16 @@ python3 -m pip install 'https://github.com/motioneye-project/motioneye/archive/d
 
 motioneye_init
 
-pipx ensurepath
-
 systemctl stop motioneye
 python3 -m pip install --upgrade --force-reinstall --no-deps 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
 systemctl start motioneye
 
+# Text vor der Anmeldung
+tee /etc/issue >/dev/null <<EOF
+\4:8765
+Login: username: admin passwort: 
 
-
-
-
-
-
-
-
-
-
-
-sleep 5
-mkdir -p /etc/motioneye
-cp /usr/local/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf
- 
-mkdir -p /var/lib/motioneye
- 
-cp /usr/local/share/motioneye/extra/motioneye.systemd-unit-local /etc/systemd/system/motioneye.service
-systemctl daemon-reload
-systemctl enable motioneye
-systemctl start motioneye
- 
-usr/local/bin/pip2 install motioneye --upgrade
+EOF
 
 clear
 echo "*******************************************************************************************"
