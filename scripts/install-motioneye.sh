@@ -16,7 +16,7 @@ echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
 
-apt --no-install-recommends install ca-certificates curl python3 python3-dev libcurl4-openssl-dev gcc libssl-dev pipx -y
+apt --no-install-recommends install ca-certificates curl python3 python3-dev libcurl4-openssl-dev gcc libssl-dev -y
 sleep 5
 
 #curl -sSfO 'https://bootstrap.pypa.io/get-pip.py'
@@ -25,11 +25,14 @@ sleep 5
 #sleep 5
 #rm get-pip.py
 
-python3 -m pipx install 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
-
+rm /usr/lib/python3.11/EXTERNALLY-MANAGED
+sleep 5
+python3 -m pip install 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
+sleep 5
 motioneye_init
 
 # Upgrade
+sleep 40
 systemctl stop motioneye
 python3 -m pipx install --upgrade --force-reinstall --no-deps 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
 systemctl start motioneye
