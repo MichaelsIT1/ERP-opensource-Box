@@ -37,7 +37,7 @@ motioneye_init
 # Upgrade
 sleep 40
 systemctl stop motioneye
-python3 -m pipx install --upgrade --force-reinstall --no-deps 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
+python3 -m pip install --upgrade --force-reinstall --no-deps 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
 systemctl start motioneye
 
 # Text vor der Anmeldung
