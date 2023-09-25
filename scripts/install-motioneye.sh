@@ -18,7 +18,6 @@ apt update -y && apt dist-upgrade -y
 
 apt --no-install-recommends install ca-certificates curl python3 python3-dev libcurl4-openssl-dev gcc libssl-dev -y
 sleep 5
-#apt install python3-pip -y
 
 rm /usr/lib/python3.11/EXTERNALLY-MANAGED
 sleep 5
@@ -30,16 +29,17 @@ python3 get-pip.py
 sleep 5
 rm get-pip.py
 
+# motioneye installieren
 sleep 5
 python3 -m pip install 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
 sleep 5
 /usr/local/bin/motioneye_init
 
 # Upgrade
-sleep 40
-systemctl stop motioneye
-python3 -m pip install --upgrade --force-reinstall --no-deps 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
-systemctl start motioneye
+#sleep 40
+#systemctl stop motioneye
+#python3 -m pip install --upgrade --force-reinstall --no-deps 'https://github.com/motioneye-project/motioneye/archive/dev.tar.gz'
+#systemctl start motioneye
 
 # Text vor der Anmeldung
 tee /etc/issue >/dev/null <<EOF
