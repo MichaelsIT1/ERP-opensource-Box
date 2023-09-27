@@ -33,27 +33,27 @@ echo
 EOF
 
  # automatische Installation
-        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
-                    # current root password (emtpy after installation)
-        y           # Set root password?
-        open3a     # new root password
-        open3a     # new root password         
-        y           # Remove anonymous users?
-        y           # Disallow root login remotely?
-        y           # Remove test database and access to it?
-        y           # Reload privilege tables now?
-EOF
+ #       sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
+ #                   # current root password (emtpy after installation)
+ #       y           # Set root password?
+ #       open3a     # new root password
+ #       open3a     # new root password         
+ #       y           # Remove anonymous users?
+ #       y           # Disallow root login remotely?
+ #       y           # Remove test database and access to it?
+ #       y           # Reload privilege tables now?
+#EOF
 
 
 echo "open3a herunterladen"
 echo "********************************"
 cd /root/
-wget https://www.open3a.de/multiCMSDownload.php?filedl=133
+wget https://www.open3a.de/multiCMSDownload.php?filedl=139
 
 mkdir /var/www/html/open3a/
-mv multiCMSDownload.php\?filedl\=133 /var/www/html/open3a/
+mv multiCMSDownload.php\?filedl\=139 /var/www/html/open3a/
 cd /var/www/html/open3a/
-unzip multiCMSDownload.php?filedl=133
+unzip multiCMSDownload.php?filedl=139
 
 
 echo "Zugriffsrechte werden gesetzt"
