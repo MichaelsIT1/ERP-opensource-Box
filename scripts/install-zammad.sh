@@ -48,11 +48,14 @@ wget -qO- https://dl.packager.io/srv/zammad/zammad/key | gpg --dearmour -o /etc/
 wget -qO- https://dl.packager.io/srv/zammad/zammad/key | apt-key add -
 wget -O /etc/apt/sources.list.d/zammad.list \
   https://dl.packager.io/srv/zammad/zammad/stable/installer/debian/12.repo
-apt update
 
 
 
 # Zammad installieren
+echo "install zammad"
+apt update -y
+apt install zammad -y
+
 
 # Allow nginx or apache to access public files of Zammad and communicate
 chcon -Rv --type=httpd_sys_content_t /opt/zammad/public/
@@ -62,25 +65,23 @@ restorecon -Rv /opt/zammad/public/
 chmod -R a+r /opt/zammad/public/
 
  # Zammad service to start all services at once
- systemctl (status|start|stop|restart) zammad
+ systemctl restart zammad
 
  # Zammads internal puma server (relevant for displaying the web app)
- systemctl (status|start|stop|restart) zammad-web
+ systemctl restart zammad-web
 
  # Zammads background worker - relevant for all delayed- and background jobs
- systemctl (status|start|stop|restart) zammad-worker
+ systemctl restart zammad-worker
 
  # Zammads websocket server for session related information
- systemctl (status|start|stop|restart) zammad-websocket
+ systemctl restart zammad-websocket
 
  
 
 
 
 
-echo "install zammad"
-apt update -y
-apt install zammad -y
+
 
 sleep 5
 
