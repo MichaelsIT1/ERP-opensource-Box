@@ -50,6 +50,8 @@ wget -O /etc/apt/sources.list.d/zammad.list \
   https://dl.packager.io/srv/zammad/zammad/stable/installer/debian/12.repo
 apt update
 
+
+
 # Zammad installieren
 apt install zammad -y
 
