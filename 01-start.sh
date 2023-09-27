@@ -55,7 +55,7 @@ Choose an option: "
         ;;
         
     3)  CNAME="dewawi"
-        COS=$DEBIAN11
+        COS=$DEBIAN12
         CID=902
         create_container
         install_dewawi
