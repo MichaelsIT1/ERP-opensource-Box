@@ -6,6 +6,7 @@
 # ERP-opensource-Box
 
 Updates:  
+Zammad: Script für debian 12 in Arbeit  
 open3a: Script für debian 12 angepasst.  
 motioneye: Script für debian 12 angepasst.  
 checkmk_raw: Script für debian 12 angepasst.  
