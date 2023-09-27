@@ -35,9 +35,9 @@ EOF
 echo "dewawi herunterladen"
 echo "********************************"
 cd /var/www/html
-wget https://github.com/dewawi/dewawi/archive/1.0.1.zip
-unzip 1.0.1.zip
-mv dewawi-1.0.1/ dewawi 
+wget https://github.com/dewawi/dewawi/archive/1.0.2.zip
+unzip 1.0.2.zip
+mv dewawi-1.0.2/ dewawi 
 
 echo "Zugriffsrechte werden gesetzt"
 echo "*****************************"
