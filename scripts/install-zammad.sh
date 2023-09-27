@@ -53,7 +53,6 @@ apt update
 
 
 # Zammad installieren
-apt install zammad -y
 
 # Allow nginx or apache to access public files of Zammad and communicate
 chcon -Rv --type=httpd_sys_content_t /opt/zammad/public/
