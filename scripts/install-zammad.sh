@@ -16,6 +16,7 @@ echo
 echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
+apt install apt-transport-https sudo wget curl gnupg -y
 
 curl -fsSL https://dl.packager.io/srv/zammad/zammad/key | \
   gpg --dearmor | tee /etc/apt/trusted.gpg.d/pkgr-zammad.gpg> /dev/null
@@ -47,7 +48,7 @@ chmod -R a+r /opt/zammad/public/
 
  
 
-apt install apt-transport-https sudo wget curl gnupg -y
+
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/elasticsearch.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main"| \
 
 tee -a /etc/apt/sources.list.d/elastic-7.x.list > /dev/null
