@@ -43,9 +43,9 @@ apt install locales -y
 locale-gen en_US.UTF-8
 echo "LANG=en_US.UTF-8" > /etc/default/locale
 
-wget -qO- https://dl.packager.io/srv/zammad/zammad/key | sudo apt-key add -
-sudo wget -O /etc/apt/sources.list.d/zammad.list \
-  https://dl.packager.io/srv/zammad/zammad/stable/installer/ubuntu/20.04.repo
+#wget -qO- https://dl.packager.io/srv/zammad/zammad/key | sudo apt-key add -
+#sudo wget -O /etc/apt/sources.list.d/zammad.list \
+#  https://dl.packager.io/srv/zammad/zammad/stable/installer/ubuntu/20.04.repo
 
 # Zammad installieren
 
