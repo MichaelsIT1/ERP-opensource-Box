@@ -69,5 +69,6 @@ clear
 echo "*******************************************************************************************"
 echo "open3A erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/open3a/"
+echo "Zugangsdaten: Benutzer: Admin, Passwort: Admin"
 echo "Zugangsdaten: Host: localhost, Bentzer: open3a, Passwort: open3a, Datenbank: open3a, Passwort: open3a"
 echo "**************************************************************************"
