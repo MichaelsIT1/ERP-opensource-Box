@@ -65,6 +65,12 @@ echo
   chmod 777 specifics/
   chmod 777 system/Backup/
 
+# Text vor der Anmeldung
+tee /etc/issue >/dev/null <<EOF
+\4/open3a/
+
+EOF
+
 clear
 echo "*******************************************************************************************"
 echo "open3A erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
