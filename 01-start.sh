@@ -48,7 +48,7 @@ Choose an option: "
         ;;
         
     2)  CNAME="open3a"
-        COS=$DEBIAN11
+        COS=$DEBIAN12
         CID=901
         create_container
         install_open3a
