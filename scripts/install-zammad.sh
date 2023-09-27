@@ -48,11 +48,9 @@ wget -qO- https://dl.packager.io/srv/zammad/zammad/key | gpg --dearmour -o /etc/
 wget -qO- https://dl.packager.io/srv/zammad/zammad/key | apt-key add -
 wget -O /etc/apt/sources.list.d/zammad.list \
   https://dl.packager.io/srv/zammad/zammad/stable/installer/debian/12.repo
-apt-get update
+apt update
 
 # Zammad installieren
-
-apt update
 apt install zammad -y
 
 # Allow nginx or apache to access public files of Zammad and communicate
