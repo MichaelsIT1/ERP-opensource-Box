@@ -3,7 +3,7 @@
 # Nur für Testzwecke. Es erfolgt z.B. kein Backup oder Optimierungen
 # auf eigenes Risiko, ohne Gewähr
 # für Rückfragen info@edv-spoor.de
-# ERP-opensource-Box
+# ERP-opensource-Box für x64
 
 Updates:  
 Zammad: Script für debian 12 in Arbeit  
