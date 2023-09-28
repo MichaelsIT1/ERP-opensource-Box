@@ -19,6 +19,9 @@ echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
 
+# Postgresql database install
+apt install postgresql postgresql-contrib -y
+
 # generate and update the locales
 apt install locales -y
 locale-gen en_US.UTF-8
