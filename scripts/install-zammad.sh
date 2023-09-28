@@ -79,6 +79,8 @@ systemctl enable --now elasticsearch
 # Set the Elasticsearch server address
 zammad run rails r "Setting.set('es_url', 'http://zammad:9200')"
 
+sleep 5
+
 # Define Elasticsearch Authentication Credentials
 set +o history
 zammad run rails r "Setting.set('es_user', 'elastic')"
