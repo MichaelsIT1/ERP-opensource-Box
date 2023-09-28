@@ -72,9 +72,9 @@ systemctl restart zammad-websocket
 # Running Elasticsearch
 systemctl enable --now elasticsearch
 
-curl -XGET "https://localhost:9200" \
---cacert /etc/elasticsearch/certs/http_ca.crt \
--u elastic
+#curl -XGET "https://localhost:9200" \
+#--cacert /etc/elasticsearch/certs/http_ca.crt \
+#-u elastic
 
 # Set the Elasticsearch server address
 zammad run rails r "Setting.set('es_url', 'http://zammad:9200')"
