@@ -21,9 +21,14 @@ apt install apt-transport-https sudo wget curl gnupg -y
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/pkgr-zammad.gpg] https://dl.packager.io/srv/deb/zammad/zammad/stable/debian 11 main"| \
    tee /etc/apt/sources.list.d/zammad.list > /dev/null
 
-
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | \
   gpg --dearmor | tee /etc/apt/trusted.gpg.d/elasticsearch.gpg> /dev/null
+
+wget -qO- https://dl.packager.io/srv/zammad/zammad/key | sudo apt-key add -
+wget -O /etc/apt/sources.list.d/zammad.list \
+  https://dl.packager.io/srv/zammad/zammad/stable/installer/debian/11.repo
+sudo apt-get update
+
 apt update -y
 apt install elasticsearch -y
 /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
