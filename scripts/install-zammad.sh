@@ -19,7 +19,7 @@ apt update -y && apt dist-upgrade -y
 apt-get install wget apt-transport-https gnupg curl -y
 
 # debian 11 gpg key
-wget -qO- https://dl.packager.io/srv/zammad/zammad/key | sudo apt-key add -
+wget -qO- https://dl.packager.io/srv/zammad/zammad/key | apt-key add -
 wget -O /etc/apt/sources.list.d/zammad.list \
   https://dl.packager.io/srv/zammad/zammad/stable/installer/debian/11.repo
 apt-get update
