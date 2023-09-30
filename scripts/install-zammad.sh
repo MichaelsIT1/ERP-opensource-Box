@@ -16,7 +16,7 @@ echo
 echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
-apt-get install wget apt-transport-https -y
+apt-get install wget apt-transport-https gnupg -y
 
 # debian 11 gpg key
 wget -qO- https://dl.packager.io/srv/zammad/zammad/key | sudo apt-key add -
