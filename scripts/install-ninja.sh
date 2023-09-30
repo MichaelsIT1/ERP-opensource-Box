@@ -40,7 +40,7 @@ apt install wget curl unzip vim -y
 mkdir  /var/www/invoice_ninja
 cd /var/www/invoice_ninja
 
-wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.7.12/invoiceninja.zip
+wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.7.24/invoiceninja.zip
 unzip invoiceninja.zip -d /var/www/invoice_ninja
 
 chown -R www-data:www-data /var/www/invoice_ninja
