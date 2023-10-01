@@ -1,7 +1,7 @@
 #!/bin/sh
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Ubuntu 20.04 im LXC Container
+# getestet auf Ubuntu 22.04 im LXC Container
 
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
@@ -32,9 +32,9 @@ apt install locales -y
 locale-gen en_US.UTF-8
 echo "LANG=en_US.UTF-8" > /etc/default/locale
 
-wget -qO- https://dl.packager.io/srv/zammad/zammad/key | sudo apt-key add -
-sudo wget -O /etc/apt/sources.list.d/zammad.list \
-  https://dl.packager.io/srv/zammad/zammad/stable/installer/ubuntu/20.04.repo
+wget -qO- https://dl.packager.io/srv/zammad/zammad/key | apt-key add -
+wget -O /etc/apt/sources.list.d/zammad.list \
+  https://dl.packager.io/srv/zammad/zammad/stable/installer/ubuntu/22.04.repo
 
 echo "install zammad"
 apt update -y
