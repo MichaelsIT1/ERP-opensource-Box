@@ -16,36 +16,25 @@ echo
 echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
-apt-get install wget apt-transport-https gnupg curl -y
 
-# debian 11 gpg key
-wget -qO- https://dl.packager.io/srv/zammad/zammad/key | apt-key add -
-wget -O /etc/apt/sources.list.d/zammad.list \
-  https://dl.packager.io/srv/zammad/zammad/stable/installer/debian/11.repo
-apt-get update
 
-echo "deb [signed-by=/etc/apt/trusted.gpg.d/pkgr-zammad.gpg] https://dl.packager.io/srv/deb/zammad/zammad/stable/debian 11 main"| \
-   tee /etc/apt/sources.list.d/zammad.list > /dev/null
 
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | \
-  gpg --dearmor | tee /etc/apt/trusted.gpg.d/elasticsearch.gpg> /dev/null
-
-apt install apt-transport-https wget curl gnupg
+apt install apt-transport-https sudo wget curl gnupg -y
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/elasticsearch.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main"| \
   tee -a /etc/apt/sources.list.d/elastic-7.x.list > /dev/null
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | \
   gpg --dearmor | tee /etc/apt/trusted.gpg.d/elasticsearch.gpg> /dev/null
- apt update
- apt install elasticsearch -y
- /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
+apt update -y
+apt install elasticsearch -y
+/usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
 
 apt install locales -y
 locale-gen en_US.UTF-8
 echo "LANG=en_US.UTF-8" > /etc/default/locale
 
 wget -qO- https://dl.packager.io/srv/zammad/zammad/key | sudo apt-key add -
-echo "deb [signed-by=/etc/apt/trusted.gpg.d/pkgr-zammad.gpg] https://dl.packager.io/srv/deb/zammad/zammad/stable/debian 11 main"| \
-   tee /etc/apt/sources.list.d/zammad.list > /dev/null  
+sudo wget -O /etc/apt/sources.list.d/zammad.list \
+  https://dl.packager.io/srv/zammad/zammad/stable/installer/ubuntu/20.04.repo
 
 echo "install zammad"
 apt update -y
