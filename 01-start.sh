@@ -11,7 +11,7 @@ DEBIAN10=local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz
 DEBIAN11=local:vztmpl/debian-11-standard_11.7-1_amd64.tar.zst 
 DEBIAN12=local:vztmpl/debian-12-standard_12.0-1_amd64.tar.zst
 UBUNTU20=local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz
-UBUNTU=local:vztmpl/ubuntu-22.10-standard_22.10-1_amd64.tar.zst
+UBUNTU=local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst
 
 # Funktionen
 menu() {
@@ -105,7 +105,7 @@ Choose an option: "
         ;;
         
  10) CNAME="zammad"
-        COS=$UBUNTU20
+        COS=$UBUNTU
         CID=909
         create_container
         install_zammad
