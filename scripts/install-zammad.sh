@@ -34,7 +34,7 @@ echo "LANG=en_US.UTF-8" > /etc/default/locale
 
 wget -qO- https://dl.packager.io/srv/zammad/zammad/key | apt-key add -
 wget -O /etc/apt/sources.list.d/zammad.list \
-  https://dl.packager.io/srv/zammad/zammad/stable/installer/ubuntu/20.04.repo
+  https://dl.packager.io/srv/zammad/zammad/stable/installer/ubuntu/22.04.repo
 
 echo "install zammad"
 apt update -y
