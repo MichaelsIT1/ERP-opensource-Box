@@ -105,7 +105,7 @@ Choose an option: "
         ;;
         
  10) CNAME="zammad"
-        COS=$DEBIAN12
+        COS=$DEBIAN11
         CID=909
         create_container
         install_zammad
