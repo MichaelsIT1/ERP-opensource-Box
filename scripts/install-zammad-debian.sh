@@ -6,7 +6,7 @@
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
-clear
+clear 
 
 echo "Zeitzone auf Europe/Berlin gesetzt"
 echo "**********************************"
