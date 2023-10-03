@@ -30,8 +30,8 @@ apt install elasticsearch -y
 /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
 
 apt install locales -y
-locale-gen en_US.UTF-8
-echo "LANG=en_US.UTF-8" > /etc/default/locale
+locale-gen de_DE.utf8
+echo "LANG=de_DE.UTF-8" > /etc/default/locale
 
 # zammad
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/pkgr-zammad.gpg] https://dl.packager.io/srv/deb/zammad/zammad/stable/debian 12 main"| \
