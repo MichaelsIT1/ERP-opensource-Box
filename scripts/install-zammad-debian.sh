@@ -34,11 +34,11 @@ locale-gen en_US.UTF-8
 echo "LANG=en_US.UTF-8" > /etc/default/locale
 
 # zammad
-echo "deb [signed-by=/etc/apt/trusted.gpg.d/pkgr-zammad.gpg] https://dl.packager.io/srv/deb/zammad/zammad/stable/debian 11 main"| \
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/pkgr-zammad.gpg] https://dl.packager.io/srv/deb/zammad/zammad/stable/debian 12 main"| \
    tee /etc/apt/sources.list.d/zammad.list > /dev/null
 
 echo "install zammad"
-apt update -y
+apt update
 apt install zammad -y
 
 sleep 5
