@@ -17,7 +17,7 @@ echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
 
-apt install apt-transport-https sudo wget curl gnupg -y
+apt install apt-transport-https sudo wget curl gnupg libimlib2 -y
 
 
 # elastic search
