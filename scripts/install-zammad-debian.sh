@@ -15,9 +15,12 @@ echo
 
 echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
-apt update -y && apt dist-upgrade -y
+apt update && apt dist-upgrade -y
 
 apt install apt-transport-https sudo wget curl gnupg libimlib2 -y
+
+# Install Required Packages for Redis Installation on Debian
+apt install software-properties-common apt-transport-https curl ca-certificates -y
 
 
 # elastic search
