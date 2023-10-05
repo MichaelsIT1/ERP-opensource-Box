@@ -40,6 +40,10 @@ echo "LANG=de_DE.UTF-8" > /etc/default/locale
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/pkgr-zammad.gpg] https://dl.packager.io/srv/deb/zammad/zammad/stable/debian 12 main"| \
    tee /etc/apt/sources.list.d/zammad.list > /dev/null
 
+chown -R redis:redis /var/log/redis
+chmod -R u+rwX,g+rwX,u+rx /var/log/redis
+chmod +r /etc/redis/redis.conf
+
 echo "install zammad"
 apt update
 apt install zammad -y
