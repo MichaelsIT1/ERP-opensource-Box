@@ -177,7 +177,7 @@ pct create $CID $COS \
         -memory 4096 \
         -net0 name=eth0,bridge=vmbr0,ip=dhcp \
         -unprivileged 1 \
-        -features nesting=1,keyctl=1
+        -features nesting=0,keyctl=0
 
 pct start $CID
 sleep 10
