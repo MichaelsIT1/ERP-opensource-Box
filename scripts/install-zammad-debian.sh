@@ -20,14 +20,14 @@ apt update && apt dist-upgrade -y
 apt install apt-transport-https sudo wget curl gnupg libimlib2 -y
 
 # Install Required Packages for Redis Installation on Debian
-apt install software-properties-common apt-transport-https curl ca-certificates -y
-
+apt install software-properties-common apt-transport-https curl ca-certificates lsb-release gpg -y
 
 # elastic search
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/elasticsearch.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main"| \
   tee -a /etc/apt/sources.list.d/elastic-7.x.list > /dev/null
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | \
   gpg --dearmor | tee /etc/apt/trusted.gpg.d/elasticsearch.gpg> /dev/null
+
 apt update
 apt install elasticsearch -y
 /usr/share/elasticsearch/bin/elasticsearch-plugin install ingest-attachment
