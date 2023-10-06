@@ -105,7 +105,7 @@ Choose an option: "
         ;;
         
  10) CNAME="zammad"
-        COS=$DEBIAN12
+        COS=$UBUNTU
         CID=909
         create_container
         install_zammad
@@ -255,7 +255,7 @@ pct exec $CID -- bash -c "sh /root/install-docspell.sh"
 }
 
 install_zammad() {
-pct push $CID scripts/install-zammad.sh /root/install-zammad-debian.sh
+pct push $CID scripts/install-zammad.sh /root/install-zammad.sh
 pct exec $CID -- bash -c "sh /root/install-zammad-debian.sh"
 }
 
