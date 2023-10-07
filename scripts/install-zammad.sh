@@ -12,7 +12,7 @@ echo "Zeitzone auf Europe/Berlin gesetzt"
 echo "**********************************"
 timedatectl set-timezone Europe/Berlin 
 echo
-
+ 
 echo "Betriebssystem wird aktualisiert"
 echo "***************************************"
 apt update -y && apt dist-upgrade -y
