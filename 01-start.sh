@@ -18,17 +18,18 @@ menu() {
     clear
     echo "
 MAIN MENU
-1) Invoice Ninja (Rechnungsprogramm)
-2) open3a (Rechnungsprogramm)
+1) Invoice Ninja (Rechnungsprogramm, debian12)
+2) open3a (Rechnungsprogramm, debian12)
 3) DEWAWI (Warenwirtschaft) FEHLER
 4) ISPConfig (Webseitenhosting/Mailserver) 
 5) iTop (CMDB)
 6) i-doit (CMDB)
-7) checkMK-Raw (LAN-Monitoring)
+7) checkMK-Raw (LAN-Monitoring, debian12)
 8) Nextcloud (Zusammenarbeit)
 9) motioneye (Videokamerazentrale)
-10) Zammad (Ticketsystem)
-11) docspell (Dokumentenverwaltung mit OCR)
+10) Zammad (Ticketsystem, debian12 FEHLER)
+11) Zammad (Ticketsystem, Ubuntu22.04)
+12) docspell (Dokumentenverwaltung mit OCR)
 ----------------------------------------
 DOCKER Software (bitte setzen: -unprivileged 0)
 20) Portainer
@@ -105,15 +106,22 @@ Choose an option: "
         ;;
         
  10) CNAME="zammad"
-        COS=$UBUNTU
+        COS=$DEBIAN12
         CID=909
         create_container
         install_zammad
         ;;
 
-11)  CNAME="docspell"
+11) CNAME="zammad"
+        COS=$UBUNTU
+        CID=911
+        create_container
+        install_zammad_ubuntu
+        ;;
+
+12)  CNAME="docspell"
         COS=$DEBIAN11
-        CID=910
+        CID=912
         create_container
         install_docspell
         ;;   
@@ -256,7 +264,12 @@ pct exec $CID -- bash -c "sh /root/install-docspell.sh"
 
 install_zammad() {
 pct push $CID scripts/install-zammad.sh /root/install-zammad.sh
-pct exec $CID -- bash -c "sh /root/install-zammad-debian.sh"
+pct exec $CID -- bash -c "sh /root/install-zammad.sh"
+}
+
+install_zammad_ubuntu() {
+pct push $CID scripts/install-zammad.sh /root/install-zammad.sh
+pct exec $CID -- bash -c "sh /root/install-zammad-ubuntu.sh"
 }
 
 
