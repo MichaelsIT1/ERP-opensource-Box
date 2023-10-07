@@ -268,7 +268,7 @@ pct exec $CID -- bash -c "sh /root/install-zammad-debian.sh"
 }
 
 install_zammad_ubuntu() {
-pct push $CID scripts/install-zammad.sh /root/install-zammad-ubuntu.sh
+pct push $CID scripts/install-zammad-ubuntu.sh /root/install-zammad-ubuntu.sh
 pct exec $CID -- bash -c "sh /root/install-zammad-ubuntu.sh"
 }
 
