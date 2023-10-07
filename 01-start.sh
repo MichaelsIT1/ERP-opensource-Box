@@ -263,7 +263,7 @@ pct exec $CID -- bash -c "sh /root/install-docspell.sh"
 }
 
 install_zammad_debian() {
-pct push $CID scripts/install-zammad.sh /root/install-zammad-debian.sh
+pct push $CID scripts/install-zammad-debian.sh /root/install-zammad-debian.sh
 pct exec $CID -- bash -c "sh /root/install-zammad-debian.sh"
 }
 
