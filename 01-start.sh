@@ -30,10 +30,6 @@ MAIN MENU
 10) Zammad (Ticketsystem, debian12 FEHLER)
 11) Zammad (Ticketsystem, Ubuntu22.04)
 12) docspell (Dokumentenverwaltung mit OCR)
-----------------------------------------
-DOCKER Software (bitte setzen: -unprivileged 0)
-20) Portainer
-21) metafresh (ERP)
 
 -----------------------------------------
 50) Debian 12 Container
@@ -124,23 +120,7 @@ Choose an option: "
         CID=912
         create_container
         install_docspell
-        ;;   
-
-   
-     20) CNAME="docker-portainer"
-        COS=$UBUNTU
-        CID=919
-        create_container
-        install_portainer
-        ;;
-        
-    21)  CNAME="metafresh-docker-test"
-        COS=$UBUNTU # only Ubuntu
-        CID=920
-        create_container
-        install_metafresh
-        ;;
-    
+        ;; 
     
     50) CNAME="debian12"
         COS=$DEBIAN12
