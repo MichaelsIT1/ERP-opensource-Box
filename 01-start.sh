@@ -29,7 +29,6 @@ MAIN MENU
 9) motioneye (Videokamerazentrale)
 10) Zammad (Ticketsystem, debian12 FEHLER)
 11) Zammad (Ticketsystem, Ubuntu22.04)
-12) docspell (Dokumentenverwaltung mit OCR)
 
 -----------------------------------------
 50) Debian 12 Container
