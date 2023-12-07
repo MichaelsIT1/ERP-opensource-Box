@@ -36,7 +36,7 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 Benutzung
 --
 
-auf dem Proxmox-Host (Server auf dem Proxmox VE läuft)
+auf dem Proxmox-Host (Server auf dem Proxmox VE läuft)  
 git clone https://github.com/MichaelsIT1/ERP-opensource-Box.git  
 cd ERP-opensource-Box  
 sh 01-start.sh  
