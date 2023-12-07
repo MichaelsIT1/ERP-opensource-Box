@@ -18,6 +18,7 @@ menu() {
     clear
     echo "
 MAIN MENU
+Info: Alle Container beginnen ab ID900
 1) Invoice Ninja (Rechnungsprogramm, debian12)
 2) open3a (Rechnungsprogramm, debian12)
 3) DEWAWI (Warenwirtschaft) FEHLER
