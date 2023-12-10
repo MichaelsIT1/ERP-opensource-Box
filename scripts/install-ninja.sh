@@ -81,6 +81,9 @@ systemctl reload apache2
 
 clear
 
+chown -R www-data:www-data /var/www/invoice_ninja
+chmod -R 755 /var/www/invoice_ninja
+
 # erzeugt einen Rechnungskey
 echo "Bitte folgende Fragen mit ja beantworten"
 php /var/www/invoice_ninja/artisan key:generate
