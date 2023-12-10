@@ -103,7 +103,7 @@ clear
 
 echo "*******************************************************************************************"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/setup-nextcloud.php"
-echo "Zugangsdaten:" 
+echo "für die Einrichtung Zugangsdaten:" 
 echo "Benutzer: nextcloud"
 echo "Passwort: nextcloud" 
 echo "Datenbank: nextcloud" 
