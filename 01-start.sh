@@ -34,8 +34,8 @@ Info: Alle Container beginnen ab ID900
 10) Zammad (Ticketsystem, debian12 FEHLER)
 11) Zammad (Ticketsystem, Ubuntu22.04)
 -----------------------------------------
-
-50) Dockerhost (Portainer debian)
+DOCKER
+50) Dockerhost (mit Portainer debian)
 55) docker-docspell
 
 99) lokale Images
