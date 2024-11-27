@@ -32,7 +32,7 @@ Info: Alle Container beginnen ab ID900
 11) Zammad (Ticketsystem, Ubuntu22.04)
 -----------------------------------------
 
-50) Dockerhost (debian)
+50) Dockerhost (Portainer/debian)
 
 99) lokale Images
 0) Exit
@@ -123,11 +123,11 @@ Choose an option: "
         install_docspell
         ;; 
     
-    50) CNAME="debian12"
+    50) CNAME="docker_Portainer"
         COS=$DEBIAN12
         CID=949
         create_container
-        install_debian
+        install_portainer
         ;;
         
      
