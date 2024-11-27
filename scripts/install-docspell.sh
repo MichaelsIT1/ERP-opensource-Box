@@ -11,3 +11,9 @@ IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | gre
 clear
 echo "docspell installieren"
 echo "*******************************"
+git clone https://github.com/eikek/docspell
+cd docspell/docker/docker-compose
+docker-compose up -d
+
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:7880/"
+echo "*************************************************************"
