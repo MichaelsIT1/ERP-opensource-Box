@@ -123,16 +123,15 @@ Choose an option: "
         install_docspell
         ;; 
     
-    50) CNAME="docker_Portainer"
+# DOCKER
+50) CNAME="docker_Portainer"
         COS=$DEBIAN12
         CID=949
         create_dockerhost
         install_portainer
         ;;
         
-     
-
-    1001)  CNAME="xentral-test"
+1001)  CNAME="xentral-test"
         COS=$DEBIAN11
         CID=1001
         create_container
@@ -182,7 +181,6 @@ pct create $CID $COS \
         -cores 2 \
         -memory 4096 \
         -net0 name=eth0,bridge=vmbr0,ip=dhcp \
-        -unprivileged 0 \
         -features nesting=1
 
 pct start $CID
