@@ -1,7 +1,6 @@
 #!/bin/sh
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Debian 11 im LXC Container
 
 # Doku
 # https://github.com/andreklug/docspell-debian
