@@ -13,6 +13,9 @@ DEBIAN12=local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst
 UBUNTU20=local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz
 UBUNTU=local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst
 
+# DOCKERHOST-ID
+DOCKERHOST-ID=949
+
 # Funktionen
 menu() {
     clear
@@ -126,7 +129,7 @@ Choose an option: "
 # DOCKER
 50) CNAME="docker-Portainer"
         COS=$DEBIAN12
-        CID=949
+        CID=$DOCKERHOST-ID
         create_dockerhost
         install_portainer
         ;;
