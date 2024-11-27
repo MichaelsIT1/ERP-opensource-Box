@@ -30,9 +30,10 @@ Info: Alle Container beginnen ab ID900
 9) motioneye (Videokamerazentrale, debian12)
 10) Zammad (Ticketsystem, debian12 FEHLER)
 11) Zammad (Ticketsystem, Ubuntu22.04)
-
 -----------------------------------------
-50) Debian 12 Container
+
+50) Dockerhost (debian)
+
 99) lokale Images
 0) Exit
 Choose an option: "
