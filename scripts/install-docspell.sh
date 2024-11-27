@@ -17,7 +17,7 @@ docker-compose up -d
 
 # Text vor der Anmeldung
 tee /etc/issue >/dev/null <<EOF
-\4/TEST
+http://\4/7880
 
 EOF
 
