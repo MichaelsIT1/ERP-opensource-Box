@@ -126,7 +126,7 @@ Choose an option: "
     50) CNAME="docker_Portainer"
         COS=$DEBIAN12
         CID=949
-        create_container
+        create_dockerhost
         install_portainer
         ;;
         
@@ -171,6 +171,25 @@ pct create $CID $COS \
 pct start $CID
 sleep 10
 }
+
+# DOCKERHOST erzeugen
+create_dockerhost() {
+clear
+pct create $CID $COS \
+        -hostname $CNAME \
+        -password $CPW \
+        -rootfs local-zfs:32 \
+        -cores 2 \
+        -memory 4096 \
+        -net0 name=eth0,bridge=vmbr0,ip=dhcp \
+        -unprivileged 0 \
+        -features nesting=1
+
+pct start $CID
+sleep 10
+}
+
+
 
 # Installation xentral opensource
 install_xentral() {
