@@ -118,13 +118,6 @@ Choose an option: "
         create_container
         install_zammad_ubuntu
         ;;
-
-12)  CNAME="docspell"
-        COS=$DEBIAN11
-        CID=912
-        create_container
-        install_docspell
-        ;; 
     
 # DOCKER
 50) CNAME="docker-Portainer"
@@ -133,6 +126,12 @@ Choose an option: "
         create_dockerhost
         install_portainer
         ;;
+
+55) CNAME="docker-docspell"
+        COS=$DEBIAN12
+        CID=$DOCKERHOST_ID
+        install_docspell
+        ;; 
         
 1001)  CNAME="xentral-test"
         COS=$DEBIAN11
@@ -224,11 +223,6 @@ pct push $CID scripts/install-metafresh.sh /root/install-metafresh.sh
 pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
 }
 
-install_portainer() {
-pct push $CID scripts/install-portainer.sh /root/install-portainer.sh
-pct exec $CID -- bash -c "sh /root/install-portainer.sh"
-}
-
 install_itop() {
 pct push $CID scripts/install-itop.sh /root/install-itop.sh
 pct exec $CID -- bash -c "sh /root/install-itop.sh"
@@ -259,11 +253,6 @@ pct push $CID scripts/install-ninja.sh /root/install-ninja.sh
 pct exec $CID -- bash -c "sh /root/install-ninja.sh"
 }
 
-install_docspell() {
-pct push $CID scripts/install-docspell.sh /root/install-docspell.sh
-pct exec $CID -- bash -c "sh /root/install-docspell.sh"
-}
-
 install_zammad_debian() {
 pct push $CID scripts/install-zammad-debian.sh /root/install-zammad-debian.sh
 pct exec $CID -- bash -c "sh /root/install-zammad-debian.sh"
@@ -274,7 +263,16 @@ pct push $CID scripts/install-zammad-ubuntu.sh /root/install-zammad-ubuntu.sh
 pct exec $CID -- bash -c "sh /root/install-zammad-ubuntu.sh"
 }
 
+# DOCKER
+install_portainer() {
+pct push $CID scripts/install-portainer.sh /root/install-portainer.sh
+pct exec $CID -- bash -c "sh /root/install-portainer.sh"
+}
 
+install_docspell() {
+pct push $CID scripts/install-docspell.sh /root/install-docspell.sh
+pct exec $CID -- bash -c "sh /root/install-docspell.sh"
+}
 
 # main program
 menu
