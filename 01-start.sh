@@ -36,6 +36,7 @@ Info: Alle Container beginnen ab ID900
 -----------------------------------------
 
 50) Dockerhost (Portainer debian)
+55) docker-docspell
 
 99) lokale Images
 0) Exit
