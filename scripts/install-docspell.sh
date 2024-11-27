@@ -15,5 +15,13 @@ git clone https://github.com/eikek/docspell
 cd docspell/docker/docker-compose
 docker-compose up -d
 
+# Text vor der Anmeldung
+tee /etc/issue >/dev/null <<EOF
+\4/TEST
+
+EOF
+
+CLEAR
+
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:7880/"
 echo "*************************************************************"
