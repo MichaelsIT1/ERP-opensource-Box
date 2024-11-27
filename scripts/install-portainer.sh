@@ -1,8 +1,7 @@
 #!/bin/sh
 # Status: Alpha
-# DOCKER
+# DOCKER DEBIAN
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Ubuntu im LXC Container
 # https://docs.portainer.io/v/ce-2.9/start/install/server/docker/linux
 
 # System-Varibale
@@ -23,7 +22,7 @@ sleep 5
 echo
 echo "Docker wird installiert"
 echo "**************************************************"
-apt install docker docker.io docker-compose git ca-certificates curl gnupg lsb-release -y
+apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release -y
 sleep 5
 docker volume create portainer_data
 sleep 5
