@@ -32,7 +32,7 @@ Info: Alle Container beginnen ab ID900
 11) Zammad (Ticketsystem, Ubuntu22.04)
 -----------------------------------------
 
-50) Dockerhost (Portainer/debian)
+50) Dockerhost (Portainer debian)
 
 99) lokale Images
 0) Exit
@@ -181,6 +181,7 @@ pct create $CID $COS \
         -cores 2 \
         -memory 4096 \
         -net0 name=eth0,bridge=vmbr0,ip=dhcp \
+        -unprivileged 0 \
         -features nesting=1
 
 pct start $CID
