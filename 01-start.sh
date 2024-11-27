@@ -128,7 +128,6 @@ Choose an option: "
         ;;
 
 55) CNAME="docker-docspell"
-        COS=$DEBIAN12
         CID=$DOCKERHOST_ID
         install_docspell
         ;; 
