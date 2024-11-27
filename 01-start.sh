@@ -14,7 +14,7 @@ UBUNTU20=local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz
 UBUNTU=local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst
 
 # DOCKERHOST-ID
-DOCKERHOST-ID=949
+DOCKERHOST_ID=949
 
 # Funktionen
 menu() {
@@ -129,7 +129,7 @@ Choose an option: "
 # DOCKER
 50) CNAME="docker-Portainer"
         COS=$DEBIAN12
-        CID=$DOCKERHOST-ID
+        CID=$DOCKERHOST_ID
         create_dockerhost
         install_portainer
         ;;
