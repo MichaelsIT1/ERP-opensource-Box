@@ -121,7 +121,7 @@ Choose an option: "
         ;;
     
 # DOCKER
-50) CNAME="docker-Portainer"
+50) CNAME="dockerhost-Portainer"
         COS=$DEBIAN12
         CID=$DOCKERHOST_ID
         create_dockerhost
