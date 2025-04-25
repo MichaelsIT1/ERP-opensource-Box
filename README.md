@@ -10,7 +10,7 @@ Zammad: Script für debian 12 in Arbeit
 open3a: Script für debian 12 angepasst.  
 motioneye: Script für debian 12 angepasst.  
 checkmk_raw: Script für debian 12 angepasst.  
-Invoice Ninja: Script für debian 12 angepasst. am 10.12.23 auf Funktionalität geprüft  
+Invoice Ninja: Script für debian 12 angepasst. am 25.04.25 auf Funktionalität geprüft  
 nextcloud: Script für debian 12 angepasst. am 10.12.23 auf Funktionalität geprüft  
 
 
