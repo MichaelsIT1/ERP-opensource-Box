@@ -41,7 +41,8 @@ mkdir  /var/www/invoice_ninja
 cd /var/www/invoice_ninja
 
 # Software herunterladen und entpacken
-wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.10.57/invoiceninja.tar
+#wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.10.57/invoiceninja.tar
+wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.11.71/invoiceninja.tar
 tar -xf invoiceninja.tar
 
 chown -R www-data:www-data /var/www/invoice_ninja
