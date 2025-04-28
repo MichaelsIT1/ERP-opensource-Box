@@ -21,6 +21,9 @@ menu() {
     clear
     echo "
 MAIN MENU
+***************
+Michas Tollbox
+****************
 Info: Alle Container beginnen ab ID900
 1) Invoice Ninja (Rechnungsprogramm, debian12)
 2) open3a (Rechnungsprogramm, debian12)
