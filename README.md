@@ -6,6 +6,7 @@
 # ERP-opensource-Box für x64
 
 Updates:  
+checkMK-Raw (Netzwerkmonitoring): am 28.04.25 auf Funktionalität geprüft (debian12)   
 Invoice Ninja: am 28.04.25 auf Funktionalität geprüft (debian12)   
 Zammad: Script für debian 12 in Arbeit  
 open3a: Script für debian 12 angepasst.  
