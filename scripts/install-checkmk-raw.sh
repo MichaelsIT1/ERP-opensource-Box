@@ -25,7 +25,8 @@ echo
 
 
 cd /root/
-wget https://download.checkmk.com/checkmk/2.2.0p9/check-mk-raw-2.2.0p9_0.bookworm_amd64.deb
+#wget https://download.checkmk.com/checkmk/2.2.0p9/check-mk-raw-2.2.0p9_0.bookworm_amd64.deb
+wget https://download.checkmk.com/checkmk/2.3.0p30/check-mk-raw-2.3.0p30_0.bookworm_amd64.deb
 
 apt install ./check* -y
 
