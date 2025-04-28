@@ -23,7 +23,14 @@ menu() {
 MAIN MENU
 ***************
 Michas Tollbox
+
+WICHTIG: 
+Für Datenverlust oder sonstiges übernehem ich keine Haftung.
+Bitte benutzen Sie das Script wenn Sie fachkundig sind.
+Dieses Script hilft Ihnen Software zu installieren.
+Es werden keine Optimierungen, Backups vorgenommen.
 ****************
+
 Info: Alle Container beginnen ab ID900
 1) Invoice Ninja (Rechnungsprogramm, debian12)
 2) open3a (Rechnungsprogramm, debian12)
