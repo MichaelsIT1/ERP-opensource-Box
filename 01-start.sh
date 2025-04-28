@@ -22,7 +22,7 @@ menu() {
     echo "
 MAIN MENU
 ***************
-Michas Tollbox
+Michas Toölbox
 
 WICHTIG: 
 Für Datenverlust oder sonstiges übernehem ich keine Haftung.
