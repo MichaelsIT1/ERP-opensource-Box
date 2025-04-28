@@ -6,6 +6,11 @@
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
+VERSION=https://github.com/invoiceninja/invoiceninja/releases/download/v5.11.72/invoiceninja.tar
+
+
+
+
 clear
 echo "Invoice Ninja installieren"
 echo "*******************************"
@@ -42,7 +47,8 @@ cd /var/www/invoice_ninja
 
 # Software herunterladen und entpacken
 #wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.10.57/invoiceninja.tar
-wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.11.71/invoiceninja.tar
+#wget https://github.com/invoiceninja/invoiceninja/releases/download/v5.11.71/invoiceninja.tar
+wget $VERSION
 tar -xf invoiceninja.tar
 
 chown -R www-data:www-data /var/www/invoice_ninja
