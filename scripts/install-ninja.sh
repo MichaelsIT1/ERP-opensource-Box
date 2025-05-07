@@ -6,7 +6,7 @@
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
-VERSION=https://github.com/invoiceninja/invoiceninja/releases/download/v5.11.72/invoiceninja.tar
+VERSION=https://github.com/invoiceninja/invoiceninja/releases/download/v5.11.73/invoiceninja.tar
 
 
 
