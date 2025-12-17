@@ -1,7 +1,7 @@
 #!/bin/sh
 # Status: Alpha
 # Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Debian 11 im LXC Container
+# getestet auf Debian 13 im LXC Container
 
 # System-Varibale
 ONLINEINSTALL=true
