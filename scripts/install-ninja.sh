@@ -92,8 +92,8 @@ chown -R www-data:www-data /var/www/invoice_ninja
 chmod -R 755 /var/www/invoice_ninja
 
 tee /etc/issue >/dev/null <<EOF
-ninja.$(hostname -f);
-\4
+ninja.$(hostname -f); oder
+\4/dashboard
 
 EOF
 
