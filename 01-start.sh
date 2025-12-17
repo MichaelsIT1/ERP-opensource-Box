@@ -142,14 +142,6 @@ Choose an option: "
         CID=$DOCKERHOST_ID
         install_docspell
         ;; 
-        
-1001)  CNAME="xentral-test"
-        COS=$DEBIAN11
-        CID=1001
-        create_container
-        install_xentral
-        ;;
-
     
     99) pveam list local
         ;;
