@@ -26,7 +26,7 @@ apt update && apt dist-upgrade -y
 echo
 echo "Webserver Apache, MariaDB und PHP wird installiert"
 echo "**************************************************"
-apt install curl sudo apache2 mariadb-server php php-mbstring php-soap php-imap php-xml php-zip php-gd php-cli php-mysql php-curl php-ldap php-intl php-bcmath php-gmp php-imagick unzip zip vim -y
+apt install curl sudo apache2 mariadb-server php php-mbstring php-soap php-xml php-zip php-gd php-cli php-mysql php-curl php-ldap php-intl php-bcmath php-gmp php-imagick unzip zip vim -y
 echo
 apt install php-intl php-imagick php-apcu -y
 apt install libmagickcore-6.q16-6-extra -y
