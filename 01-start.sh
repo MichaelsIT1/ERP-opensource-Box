@@ -40,7 +40,7 @@ Info: Alle Container beginnen ab ID900
 5) iTop (CMDB)
 6) i-doit (CMDB)
 7) checkMK-Raw (LAN-Monitoring, debian12)
-8) Nextcloud (Zusammenarbeit, debian12)
+8) Nextcloud (Zusammenarbeit, debian13)
 9) motioneye (Videokamerazentrale, debian12)
 10) Zammad (Ticketsystem, debian12 FEHLER)
 11) Zammad (Ticketsystem, Ubuntu22.04)
