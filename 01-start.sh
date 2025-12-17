@@ -10,6 +10,7 @@ CPW=12345                                                   #Container root-Pass
 DEBIAN10=local:vztmpl/debian-10-standard_10.7-1_amd64.tar.gz
 DEBIAN11=local:vztmpl/debian-11-standard_11.7-1_amd64.tar.zst 
 DEBIAN12=local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst
+DEBIAN13=local:vztmpl/debian-13-standard_13.1-2_amd64.tar.zst
 UBUNTU20=local:vztmpl/ubuntu-20.04-standard_20.04-1_amd64.tar.gz
 UBUNTU=local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst
 
@@ -103,7 +104,7 @@ Choose an option: "
         ;;
         
     8)  CNAME="nextcloud"
-        COS=$DEBIAN12
+        COS=$DEBIAN13
         CID=907
         create_container
         install_nextcloud
