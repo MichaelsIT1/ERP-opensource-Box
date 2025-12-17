@@ -194,13 +194,6 @@ sleep 10
 }
 
 
-
-# Installation xentral opensource
-install_xentral() {
-pct push $CID scripts/install-xentral-opensource.sh /root/install-xentral-opensource.sh
-pct exec $CID -- bash -c "sh /root/install-xentral-opensource.sh"
-}
-
 install_open3a() {
 pct push $CID scripts/install-open3a.sh /root/install-open3a.sh
 pct exec $CID -- bash -c "sh /root/install-open3a.sh"
