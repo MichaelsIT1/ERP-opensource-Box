@@ -55,7 +55,7 @@ Choose an option: "
     read -r ans
     case $ans in
     1)  CNAME="invoice-ninja"
-        COS=$DEBIAN12
+        COS=$DEBIAN13
         CID=900
         create_container
         install_ninja
