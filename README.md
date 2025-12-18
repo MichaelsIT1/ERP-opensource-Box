@@ -7,7 +7,7 @@
 
 Updates:  
 Invoice Ninja: Script für docker Installation erstellt. am 18.12.25 auf Funktionalität geprüft
-Invoice Ninja: Script für debian 13 angepasst. am 18.12.25 auf Funktionalität geprüft (viele Sprachen fehlen) 
+Invoice Ninja: Script für debian 13 angepasst. am 18.12.25 auf Funktionalität geprüft (viele Sprachen fehlen)  
 nextcloud: Script für debian 13 angepasst. am 17.12.25 auf Funktionalität geprüft  
 checkMK-Raw (Netzwerkmonitoring): am 28.04.25 auf Funktionalität geprüft (debian12)   
 Invoice Ninja: am 28.04.25 auf Funktionalität geprüft (debian12)   
