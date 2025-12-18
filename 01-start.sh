@@ -145,7 +145,7 @@ Choose an option: "
         install_docspell
         ;; 
 
-55) CNAME="docker-Invoice-Ninja"
+60) CNAME="docker-Invoice-Ninja"
         CID=$DOCKERHOST_ID
         install_docker_invoiceninja
         ;; 
