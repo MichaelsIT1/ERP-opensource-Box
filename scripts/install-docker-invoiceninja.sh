@@ -16,5 +16,5 @@ docker-compose up -d
 CLEAR
 
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP"
-echo "Logindaten Benutzername: "
+echo "Logindaten Benutzername: admin@example.com Passwort: changeme!"
 echo "*************************************************************"
