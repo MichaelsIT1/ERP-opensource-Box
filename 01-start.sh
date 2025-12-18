@@ -48,6 +48,7 @@ Info: Alle Container beginnen ab ID900
 DOCKER
 50) Dockerhost (privileged, mit Portainer debian)
 55) docker-docspell
+60) Invoice Ninja
 
 99) lokale Images
 0) Exit
@@ -142,6 +143,11 @@ Choose an option: "
 55) CNAME="docker-docspell"
         CID=$DOCKERHOST_ID
         install_docspell
+        ;; 
+
+55) CNAME="docker-Invoice-Ninja"
+        CID=$DOCKERHOST_ID
+        install_docker_invoiceninja
         ;; 
     
     99) pveam list local
@@ -247,6 +253,11 @@ pct exec $CID -- bash -c "sh /root/install-motioneye.sh"
 install_ninja() {
 pct push $CID scripts/install-ninja.sh /root/install-ninja.sh
 pct exec $CID -- bash -c "sh /root/install-ninja.sh"
+}
+
+install_docker_invoiceninja() {
+pct push $CID scripts/install-docker-invoiceninja.sh /root/install-docker-invoiceninja.sh
+pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
 }
 
 install_zammad_debian() {
