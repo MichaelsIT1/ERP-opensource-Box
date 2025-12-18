@@ -6,7 +6,6 @@
 # ERP-opensource-Box für x64
 
 Updates:  
-Invoice Ninja: Script für debian 13 angepasst. am 17.12.25 auf Funktionalität geprüft  
 nextcloud: Script für debian 13 angepasst. am 17.12.25 auf Funktionalität geprüft  
 checkMK-Raw (Netzwerkmonitoring): am 28.04.25 auf Funktionalität geprüft (debian12)   
 Invoice Ninja: am 28.04.25 auf Funktionalität geprüft (debian12)   
