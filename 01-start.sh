@@ -281,5 +281,9 @@ pct push $CID scripts/install-docspell.sh /root/install-docspell.sh
 pct exec $CID -- bash -c "sh /root/install-docspell.sh"
 }
 
+install_docker_invoiceninja() {
+pct push $CID scripts/install-docker-invoiceninja.sh /root/install-docker-invoiceninja.sh
+pct exec $CID -- bash -c "sh install-docker-invoiceninja.sh"
+}
 # main program
 menu
