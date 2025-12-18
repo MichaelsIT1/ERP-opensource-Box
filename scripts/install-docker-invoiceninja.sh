@@ -13,13 +13,8 @@ git clone https://github.com/invoiceninja/dockerfiles.git -b debian
 cd dockerfiles/debian
 docker-compose up -d
 
-# Text vor der Anmeldung
-tee /etc/issue >/dev/null <<EOF
-http://\4:7880
-
-EOF
-
 CLEAR
 
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:7880/"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP"
+echo "Logindaten Benutzername: "
 echo "*************************************************************"
