@@ -1,4 +1,4 @@
-#!/bin/sh
+eu#!/bin/sh
 # Dieses Script erstellt einen LXC-Container im Proxmox und installiert diverse Software.
 # Nur fuer Testzwecke. Keine Gewaehrleistung oder Haftung bei Datenverlust.
 # Version 0.1
@@ -46,7 +46,7 @@ Info: Alle Container beginnen ab ID900
 11) Zammad (Ticketsystem, Ubuntu22.04)
 -----------------------------------------
 DOCKER
-50) Dockerhost (privileged, mit Portainer debian)
+50) Dockerhost erzeugen (privileged, mit Portainer debian)
 55) docker-docspell
 60) Invoice Ninja
 
@@ -283,7 +283,7 @@ pct exec $CID -- bash -c "sh /root/install-docspell.sh"
 
 install_docker_invoiceninja() {
 pct push $CID scripts/install-docker-invoiceninja.sh /root/install-docker-invoiceninja.sh
-pct exec $CID -- bash -c "sh install-docker-invoiceninja.sh"
+pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
 }
 # main program
 menu
