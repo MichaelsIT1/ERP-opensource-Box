@@ -33,7 +33,7 @@ Es werden keine Optimierungen, Backups vorgenommen.
 ****************
 
 Info: Alle Container beginnen ab ID900
-1) Invoice Ninja (Rechnungsprogramm, debian13)
+1) Invoice Ninja (Rechnungsprogramm, debian12)
 2) open3a (Rechnungsprogramm, debian12)
 3) DEWAWI (Warenwirtschaft) FEHLER
 4) ISPConfig (Webseitenhosting/Mailserver) 
@@ -55,7 +55,7 @@ Choose an option: "
     read -r ans
     case $ans in
     1)  CNAME="invoice-ninja"
-        COS=$DEBIAN13
+        COS=$DEBIAN12
         CID=900
         create_container
         install_ninja
