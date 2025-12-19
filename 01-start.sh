@@ -237,12 +237,5 @@ pct start $CID
 sleep 10
 }
 
-install_metafresh() {
-pct push $CID scripts/install-metafresh.sh /root/install-metafresh.sh
-pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
-}
-
-
-
 # main program
 menu
