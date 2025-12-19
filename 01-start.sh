@@ -146,8 +146,8 @@ Choose an option: "
     
 # DOCKER
 50) CNAME="dockerhost-Portainer"
-        COS=$DEBIAN12
-        CID=$DOCKERHOST_ID
+        COS=$DEBIAN13
+        CID=9999
         create_dockerhost
         pct push $CID scripts/install-portainer.sh /root/install-portainer.sh
         pct exec $CID -- bash -c "sh /root/install-portainer.sh"
