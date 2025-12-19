@@ -196,7 +196,13 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-erpnext.sh"
         ;;
 
-
+334) CNAME="Paperless-ngx-docker"
+        COS=$DEBIAN13
+        CID=999
+        create_dockerhost
+        pct push $CID scripts/install-docker-paperless-ngx.sh /root/install-docker-paperless-ngx.sh
+        pct exec $CID -- bash -c "sh /root/install-docker-paperless-ngx.sh"
+        ;;
 
 
 
