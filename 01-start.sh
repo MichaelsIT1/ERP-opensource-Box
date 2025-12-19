@@ -145,7 +145,7 @@ Choose an option: "
         ;;
     
 # DOCKER
-50) CNAME="dockerhost-Portainer"
+50) CNAME="docker-Portainer"
         COS=$DEBIAN13
         CID=9999
         create_dockerhost
@@ -159,13 +159,13 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docspell.sh"
         ;; 
 
-60) CNAME="install_docker_invoiceninja"
+60) CNAME="docker-invoiceninja"
         CID=$DOCKERHOST_ID
         pct push $CID scripts/install-docker-invoiceninja.sh /root/install-docker-invoiceninja.sh
         pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
         ;; 
     
-90) CNAME="dockerhost debian"
+90) CNAME="docker-debian"
         COS=$DEBIAN13
         CID=9999
         create_container
@@ -174,7 +174,7 @@ Choose an option: "
         ;; 
 
 
-300) CNAME="dockerhost-metafresh"
+300) CNAME="docker-metafresh"
         COS=$DEBIAN13
         CID=999
         create_dockerhost
