@@ -6,6 +6,8 @@
 # System-Varibale
 IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
+apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release -y
+sleep 5
 clear
 echo "ERPnext installieren"
 echo "*******************************"
