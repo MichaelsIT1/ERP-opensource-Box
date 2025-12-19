@@ -50,6 +50,7 @@ DOCKER
 55) docker-docspell
 60) Invoice Ninja
 
+90) debian
 99) lokale Images
 0) Exit
 Choose an option: "
@@ -164,7 +165,13 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
         ;; 
     
-    99) pveam list local
+90) CNAME="debian"
+        COS=$DEBIAN12
+        pct push $CID scripts/install-debian.sh /root/install-debian.sh
+        pct exec $CID -- bash -c "sh /root/install-debian.sh"
+        ;; 
+
+99) pveam list local
         ;;
                 
     0)
@@ -211,11 +218,6 @@ pct create $CID $COS \
 
 pct start $CID
 sleep 10
-}
-
-install_debian() {
-pct push $CID scripts/install-debian.sh /root/install-debian.sh
-pct exec $CID -- bash -c "sh /root/install-debian.sh"
 }
 
 install_metafresh() {
