@@ -21,8 +21,6 @@ docker compose -f pwd.yml up -d
 
 tee /etc/issue >/dev/null <<EOF
 \4:8080
-Username: Administrator
-Password: admin
 
 
 EOF
