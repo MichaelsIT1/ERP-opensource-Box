@@ -165,13 +165,28 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
         ;; 
     
-90) CNAME="debian"
+90) CNAME="dockerhost debian"
         COS=$DEBIAN13
         CID=9999
         create_container
         pct push $CID scripts/install-debian.sh /root/install-debian.sh
         pct exec $CID -- bash -c "sh /root/install-debian.sh"
         ;; 
+
+
+300) CNAME="dockerhost metafresh"
+        COS=$DEBIAN13
+        CID=9999
+        create_dockerhost
+        pct push $CID scripts/install-metafresh.sh /root/install-metafresh.sh
+        pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
+        ;;
+
+
+
+
+
+
 
 99) pveam list local
         ;;
