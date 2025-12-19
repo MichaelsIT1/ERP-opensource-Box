@@ -67,70 +67,80 @@ Choose an option: "
         COS=$DEBIAN12
         CID=901
         create_container
-        install_open3a
+        pct push $CID scripts/install-open3a.sh /root/install-open3a.sh
+        pct exec $CID -- bash -c "sh /root/install-open3a.sh"
         ;;
         
     3)  CNAME="dewawi"
         COS=$DEBIAN12
         CID=902
         create_container
-        install_dewawi
+        pct push $CID scripts/install-dewawi.sh /root/install-dewawi.sh
+        pct exec $CID -- bash -c "sh /root/install-dewawi.sh"
         ;;   
         
     4)  CNAME="ispconfig-test"
         COS=$DEBIAN11
         CID=903
         create_container
-        install_ispconfig
+        pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
+        pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
         ;;
         
     5)  CNAME="itop"
         COS=$DEBIAN11
         CID=904
         create_container
-        install_itop
+        pct push $CID scripts/install-itop.sh /root/install-itop.sh
+        pct exec $CID -- bash -c "sh /root/install-itop.sh"
         ;;
         
     6)  CNAME="i-doit"
         COS=$DEBIAN11
         CID=905
         create_container
-        install_idoit
+        pct push $CID scripts/install-idoit.sh /root/install-idoit.sh
+        pct exec $CID -- bash -c "sh /root/install-idoit.sh"
         ;;
         
     7)  CNAME="checmk-raw"
         COS=$DEBIAN12
         CID=906
         create_container
-        install_checkmk
+        pct push $CID scripts/install-checkmk-raw.sh /root/install-checkmk-raw.sh
+        pct exec $CID -- bash -c "sh /root/install-checkmk-raw.sh"
         ;;
         
     8)  CNAME="nextcloud"
         COS=$DEBIAN13
         CID=907
         create_container
-        install_nextcloud
+        pct push $CID scripts/install-nextcloud.sh /root/install-nextcloud.sh
+        pct exec $CID -- bash -c "sh /root/install-nextcloud.sh"
         ;;
         
     9) CNAME="motioneye"
         COS=$DEBIAN12
         CID=908
         create_container
-        install_motioneye
+        pct push $CID scripts/install-motioneye.sh /root/install-motioneye.sh
+        pct exec $CID -- bash -c "sh /root/install-motioneye.sh"
         ;;
         
- 10) CNAME="zammad"
+ 10) CNAME="zammad debian"
         COS=$DEBIAN12
         CID=909
         create_container
-        install_zammad_debian
+        pct push $CID scripts/install-zammad-debian.sh /root/install-zammad-debian.sh
+        pct exec $CID -- bash -c "sh /root/install-zammad-debian.sh"
         ;;
 
-11) CNAME="zammad"
+11) CNAME="zammad Ubuntu"
         COS=$UBUNTU
         CID=911
         create_container
-        install_zammad_ubuntu
+        pct push $CID scripts/install-zammad-ubuntu.sh /root/install-zammad-ubuntu.sh
+        pct exec $CID -- bash -c "sh /root/install-zammad-ubuntu.sh"
         ;;
     
 # DOCKER
@@ -138,17 +148,20 @@ Choose an option: "
         COS=$DEBIAN12
         CID=$DOCKERHOST_ID
         create_dockerhost
-        install_portainer
+        pct push $CID scripts/install-portainer.sh /root/install-portainer.sh
+        pct exec $CID -- bash -c "sh /root/install-portainer.sh"
         ;;
 
 55) CNAME="docker-docspell"
         CID=$DOCKERHOST_ID
-        install_docspell
+        pct push $CID scripts/install-docspell.sh /root/install-docspell.sh
+        pct exec $CID -- bash -c "sh /root/install-docspell.sh"
         ;; 
 
 60) CNAME="install_docker_invoiceninja"
         CID=$DOCKERHOST_ID
-        install_docker_invoiceninja
+        pct push $CID scripts/install-docker-invoiceninja.sh /root/install-docker-invoiceninja.sh
+        pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
         ;; 
     
     99) pveam list local
@@ -200,22 +213,6 @@ pct start $CID
 sleep 10
 }
 
-
-install_open3a() {
-pct push $CID scripts/install-open3a.sh /root/install-open3a.sh
-pct exec $CID -- bash -c "sh /root/install-open3a.sh"
-}
-
-install_dewawi() {
-pct push $CID scripts/install-dewawi.sh /root/install-dewawi.sh
-pct exec $CID -- bash -c "sh /root/install-dewawi.sh"
-}
-
-install_ispconfig() {
-pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
-pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
-}
-
 install_debian() {
 pct push $CID scripts/install-debian.sh /root/install-debian.sh
 pct exec $CID -- bash -c "sh /root/install-debian.sh"
@@ -226,60 +223,7 @@ pct push $CID scripts/install-metafresh.sh /root/install-metafresh.sh
 pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
 }
 
-install_itop() {
-pct push $CID scripts/install-itop.sh /root/install-itop.sh
-pct exec $CID -- bash -c "sh /root/install-itop.sh"
-}
 
-install_idoit() {
-pct push $CID scripts/install-idoit.sh /root/install-idoit.sh
-pct exec $CID -- bash -c "sh /root/install-idoit.sh"
-}
 
-install_checkmk() {
-pct push $CID scripts/install-checkmk-raw.sh /root/install-checkmk-raw.sh
-pct exec $CID -- bash -c "sh /root/install-checkmk-raw.sh"
-}
-
-install_nextcloud() {
-pct push $CID scripts/install-nextcloud.sh /root/install-nextcloud.sh
-pct exec $CID -- bash -c "sh /root/install-nextcloud.sh"
-}
-
-install_motioneye() {
-pct push $CID scripts/install-motioneye.sh /root/install-motioneye.sh
-pct exec $CID -- bash -c "sh /root/install-motioneye.sh"
-}
-
-install_docker_invoiceninja() {
-pct push $CID scripts/install-docker-invoiceninja.sh /root/install-docker-invoiceninja.sh
-pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
-}
-
-install_zammad_debian() {
-pct push $CID scripts/install-zammad-debian.sh /root/install-zammad-debian.sh
-pct exec $CID -- bash -c "sh /root/install-zammad-debian.sh"
-}
-
-install_zammad_ubuntu() {
-pct push $CID scripts/install-zammad-ubuntu.sh /root/install-zammad-ubuntu.sh
-pct exec $CID -- bash -c "sh /root/install-zammad-ubuntu.sh"
-}
-
-# DOCKER
-install_portainer() {
-pct push $CID scripts/install-portainer.sh /root/install-portainer.sh
-pct exec $CID -- bash -c "sh /root/install-portainer.sh"
-}
-
-install_docspell() {
-pct push $CID scripts/install-docspell.sh /root/install-docspell.sh
-pct exec $CID -- bash -c "sh /root/install-docspell.sh"
-}
-
-install_docker_invoiceninja() {
-pct push $CID scripts/install-docker-invoiceninja.sh /root/install-docker-invoiceninja.sh
-pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
-}
 # main program
 menu
