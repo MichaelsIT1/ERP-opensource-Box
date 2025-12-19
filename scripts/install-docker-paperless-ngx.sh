@@ -21,7 +21,7 @@ echo "*******************************"
 
 
 
-tee /root/docker-compose.postgres.yml >/dev/null <<EOF
+tee /root/docker-compose.yml >/dev/null <<EOF
 # Docker Compose file for running paperless from the Docker Hub.
 # This file contains everything paperless needs to run.
 # Paperless supports amd64, arm and arm64 hardware.
