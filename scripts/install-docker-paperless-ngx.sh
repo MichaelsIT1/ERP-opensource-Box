@@ -94,16 +94,19 @@ COMPOSE_PROJECT_NAME=paperless
 EOF
 
 
+docker compose pull
+sleep 5
 
+docker compose up -d
 
 
 # Text vor der Anmeldung
 tee /etc/issue >/dev/null <<EOF
-http://\4:7880
+http://\4:5432
 
 EOF
 
 #CLEAR
 
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:7880/"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:5432/"
 echo "*************************************************************"
