@@ -174,7 +174,7 @@ Choose an option: "
         ;; 
 
 
-300) CNAME="dockerhost metafresh"
+300) CNAME="dockerhost-metafresh"
         COS=$DEBIAN13
         CID=9999
         create_dockerhost
