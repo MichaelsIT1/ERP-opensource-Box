@@ -19,5 +19,15 @@ git clone https://github.com/frappe/frappe_docker
 cd frappe_docker
 docker compose -f pwd.yml up -d
 
+
+tee /etc/issue >/dev/null <<EOF
+\4:8080
+Username: Administrator
+Password: admin
+
+
+EOF
+
+
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP"
 echo "*************************************************************"
