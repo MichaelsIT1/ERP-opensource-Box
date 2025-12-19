@@ -176,7 +176,7 @@ Choose an option: "
 
 300) CNAME="dockerhost-metafresh"
         COS=$DEBIAN13
-        CID=9999
+        CID=999
         create_dockerhost
         pct push $CID scripts/install-metafresh.sh /root/install-metafresh.sh
         pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
