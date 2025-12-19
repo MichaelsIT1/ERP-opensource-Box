@@ -158,7 +158,7 @@ Choose an option: "
         COS=$DEBIAN13
         CID=999
         create_dockerhost
-        pct push $CID scripts/install-docspell.sh /root/install-docspell.sh
+        pct push $CID scripts/install-docker-docspell.sh /root/install-docker-docspell.sh
         pct exec $CID -- bash -c "sh /root/install-docspell.sh"
         ;; 
 
