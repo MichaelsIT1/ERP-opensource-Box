@@ -27,9 +27,9 @@ Password: admin
 
 EOF
 
-#clear
+clear
 
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:8080"
 echo "Username: Administrator"
 echo "Password: admin"
 echo "*************************************************************"
