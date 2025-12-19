@@ -168,6 +168,7 @@ Choose an option: "
 90) CNAME="debian"
         COS=$DEBIAN13
         CID=9999
+        create_container
         pct push $CID scripts/install-debian.sh /root/install-debian.sh
         pct exec $CID -- bash -c "sh /root/install-debian.sh"
         ;; 
