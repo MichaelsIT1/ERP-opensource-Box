@@ -150,7 +150,7 @@ Choose an option: "
         CID=9999
         create_dockerhost
         pct push $CID scripts/install-docker-portainer.sh /root/install-docker-portainer.sh
-        pct exec $CID -- bash -c "sh /root/install-portainer.sh"
+        pct exec $CID -- bash -c "sh /root/install-docker-portainer.sh"
         ;;
 
 55) CNAME="docker-docspell"
@@ -159,7 +159,7 @@ Choose an option: "
         CID=999
         create_dockerhost
         pct push $CID scripts/install-docker-docspell.sh /root/install-docker-docspell.sh
-        pct exec $CID -- bash -c "sh /root/install-docspell.sh"
+        pct exec $CID -- bash -c "sh /root/install-docker-docspell.sh"
         ;; 
 
 60) CNAME="docker-invoiceninja"
@@ -171,7 +171,7 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
         ;; 
     
-90) CNAME="docker-debian"
+90) CNAME="debian"
         COS=$DEBIAN13
         CID=9999
         create_container
@@ -192,8 +192,8 @@ Choose an option: "
         COS=$DEBIAN13
         CID=999
         create_dockerhost
-        pct push $CID scripts/install-metafresh.sh /root/install-metafresh.sh
-        pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
+        pct push $CID scripts/install-docker-erpnext.sh /root/install-docker-erpnext.sh
+        pct exec $CID -- bash -c "sh /root/install-docker-erpnext.sh"
         ;;
 
 
