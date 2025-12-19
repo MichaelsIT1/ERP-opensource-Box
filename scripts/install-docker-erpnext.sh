@@ -13,12 +13,11 @@ apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release 
 sleep 5
 clear
 
-echo "ERPnext installieren"
+echo "ERPNext installieren"
 echo "*******************************"
 git clone https://github.com/frappe/frappe_docker
 cd frappe_docker
 docker compose -f pwd.yml up -d
-
 
 tee /etc/issue >/dev/null <<EOF
 \4:8080
@@ -28,6 +27,9 @@ Password: admin
 
 EOF
 
+clear
 
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP"
+echo "Username: Administrator"
+echo "Password: admin"
 echo "*************************************************************"
