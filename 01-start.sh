@@ -182,7 +182,13 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
         ;;
 
-
+333) CNAME="docker-ERPnext"
+        COS=$DEBIAN13
+        CID=999
+        create_dockerhost
+        pct push $CID scripts/install-metafresh.sh /root/install-metafresh.sh
+        pct exec $CID -- bash -c "sh /root/install-metafresh.sh"
+        ;;
 
 
 
