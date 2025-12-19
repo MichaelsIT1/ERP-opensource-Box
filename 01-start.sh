@@ -59,7 +59,8 @@ Choose an option: "
         COS=$DEBIAN13
         CID=900
         create_container
-        install_ninja
+        pct push $CID scripts/install-ninja.sh /root/install-ninja.sh
+        pct exec $CID -- bash -c "sh /root/install-ninja.sh"
         ;;
         
     2)  CNAME="open3a"
@@ -248,11 +249,6 @@ pct exec $CID -- bash -c "sh /root/install-nextcloud.sh"
 install_motioneye() {
 pct push $CID scripts/install-motioneye.sh /root/install-motioneye.sh
 pct exec $CID -- bash -c "sh /root/install-motioneye.sh"
-}
-
-install_ninja() {
-pct push $CID scripts/install-ninja.sh /root/install-ninja.sh
-pct exec $CID -- bash -c "sh /root/install-ninja.sh"
 }
 
 install_docker_invoiceninja() {
