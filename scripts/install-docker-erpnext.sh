@@ -27,7 +27,7 @@ Password: admin
 
 EOF
 
-clear
+#clear
 
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP"
 echo "Username: Administrator"
