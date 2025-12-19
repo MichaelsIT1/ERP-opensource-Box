@@ -149,18 +149,24 @@ Choose an option: "
         COS=$DEBIAN13
         CID=9999
         create_dockerhost
-        pct push $CID scripts/install-portainer.sh /root/install-portainer.sh
+        pct push $CID scripts/install-docker-portainer.sh /root/install-docker-portainer.sh
         pct exec $CID -- bash -c "sh /root/install-portainer.sh"
         ;;
 
 55) CNAME="docker-docspell"
-        CID=$DOCKERHOST_ID
+        #CID=$DOCKERHOST_ID
+        COS=$DEBIAN13
+        CID=999
+        create_dockerhost
         pct push $CID scripts/install-docspell.sh /root/install-docspell.sh
         pct exec $CID -- bash -c "sh /root/install-docspell.sh"
         ;; 
 
 60) CNAME="docker-invoiceninja"
-        CID=$DOCKERHOST_ID
+        #CID=$DOCKERHOST_ID
+        COS=$DEBIAN13
+        CID=999
+        create_dockerhost
         pct push $CID scripts/install-docker-invoiceninja.sh /root/install-docker-invoiceninja.sh
         pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
         ;; 
