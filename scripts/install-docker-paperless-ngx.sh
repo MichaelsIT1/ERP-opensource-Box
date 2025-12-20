@@ -118,6 +118,7 @@ USERMAP_GID=0
 # The default language to use for OCR. Set this to the language most of your
 # documents are written in.
 #PAPERLESS_OCR_LANGUAGE=eng
+PAPERLESS_OCR_LANGUAGE=deu
 
 # Additional languages to install for text recognition, separated by a whitespace.
 # Note that this is different from PAPERLESS_OCR_LANGUAGE (default=eng), which defines
