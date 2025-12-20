@@ -73,7 +73,7 @@ Choose an option: "
         ;;
         
     3)  CNAME="dewawi"
-        COS=$DEBIAN12
+        COS=$DEBIAN13
         CID=902
         create_container
         pct push $CID scripts/install-dewawi.sh /root/install-dewawi.sh
