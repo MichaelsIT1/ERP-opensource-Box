@@ -29,7 +29,7 @@ WICHTIG:
 Für Datenverlust oder sonstiges übernehem ich keine Haftung.
 Bitte benutzen Sie das Script wenn Sie fachkundig sind.
 Dieses Script hilft Ihnen Software zu installieren.
-Es werden keine Optimierungen, Backups vorgenommen.
+Es werden wenige/keine Optimierungen, Backups vorgenommen.
 ****************
 
 Info: Alle Container beginnen ab ID900
