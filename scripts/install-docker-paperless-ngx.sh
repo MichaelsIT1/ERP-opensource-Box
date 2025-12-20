@@ -98,8 +98,8 @@ tee /root/docker-compose.env >/dev/null <<EOF
 # consumption directory.
 #USERMAP_UID=1000
 #USERMAP_GID=1000
-USERMAP_UID=0
-USERMAP_GID=0
+#USERMAP_UID=0
+#USERMAP_GID=0
 
 # See the documentation linked above for all options. A few commonly adjusted settings
 # are provided below.
