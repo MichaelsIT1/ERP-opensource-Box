@@ -149,7 +149,7 @@ http://\4:5432
 
 EOF
 
-#CLEAR
+CLEAR
 
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:5432/"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:8000/"
 echo "*************************************************************"
