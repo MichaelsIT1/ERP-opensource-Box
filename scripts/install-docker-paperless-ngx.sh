@@ -15,7 +15,7 @@ apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release 
 sleep 5
 clear
 
-echo "paperless ngx installieren"
+echo "paperless-ngx installieren"
 echo "*******************************"
 
 tee /root/docker-compose.yml >/dev/null <<EOF
@@ -145,7 +145,7 @@ docker compose up -d
 
 # Text vor der Anmeldung
 tee /etc/issue >/dev/null <<EOF
-http://\4:5432
+http://\4:8000
 
 EOF
 
