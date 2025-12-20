@@ -134,10 +134,10 @@ EOF
 
 sleep 5
 
+cd /root
 docker compose pull
 sleep 5
 
-cd /root
 docker compose up -d
 
 
