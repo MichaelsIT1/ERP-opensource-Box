@@ -18,9 +18,6 @@ clear
 echo "paperless ngx installieren"
 echo "*******************************"
 
-
-
-
 tee /root/docker-compose.yml >/dev/null <<EOF
 # Docker Compose file for running paperless from the Docker Hub.
 # This file contains everything paperless needs to run.
