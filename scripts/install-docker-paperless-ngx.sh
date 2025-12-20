@@ -87,6 +87,8 @@ volumes:
   redisdata:
 EOF
 
+sleep 5
+
 tee /root/docker-compose.env >/dev/null <<EOF
 ###############################################################################
 # Paperless-ngx settings                                                      #
@@ -127,14 +129,13 @@ tee /root/docker-compose.env >/dev/null <<EOF
 #PAPERLESS_OCR_LANGUAGES=tur ces
 EOF
 
-
-
-
+sleep 5
 
 tee /root/.env >/dev/null <<EOF
 COMPOSE_PROJECT_NAME=paperless
 EOF
 
+sleep 5
 
 docker compose pull
 sleep 5
