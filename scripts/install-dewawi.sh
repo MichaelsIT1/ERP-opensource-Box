@@ -20,7 +20,7 @@ apt update -y && apt dist-upgrade -y
 echo
 echo "Webserver Apache, MariaDB und PHP wird installiert"
 echo "**************************************************"
-apt install apache2 mariadb-server php php-mbstring php-soap php-imap php-xml php-zip php-gd php-cli php-mysql php-curl php-intl php-ssh2 unzip zip -y
+apt install apache2 mariadb-server php php-mbstring php-soap php-xml php-zip php-gd php-cli php-mysql php-curl php-intl php-ssh2 unzip zip -y
 echo
 
 
