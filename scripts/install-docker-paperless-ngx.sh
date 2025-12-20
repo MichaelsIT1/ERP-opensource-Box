@@ -134,7 +134,7 @@ EOF
 
 sleep 5
 
-#docker compose pull
+docker compose pull
 sleep 5
 
 cd /root
