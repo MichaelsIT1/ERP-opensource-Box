@@ -137,6 +137,7 @@ sleep 5
 #docker compose pull
 sleep 5
 
+cd /root
 docker compose up -d
 
 
