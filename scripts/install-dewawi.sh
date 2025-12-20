@@ -43,6 +43,7 @@ echo "Zugriffsrechte werden gesetzt"
 echo "*****************************"
 chown -R www-data:www-data /var/www/html/dewawi
 echo
+systemctl restart apache2
 clear
 echo "*******************************************************************************************"
 echo "dewawi installiert. Bitte ueber das Web die Konfiguration vornehmen"
