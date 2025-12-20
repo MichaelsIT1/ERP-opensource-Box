@@ -13,18 +13,10 @@ apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release 
 sleep 5
 clear
 
-echo "ERPNext installieren"
+echo "NetAlertX installieren"
 echo "*******************************"
-git clone https://github.com/frappe/frappe_docker
-cd frappe_docker
-docker compose -f pwd.yml up -d
 
-
-
-
-
-
-
+cd /root
 tee docker-compose.yml >/dev/null <<EOF
 services:
   netalertx:
@@ -103,7 +95,7 @@ EOF
 
 
 
-
+docker compose up --force-recreate
 
 
 
