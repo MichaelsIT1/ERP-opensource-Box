@@ -16,7 +16,9 @@ clear
 echo "librenms installieren"
 echo "*******************************"
 
-cd /root
+mkdir /var/librenms/
+cd /var/librenms/
+
 tee docker-compose.yml >/dev/null <<EOF
 name: librenms
 
@@ -220,14 +222,6 @@ SMTP_PASSWORD=bar
 SMTP_FROM=foo@gmail.com
 EOF
 
-
-
-
-
-
-
-
-
 $ docker compose up -d
 $ docker compose logs -f
 
@@ -236,9 +230,10 @@ $ docker compose logs -f
 
 
 tee /etc/issue >/dev/null <<EOF
-\4:8080
+\4:8000
 
 
 EOF
 
 clear
+
