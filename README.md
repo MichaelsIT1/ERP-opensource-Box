@@ -41,7 +41,7 @@ Benutzung
 --
 
 auf dem Proxmox-Host (Server auf dem Proxmox VE läuft)  
-git clone https://github.com/MichaelsIT1/ERP-opensource-Box.git  
+https://github.com/MichaelsIT1/Michas-ToolBox.git    
 cd ERP-opensource-Box  
 sh 01-start.sh  
 
