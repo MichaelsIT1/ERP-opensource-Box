@@ -237,3 +237,9 @@ EOF
 
 clear
 
+clear
+
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:8000"
+echo "Username: Administrator"
+echo "Password: admin"
+echo "*************************************************************"
