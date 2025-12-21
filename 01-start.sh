@@ -187,6 +187,16 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-erpnext.sh"
         ;;
     
+55) CNAME="NetalertX-docker"
+        COS=$DEBIAN13
+        CID=1000
+        create_dockerhost
+        pct push $CID scripts/install-docker-netalertx.sh /root/install-docker-netalertx.sh
+        pct exec $CID -- bash -c "sh /root/install-docker-netalertx.sh"
+        ;;
+
+
+
 90) CNAME="debian"
         COS=$DEBIAN13
         CID=9999
