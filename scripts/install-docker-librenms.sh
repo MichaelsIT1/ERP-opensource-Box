@@ -13,90 +13,223 @@ apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release 
 sleep 5
 clear
 
-echo "NetAlertX installieren"
+echo "librenms installieren"
 echo "*******************************"
 
 cd /root
 tee docker-compose.yml >/dev/null <<EOF
+name: librenms
+
 services:
-  netalertx:
-  #use an environmental variable to set host networking mode if needed
-    container_name: netalertx                       # The name when you docker contiainer ls
-    image: ghcr.io/jokob-sk/netalertx:latest
-    network_mode: ${NETALERTX_NETWORK_MODE:-host}   # Use host networking for ARP scanning and other services
-    read_only: true                                 # Make the container filesystem read-only
-    cap_drop:                                       # Drop all capabilities for enhanced security
-      - ALL
-    cap_add:                                        # Add only the necessary capabilities
-      - NET_ADMIN                                   # Required for ARP scanning
-      - NET_RAW                                     # Required for raw socket operations
-      - NET_BIND_SERVICE                            # Required to bind to privileged ports (nbtscan)
-
+  db:
+    image: mariadb:10
+    container_name: librenms_db
+    command:
+      - "mysqld"
+      - "--innodb-file-per-table=1"
+      - "--lower-case-table-names=0"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
     volumes:
-      - type: volume                                # Persistent Docker-managed named volume for config + database
-        source: netalertx_data
-        target: /data                               # `/data/config` and `/data/db` live inside this mount
-        read_only: false
-
-    # Example custom local folder called /home/user/netalertx_data
-    # - type: bind
-    #   source: /home/user/netalertx_data
-    #   target: /data
-    #   read_only: false
-    # ... or use the alternative format
-    # - /home/user/netalertx_data:/data:rw
-
-      - type: bind                                  # Bind mount for timezone consistency
-        source: /etc/localtime
-        target: /etc/localtime
-        read_only: true
-
-      # Mount your DHCP server file into NetAlertX for a plugin to access
-      # - path/on/host/to/dhcp.file:/resources/dhcp.file
-
-    # tmpfs mount consolidates writable state for a read-only container and improves performance
-    # uid=20211 and gid=20211 is the netalertx user inside the container
-    # mode=1700 grants rwx------ permissions to the netalertx user only
-    tmpfs:
-      # Comment out to retain logs between container restarts - this has a server performance impact.
-      - "/tmp:uid=20211,gid=20211,mode=1700,rw,noexec,nosuid,nodev,async,noatime,nodiratime"
-
-      # Retain logs - comment out tmpfs /tmp if you want to retain logs between container restarts
-      # Please note if you remove the /tmp mount, you must create and maintain sub-folder mounts.
-      # - /path/on/host/log:/tmp/log
-      # - "/tmp/api:uid=20211,gid=20211,mode=1700,rw,noexec,nosuid,nodev,async,noatime,nodiratime"
-      # - "/tmp/nginx:uid=20211,gid=20211,mode=1700,rw,noexec,nosuid,nodev,async,noatime,nodiratime"
-      # - "/tmp/run:uid=20211,gid=20211,mode=1700,rw,noexec,nosuid,nodev,async,noatime,nodiratime"
-
+      - "./db:/var/lib/mysql"
     environment:
-      LISTEN_ADDR: ${LISTEN_ADDR:-0.0.0.0}                   # Listen for connections on all interfaces
-      PORT: ${PORT:-20211}                                   # Application port
-      GRAPHQL_PORT: ${GRAPHQL_PORT:-20212}                   # GraphQL API port (passed into APP_CONF_OVERRIDE at runtime)
-  #    NETALERTX_DEBUG: ${NETALERTX_DEBUG:-0}                 # 0=kill all services and restart if any dies. 1 keeps running dead services.
+      - "TZ=${TZ}"
+      - "MARIADB_RANDOM_ROOT_PASSWORD=yes"
+      - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+      - "MYSQL_USER=${MYSQL_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+    restart: always
 
-    # Resource limits to prevent resource exhaustion
-    mem_limit: 2048m            # Maximum memory usage
-    mem_reservation: 1024m      # Soft memory limit
-    cpu_shares: 512             # Relative CPU weight for CPU contention scenarios
-    pids_limit: 512             # Limit the number of processes/threads to prevent fork bombs
-    logging:
-      driver: "json-file"       # Use JSON file logging driver
-      options:
-        max-size: "10m"         # Rotate log files after they reach 10MB
-        max-file: "3"           # Keep a maximum of 3 log files
+  redis:
+    image: redis:7.2-alpine
+    container_name: librenms_redis
+    environment:
+      - "TZ=${TZ}"
+    restart: always
 
-    # Always restart the container unless explicitly stopped
-    restart: unless-stopped
+  msmtpd:
+    image: crazymax/msmtpd:latest
+    container_name: librenms_msmtpd
+    env_file:
+      - "./msmtpd.env"
+    restart: always
 
-volumes:                        # Persistent volume for configuration and database storage
-  netalertx_data:
+  librenms:
+    image: librenms/librenms:latest
+    container_name: librenms
+    hostname: librenms
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    ports:
+      - target: 8000
+        published: 8000
+        protocol: tcp
+    depends_on:
+      - db
+      - redis
+      - msmtpd
+    volumes:
+      - "./librenms:/data"
+    env_file:
+      - "./librenms.env"
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+      - "DB_HOST=db"
+      - "DB_NAME=${MYSQL_DATABASE}"
+      - "DB_USER=${MYSQL_USER}"
+      - "DB_PASSWORD=${MYSQL_PASSWORD}"
+      - "DB_TIMEOUT=60"
+    restart: always
+
+  dispatcher:
+    image: librenms/librenms:latest
+    container_name: librenms_dispatcher
+    hostname: librenms-dispatcher
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    depends_on:
+      - librenms
+      - redis
+    volumes:
+      - "./librenms:/data"
+    env_file:
+      - "./librenms.env"
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+      - "DB_HOST=db"
+      - "DB_NAME=${MYSQL_DATABASE}"
+      - "DB_USER=${MYSQL_USER}"
+      - "DB_PASSWORD=${MYSQL_PASSWORD}"
+      - "DB_TIMEOUT=60"
+      - "DISPATCHER_NODE_ID=dispatcher1"
+      - "SIDECAR_DISPATCHER=1"
+    restart: always
+
+  syslogng:
+    image: librenms/librenms:latest
+    container_name: librenms_syslogng
+    hostname: librenms-syslogng
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    depends_on:
+      - librenms
+      - redis
+    ports:
+      - target: 514
+        published: 514
+        protocol: tcp
+      - target: 514
+        published: 514
+        protocol: udp
+    volumes:
+      - "./librenms:/data"
+    env_file:
+      - "./librenms.env"
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+      - "DB_HOST=db"
+      - "DB_NAME=${MYSQL_DATABASE}"
+      - "DB_USER=${MYSQL_USER}"
+      - "DB_PASSWORD=${MYSQL_PASSWORD}"
+      - "DB_TIMEOUT=60"
+      - "SIDECAR_SYSLOGNG=1"
+    restart: always
+
+  snmptrapd:
+    image: librenms/librenms:latest
+    container_name: librenms_snmptrapd
+    hostname: librenms-snmptrapd
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    depends_on:
+      - librenms
+      - redis
+    ports:
+      - target: 162
+        published: 162
+        protocol: tcp
+      - target: 162
+        published: 162
+        protocol: udp
+    volumes:
+      - "./librenms:/data"
+    env_file:
+      - "./librenms.env"
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+      - "DB_HOST=db"
+      - "DB_NAME=${MYSQL_DATABASE}"
+      - "DB_USER=${MYSQL_USER}"
+      - "DB_PASSWORD=${MYSQL_PASSWORD}"
+      - "DB_TIMEOUT=60"
+      - "SIDECAR_SNMPTRAPD=1"
+    restart: always
+EOF
+
+tee .env >/dev/null <<EOF
+TZ=Europe/Berlin
+PUID=1000
+PGID=1000
+
+MYSQL_DATABASE=librenms
+MYSQL_USER=librenms
+MYSQL_PASSWORD=asupersecretpassword
+EOF
+
+tee librenms.env >/dev/null <<EOF
+MEMORY_LIMIT=256M
+MAX_INPUT_VARS=1000
+UPLOAD_MAX_SIZE=16M
+OPCACHE_MEM_SIZE=128
+REAL_IP_FROM=0.0.0.0/32
+REAL_IP_HEADER=X-Forwarded-For
+LOG_IP_VAR=remote_addr
+
+CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+REDIS_HOST=redis
+
+LIBRENMS_SNMP_COMMUNITY=librenmsdocker
+
+LIBRENMS_WEATHERMAP=false
+LIBRENMS_WEATHERMAP_SCHEDULE=*/5 * * * *
+EOF
+
+tee msmtpd.env >/dev/null <<EOF
+# https://github.com/crazy-max/docker-msmtpd
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_TLS=on
+SMTP_STARTTLS=on
+SMTP_TLS_CHECKCERT=on
+SMTP_AUTH=on
+SMTP_USER=foo
+SMTP_PASSWORD=bar
+SMTP_FROM=foo@gmail.com
 EOF
 
 
 
-#docker compose up --force-recreate
-docker run --network=host --cap-add=NET_RAW --cap-add=NET_ADMIN --cap-add=NET_BIND_SERVICE
 
+
+
+
+
+
+$ docker compose up -d
+$ docker compose logs -f
 
 
 
