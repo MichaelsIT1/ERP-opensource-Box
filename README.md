@@ -40,7 +40,7 @@ Benutzung
 --
 
 auf dem Proxmox-Host (Server auf dem Proxmox VE läuft)  
-https://github.com/MichaelsIT1/Michas-ToolBox.git    
+git clone https://github.com/MichaelsIT1/Michas-ToolBox.git    
 cd Michas-ToolBox  
 sh 01-start.sh  
 
