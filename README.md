@@ -5,6 +5,7 @@
 # für Rückfragen info@edv-spoor.de
 
 Updates:  
+Paperless-ngx: Script für docker Installation erstellt. am 18.12.25 auf Funktionalität geprüft   
 Invoice Ninja: Script für docker Installation erstellt. am 18.12.25 auf Funktionalität geprüft   
 Invoice Ninja: Script für debian 13 angepasst. am 18.12.25 auf Funktionalität geprüft (viele Sprachen fehlen)  
 nextcloud: Script für debian 13 angepasst. am 17.12.25 auf Funktionalität geprüft  
