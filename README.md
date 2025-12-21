@@ -9,13 +9,10 @@ Invoice Ninja: Script für docker Installation erstellt. am 18.12.25 auf Funktio
 Invoice Ninja: Script für debian 13 angepasst. am 18.12.25 auf Funktionalität geprüft (viele Sprachen fehlen)  
 nextcloud: Script für debian 13 angepasst. am 17.12.25 auf Funktionalität geprüft  
 checkMK-Raw (Netzwerkmonitoring): am 28.04.25 auf Funktionalität geprüft (debian12)   
-Invoice Ninja: am 28.04.25 auf Funktionalität geprüft (debian12)   
 Zammad: Script für debian 12 in Arbeit  
 open3a: Script für debian 12 angepasst.  
 motioneye: Script für debian 12 angepasst.  
 checkmk_raw: Script für debian 12 angepasst.  
-Invoice Ninja: Script für debian 12 angepasst. am 25.04.25 auf Funktionalität geprüft  
-nextcloud: Script für debian 12 angepasst. am 10.12.23 auf Funktionalität geprüft  
 
 
 HINWEIS: das DEWAWI-Script ist fehlerhaft. Wer möchte kann dies gern fixen. 
@@ -42,7 +39,7 @@ Benutzung
 
 auf dem Proxmox-Host (Server auf dem Proxmox VE läuft)  
 https://github.com/MichaelsIT1/Michas-ToolBox.git    
-cd ERP-opensource-Box  
+cd Michas-ToolBox  
 sh 01-start.sh  
 
 
