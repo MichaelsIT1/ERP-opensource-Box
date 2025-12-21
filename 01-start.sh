@@ -195,7 +195,13 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-netalertx.sh"
         ;;
 
-
+56) CNAME="librenms-docker"
+        COS=$DEBIAN13
+        CID=1001
+        create_dockerhost
+        pct push $CID scripts/install-docker-librenms.sh /root/install-docker-librenms.sh
+        pct exec $CID -- bash -c "sh /root/install-docker-librenms.sh"
+        ;;
 
 90) CNAME="debian"
         COS=$DEBIAN13
