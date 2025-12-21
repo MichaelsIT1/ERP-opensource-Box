@@ -3,7 +3,6 @@
 # Nur für Testzwecke. Es erfolgt z.B. kein Backup oder Optimierungen
 # auf eigenes Risiko, ohne Gewähr
 # für Rückfragen info@edv-spoor.de
-# ERP-opensource-Box für x64
 
 Updates:  
 Invoice Ninja: Script für docker Installation erstellt. am 18.12.25 auf Funktionalität geprüft   
