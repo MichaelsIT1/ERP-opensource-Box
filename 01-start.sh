@@ -71,7 +71,7 @@ Choose an option: "
     6)  CNAME="i-doit"
         COS=$DEBIAN13
         CID=905
-        create_container
+        create_dockerhost
         pct push $CID scripts/install-idoit.sh /root/install-idoit.sh
         pct exec $CID -- bash -c "sh /root/install-idoit.sh"
         ;;
