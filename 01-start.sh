@@ -67,14 +67,6 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-itop.sh"
         ;;
         
-    6)  CNAME="i-doit"
-        COS=$DEBIAN13
-        CID=905
-        create_dockerhost
-        pct push $CID scripts/install-idoit.sh /root/install-idoit.sh
-        pct exec $CID -- bash -c "sh /root/install-idoit.sh"
-        ;;
-        
     7)  CNAME="checmk-raw"
         COS=$DEBIAN12
         CID=906
