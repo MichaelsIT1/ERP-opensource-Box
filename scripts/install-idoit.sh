@@ -23,7 +23,7 @@ echo "**************************************************"
 apt install apache2 libapache2-mod-php mariadb-client mariadb-server php php-bcmath php-cli php-common php-curl php-gd php-imagick php-json php-ldap php-mbstring php-memcached php-mysql php-pgsql php-soap php-xml php-zip memcached unzip moreutils -y
 echo
 
-tee /etc/php/7.4/mods-available/i-doit.ini >/dev/null <<EOF
+tee /etc/php/8.4/mods-available/i-doit.ini >/dev/null <<EOF
 allow_url_fopen = Yes
 file_uploads = On
 magic_quotes_gpc = Off
@@ -81,20 +81,6 @@ EOF
 a2ensite i-doit
 a2enmod rewrite
 systemctl restart apache2.service
-
-
- #automatische Installation
-        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
-                    # current root password (emtpy after installation)
-        y           # Set root password?
-        idoit     # new root password
-        idoit     # new root password         
-        y           # Remove anonymous users?
-        y           # Disallow root login remotely?
-        y           # Remove test database and access to it?
-        y           # Reload privilege tables now?
-EOF
-
 
 mysql -u root -e "SET PASSWORD FOR root@'localhost' = PASSWORD('$idoit');"
 mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('idoit'); FLUSH PRIVILEGES;"
