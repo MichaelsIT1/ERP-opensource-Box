@@ -63,7 +63,7 @@ Choose an option: "
         ;;
         
     2)  CNAME="open3a"
-        COS=$DEBIAN12
+        COS=$DEBIAN13
         CID=901
         create_container
         pct push $CID scripts/install-open3a.sh /root/install-open3a.sh
