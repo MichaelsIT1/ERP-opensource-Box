@@ -30,8 +30,7 @@ Es werden wenige/keine Optimierungen, Backups vorgenommen.
 ****************
 
 Info: Alle Container beginnen ab ID900
-1) Invoice Ninja (Rechnungsprogramm, debian13)
-2) open3a (Rechnungsprogramm, debian12)
+1) open3a (Rechnungsprogramm, debian12)
 4) ISPConfig (Webseitenhosting/Mailserver) 
 5) iTop (CMDB)
 6) i-doit (CMDB)
@@ -53,16 +52,8 @@ DOCKER
 0) Exit
 Choose an option: "
     read -r ans
-    case $ans in
-    1)  CNAME="invoice-ninja"
-        COS=$DEBIAN13
-        CID=900
-        create_container
-        pct push $CID scripts/install-ninja.sh /root/install-ninja.sh
-        pct exec $CID -- bash -c "sh /root/install-ninja.sh"
-        ;;
-        
-    2)  CNAME="open3a"
+    case $ans in   
+    1)  CNAME="open3a"
         COS=$DEBIAN13
         CID=901
         create_container
@@ -185,6 +176,21 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-erpnext.sh"
         ;;
     
+
+
+90) CNAME="debian"
+        COS=$DEBIAN13
+        CID=9999
+        create_container
+        pct push $CID scripts/install-debian.sh /root/install-debian.sh
+        pct exec $CID -- bash -c "sh /root/install-debian.sh"
+        ;; 
+
+
+
+
+
+#FEHLERHAFTE SCRIPTE
 55) CNAME="NetalertX-docker"
         COS=$DEBIAN13
         CID=1000
@@ -201,14 +207,13 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-librenms.sh"
         ;;
 
-90) CNAME="debian"
+100)  CNAME="invoice-ninja"
         COS=$DEBIAN13
-        CID=9999
+        CID=900
         create_container
-        pct push $CID scripts/install-debian.sh /root/install-debian.sh
-        pct exec $CID -- bash -c "sh /root/install-debian.sh"
-        ;; 
-
+        pct push $CID scripts/install-ninja.sh /root/install-ninja.sh
+        pct exec $CID -- bash -c "sh /root/install-ninja.sh"
+        ;;
 
 300) CNAME="docker-metafresh"
         COS=$DEBIAN13
@@ -217,11 +222,6 @@ Choose an option: "
         pct push $CID scripts/install-docker-metafresh.sh /root/install-docker-metafresh.sh
         pct exec $CID -- bash -c "sh /root/install-docker-metafresh.sh"
         ;;
-
-
-
-
-
 
 
 99) pveam list local
