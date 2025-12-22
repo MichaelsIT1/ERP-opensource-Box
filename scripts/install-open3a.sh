@@ -48,12 +48,14 @@ EOF
 echo "open3a herunterladen"
 echo "********************************"
 cd /root/
-wget https://www.open3a.de/multiCMSDownload.php?filedl=139
+
 
 mkdir /var/www/html/open3a/
-mv multiCMSDownload.php\?filedl\=139 /var/www/html/open3a/
 cd /var/www/html/open3a/
-unzip multiCMSDownload.php?filedl=139
+
+wget https://www.open3a.de/multiCMSDownload.php?filedl=149
+
+unzip multiCMSDownload.php?filedl=149
 
 
 echo "Zugriffsrechte werden gesetzt"
