@@ -111,7 +111,7 @@ Choose an option: "
 # DOCKER
 50) CNAME="Portainer-docker"
         COS=$DEBIAN13
-        CID=9999
+        CID=950
         create_dockerhost
         pct push $CID scripts/install-docker-portainer.sh /root/install-docker-portainer.sh
         pct exec $CID -- bash -c "sh /root/install-docker-portainer.sh"
@@ -120,7 +120,7 @@ Choose an option: "
 51) CNAME="docspell-docker"
         #CID=$DOCKERHOST_ID
         COS=$DEBIAN13
-        CID=999
+        CID=951
         create_dockerhost
         pct push $CID scripts/install-docker-docspell.sh /root/install-docker-docspell.sh
         pct exec $CID -- bash -c "sh /root/install-docker-docspell.sh"
@@ -129,7 +129,7 @@ Choose an option: "
 52) CNAME="invoiceninja-docker"
         #CID=$DOCKERHOST_ID
         COS=$DEBIAN13
-        CID=999
+        CID=952
         create_dockerhost
         pct push $CID scripts/install-docker-invoiceninja.sh /root/install-docker-invoiceninja.sh
         pct exec $CID -- bash -c "sh /root/install-docker-invoiceninja.sh"
@@ -137,7 +137,7 @@ Choose an option: "
 
 53) CNAME="Paperless-ngx-docker"
         COS=$DEBIAN13
-        CID=1000
+        CID=953
         create_dockerhost
         pct push $CID scripts/install-docker-paperless-ngx.sh /root/install-docker-paperless-ngx.sh
         pct exec $CID -- bash -c "sh /root/install-docker-paperless-ngx.sh"
@@ -145,7 +145,7 @@ Choose an option: "
 
 54) CNAME="ERPnext-docker"
         COS=$DEBIAN13
-        CID=999
+        CID=954
         create_dockerhost
         pct push $CID scripts/install-docker-erpnext.sh /root/install-docker-erpnext.sh
         pct exec $CID -- bash -c "sh /root/install-docker-erpnext.sh"
