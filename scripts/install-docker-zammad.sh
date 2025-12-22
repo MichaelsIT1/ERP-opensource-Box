@@ -26,6 +26,7 @@ apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release 
 sleep 5
 git clone https://github.com/zammad/zammad-docker-compose.git
 sleep 5
+cd
 cd zammad-docker-compose
 docker compose up -d
 
