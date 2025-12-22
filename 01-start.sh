@@ -161,17 +161,6 @@ Choose an option: "
         ;; 
 
 
-
-
-#nicht optimal für die Toolbox
-4)  CNAME="ispconfig-test"
-        COS=$DEBIAN11
-        CID=903
-        create_container
-        pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
-        pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
-        ;;
-
 #FEHLERHAFTE SCRIPTE
 55) CNAME="NetalertX-docker"
         COS=$DEBIAN13
