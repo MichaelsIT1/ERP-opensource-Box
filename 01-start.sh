@@ -32,7 +32,6 @@ Es werden wenige/keine Optimierungen, Backups vorgenommen.
 Info: Alle Container beginnen ab ID900
 1) Invoice Ninja (Rechnungsprogramm, debian13)
 2) open3a (Rechnungsprogramm, debian12)
-3) DEWAWI (Warenwirtschaft) FEHLER
 4) ISPConfig (Webseitenhosting/Mailserver) 
 5) iTop (CMDB)
 6) i-doit (CMDB)
