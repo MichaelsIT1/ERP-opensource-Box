@@ -61,22 +61,6 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-open3a.sh"
         ;;
         
-    3)  CNAME="dewawi"
-        COS=$DEBIAN13
-        CID=902
-        create_container
-        pct push $CID scripts/install-dewawi.sh /root/install-dewawi.sh
-        pct exec $CID -- bash -c "sh /root/install-dewawi.sh"
-        ;;   
-        
-    4)  CNAME="ispconfig-test"
-        COS=$DEBIAN11
-        CID=903
-        create_container
-        pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
-        pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
-        ;;
-        
     5)  CNAME="itop"
         COS=$DEBIAN11
         CID=904
@@ -189,6 +173,14 @@ Choose an option: "
 
 
 
+#nicht optimal für die Toolbox
+4)  CNAME="ispconfig-test"
+        COS=$DEBIAN11
+        CID=903
+        create_container
+        pct push $CID scripts/install-ispconfig.sh /root/install-ispconfig.sh
+        pct exec $CID -- bash -c "sh /root/install-ispconfig.sh"
+        ;;
 
 #FEHLERHAFTE SCRIPTE
 55) CNAME="NetalertX-docker"
@@ -223,6 +215,13 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-metafresh.sh"
         ;;
 
+3)  CNAME="dewawi"
+        COS=$DEBIAN13
+        CID=902
+        create_container
+        pct push $CID scripts/install-dewawi.sh /root/install-dewawi.sh
+        pct exec $CID -- bash -c "sh /root/install-dewawi.sh"
+        ;;   
 
 99) pveam list local
         ;;
