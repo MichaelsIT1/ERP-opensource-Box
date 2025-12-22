@@ -30,8 +30,7 @@ Es werden wenige/keine Optimierungen, Backups vorgenommen.
 ****************
 
 Info: Alle Container beginnen ab ID900
-1) open3a (Rechnungsprogramm, debian12)
-4) ISPConfig (Webseitenhosting/Mailserver) 
+1) open3a (Rechnungsprogramm)
 5) iTop (CMDB)
 6) i-doit (CMDB)
 7) checkMK-Raw (LAN-Monitoring, debian12)
