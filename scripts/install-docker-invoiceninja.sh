@@ -19,7 +19,7 @@ git clone https://github.com/invoiceninja/dockerfiles.git -b debian
 cd dockerfiles/debian
 docker-compose up -d
 
-CLEAR
+clear
 
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP"
 echo "Logindaten Benutzername: admin@example.com Passwort: changeme!"
