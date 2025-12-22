@@ -43,6 +43,7 @@ DOCKER
 52) Invoice Ninja
 53) Paperless-ngx (Dokumentenverwaltung mit OCR)
 54) ERPNext (ERP-System)
+55) Zammad (Ticketsystem)
 
 
 90) debian
