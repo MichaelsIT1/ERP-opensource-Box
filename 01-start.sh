@@ -62,7 +62,7 @@ Choose an option: "
         ;;
         
     5)  CNAME="itop"
-        COS=$DEBIAN11
+        COS=$DEBIAN13
         CID=904
         create_container
         pct push $CID scripts/install-itop.sh /root/install-itop.sh
