@@ -31,5 +31,8 @@ EOF
 clear
 
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP"
-echo "Logindaten Benutzername: admin@example.com Passwort: changeme!"
+echo ""
+echo "Default-Logindaten" 
+echo "Benutzername: admin@example.com" 
+echo "Passwort: changeme!"
 echo "*************************************************************"
