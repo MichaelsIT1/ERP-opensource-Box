@@ -20,7 +20,7 @@ apt update && apt dist-upgrade -y
 echo
 echo "Webserver Apache, MariaDB und PHP wird installiert"
 echo "**************************************************"
-apt install apache2 mariadb-server php php-mbstring php-soap php-imap php-xml php-zip php-gd php-cli php-mysql php-curl php-ldap unzip zip graphviz -y
+apt install apache2 mariadb-server php php-mbstring php-soap php-xml php-zip php-gd php-cli php-mysql php-curl php-ldap unzip zip graphviz -y
 echo
 
 
@@ -32,22 +32,8 @@ echo
         FLUSH PRIVILEGES;
 EOF
 
- # automatische Installation
-        sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | mysql_secure_installation
-                    # current root password (emtpy after installation)
-        y           # Set root password?
-        open3a     # new root password
-        open3a     # new root password         
-        y           # Remove anonymous users?
-        y           # Disallow root login remotely?
-        y           # Remove test database and access to it?
-        y           # Reload privilege tables now?
-EOF
-
-
 echo "itop herunterladen"
 echo "********************************"
-
 
 mkdir /var/www/html/itop/
 cd /var/www/html/itop/
