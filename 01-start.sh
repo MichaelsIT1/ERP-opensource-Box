@@ -154,8 +154,8 @@ Choose an option: "
         COS=$DEBIAN13
         CID=955
         create_dockerhost
-        pct push $CID scripts/install-docker-erpnext.sh /root/install-docker-erpnext.sh
-        pct exec $CID -- bash -c "sh /root/install-docker-erpnext.sh"
+        pct push $CID scripts/install-docker-zammad.sh /root/install-docker-zammad.sh
+        pct exec $CID -- bash -c "sh /root/install-docker-zammad.sh"
         ;;
     
 
