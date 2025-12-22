@@ -26,7 +26,7 @@ apt install docker.io docker-compose git ca-certificates curl gnupg lsb-release 
 sleep 5
 git clone https://github.com/zammad/zammad-docker-compose.git
 sleep 5
-cd /root
+
 cd zammad-docker-compose
 docker compose up -d
 
@@ -36,7 +36,7 @@ http://\4:8000
 
 EOF
 
-#clear
+clear
 
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:8000/"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:8080/"
 echo "*************************************************************"
