@@ -69,7 +69,7 @@ Choose an option: "
         ;;
         
     6)  CNAME="i-doit"
-        COS=$DEBIAN11
+        COS=$DEBIAN13
         CID=905
         create_container
         pct push $CID scripts/install-idoit.sh /root/install-idoit.sh
