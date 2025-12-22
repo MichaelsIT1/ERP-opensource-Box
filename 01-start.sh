@@ -126,7 +126,7 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-docspell.sh"
         ;; 
 
-52) CNAME="invoiceninja-docker"
+52) CNAME="InvoiceNinja-docker"
         #CID=$DOCKERHOST_ID
         COS=$DEBIAN13
         CID=952
