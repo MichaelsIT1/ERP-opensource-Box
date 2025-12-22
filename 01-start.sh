@@ -149,6 +149,14 @@ Choose an option: "
         pct push $CID scripts/install-docker-erpnext.sh /root/install-docker-erpnext.sh
         pct exec $CID -- bash -c "sh /root/install-docker-erpnext.sh"
         ;;
+
+55) CNAME="Zammad-docker"
+        COS=$DEBIAN13
+        CID=955
+        create_dockerhost
+        pct push $CID scripts/install-docker-erpnext.sh /root/install-docker-erpnext.sh
+        pct exec $CID -- bash -c "sh /root/install-docker-erpnext.sh"
+        ;;
     
 
 
@@ -162,7 +170,7 @@ Choose an option: "
 
 
 #FEHLERHAFTE SCRIPTE
-55) CNAME="NetalertX-docker"
+550) CNAME="NetalertX-docker"
         COS=$DEBIAN13
         CID=1000
         create_dockerhost
@@ -170,7 +178,7 @@ Choose an option: "
         pct exec $CID -- bash -c "sh /root/install-docker-netalertx.sh"
         ;;
 
-56) CNAME="librenms-docker"
+560) CNAME="librenms-docker"
         COS=$DEBIAN13
         CID=1001
         create_dockerhost
