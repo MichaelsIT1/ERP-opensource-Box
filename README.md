@@ -7,16 +7,8 @@
 Updates:  
 Paperless-ngx: Script für docker Installation erstellt. am 18.12.25 auf Funktionalität geprüft   
 Invoice Ninja: Script für docker Installation erstellt. am 18.12.25 auf Funktionalität geprüft   
-Invoice Ninja: Script für debian 13 angepasst. am 18.12.25 auf Funktionalität geprüft (viele Sprachen fehlen)  
 nextcloud: Script für debian 13 angepasst. am 17.12.25 auf Funktionalität geprüft  
 checkMK-Raw (Netzwerkmonitoring): am 28.04.25 auf Funktionalität geprüft (debian12)   
-Zammad: Script für debian 12 in Arbeit  
-open3a: Script für debian 12 angepasst.  
-motioneye: Script für debian 12 angepasst.  
-checkmk_raw: Script für debian 12 angepasst.  
-
-
-HINWEIS: das DEWAWI-Script ist fehlerhaft. Wer möchte kann dies gern fixen. 
 
 Mit dieser Toolbox kann von Proxmox als Host spezielle LXC-Container installiert werden.
 Diese Toolbox soll Existensgründer diverser Programme eine einfache Installation bieten.
