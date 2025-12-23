@@ -54,18 +54,4 @@ Als Beispiel Nextcloud. Nextcloud kann mit dem Script installiert werden. Es wer
 Die eizelne Rechte liegen bei den jeweiligen Firmen/Entwickler.
 Ich bin nicht der Entwickler der einzelnen Software.
 
-# DETAILS
-**Zammad**
-Continue with installation? [y/N] -> y wählen
-----------------------------------------------------------------------------------------------------------------------------
-**ISPConfig TESTVERSION**
-
-Das Installationsskript bereitet den Server für das eigentliche Installationskript vor.
-
-Ich empfehle dieses nur zum Testen.
-
-**Für eine produktive Umgebung würde ich dieses Skript nehmen: https://www.howtoforge.com/ispconfig-autoinstall-debian-ubuntu/**
-
-Webseiten: https://www.ispconfig.org, https://www.ispconfig.de
-
 --------------------------------------------------------------------------------------------------------------------------------
