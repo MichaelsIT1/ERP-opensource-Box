@@ -18,7 +18,7 @@ Folgende Software können installiert werden. Hinweis: Die LXC-Container werden 
 - Paperless-ngx (Dokumentenverwaltung mit OCR) -> paperless-ngx.com oder https://github.com/paperless-ngx/paperless-ngx
 - Invoice Ninja (Rechnungsprogramm) -> https://www.invoiceninja.org oder https://www.invoiceninja.com
 - open3a (Rechnungsprogramm) -> https://www.open3a.de
-- iTop (CMDB + Ticketsystem) -> https://www.combodo.com/itop-193
+- iTop (CMDB + Ticketsystem) -> https://www.combodo.com
 - checkMK-Raw (Netzwerkmonitoring) -> https://checkmk.com/de
 - Nextcloud (Zusammenarbeit) -> https://nextcloud.com/
 - motioneye (Kamerazentrale) -> https://github.com/motioneye-project/motioneye
