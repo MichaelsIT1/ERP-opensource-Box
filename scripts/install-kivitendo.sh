@@ -535,3 +535,6 @@ international_dialing_prefix = 00
 our_country_code = 49
 EOF
 
+pg_createcluster --locale=de_DE.UTF-8 --encoding=UTF-8 9.3 clustername
+
+su - postgres
