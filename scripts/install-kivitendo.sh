@@ -52,16 +52,11 @@ mkdir webdav
 chown -R www-data users spool webdav
 
 chown www-data templates
+chown -R www-data /var/www/kivitendo-erp/
 
 
-
-
-
-
-
-
-
-
+# Config-Datei
+tee /var/www/kivitendo-erp/config/kivitendo.conf >/dev/null <<EOF
 [authentication]
 # The cleartext password for access to the administrative part.  It
 # can only be changed in this file, not via the administrative
@@ -101,9 +96,9 @@ failed_login_penalty = 5
 # users' passwords.
 host     = localhost
 port     = 5432
-db       = kivitendo_auth
-user     = postgres
-password =
+db       = kivitendo
+user     = kivitendo
+password = kivitendo
 
 [authentication/ldap]
 # This section is only relevant if 'module' is set to 'LDAP'. It names
@@ -308,7 +303,7 @@ openofficeorg_daemon_port = 2002
 # Set to 1 for debug messages in users/kivitendo-debug.log
 debug = 0
 # Chose a system user the daemon should run under when started as root.
-run_as =
+run_as = www-data
 # Task servers can run on multiple machines. Each needs its own unique
 # ID. If unset, it defaults to the host name. All but one task server
 # must have 'only_run_tasks_for_this_node' set to 1.
@@ -538,3 +533,5 @@ external_prefix = 0
 international_dialing_prefix = 00
 # Our own country code
 our_country_code = 49
+EOF
+
