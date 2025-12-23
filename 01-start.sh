@@ -37,8 +37,8 @@ Info: Alle Container beginnen ab ID900
 9) motioneye (Videokamerazentrale, debian12)
 -----------------------------------------
 
-DOCKER
-50) Portainer (privileged)
+DOCKER (alle Docker laufen mit priviligierten Rechten)
+50) Portainer
 51) docspell
 52) Invoice Ninja
 53) Paperless-ngx (Dokumentenverwaltung mit OCR)
