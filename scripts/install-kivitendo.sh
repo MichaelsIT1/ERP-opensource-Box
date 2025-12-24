@@ -95,5 +95,7 @@ cp /var/www/kivitendo-erp/config/kivitendo.conf.default /var/www/kivitendo-erp/c
 sed -i "s/admin_password.*$/admin_password = 12345" $DIR/kivitendo-erp/config/kivitendo.conf
 sed -i "s/password =$/password = 12345" $DIR/kivitendo-erp/config/kivitendo.conf
 
-echo "http://localhost/kivitendo/ aufgerufen werden!"
-echo "Im Adminbereich können Sie Datenbanken, Benutzer und Gruppen hinzufügen sowie weitere Konfigurationen vornehmen."
+echo "*******************************************************************************************"
+echo "kivitendo erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/kivitendo"
+echo "**************************************************************************"
