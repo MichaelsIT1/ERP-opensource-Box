@@ -1,144 +1,151 @@
-#!/bin/bash
-# ======================================================================
-# Vollautomatische kivitendo 4.0.0 Installation in privilegiertem LXC-Container
-# Debian 13 (Trixie) – PostgreSQL 17 mit UTF8
-# Dieses Skript behebt alle bisherigen Probleme (SQL_ASCII, hängende Cluster)
-# ======================================================================
+#!/bin/sh
+# Status: Alpha
+# Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
+# getestet auf Debian 11 im LXC Container
 
-set -e  # Bei Fehler abbrechen
+# System-Varibale
+IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
 
-# === Variablen – IN PRODUKTION UNBEDINGT ÄNDERN! ===
-DB_PASS="KiviSuperSicher2025!"   # Starkes Passwort für PostgreSQL-User
-ADMIN_PASS="AdminSicher2025!"    # Initiales Admin-Passwort für kivitendo
-KIVI_DIR="/opt/kivitendo"
+clear
+echo "Kivitendo installieren"
+echo "*******************************"
+echo
+echo "Zeitzone auf Europe/Berlin gesetzt"
+echo "**********************************"
+timedatectl set-timezone Europe/Berlin 
+echo
+echo "Betriebssystem wird aktualisiert"
+echo "***************************************"
+apt update -y && apt dist-upgrade -y
+echo
+echo "Webserver Apache, MariaDB und PHP wird installiert"
+echo "**************************************************"
+apt install  apache2 libarchive-zip-perl libclone-perl \
+libconfig-std-perl libdatetime-perl libdbd-pg-perl libdbi-perl \
+libemail-address-perl  libemail-mime-perl libfcgi-perl libjson-perl \
+liblist-moreutils-perl libnet-smtp-ssl-perl libnet-sslglue-perl \
+libparams-validate-perl libpdf-api2-perl librose-db-object-perl \
+librose-db-perl librose-object-perl libsort-naturally-perl \
+libstring-shellquote-perl libtemplate-perl libtext-csv-xs-perl \
+libtext-iconv-perl liburi-perl libxml-writer-perl libyaml-perl \
+libimage-info-perl libgd-gd2-perl libapache2-mod-fcgid \
+libfile-copy-recursive-perl postgresql libalgorithm-checkdigits-perl \
+libcrypt-pbkdf2-perl git libcgi-pm-perl libtext-unidecode-perl libwww-perl \
+postgresql-contrib poppler-utils libhtml-restrict-perl \
+libdatetime-set-perl libset-infinite-perl liblist-utilsby-perl \
+libdaemon-generic-perl libfile-flock-perl libfile-slurp-perl \
+libfile-mimeinfo-perl libpbkdf2-tiny-perl libregexp-ipv6-perl \
+libdatetime-event-cron-perl libexception-class-perl \
+libxml-libxml-perl libtry-tiny-perl libmath-round-perl \
+libimager-perl libimager-qrcode-perl librest-client-perl libipc-run-perl \
+libencode-imaputf7-perl libmail-imapclient-perl libuuid-tiny-perl -y
 
-echo "=== kivitendo Installation im LXC-Container startet ==="
+# Latex-Installation
+echo "Latex wird installiert."
+apt-get install -y texlive-binaries texlive-latex-recommended texlive-fonts-recommended \
+texlive-lang-german dvisvgm fonts-lmodern fonts-texgyre libptexenc1 libsynctex2 \
+libteckit0 libtexlua53 libtexluajit2 libzzip-0-13 lmodern tex-common tex-gyre \
+texlive-base latexmk texlive-latex-extra
 
-# 1. System aktualisieren & alle benötigten Pakete installieren
-apt update && apt upgrade -y
-apt install -y \
-    apache2 libapache2-mod-perl2 \
-    postgresql postgresql-contrib \
-    git build-essential libpq-dev libssl-dev \
-    libtemplate-perl libdbi-perl libdbd-pg-perl libjson-perl \
-    libpdf-api2-perl libgd-perl libyaml-perl libxml-simple-perl \
-    libbarcode-code128-perl libtext-csv-perl libhtml-template-perl \
-    libconfig-std-perl \
-    locales cpanminus wget unzip
+# 1. PostgreSQL stoppen
+systemctl stop postgresql  # Oder: service postgresql stop
 
-# 2. Locales für UTF8 und deutsche Sortierung generieren
-sed -i 's/^# de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen
-sed -i 's/^# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
-locale-gen
-export LANG=de_DE.UTF-8
-export LC_ALL=de_DE.UTF-8
-update-locale LANG=de_DE.UTF-8
+# 2. Alten Cluster löschen (Achtung: löscht ALLE Datenbanken!)
+rm -rf /var/lib/postgresql/17/main  # Ersetze <VERSION> durch deine Version, z.B. 14 oder 16
+# Finde die Version mit: psql --version oder dpkg -l | grep postgresql
 
-# 3. PostgreSQL-Cluster erzwingen mit UTF8 (kompletter Reset bei SQL_ASCII)
-echo "PostgreSQL-Cluster wird auf UTF8 umgestellt..."
-systemctl stop postgresql 2>/dev/null || true
-pkill -u postgres 2>/dev/null || true
+# 3. Neuen Cluster mit UTF8 anlegen (wichtig: --locale und --encoding explizit!)
+su - postgres -c "initdb -D /var/lib/postgresql/17/main --locale=de_DE.UTF-8 --encoding=UTF8"
 
-pg_dropcluster --stop 17 main 2>/dev/null || true
-rm -rf /etc/postgresql/17/main /var/lib/postgresql/17/main
+# Oder, falls de_DE.UTF-8 nicht verfügbar ist, nutze en_US.UTF-8 oder C.UTF-8:
+# su - postgres -c "initdb -D /var/lib/postgresql/<VERSION>/main --locale=C.UTF-8 --encoding=UTF8"
 
-pg_createcluster --locale de_DE.UTF-8 --encoding UTF8 --start 17 main
+# 4. PostgreSQL starten
+systemctl start postgresql
 
-# Überprüfung
-echo "PostgreSQL Encoding (muss UTF8 sein):"
-su - postgres -c "psql -c 'SHOW SERVER_ENCODING;'"
+# 5. Überprüfen (sollte jetzt UTF8 zeigen)
+psql -U postgres -c "SHOW SERVER_ENCODING;"  # Sollte UTF8 ausgeben
+psql -U postgres -c "\l"  # Encoding für template1/template0 ist jetzt UTF8
 
-# 4. kivitendo DB-User und Auth-DB anlegen
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 1. Als System-User postgres wechseln (nur für diesen einen Befehl)
 su - postgres -c "psql" <<EOF
-\\set ON_ERROR_STOP on
-DROP DATABASE IF EXISTS kivitendo_auth;
-DROP USER IF EXISTS kivitendo;
-CREATE USER kivitendo WITH PASSWORD '$DB_PASS' CREATEDB;
-CREATE DATABASE kivitendo_auth ENCODING 'UTF8' OWNER kivitendo;
+-- kivitendo-User anlegen
+CREATE USER kivitendo WITH PASSWORD kivitendo CREATEDB;
+
+-- Auth-Datenbank mit UTF8 anlegen (template0 umgeht SQL_ASCII-Problem)
+CREATE DATABASE kivitendo_auth
+    WITH TEMPLATE = template0
+    ENCODING = 'UTF8';
+
+-- Rechte setzen
+ALTER DATABASE kivitendo_auth OWNER TO kivitendo;
 GRANT ALL PRIVILEGES ON DATABASE kivitendo_auth TO kivitendo;
 EOF
 
-# 5. kivitendo 4.0.0 aus Git holen
-mkdir -p $KIVI_DIR
-if [ ! -d "$KIVI_DIR/.git" ]; then
-    git clone https://github.com/kivitendo/kivitendo-erp.git $KIVI_DIR
-fi
-cd $KIVI_DIR
-git fetch --all --tags
-git checkout release-4.0.0
+cd /var/www/
+git clone https://github.com/kivitendo/kivitendo-erp.git
 
-# 6. Konfigurationsdatei anlegen/überschreiben
-cp -f config/kivitendo.conf.default config/kivitendo.conf 2>/dev/null || true
-cat <<EOF > config/kivitendo.conf
-[database]
-host     = localhost
-port     = 5432
-db       = kivitendo_auth
-user     = kivitendo
-password = $DB_PASS
+cd kivitendo-erp/
+git checkout $(git tag -l | egrep -ve "(alpha|beta|rc)" | tail -1)
+chown -R www-data: /var/www/kivitendo-erp
 
-[authentication/database]
-host     = localhost
-port     = 5432
-db       = kivitendo_auth
-user     = kivitendo
-password = $DB_PASS
+cat <<EOL > /etc/apache2/sites-available/kivitendo.apache2.conf
+AddHandler fcgid-script .fpl
+AliasMatch ^/kivitendo/[^/]+\.pl /var/www/kivitendo-erp/dispatcher.fcgi
+Alias       /kivitendo/          /var/www/kivitendo-erp/
+<Directory /var/www/kivitendo-erp>
+  AllowOverride All
+  Options ExecCGI Includes FollowSymlinks
+  AddHandler cgi-script .py
+  DirectoryIndex login.pl
+  AddDefaultCharset UTF-8
+  Require all granted
+</Directory>
+<Directory /var/www/kivitendo-erp/users>
+  Require all denied
+</Directory>
+EOL
 
-[authentication]
-admin_password = $ADMIN_PASS
+ln -sf /etc/apache2/sites-available/kivitendo.apache2.conf /etc/apache2/sites-enabled/kivitendo.apache2.conf
+service apache2 restart
 
-[system]
-default_language = de
+echo "config/kivitendo.conf erzeugen"
+cp /var/www/kivitendo-erp/config/kivitendo.conf.default /var/www/kivitendo-erp/config/kivitendo.conf
+sed -i "s/admin_password.*$/admin_password = 12345" /var/www/kivitendo-erp/config/kivitendo.conf
+sed -i "s/password =$/password = 12345" /var/www/kivitendo-erp/config/kivitendo.conf
+
+# Text vor der Anmeldung
+tee /etc/issue >/dev/null <<EOF
+\4\/kivitendo/
+
 EOF
 
-# 7. Fehlende Perl-Module installieren (harmlose Fehler ignorieren)
-cd $KIVI_DIR
-cpanm --installdeps . || echo "CPAN-Fehler sind meist harmlos – wichtige Module sind via apt installiert"
-
-# 8. Apache konfigurieren (HTTPS mit Debian-Snakeoil-Zertifikat)
-a2enmod perl cgi rewrite headers ssl
-chown -R www-data:www-data $KIVI_DIR/users $KIVI_DIR/spool $KIVI_DIR/webdav 2>/dev/null || mkdir -p $KIVI_DIR/{users,spool,webdav} && chown -R www-data:www-data $KIVI_DIR/{users,spool,webdav}
-
-cat <<EOF > /etc/apache2/sites-available/kivitendo.conf
-<VirtualHost *:80>
-    ServerName localhost
-    Redirect permanent / https://localhost/
-</VirtualHost>
-
-<VirtualHost *:443>
-    ServerName localhost
-    DocumentRoot $KIVI_DIR
-
-    SSLEngine on
-    SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
-    SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
-
-    <Directory "$KIVI_DIR">
-        Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
-        AllowOverride All
-        Require all granted
-    </Directory>
-
-    ScriptAlias / $KIVI_DIR/
-</VirtualHost>
+# Als postgres-Systemuser wechseln und Passwort richtig setzen
+su - postgres -c "psql" <<EOF
+ALTER ROLE postgres WITH PASSWORD 'postgres_temp_2025';
+\q
 EOF
 
-a2ensite kivitendo
-a2dissite 000-default 2>/dev/null || true
-systemctl restart apache2
 
-# 9. Authentifizierungsdatenbank initialisieren
-cd $KIVI_DIR
-perl scripts/update_auth_db.pl --init
+echo "*******************************************************************************************"
+echo "kivitendo erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/kivitendo/"
+echo "Adminpasswort: admin123
+echo "**************************************************************************"
 
-# 10. Dienste starten und Logs im Vordergrund (Container bleibt am Laufen)
-echo "=== kivitendo ist erfolgreich installiert und läuft! ==="
-echo "Öffne im Browser: https://<IP-des-Containers> (selbstsigniertes Zertifikat akzeptieren)"
-echo "Admin-Login: admin / $ADMIN_PASS"
-echo "Danach ersten Mandanten anlegen und ALLE Passwörter ändern!"
 
-service postgresql start
-service apache2 start
-
-# Logs tailen → Container bleibt aktiv
-tail -f /var/log/postgresql/*.log /var/log/apache2/*.log
+mobil: 0171 / 90 28 930 
+e-mail: mspoor@mspoor.de
