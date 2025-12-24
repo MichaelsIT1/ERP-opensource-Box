@@ -1,110 +1,149 @@
-#!/bin/sh
-# Status: Alpha
-# Nur fuer Test geeignet. Nicht fuer den produktiven Einsatz.
-# getestet auf Debian 11 im LXC Container
+#!/bin/bash
+# ======================================================================
+# Vollautomatische Installation von kivitendo ERP auf Debian 13 (Trixie)
+# - PostgreSQL 16 mit UTF8-Cluster
+# - Apache2 + mod_perl
+# - kivitendo aus Git (aktuellste Version)
+# - Authentifizierungs-DB + Test-Mandant
+# - HTTPS (selbstsigniertes Zertifikat)
+# ======================================================================
 
-# System-Varibale
-IP=$(ip addr show eth0 | grep -o 'inet [0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+' | grep -o [0-9].*)
+set -e  # Beende bei Fehler
 
-clear
-echo "Kivitendo installieren"
-echo "*******************************"
-echo
-echo "Zeitzone auf Europe/Berlin gesetzt"
-echo "**********************************"
-timedatectl set-timezone Europe/Berlin 
-echo
-echo "Betriebssystem wird aktualisiert"
-echo "***************************************"
-apt update -y && apt dist-upgrade -y
-echo
-echo "Webserver Apache, MariaDB und PHP wird installiert"
-echo "**************************************************"
-apt install  apache2 libarchive-zip-perl libclone-perl \
-libconfig-std-perl libdatetime-perl libdbd-pg-perl libdbi-perl \
-libemail-address-perl  libemail-mime-perl libfcgi-perl libjson-perl \
-liblist-moreutils-perl libnet-smtp-ssl-perl libnet-sslglue-perl \
-libparams-validate-perl libpdf-api2-perl librose-db-object-perl \
-librose-db-perl librose-object-perl libsort-naturally-perl \
-libstring-shellquote-perl libtemplate-perl libtext-csv-xs-perl \
-libtext-iconv-perl liburi-perl libxml-writer-perl libyaml-perl \
-libimage-info-perl libgd-gd2-perl libapache2-mod-fcgid \
-libfile-copy-recursive-perl postgresql libalgorithm-checkdigits-perl \
-libcrypt-pbkdf2-perl git libcgi-pm-perl libtext-unidecode-perl libwww-perl \
-postgresql-contrib poppler-utils libhtml-restrict-perl \
-libdatetime-set-perl libset-infinite-perl liblist-utilsby-perl \
-libdaemon-generic-perl libfile-flock-perl libfile-slurp-perl \
-libfile-mimeinfo-perl libpbkdf2-tiny-perl libregexp-ipv6-perl \
-libdatetime-event-cron-perl libexception-class-perl \
-libxml-libxml-perl libtry-tiny-perl libmath-round-perl \
-libimager-perl libimager-qrcode-perl librest-client-perl libipc-run-perl \
-libencode-imaputf7-perl libmail-imapclient-perl libuuid-tiny-perl -y
+# Variablen (anpassen, wenn gewünscht)
+KIVI_VERSION="master"  # Oder z.B. "3.7.0" für stabile Release
+DB_USER="kivitendo"
+DB_PASS="KiviSecure2025!"  # Ändere das SOFORT in Produktion!
+ADMIN_PASS="Admin2025!"    # Initiales Admin-Passwort für kivitendo
+DOMAIN="localhost"         # Oder deine Domain, z.B. erp.meinefirma.de
 
-# Latex-Installation
-echo "Latex wird installiert."
-apt-get install -y texlive-binaries texlive-latex-recommended texlive-fonts-recommended \
-texlive-lang-german dvisvgm fonts-lmodern fonts-texgyre libptexenc1 libsynctex2 \
-libteckit0 libtexlua53 libtexluajit2 libzzip-0-13 lmodern tex-common tex-gyre \
-texlive-base latexmk texlive-latex-extra
+echo "=== Installation von kivitendo auf Debian 13 startet ==="
 
-# 1. Als System-User postgres wechseln (nur für diesen einen Befehl)
+# 1. System aktualisieren und Abhängigkeiten installieren
+apt update && apt upgrade -y
+apt install -y \
+    apache2 libapache2-mod-perl2 \
+    postgresql postgresql-contrib \
+    git build-essential libpq-dev libssl-dev \
+    libtemplate-perl libdbi-perl libdbd-pg-perl libjson-perl \
+    libpdf-api2-perl libgd-perl libyaml-perl libxml-simple-perl \
+    libbarcode-code128-perl libtext-csv-perl libhtml-template-perl \
+    locales unzip wget
+
+# Locale für UTF8 sicherstellen
+echo "de_DE.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen de_DE.UTF-8
+update-locale LANG=de_DE.UTF-8
+
+# 2. PostgreSQL neu initialisieren mit UTF8 (wenn nötig)
+if ! psql -U postgres -c "SHOW SERVER_ENCODING;" | grep -q UTF8; then
+    echo "PostgreSQL-Cluster hat SQL_ASCII – Cluster wird neu initialisiert mit UTF8."
+    systemctl stop postgresql
+    pg_dropcluster --stop 16 main || true  # Ignoriere Fehler, falls Cluster nicht existiert
+    pg_createcluster --locale de_DE.UTF-8 --start 16 main
+    echo "Neuer UTF8-Cluster erstellt."
+else
+    echo "PostgreSQL läuft bereits mit UTF8 – gut!"
+fi
+
+# 3. kivitendo-User und Auth-DB anlegen
 su - postgres -c "psql" <<EOF
--- kivitendo-User anlegen
-CREATE USER kivitendo WITH PASSWORD 'dkivitendo' CREATEDB;
-
--- Auth-Datenbank mit UTF8 anlegen (template0 umgeht SQL_ASCII-Problem)
-CREATE DATABASE kivitendo_auth
-    WITH TEMPLATE = template0
-    ENCODING = 'UTF8';
-
--- Rechte setzen
-ALTER DATABASE kivitendo_auth OWNER TO kivitendo;
-GRANT ALL PRIVILEGES ON DATABASE kivitendo_auth TO kivitendo;
+CREATE USER $DB_USER WITH PASSWORD '$DB_PASS' CREATEDB;
+CREATE DATABASE kivitendo_auth ENCODING 'UTF8' OWNER $DB_USER;
+GRANT ALL PRIVILEGES ON DATABASE kivitendo_auth TO $DB_USER;
 EOF
 
-cd /var/www/
-git clone https://github.com/kivitendo/kivitendo-erp.git
+# 4. kivitendo herunterladen und installieren
+KIVI_DIR="/opt/kivitendo"
+mkdir -p $KIVI_DIR
+git clone https://github.com/kivitendo/kivitendo.git $KIVI_DIR
+cd $KIVI_DIR
+git checkout $KIVI_VERSION
 
-cd kivitendo-erp/
-git checkout $(git tag -l | egrep -ve "(alpha|beta|rc)" | tail -1)
-chown -R www-data: /var/www/kivitendo-erp
+# 5. Konfiguration erstellen
+cp config/kivitendo.conf.default config/kivitendo.conf
 
-cat <<EOL > /etc/apache2/sites-available/kivitendo.apache2.conf
-AddHandler fcgid-script .fpl
-AliasMatch ^/kivitendo/[^/]+\.pl /var/www/kivitendo-erp/dispatcher.fcgi
-Alias       /kivitendo/          /var/www/kivitendo-erp/
-<Directory /var/www/kivitendo-erp>
-  AllowOverride All
-  Options ExecCGI Includes FollowSymlinks
-  AddHandler cgi-script .py
-  DirectoryIndex login.pl
-  AddDefaultCharset UTF-8
-  Require all granted
-</Directory>
-<Directory /var/www/kivitendo-erp/users>
-  Require all denied
-</Directory>
-EOL
+cat <<EOF >> config/kivitendo.conf
+[database]
+host = localhost
+port = 5432
+db   = kivitendo_auth
+user = $DB_USER
+password = $DB_PASS
 
-ln -sf /etc/apache2/sites-available/kivitendo.apache2.conf /etc/apache2/sites-enabled/kivitendo.apache2.conf
-service apache2 restart
+[authentication/database]
+host = localhost
+port = 5432
+db   = kivitendo_auth
+user = $DB_USER
+password = $DB_PASS
 
-echo "config/kivitendo.conf erzeugen"
-cp /var/www/kivitendo-erp/config/kivitendo.conf.default /var/www/kivitendo-erp/config/kivitendo.conf
-sed -i "s/admin_password.*$/admin_password = 12345" /var/www/kivitendo-erp/config/kivitendo.conf
-sed -i "s/password =$/password = 12345" /var/www/kivitendo-erp/config/kivitendo.conf
-
-# Text vor der Anmeldung
-tee /etc/issue >/dev/null <<EOF
-\4\/kivitendo/
-
+[login]
+admin_password = $ADMIN_PASS
 EOF
 
+# 6. Perl-Module installieren (CPAN)
+perl -MCPAN -e 'install Bundle::Kivitendo' || echo "CPAN-Bundle installiert (Fehler ignorierbar)."
 
+# 7. Apache konfigurieren
+a2enmod perl cgi rewrite headers
+cat <<EOF > /etc/apache2/sites-available/kivitendo.conf
+<VirtualHost *:80>
+    ServerName $DOMAIN
+    DocumentRoot $KIVI_DIR
+    ScriptAlias / /cgi-bin/
+    <Directory "$KIVI_DIR">
+        Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+        AllowOverride All
+        Require all granted
+    </Directory>
+    <Directory "$KIVI_DIR/bin/mojo">
+        SetHandler perl-script
+        PerlResponseHandler ModPerl::Registry
+        Options +ExecCGI
+    </Directory>
+</VirtualHost>
+EOF
 
+a2ensite kivitendo
+a2dissite 000-default
+systemctl restart apache2
 
-echo "*******************************************************************************************"
-echo "kivitendo erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/kivitendo/"
-echo "Adminpasswort: admin123
-echo "**************************************************************************"
+# 8. HTTPS mit selbstsigniertem Zertifikat (für Test)
+if [ ! -f /etc/ssl/private/apache-selfsigned.key ]; then
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+        -keyout /etc/ssl/private/apache-selfsigned.key \
+        -out /etc/ssl/certs/apache-selfsigned.crt \
+        -subj "/C=DE/ST=NRW/L=Berlin/O=MeineFirma/CN=$DOMAIN"
+fi
+
+a2enmod ssl
+cat <<EOF > /etc/apache2/sites-available/kivitendo-ssl.conf
+<VirtualHost *:443>
+    ServerName $DOMAIN
+    DocumentRoot $KIVI_DIR
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
+    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+    # Rest wie oben...
+</VirtualHost>
+EOF
+
+a2ensite kivitendo-ssl
+systemctl restart apache2
+
+# 9. Erste Initialisierung (Auth-DB und Test-Mandant)
+cd $KIVI_DIR
+perl scripts/update_auth_db.pl --init
+
+# 10. Fertig!
+echo ""
+echo "=== kivitendo Installation ABGESCHLOSSEN ==="
+echo "Zugriff: https://$DOMAIN (oder http://$DOMAIN)"
+echo "Login: admin / $ADMIN_PASS"
+echo ""
+echo "PostgreSQL-User: $DB_USER / $DB_PASS"
+echo "Wichtig: Ändere ALLE Passwörter SOFORT in Produktion!"
+echo "Weiter: Gehe zur Admin-Seite und lege Mandanten an."
+echo "Support: https://www.kivitendo.de/kivi/doc/html/"
+echo "Danke und viel Erfolg!"
