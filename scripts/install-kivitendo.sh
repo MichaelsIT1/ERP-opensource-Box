@@ -29,7 +29,20 @@ apt install -y \
     libtemplate-perl libdbi-perl libdbd-pg-perl libjson-perl \
     libpdf-api2-perl libgd-perl libyaml-perl libxml-simple-perl \
     libbarcode-code128-perl libtext-csv-perl libhtml-template-perl \
-    locales wget unzip cpanminus
+    locales wget unzip cpanminus libconfig-std-perl
+
+apt install libalgorithm-checkdigits-perl libarchive-zip-perl \
+    libcryptx-perl libdaemon-generic-perl libdatetime-perl \
+    libdatetime-event-cron-perl libdatetime-format-strptime-perl \
+    libdatetime-set-perl libexception-class-perl libemail-address-perl \
+    libemail-mime-perl libencode-imaputf7-perl libfile-copy-recursive-perl \
+    libfile-flock-perl libfile-mimeinfo-perl libhtml-restrict-perl \
+    libimage-info-perl libimager-perl libimager-qrcode-perl \
+    liblist-utilsby-perl libmath-round-perl libmail-imapclient-perl \
+    libpbkdf2-tiny-perl libregexp-ipv6-perl librest-client-perl \
+    librose-object-perl librose-db-perl librose-db-object-perl \
+    libset-infinite-perl libsort-naturally-perl libtext-unidecode-perl \
+    libuuid-tiny-perl libxml-writer-perl poppler-utils -y
 
 # 2. Locales für UTF8 und deutsche Sortierung sicherstellen (verhindert Perl-Warnings)
 sed -i 's/^# *\(de_DE.UTF-8 UTF-8\)/\1/' /etc/locale.gen
