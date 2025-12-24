@@ -107,6 +107,16 @@ Choose an option: "
         pct push $CID scripts/install-zammad-ubuntu.sh /root/install-zammad-ubuntu.sh
         pct exec $CID -- bash -c "sh /root/install-zammad-ubuntu.sh"
         ;;
+
+11) CNAME="kivitendo"
+        COS=$DEBIAN13
+        CID=911
+        create_dockerhost
+        pct push $CID scripts/install-kivitendo.sh /root/install-kivitendo.sh
+        pct exec $CID -- bash -c "sh /root/install-kivitendo.sh"
+        ;;
+
+
     
 # DOCKER
 50) CNAME="Portainer-docker"
