@@ -47,9 +47,20 @@ texlive-lang-german dvisvgm fonts-lmodern fonts-texgyre libptexenc1 libsynctex2 
 libteckit0 libtexlua53 libtexluajit2 libzzip-0-13 lmodern tex-common tex-gyre \
 texlive-base latexmk texlive-latex-extra
 
-su - postgres
-psql -d template1 -c "ALTER ROLE postgres WITH password 'test'"
-exit
+# 1. Als System-User postgres wechseln (nur für diesen einen Befehl)
+su - postgres -c "psql" <<EOF
+-- kivitendo-User anlegen
+CREATE USER kivitendo WITH PASSWORD 'dkivitendo' CREATEDB;
+
+-- Auth-Datenbank mit UTF8 anlegen (template0 umgeht SQL_ASCII-Problem)
+CREATE DATABASE kivitendo_auth
+    WITH TEMPLATE = template0
+    ENCODING = 'UTF8';
+
+-- Rechte setzen
+ALTER DATABASE kivitendo_auth OWNER TO kivitendo;
+GRANT ALL PRIVILEGES ON DATABASE kivitendo_auth TO kivitendo;
+EOF
 
 cd /var/www/
 git clone https://github.com/kivitendo/kivitendo-erp.git
