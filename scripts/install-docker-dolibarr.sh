@@ -74,12 +74,14 @@ docker compose up -d
 tee /etc/issue >/dev/null <<EOF
 \4
 
+Username: admin
+Password: admin
 
 EOF
 
 clear
 
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP:8080"
-echo "Username: Administrator"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP"
+echo "Username: admin"
 echo "Password: admin"
 echo "*************************************************************"
