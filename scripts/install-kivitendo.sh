@@ -38,7 +38,7 @@ libfile-mimeinfo-perl libpbkdf2-tiny-perl libregexp-ipv6-perl \
 libdatetime-event-cron-perl libexception-class-perl \
 libxml-libxml-perl libtry-tiny-perl libmath-round-perl \
 libimager-perl libimager-qrcode-perl librest-client-perl libipc-run-perl \
-libencode-imaputf7-perl libmail-imapclient-perl libuuid-tiny-perl -y
+libencode-imaputf7-perl libmail-imapclient-perl libuuid-tiny-perl libcryptx-perl -y
 
 # Latex-Installation
 echo "Latex wird installiert."
