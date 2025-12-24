@@ -65,7 +65,6 @@ EOF
 cd /var/www/
 git clone https://github.com/kivitendo/kivitendo-erp.git
 
-# Wechsel in das kivitendo-Verzeichnis und Checkout des neuesten stabilen Tags
 cd kivitendo-erp/
 git checkout $(git tag -l | egrep -ve "(alpha|beta|rc)" | tail -1)
 chown -R www-data: /var/www/kivitendo-erp
@@ -94,6 +93,15 @@ echo "config/kivitendo.conf erzeugen"
 cp /var/www/kivitendo-erp/config/kivitendo.conf.default /var/www/kivitendo-erp/config/kivitendo.conf
 sed -i "s/admin_password.*$/admin_password = 12345" $DIR/kivitendo-erp/config/kivitendo.conf
 sed -i "s/password =$/password = 12345" $DIR/kivitendo-erp/config/kivitendo.conf
+
+# Text vor der Anmeldung
+tee /etc/issue >/dev/null <<EOF
+\4\/kivitendo/
+
+EOF
+
+
+
 
 echo "*******************************************************************************************"
 echo "kivitendo erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
