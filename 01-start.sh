@@ -168,7 +168,14 @@ Choose an option: "
         pct push $CID scripts/install-docker-zammad.sh /root/install-docker-zammad.sh
         pct exec $CID -- bash -c "sh /root/install-docker-zammad.sh"
         ;;
-    
+
+56) CNAME="dolibarr-docker"
+        COS=$DEBIAN13
+        CID=956
+        create_dockerhost
+        pct push $CID scripts/install-docker-dolibarr.sh /root/install-docker-dolibarr.sh
+        pct exec $CID -- bash -c "sh /root/install-docker-dolibarr.sh"
+        ;;
 
 
 90) CNAME="debian"
