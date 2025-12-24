@@ -72,9 +72,9 @@ chown -R www-data: /var/www/kivitendo-erp
 
 cat <<EOL > /etc/apache2/sites-available/kivitendo.apache2.conf
 AddHandler fcgid-script .fpl
-AliasMatch ^/kivitendo/[^/]+\.pl /var/www/kivitendo-erp/kivitendo-erp/dispatcher.fcgi
-Alias       /kivitendo/          /var/www/kivitendo-erp/kivitendo-erp/
-<Directory /var/www/kivitendo-erp/kivitendo-erp>
+AliasMatch ^/kivitendo/[^/]+\.pl /var/www/kivitendo-erp/dispatcher.fcgi
+Alias       /kivitendo/          /var/www/kivitendo-erp/
+<Directory /var/www/kivitendo-erp>
   AllowOverride All
   Options ExecCGI Includes FollowSymlinks
   AddHandler cgi-script .py
@@ -82,7 +82,7 @@ Alias       /kivitendo/          /var/www/kivitendo-erp/kivitendo-erp/
   AddDefaultCharset UTF-8
   Require all granted
 </Directory>
-<Directory /var/www/kivitendo-erp/kivitendo-erp/users>
+<Directory /var/www/kivitendo-erp/users>
   Require all denied
 </Directory>
 EOL
@@ -97,5 +97,5 @@ sed -i "s/password =$/password = 12345" $DIR/kivitendo-erp/config/kivitendo.conf
 
 echo "*******************************************************************************************"
 echo "kivitendo erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/kivitendo"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/kivitendo/"
 echo "**************************************************************************"
