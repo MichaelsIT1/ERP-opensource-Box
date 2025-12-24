@@ -91,8 +91,8 @@ service apache2 restart
 
 echo "config/kivitendo.conf erzeugen"
 cp /var/www/kivitendo-erp/config/kivitendo.conf.default /var/www/kivitendo-erp/config/kivitendo.conf
-sed -i "s/admin_password.*$/admin_password = 12345" $DIR/kivitendo-erp/config/kivitendo.conf
-sed -i "s/password =$/password = 12345" $DIR/kivitendo-erp/config/kivitendo.conf
+sed -i "s/admin_password.*$/admin_password = 12345" /var/www/kivitendo-erp/config/kivitendo.conf
+sed -i "s/password =$/password = 12345" /var/www/kivitendo-erp/config/kivitendo.conf
 
 # Text vor der Anmeldung
 tee /etc/issue >/dev/null <<EOF
@@ -106,4 +106,5 @@ EOF
 echo "*******************************************************************************************"
 echo "kivitendo erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
 echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/kivitendo/"
+echo "Adminpasswort: admin123
 echo "**************************************************************************"
