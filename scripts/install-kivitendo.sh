@@ -80,18 +80,13 @@ psql -U postgres -c "\l"  # Encoding für template1/template0 ist jetzt UTF8
 
 
 
-# 1. Als System-User postgres wechseln (nur für diesen einen Befehl)
+# 4. kivitendo DB-User und Auth-DB anlegen
 su - postgres -c "psql" <<EOF
--- kivitendo-User anlegen
-CREATE USER kivitendo WITH PASSWORD kivitendo CREATEDB;
-
--- Auth-Datenbank mit UTF8 anlegen (template0 umgeht SQL_ASCII-Problem)
-CREATE DATABASE kivitendo_auth
-    WITH TEMPLATE = template0
-    ENCODING = 'UTF8';
-
--- Rechte setzen
-ALTER DATABASE kivitendo_auth OWNER TO kivitendo;
+\\set ON_ERROR_STOP on
+DROP DATABASE IF EXISTS kivitendo_auth;
+DROP USER IF EXISTS kivitendo;
+CREATE USER kivitendo WITH PASSWORD kividento CREATEDB;
+CREATE DATABASE kivitendo_auth ENCODING 'UTF8' OWNER kivitendo;
 GRANT ALL PRIVILEGES ON DATABASE kivitendo_auth TO kivitendo;
 EOF
 
@@ -135,7 +130,7 @@ EOF
 
 # Als postgres-Systemuser wechseln und Passwort richtig setzen
 su - postgres -c "psql" <<EOF
-ALTER ROLE postgres WITH PASSWORD 'postgres_temp_2025';
+ALTER ROLE postgres WITH PASSWORD 'kivitendo';
 \q
 EOF
 
