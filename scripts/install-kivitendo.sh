@@ -17,6 +17,31 @@ DB_PASS="KiviSecure2025!"  # Ändere das SOFORT in Produktion!
 ADMIN_PASS="Admin2025!"    # Initiales Admin-Passwort für kivitendo
 DOMAIN="localhost"         # Oder deine Domain, z.B. erp.meinefirma.de
 
+
+# 1. en_US.UTF-8 in /etc/locale.gen aktivieren (uncomment)
+sed -i 's/^# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
+
+# Optional: Auch de_DE.UTF-8 für deutsche Sortierung aktivieren
+sed -i 's/^# de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen
+
+# 2. Locales generieren
+locale-gen
+
+# 3. Systemweite Default-Locale setzen
+echo "LANG=en_US.UTF-8" > /etc/default/locale
+echo "LC_ALL=en_US.UTF-8" >> /etc/default/locale
+
+# 4. Für die aktuelle Shell (damit es sofort wirkt)
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# 5. Überprüfen
+locale
+
+
+
+
+
 echo "=== Installation von kivitendo auf Debian 13 startet ==="
 
 # 1. System aktualisieren und Abhängigkeiten installieren
