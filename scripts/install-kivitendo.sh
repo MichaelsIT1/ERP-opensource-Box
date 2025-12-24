@@ -57,6 +57,50 @@ update-locale LANG=de_DE.UTF-8
 apt install -y postgresql
 systemctl enable --now postgresql
 
+# 1. Zuerst die aktuelle PostgreSQL-Version herausfinden (wichtig!)
+pg_lsclusters
+
+# Die Ausgabe zeigt z. B. "Ver" als 17 und "Cluster" als main
+# Passe im Folgenden <VERSION> an (meist 17 auf Debian 13)
+
+# 2. PostgreSQL stoppen und alten Cluster löschen
+systemctl stop postgresql
+pg_dropcluster --stop 17 main
+
+# 3. Neuen Cluster mit UTF8 und deutscher Locale anlegen
+pg_createcluster --locale de_DE.UTF-8 --encoding UTF8 --start 17 main
+
+# Falls de_DE.UTF-8 nicht verfügbar ist (Fehler "locale not found"):
+# pg_createcluster --locale en_US.UTF-8 --encoding UTF8 --start 17 main
+
+# 4. Überprüfen – muss jetzt UTF8 zeigen!
+su - postgres -c "psql -c 'SHOW SERVER_ENCODING;'"
+su - postgres -c "psql -c '\l'"
+
+# 5. kivitendo-User und Auth-DB neu anlegen (Passwort aus deinem Skript)
+su - postgres -c "psql" <<EOF
+DROP OWNED BY kivitendo CASCADE;  -- Alte Objekte aufräumen
+DROP USER IF EXISTS kivitendo;
+DROP DATABASE IF EXISTS kivitendo_auth;
+
+CREATE USER kivitendo WITH PASSWORD 'KiviSuperSicher2025!' CREATEDB;
+
+CREATE DATABASE kivitendo_auth ENCODING 'UTF8' OWNER kivitendo;
+
+GRANT ALL PRIVILEGES ON DATABASE kivitendo_auth TO kivitendo;
+EOF
+
+echo "Fertig! Der PostgreSQL-Cluster ist jetzt korrekt mit UTF8 initialisiert."
+echo "Gehe zurück in /opt/kivitendo und führe aus:"
+echo "  perl scripts/update_auth_db.pl --init"
+echo "  systemctl restart apache2"
+
+
+
+
+
+
+
 # Überprüfung
 echo "PostgreSQL-Version und Encoding:"
 su - postgres -c "psql -c 'SHOW server_version;'"
