@@ -751,6 +751,17 @@ systemctl reload apache2
 systemctl restart apache2
 a2ensite kivitendo.apache2.conf
 
+sleep 5
+
+cp /var/www/kivitendo-erp/scripts/boot/systemd/kivitendo-task-server.service  /etc/systemd/system/
+
+# Taskserver aktivieren und starten
+systemctl daemon-reload
+systemctl enable kivitendo-task-server.service
+systemctl start kivitendo-task-server.service
+
+sleep 5
+
 # Text vor der Anmeldung
 tee /etc/issue >/dev/null <<EOF
 \4/kivitendo/
