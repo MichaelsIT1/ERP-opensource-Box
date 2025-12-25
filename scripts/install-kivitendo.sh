@@ -753,7 +753,7 @@ a2ensite kivitendo.apache2.conf
 
 # Text vor der Anmeldung
 tee /etc/issue >/dev/null <<EOF
-\4\kivitendo
+\4/kivitendo/
 Login: passwort: kivitendo: 
 
 EOF
