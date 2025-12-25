@@ -20,8 +20,6 @@ echo "LANG=de_DE.UTF-8" > /etc/default/locale
 export LANG=de_DE.UTF-8
 export LC_ALL=de_DE.UTF-8
 
-
-
 clear
 echo "Kivitendo installieren"
 echo "*******************************"
@@ -768,7 +766,6 @@ tee /etc/issue >/dev/null <<EOF
 Login: passwort: kivitendo: 
 
 EOF
-
 
 sleep 5
 
