@@ -752,3 +752,9 @@ a2ensite kivitendo.apache2.conf
 
 sleep 5
 
+clear
+echo "*******************************************************************************************"
+echo "Kivitendo erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/kivitendo"
+echo "Zugangsdaten: Passwort: kivitendo"
+echo "**************************************************************************"
