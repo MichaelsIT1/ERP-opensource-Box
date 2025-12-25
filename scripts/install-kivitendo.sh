@@ -761,9 +761,9 @@ EOF
 
 sleep 5
 
-#clear
+clear
 echo "*******************************************************************************************"
 echo "Kivitendo erfolgreich installiert. Bitte ueber das Web die Konfiguration vornehmen"
-echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/kivitendo"
+echo "weiter gehts mit dem Browser. Gehen Sie auf http://$IP/kivitendo/"
 echo "Zugangsdaten: Passwort: kivitendo"
 echo "**************************************************************************"
