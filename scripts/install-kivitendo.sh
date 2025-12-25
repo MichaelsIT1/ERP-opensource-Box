@@ -61,8 +61,7 @@ apt install  apache2 libarchive-zip-perl libclone-perl \
   apt install postgresql-contrib poppler-utils -y
 
 
-pg_createcluster --locale=de_DE.UTF-8 --encoding=UTF-8 17 cluster
-name
+pg_createcluster --locale=de_DE.UTF-8 --encoding=UTF-8 17 clustername
 
 systemctl restart postgresql
 
