@@ -721,7 +721,9 @@ AddHandler fcgid-script .fcgi   # oder .fpl, je nach Dispatcher
 
 AliasMatch ^/kivitendo/[^/]+\.pl /var/www/kivitendo-erp/dispatcher.fcgi
 Alias /kivitendo/ /var/www/kivitendo-erp/
-FcgidMaxRequestLen 10485760   # Für große Uploads/Reports
+
+# Für große Uploads/Reports
+FcgidMaxRequestLen 10485760
 
 <Directory /var/www/kivitendo-erp>
     AllowOverride All
