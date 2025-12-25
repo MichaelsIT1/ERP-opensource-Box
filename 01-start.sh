@@ -33,9 +33,9 @@ Info: Alle Container beginnen ab ID900
 1) open3a (Rechnungsprogramm)
 5) iTop (CMDB)
 7) checkMK-Raw (LAN-Monitoring, debian12)
-8) Nextcloud (Zusammenarbeit, debian13)
+8) Nextcloud (Zusammenarbeit)
 9) motioneye (Videokamerazentrale, debian12)
-12) kivitendo
+12) kivitendo (ERP-System)
 -----------------------------------------
 
 DOCKER (alle Docker laufen mit priviligierten Rechten)
